@@ -8,7 +8,8 @@ const START_ANGLE = 135; // 8 o'clock position
 const SWEEP_ANGLE = 270; // Sweeps clockwise to 4 o'clock position
 
 export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
-  const [show, setShow] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [progress, setProgress] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -16,49 +17,54 @@ export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
   const rightCurtainRef = useRef<HTMLDivElement>(null);
   const dialContentRef = useRef<HTMLDivElement>(null);
 
+  // 1. Initial client check
   useEffect(() => {
-    // Check sessionStorage to show once per session
-    const hasSeen = sessionStorage.getItem("zaria_intro_seen");
-    if (hasSeen) {
-      if (onComplete) onComplete();
-      return;
+    setMounted(true);
+    if (typeof window !== "undefined") {
+      const hasSeen = sessionStorage.getItem("zaria_intro_seen");
+      if (hasSeen) {
+        setVisible(false);
+        if (onComplete) onComplete();
+      }
     }
+  }, [onComplete]);
 
-    setShow(true);
+  // 2. Animate only when mounted in DOM and visible
+  useEffect(() => {
+    if (!mounted || !visible) return;
 
-    // Smooth simulated load from 0 to 100
     const progressObj = { value: 0 };
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
-      // Animate progress smoothly with slight realistic easing
+      // Progress counts from 0 to 100
       tl.to(progressObj, {
         value: 100,
-        duration: 2.2,
+        duration: 1.8,
         ease: "power2.inOut",
         onUpdate: () => {
           setProgress(Math.floor(progressObj.value));
         },
       });
 
-      // Brief hold at 100% so user registers full load
-      tl.to({}, { duration: 0.25 });
+      // Brief hold at 100%
+      tl.to({}, { duration: 0.2 });
 
-      // Fade & scale out the dial center smoothly
+      // Dial fades out
       tl.to(dialContentRef.current, {
         opacity: 0,
-        scale: 0.92,
+        scale: 0.9,
         duration: 0.35,
         ease: "power2.in",
       });
 
-      // Part the luxury curtains: left panel slides left, right panel slides right
+      // Curtains part left & right
       tl.to(
         leftCurtainRef.current,
         {
           xPercent: -100,
-          duration: 0.75,
+          duration: 0.7,
           ease: "power4.inOut",
         },
         "curtain"
@@ -68,11 +74,11 @@ export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
         rightCurtainRef.current,
         {
           xPercent: 100,
-          duration: 0.75,
+          duration: 0.7,
           ease: "power4.inOut",
           onComplete: () => {
             sessionStorage.setItem("zaria_intro_seen", "true");
-            setShow(false);
+            setVisible(false);
             if (onComplete) onComplete();
           },
         },
@@ -80,12 +86,10 @@ export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
       );
     }, containerRef);
 
-    return () => {
-      ctx.revert();
-    };
-  }, [onComplete]);
+    return () => ctx.revert();
+  }, [mounted, visible, onComplete]);
 
-  if (!show) return null;
+  if (!mounted || !visible) return null;
 
   // Calculate needle rotation angle based on progress (0 -> 100%)
   const needleAngle = START_ANGLE + (progress / 100) * SWEEP_ANGLE;
@@ -101,7 +105,7 @@ export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
 
   const handleSkip = () => {
     sessionStorage.setItem("zaria_intro_seen", "true");
-    setShow(false);
+    setVisible(false);
     if (onComplete) onComplete();
   };
 
@@ -114,7 +118,7 @@ export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
       {/* Left Curtain Panel with Architectural Grid */}
       <div
         ref={leftCurtainRef}
-        className="w-1/2 h-full bg-[#0D0B09] border-r border-gold/25 relative overflow-hidden"
+        className="w-1/2 h-full bg-[#0D0B09] border-r border-gold/25 relative overflow-hidden will-change-transform"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(201, 160, 80, 0.04) 1px, transparent 1px),
@@ -127,7 +131,7 @@ export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
       {/* Right Curtain Panel with Architectural Grid */}
       <div
         ref={rightCurtainRef}
-        className="w-1/2 h-full bg-[#0D0B09] border-l border-gold/25 relative overflow-hidden"
+        className="w-1/2 h-full bg-[#0D0B09] border-l border-gold/25 relative overflow-hidden will-change-transform"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(201, 160, 80, 0.04) 1px, transparent 1px),
