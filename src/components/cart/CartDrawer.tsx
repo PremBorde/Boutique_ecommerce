@@ -47,22 +47,22 @@ export function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-ivory border-l border-gold/30 z-50 flex flex-col shadow-2xl"
+            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-ivory dark:bg-[#120E10] border-l border-gold/30 dark:border-gold/20 z-50 flex flex-col shadow-2xl transition-colors duration-300"
           >
             {/* Header */}
-            <div className="p-6 border-b border-gold/20 flex items-center justify-between bg-white/60">
+            <div className="p-6 border-b border-gold/20 flex items-center justify-between bg-white/60 dark:bg-[#171215]/80">
               <div className="flex items-center gap-2.5">
-                <ShoppingBag className="w-5 h-5 text-oxblood" />
-                <h2 className="font-serif text-xl text-oxblood font-normal">
+                <ShoppingBag className="w-5 h-5 text-oxblood dark:text-gold-light" />
+                <h2 className="font-serif text-xl text-oxblood dark:text-gold-foil font-normal">
                   Your Atelier Bag
                 </h2>
-                <span className="text-[11px] uppercase tracking-widest text-gold-dark font-medium ml-1">
+                <span className="text-[11px] uppercase tracking-widest text-gold-dark dark:text-gold-light font-medium ml-1">
                   ({items.reduce((acc, it) => acc + it.quantity, 0)})
                 </span>
               </div>
               <button
                 onClick={closeDrawer}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-noir/60 hover:text-oxblood hover:bg-gold/10 transition-colors"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold hover:bg-gold/10 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -170,13 +170,15 @@ export function CartDrawer() {
               )}
             </div>
 
-            {/* Footer Summary */}
+            {/* Footer Summary & Checkout CTA */}
             {items.length > 0 && (
-              <div className="p-6 border-t border-gold/20 bg-white/80 space-y-4">
+              <div className="p-6 border-t border-gold/25 bg-white/40 dark:bg-[#171215]/60 space-y-4">
                 <div className="space-y-2 text-xs">
-                  <div className="flex justify-between text-noir/70">
+                  <div className="flex justify-between text-noir/70 dark:text-ivory/70">
                     <span>Subtotal</span>
-                    <span>{formatPrice(subtotal)}</span>
+                    <span className="font-serif text-sm font-medium text-oxblood dark:text-ivory">
+                      {formatPrice(subtotal)}
+                    </span>
                   </div>
                   {discount > 0 && (
                     <div className="flex justify-between text-emerald font-medium">
@@ -184,7 +186,7 @@ export function CartDrawer() {
                       <span>-{formatPrice(discount)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between text-noir/70">
+                  <div className="flex justify-between text-noir/70 dark:text-ivory/70">
                     <span>Atelier White-Glove Delivery</span>
                     <span>
                       {shipping === 0 ? (
@@ -196,7 +198,7 @@ export function CartDrawer() {
                       )}
                     </span>
                   </div>
-                  <div className="pt-2 border-t border-gold/20 flex justify-between font-serif text-base text-oxblood font-semibold">
+                  <div className="pt-2 border-t border-gold/20 flex justify-between font-serif text-base text-oxblood dark:text-gold-foil font-semibold">
                     <span>Total Investment</span>
                     <span>{formatPrice(total)}</span>
                   </div>
@@ -215,13 +217,13 @@ export function CartDrawer() {
                   <Link
                     href="/cart"
                     onClick={closeDrawer}
-                    className="block text-center text-[11px] uppercase tracking-widest text-noir/60 hover:text-oxblood mt-3 transition-colors font-medium"
+                    className="block text-center text-[11px] uppercase tracking-widest text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold mt-3 transition-colors font-medium"
                   >
                     View Detailed Bag & Apply Coupons →
                   </Link>
                 </div>
 
-                <div className="flex items-center justify-center gap-2 text-[10px] uppercase tracking-wider text-noir/40 pt-1">
+                <div className="flex items-center justify-center gap-2 text-[10px] uppercase tracking-wider text-noir/40 dark:text-ivory/40 pt-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-gold-dark" />
                   Insured Transit · Authenticity Guaranteed
                 </div>

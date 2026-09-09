@@ -77,16 +77,16 @@ export function LookbookRail() {
   };
 
   return (
-    <section className="py-24 bg-ivory overflow-hidden border-t border-gold/25 select-none">
+    <section className="py-24 bg-ivory dark:bg-[#0C0A0B] overflow-hidden border-t border-gold/25 dark:border-gold/15 select-none transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 md:px-8 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark font-semibold mb-2">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark dark:text-gold-light font-semibold mb-2">
             Editorial Lookbook
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif text-oxblood">
+          <h2 className="text-3xl md:text-5xl font-serif text-oxblood dark:text-gold-foil">
             Signature Silhouettes
           </h2>
-          <p className="text-xs md:text-sm text-noir/60 mt-2">
+          <p className="text-xs md:text-sm text-noir/60 dark:text-ivory/60 mt-2">
             Drag horizontally to discover the 2026 Festive Couture showcase.
           </p>
         </div>
@@ -96,14 +96,14 @@ export function LookbookRail() {
           <button
             onClick={() => handleScroll("left")}
             aria-label="Scroll left"
-            className="w-10 h-10 border border-gold/40 flex items-center justify-center text-oxblood hover:bg-gold/10 transition-colors"
+            className="w-10 h-10 border border-gold/40 flex items-center justify-center text-oxblood dark:text-gold-light hover:bg-gold/10 transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={() => handleScroll("right")}
             aria-label="Scroll right"
-            className="w-10 h-10 border border-gold/40 flex items-center justify-center text-oxblood hover:bg-gold/10 transition-colors"
+            className="w-10 h-10 border border-gold/40 flex items-center justify-center text-oxblood dark:text-gold-light hover:bg-gold/10 transition-colors"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -121,10 +121,10 @@ export function LookbookRail() {
             key={look.id}
             whileHover={{ y: -6 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="shrink-0 w-[300px] sm:w-[380px] bg-white border border-gold/30 p-4 shadow-sm flex flex-col justify-between group"
+            className="shrink-0 w-[300px] sm:w-[380px] bg-white dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-4 shadow-sm flex flex-col justify-between group transition-colors duration-300"
           >
             {/* Image */}
-            <div className="relative aspect-[3/4] overflow-hidden bg-noir/5 border border-gold/20 mb-4">
+            <div className="relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/40 border border-gold/20 mb-4">
               <Image
                 src={look.image}
                 alt={look.name}
@@ -132,26 +132,26 @@ export function LookbookRail() {
                 sizes="380px"
                 className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute top-3 left-3 px-2.5 py-0.5 bg-ivory/95 border border-gold/30 text-[9px] uppercase tracking-widest text-oxblood font-semibold">
+              <div className="absolute top-3 left-3 px-2.5 py-0.5 bg-ivory/95 dark:bg-[#20181B]/95 border border-gold/30 text-[9px] uppercase tracking-widest text-oxblood dark:text-gold-foil font-semibold backdrop-blur-xs">
                 {look.category}
               </div>
             </div>
 
             {/* Details */}
             <div className="space-y-1.5">
-              <h3 className="font-serif text-lg text-oxblood font-medium truncate">
+              <h3 className="font-serif text-lg text-oxblood dark:text-ivory font-medium truncate">
                 {look.name}
               </h3>
-              <p className="text-[11px] text-noir/60 line-clamp-1 italic font-serif">
+              <p className="text-[11px] text-noir/60 dark:text-ivory/60 line-clamp-1 italic font-serif">
                 {look.tagline}
               </p>
-              <div className="pt-3 border-t border-gold/15 flex items-center justify-between">
-                <span className="font-serif text-sm font-semibold text-oxblood">
+              <div className="pt-3 border-t border-gold/15 dark:border-gold/10 flex items-center justify-between">
+                <span className="font-serif text-sm font-semibold text-oxblood dark:text-gold-foil">
                   {formatPrice(look.price)}
                 </span>
                 <Link
                   href={`/product/${look.slug}`}
-                  className="text-[10px] uppercase tracking-widest text-gold-dark hover:text-oxblood flex items-center gap-1 font-semibold transition-colors"
+                  className="text-[10px] uppercase tracking-widest text-gold-dark dark:text-gold-light hover:text-oxblood dark:hover:text-gold flex items-center gap-1 font-semibold transition-colors"
                 >
                   Explore Creation <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </Link>

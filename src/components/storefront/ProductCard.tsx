@@ -90,9 +90,9 @@ export function ProductCard({ product }: ProductCardProps) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex flex-col bg-white border border-gold/25 p-3.5 transition-shadow duration-500 hover:shadow-[0_20px_40px_-15px_rgba(74,14,23,0.18)]"
+      className="group relative flex flex-col bg-white dark:bg-[#161214] border border-gold/25 dark:border-gold/20 p-3.5 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(74,14,23,0.18)] dark:hover:shadow-[0_20px_40px_-15px_rgba(201,160,80,0.15)]"
     >
-      <Link href={`/product/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-noir/5">
+      <Link href={`/product/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/30">
         {/* Primary Image */}
         <Image
           src={primaryImage}
@@ -122,7 +122,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Stock or Category Badge */}
         <div className="absolute top-3 left-3 z-10 flex flex-col gap-1">
           {product.category && (
-            <span className="text-[9px] uppercase tracking-[0.25em] px-2 py-0.5 bg-ivory/90 text-oxblood border border-gold/30 font-medium backdrop-blur-sm">
+            <span className="text-[9px] uppercase tracking-[0.25em] px-2 py-0.5 bg-ivory/90 dark:bg-[#20181B]/90 text-oxblood dark:text-gold-foil border border-gold/30 font-medium backdrop-blur-sm">
               {product.category.name}
             </span>
           )}
@@ -155,30 +155,30 @@ export function ProductCard({ product }: ProductCardProps) {
                   className="w-2.5 h-2.5 rounded-full border border-black/20 shadow-xs"
                 />
               ))}
-              <span className="text-[10px] text-noir/40 ml-1">
+              <span className="text-[10px] text-noir/40 dark:text-ivory/40 ml-1">
                 {colorVariants.length} {colorVariants.length === 1 ? "shade" : "shades"}
               </span>
             </div>
           )}
 
           <Link href={`/product/${product.slug}`} className="block">
-            <h3 className="font-serif text-base text-oxblood hover:text-gold transition-colors font-normal line-clamp-1">
+            <h3 className="font-serif text-base text-oxblood dark:text-ivory hover:text-gold dark:hover:text-gold-light transition-colors font-normal line-clamp-1">
               {product.name}
             </h3>
           </Link>
 
           {product.fabric && (
-            <p className="text-[11px] text-noir/50 line-clamp-1 mt-0.5">
+            <p className="text-[11px] text-noir/50 dark:text-ivory/50 line-clamp-1 mt-0.5">
               {product.fabric}
             </p>
           )}
         </div>
 
-        <div className="pt-3 mt-3 border-t border-gold/15 flex items-center justify-between">
-          <span className="font-serif text-sm font-semibold text-oxblood">
+        <div className="pt-3 mt-3 border-t border-gold/15 dark:border-gold/10 flex items-center justify-between">
+          <span className="font-serif text-sm font-semibold text-oxblood dark:text-gold-foil">
             {formatPrice(product.basePrice)}
           </span>
-          <span className="text-[10px] uppercase tracking-wider text-gold-dark font-medium group-hover:translate-x-0.5 transition-transform">
+          <span className="text-[10px] uppercase tracking-wider text-gold-dark dark:text-gold-light font-medium group-hover:translate-x-0.5 transition-transform">
             Details →
           </span>
         </div>

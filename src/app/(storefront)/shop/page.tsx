@@ -92,24 +92,24 @@ function ShopContent() {
   const sizes = ["all", "XS", "S", "M", "L", "XL", "Free Size"];
 
   return (
-    <div className="min-h-screen bg-regal-texture py-12 px-4 md:px-8">
+    <div className="min-h-screen bg-regal-texture py-12 px-4 md:px-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* Editorial Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique mb-2 font-semibold">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique dark:text-gold-light mb-2 font-semibold">
             Bespoke Collection Archive
           </p>
-          <h1 className="text-4xl md:text-5xl font-serif text-oxblood">
+          <h1 className="text-4xl md:text-5xl font-serif text-oxblood dark:text-gold-foil">
             The Atelier Catalogue
           </h1>
-          <p className="text-xs md:text-sm text-noir/60 mt-3 leading-relaxed">
+          <p className="text-xs md:text-sm text-noir/60 dark:text-ivory/60 mt-3 leading-relaxed">
             Every garment cut by hand from heritage weaves. Browse our limited-batch lehengas,
             Banarasi sarees, and tailored festive silhouettes.
           </p>
         </div>
 
         {/* Filter & Sort Bar */}
-        <div className="bg-ivory border border-gold/30 p-4 mb-8 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="bg-ivory dark:bg-[#141012] border border-gold/30 dark:border-gold/20 p-4 mb-8 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4 transition-colors duration-300">
           {/* Search Input */}
           <form onSubmit={handleSearchSubmit} className="relative w-full md:w-80">
             <input
@@ -117,9 +117,9 @@ function ShopContent() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search silk, velvet, zari..."
-              className="w-full h-10 pl-9 pr-4 text-xs bg-white/70 border border-gold/30 focus:border-oxblood focus:ring-1 focus:ring-oxblood outline-none transition-all placeholder:text-noir/40"
+              className="w-full h-10 pl-9 pr-4 text-xs bg-white/70 dark:bg-[#1D171A] border border-gold/30 dark:border-gold/20 focus:border-oxblood dark:focus:border-gold outline-none transition-all placeholder:text-noir/40 dark:placeholder:text-ivory/40 text-noir dark:text-ivory"
             />
-            <Search className="w-4 h-4 text-noir/40 absolute left-3 top-3 pointer-events-none" />
+            <Search className="w-4 h-4 text-noir/40 dark:text-ivory/40 absolute left-3 top-3 pointer-events-none" />
           </form>
 
           {/* Category Tabs (Desktop) */}
@@ -132,7 +132,7 @@ function ShopContent() {
               className={`text-[11px] uppercase tracking-[0.18em] px-3.5 py-1.5 transition-all font-medium whitespace-nowrap ${
                 selectedCategory === "all"
                   ? "bg-oxblood text-gold-light border border-oxblood"
-                  : "bg-white/50 text-noir/70 border border-gold/25 hover:bg-gold/10"
+                  : "bg-white/50 dark:bg-[#1D171A] text-noir/70 dark:text-ivory/70 border border-gold/25 hover:bg-gold/10"
               }`}
             >
               All Pieces
@@ -147,7 +147,7 @@ function ShopContent() {
                 className={`text-[11px] uppercase tracking-[0.18em] px-3.5 py-1.5 transition-all font-medium whitespace-nowrap ${
                   selectedCategory === c.slug
                     ? "bg-oxblood text-gold-light border border-oxblood"
-                    : "bg-white/50 text-noir/70 border border-gold/25 hover:bg-gold/10"
+                    : "bg-white/50 dark:bg-[#1D171A] text-noir/70 dark:text-ivory/70 border border-gold/25 hover:bg-gold/10"
                 }`}
               >
                 {c.name}
@@ -159,14 +159,14 @@ function ShopContent() {
           <div className="flex items-center justify-between w-full md:w-auto gap-3">
             <button
               onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-              className="lg:hidden flex items-center gap-1.5 text-xs uppercase tracking-wider text-oxblood border border-gold/30 px-3 py-2 bg-white/70"
+              className="lg:hidden flex items-center gap-1.5 text-xs uppercase tracking-wider text-oxblood dark:text-gold-light border border-gold/30 px-3 py-2 bg-white/70 dark:bg-[#1D171A]"
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
               Filters
             </button>
 
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-noir/50 uppercase tracking-widest text-[10px] hidden sm:inline">
+              <span className="text-noir/50 dark:text-ivory/50 uppercase tracking-widest text-[10px] hidden sm:inline">
                 Sort By:
               </span>
               <select
@@ -175,7 +175,7 @@ function ShopContent() {
                   setSelectedSort(e.target.value);
                   setPage(1);
                 }}
-                className="h-10 px-3 text-xs bg-white/80 border border-gold/30 text-noir focus:border-oxblood outline-none cursor-pointer"
+                className="h-10 px-3 text-xs bg-white/80 dark:bg-[#1D171A] border border-gold/30 text-noir dark:text-ivory focus:border-oxblood dark:focus:border-gold outline-none cursor-pointer"
               >
                 <option value="newest">Newest Arrivals</option>
                 <option value="price_asc">Price: Low to High</option>
@@ -189,7 +189,7 @@ function ShopContent() {
         {/* Secondary Filter Strip (Sizes & Stock toggle) */}
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-gold/20 text-xs">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-noir/50 uppercase tracking-widest text-[10px] mr-1">
+            <span className="text-noir/50 dark:text-ivory/50 uppercase tracking-widest text-[10px] mr-1">
               Select Size:
             </span>
             {sizes.map((s) => (
@@ -202,7 +202,7 @@ function ShopContent() {
                 className={`px-2.5 py-1 text-[11px] font-medium border transition-colors ${
                   selectedSize === s
                     ? "bg-gold text-noir font-semibold border-gold"
-                    : "bg-white/50 text-noir/60 border-gold/25 hover:bg-gold/10"
+                    : "bg-white/50 dark:bg-[#1D171A] text-noir/60 dark:text-ivory/60 border-gold/25 hover:bg-gold/10"
                 }`}
               >
                 {s === "all" ? "All Sizes" : s}
@@ -211,7 +211,7 @@ function ShopContent() {
           </div>
 
           <div className="flex items-center gap-4">
-            <label className="flex items-center gap-2 cursor-pointer select-none text-noir/70 text-xs font-medium">
+            <label className="flex items-center gap-2 cursor-pointer select-none text-noir/70 dark:text-ivory/70 text-xs font-medium">
               <input
                 type="checkbox"
                 checked={inStockOnly}

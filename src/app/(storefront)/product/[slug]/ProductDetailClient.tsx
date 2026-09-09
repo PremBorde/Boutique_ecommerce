@@ -143,15 +143,15 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
   const price = Number(selectedVariant?.priceOverride ?? product.basePrice);
 
   return (
-    <div className="min-h-screen bg-regal-texture py-12 px-4 md:px-8">
+    <div className="min-h-screen bg-regal-texture py-12 px-4 md:px-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-noir/50 mb-8 pb-4 border-b border-gold/20">
-          <Link href="/" className="hover:text-oxblood transition-colors">
+        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-noir/50 dark:text-ivory/50 mb-8 pb-4 border-b border-gold/20">
+          <Link href="/" className="hover:text-oxblood dark:hover:text-gold transition-colors">
             Atelier
           </Link>
           <span>/</span>
-          <Link href="/shop" className="hover:text-oxblood transition-colors">
+          <Link href="/shop" className="hover:text-oxblood dark:hover:text-gold transition-colors">
             Catalogue
           </Link>
           {product.category && (
@@ -159,14 +159,14 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
               <span>/</span>
               <Link
                 href={`/shop?category=${product.category.slug}`}
-                className="hover:text-oxblood transition-colors"
+                className="hover:text-oxblood dark:hover:text-gold transition-colors"
               >
                 {product.category.name}
               </Link>
             </>
           )}
           <span>/</span>
-          <span className="text-oxblood font-semibold truncate max-w-xs">
+          <span className="text-oxblood dark:text-gold-foil font-semibold truncate max-w-xs">
             {product.name}
           </span>
         </div>
@@ -241,27 +241,27 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                   {product.category.name}
                 </p>
               )}
-              <h1 className="text-3xl md:text-4xl font-serif text-oxblood leading-tight">
+              <h1 className="text-3xl md:text-4xl font-serif text-oxblood dark:text-gold-foil leading-tight">
                 {product.name}
               </h1>
 
               {/* Price Display */}
               <div className="mt-4 flex items-baseline gap-3">
-                <span className="text-2xl md:text-3xl font-serif font-semibold text-oxblood">
+                <span className="text-2xl md:text-3xl font-serif font-semibold text-oxblood dark:text-gold-foil">
                   {formatPrice(price)}
                 </span>
-                <span className="text-xs text-noir/50">Taxes & Insured Shipping Included</span>
+                <span className="text-xs text-noir/50 dark:text-ivory/50">Taxes & Insured Shipping Included</span>
               </div>
 
               {/* Short Story */}
-              <p className="mt-4 text-xs md:text-sm text-noir/70 leading-relaxed">
+              <p className="mt-4 text-xs md:text-sm text-noir/70 dark:text-ivory/70 leading-relaxed">
                 {product.description}
               </p>
 
               {/* Fabric Tag */}
               {product.fabric && (
-                <div className="mt-4 p-3 bg-white/70 border border-gold/25 text-xs text-noir/80 flex items-start gap-2">
-                  <span className="text-gold-dark font-semibold shrink-0">Fabric:</span>
+                <div className="mt-4 p-3 bg-white/70 dark:bg-[#181315] border border-gold/25 dark:border-gold/20 text-xs text-noir/80 dark:text-ivory/80 flex items-start gap-2">
+                  <span className="text-gold-dark dark:text-gold-light font-semibold shrink-0">Fabric:</span>
                   <span>{product.fabric}</span>
                 </div>
               )}
@@ -271,9 +271,9 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                 {/* 1. Color Selector */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs uppercase tracking-[0.2em] font-semibold text-noir">
+                    <span className="text-xs uppercase tracking-[0.2em] font-semibold text-noir dark:text-ivory">
                       Select Shade:{" "}
-                      <span className="text-oxblood font-normal">{selectedColor}</span>
+                      <span className="text-oxblood dark:text-gold-light font-normal">{selectedColor}</span>
                     </span>
                   </div>
                   <div className="flex items-center gap-3 flex-wrap">
@@ -286,15 +286,15 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                           title={c.color}
                           className={`group flex items-center gap-2 px-3 py-1.5 border transition-all ${
                             isSelected
-                              ? "border-oxblood bg-white shadow-xs ring-1 ring-oxblood"
-                              : "border-gold/30 bg-white/60 hover:border-gold"
+                              ? "border-oxblood dark:border-gold bg-white dark:bg-[#20181B] shadow-xs ring-1 ring-oxblood dark:ring-gold"
+                              : "border-gold/30 dark:border-gold/20 bg-white/60 dark:bg-[#181315] hover:border-gold"
                           }`}
                         >
                           <span
                             style={{ backgroundColor: c.colorHex }}
                             className="w-3.5 h-3.5 rounded-full border border-black/20 shrink-0"
                           />
-                          <span className="text-xs text-noir/80 font-medium">
+                          <span className="text-xs text-noir/80 dark:text-ivory/80 font-medium">
                             {c.color}
                           </span>
                         </button>
@@ -306,11 +306,11 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                 {/* 2. Size Selector (Matrix validation against selected color) */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs uppercase tracking-[0.2em] font-semibold text-noir">
+                    <span className="text-xs uppercase tracking-[0.2em] font-semibold text-noir dark:text-ivory">
                       Select Size:{" "}
-                      <span className="text-oxblood font-normal">{selectedSize}</span>
+                      <span className="text-oxblood dark:text-gold-light font-normal">{selectedSize}</span>
                     </span>
-                    <span className="text-[11px] text-gold-dark tracking-wider underline cursor-pointer">
+                    <span className="text-[11px] text-gold-dark dark:text-gold-light tracking-wider underline cursor-pointer">
                       Sizing Guide
                     </span>
                   </div>
@@ -331,19 +331,19 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                           }}
                           className={`relative py-3 px-2 border text-xs font-medium uppercase tracking-wider transition-all flex flex-col items-center justify-center ${
                             isSelected && !isOutOfStock
-                              ? "bg-oxblood text-gold-light border-oxblood shadow-xs font-semibold"
+                              ? "bg-oxblood dark:bg-gold-dark text-gold-light dark:text-noir border-oxblood dark:border-gold shadow-xs font-semibold"
                               : isOutOfStock
-                              ? "bg-noir/5 text-noir/30 border-dashed border-noir/20 cursor-not-allowed line-through"
-                              : "bg-white/80 text-noir border-gold/30 hover:border-gold hover:bg-white"
+                              ? "bg-noir/5 dark:bg-ivory/5 text-noir/30 dark:text-ivory/30 border-dashed border-noir/20 dark:border-ivory/20 cursor-not-allowed line-through"
+                              : "bg-white/80 dark:bg-[#181315] text-noir dark:text-ivory border-gold/30 dark:border-gold/20 hover:border-gold hover:bg-white dark:hover:bg-[#20181B]"
                           }`}
                         >
                           <span>{sz}</span>
                           {isOutOfStock ? (
-                            <span className="text-[8px] tracking-normal text-noir/40 mt-0.5 no-underline">
+                            <span className="text-[8px] tracking-normal text-noir/40 dark:text-ivory/40 mt-0.5 no-underline">
                               Sold Out
                             </span>
                           ) : stock <= 2 ? (
-                            <span className="text-[8px] text-amber-700 tracking-normal mt-0.5">
+                            <span className="text-[8px] text-amber-700 dark:text-amber-400 tracking-normal mt-0.5">
                               {stock} left
                             </span>
                           ) : null}
@@ -386,21 +386,21 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                 {/* 4. Quantity Stepper & Add To Cart Button */}
                 <div className="flex items-center gap-4 pt-2">
                   {/* Stepper */}
-                  <div className="flex items-center border border-gold/40 bg-white h-13 px-2">
+                  <div className="flex items-center border border-gold/40 dark:border-gold/25 bg-white dark:bg-[#181315] h-13 px-2">
                     <button
                       disabled={quantity <= 1 || !isVariantInStock}
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="w-8 h-full flex items-center justify-center text-noir/60 hover:text-oxblood disabled:opacity-30 transition-colors"
+                      className="w-8 h-full flex items-center justify-center text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold disabled:opacity-30 transition-colors"
                     >
                       <Minus className="w-3.5 h-3.5" />
                     </button>
-                    <span className="w-10 text-center font-serif text-sm font-semibold text-noir">
+                    <span className="w-10 text-center font-serif text-sm font-semibold text-noir dark:text-ivory">
                       {quantity}
                     </span>
                     <button
                       disabled={quantity >= currentStock || !isVariantInStock}
                       onClick={() => setQuantity((q) => Math.min(currentStock, q + 1))}
-                      className="w-8 h-full flex items-center justify-center text-noir/60 hover:text-oxblood disabled:opacity-30 transition-colors"
+                      className="w-8 h-full flex items-center justify-center text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold disabled:opacity-30 transition-colors"
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>

@@ -23,6 +23,15 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
+  html.dark {
+    background-color: #0C0A0B;
+    color: #F5EFE6;
+  }
+
+  html.dark * {
+    border-color: rgba(201, 160, 80, 0.18);
+  }
+
   body {
     overflow-x: hidden;
     min-height: 100vh;
@@ -38,6 +47,11 @@
   ::selection {
     background-color: #4A0E17;
     color: #DFC07B;
+  }
+
+  html.dark ::selection {
+    background-color: #C9A050;
+    color: #0C0A0B;
   }
 }
 
@@ -96,6 +110,11 @@
   background-color: #FAF7F2;
   background-image: radial-gradient(rgba(201, 160, 80, 0.08) 1px, transparent 1px);
   background-size: 28px 28px;
+}
+
+html.dark .bg-regal-texture {
+  background-color: #0C0A0B;
+  background-image: radial-gradient(rgba(201, 160, 80, 0.09) 1px, transparent 1px);
 }
 
 .bg-regal-dark {

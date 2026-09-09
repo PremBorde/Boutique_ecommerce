@@ -39,12 +39,28 @@ export const viewport: Viewport = {
 };
 
 import { Providers } from "./providers";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Navbar } from "@/components/storefront/Navbar";
 import { Footer } from "@/components/storefront/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { AiChatWidget } from "@/components/chat/AiChatWidget";
 import { SmoothScrollProvider } from "@/components/animations/SmoothScrollProvider";
 import { CustomCursor } from "@/components/animations/CustomCursor";
+
+const themeInitScript = `
+(function() {
+  try {
+    var key = 'zaria-theme-mode';
+    var theme = localStorage.getItem(key);
+    var isDark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {}
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -54,19 +70,25 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${playfair.variable} ${cinzel.variable} ${jakarta.variable}`}
     >
-      <body className="bg-ivory text-noir antialiased selection:bg-oxblood selection:text-gold-light flex flex-col min-h-screen">
-        <Providers>
-          <SmoothScrollProvider>
-            <CustomCursor />
-            <Navbar />
-            <CartDrawer />
-            <AiChatWidget />
-            <div className="flex-1">{children}</div>
-            <Footer />
-          </SmoothScrollProvider>
-        </Providers>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="bg-ivory dark:bg-[#0C0A0B] text-noir dark:text-ivory transition-colors duration-300 antialiased selection:bg-oxblood selection:text-gold-light flex flex-col min-h-screen">
+        <ThemeProvider>
+          <Providers>
+            <SmoothScrollProvider>
+              <CustomCursor />
+              <Navbar />
+              <CartDrawer />
+              <AiChatWidget />
+              <div className="flex-1">{children}</div>
+              <Footer />
+            </SmoothScrollProvider>
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
