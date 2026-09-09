@@ -146,18 +146,18 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-regal-texture py-12 px-4 md:px-8">
+    <div className="min-h-screen bg-regal-texture py-12 px-4 md:px-8 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         {/* Header Breadcrumb */}
         <div className="flex items-center justify-between pb-6 mb-8 border-b border-gold/20">
           <Link
             href="/cart"
-            className="text-xs uppercase tracking-[0.2em] text-oxblood hover:text-gold transition-colors font-medium flex items-center gap-1.5"
+            className="text-xs uppercase tracking-[0.2em] text-oxblood dark:text-gold-light hover:text-gold transition-colors font-medium flex items-center gap-1.5"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Return to Bag
           </Link>
-          <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-gold-dark font-medium">
+          <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-gold-dark dark:text-gold-light font-medium">
             <Lock className="w-3.5 h-3.5" />
             256-Bit Encrypted Checkout
           </div>
@@ -181,8 +181,8 @@ export default function CheckoutPage() {
             </div>
 
             {/* 1. Customer Contact */}
-            <div className="bg-white/80 border border-gold/30 p-6 md:p-8 shadow-xs space-y-4">
-              <h2 className="font-serif text-lg text-oxblood border-b border-gold/20 pb-3 font-semibold">
+            <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 md:p-8 shadow-xs space-y-4 transition-colors duration-300">
+              <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil border-b border-gold/20 pb-3 font-semibold">
                 1. Client Identification
               </h2>
 
@@ -299,10 +299,10 @@ export default function CheckoutPage() {
             </div>
 
             {/* 3. Simulated Payment Section with Success/Failure Toggle */}
-            <div className="bg-white/80 border border-gold/30 p-6 md:p-8 shadow-xs space-y-4">
+            <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 md:p-8 shadow-xs space-y-4 transition-colors duration-300">
               <div className="flex items-center justify-between border-b border-gold/20 pb-3">
-                <h2 className="font-serif text-lg text-oxblood font-semibold flex items-center gap-2">
-                  <CreditCard className="w-4 h-4 text-gold-dark" />
+                <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil font-semibold flex items-center gap-2">
+                  <CreditCard className="w-4 h-4 text-gold-dark dark:text-gold-light" />
                   3. Payment Authorization (Demo Gateway)
                 </h2>
                 <span className="text-[10px] uppercase tracking-wider text-emerald bg-emerald/10 px-2 py-0.5 border border-emerald/30 font-medium">
@@ -362,8 +362,8 @@ export default function CheckoutPage() {
 
           {/* Order Summary (Right Col) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white/80 border border-gold/30 p-6 md:p-8 shadow-xs space-y-6">
-              <h2 className="font-serif text-lg text-oxblood border-b border-gold/20 pb-3 font-semibold">
+            <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 md:p-8 shadow-xs space-y-6 transition-colors duration-300">
+              <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil border-b border-gold/20 pb-3 font-semibold">
                 Order Review ({items.length} {items.length === 1 ? "Piece" : "Pieces"})
               </h2>
 
@@ -423,7 +423,7 @@ export default function CheckoutPage() {
                   </span>
                 </div>
 
-                <div className="pt-3 border-t border-gold/20 flex justify-between font-serif text-xl text-oxblood font-semibold">
+                <div className="pt-3 border-t border-gold/20 flex justify-between font-serif text-xl text-oxblood dark:text-gold-foil font-semibold">
                   <span>Total Amount</span>
                   <span>{formatPrice(total)}</span>
                 </div>

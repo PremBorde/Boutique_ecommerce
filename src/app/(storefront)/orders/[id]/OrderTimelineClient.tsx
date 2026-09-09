@@ -83,35 +83,35 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
   };
 
   return (
-    <div className="min-h-screen bg-regal-texture py-12 px-4 md:px-8">
+    <div className="min-h-screen bg-regal-texture py-12 px-4 md:px-8 transition-colors duration-300">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Navigation & Order Badge */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gold/20">
           <Link
             href="/shop"
-            className="text-xs uppercase tracking-[0.2em] text-oxblood hover:text-gold transition-colors font-medium flex items-center gap-1.5"
+            className="text-xs uppercase tracking-[0.2em] text-oxblood dark:text-gold-light hover:text-gold transition-colors font-medium flex items-center gap-1.5"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Continue Browsing
           </Link>
           <div className="flex items-center gap-3">
-            <span className="text-xs text-noir/50 uppercase tracking-widest">
+            <span className="text-xs text-noir/50 dark:text-ivory/50 uppercase tracking-widest">
               Confirmation No:
             </span>
-            <span className="font-mono text-sm font-semibold text-oxblood bg-gold/10 border border-gold/30 px-3 py-1">
+            <span className="font-mono text-sm font-semibold text-oxblood dark:text-gold-foil bg-gold/10 border border-gold/30 px-3 py-1">
               {order.orderNumber}
             </span>
           </div>
         </div>
 
         {/* State Machine Status Timeline */}
-        <div className="bg-white/90 border border-gold/30 p-6 md:p-10 shadow-xs">
+        <div className="bg-white/90 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 md:p-10 shadow-xs transition-colors duration-300">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark font-semibold">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark dark:text-gold-light font-semibold">
                 Order State Machine
               </p>
-              <h1 className="text-2xl md:text-3xl font-serif text-oxblood mt-1">
+              <h1 className="text-2xl md:text-3xl font-serif text-oxblood dark:text-gold-foil mt-1">
                 {isCancelled ? "Order Cancelled" : "Creation & Delivery Timeline"}
               </h1>
             </div>
@@ -230,8 +230,8 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
         {/* Order Details & Summary Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Purchased Items (Left Col) */}
-          <div className="lg:col-span-8 bg-white/90 border border-gold/30 p-6 md:p-8 shadow-xs space-y-6">
-            <h2 className="font-serif text-lg text-oxblood border-b border-gold/20 pb-3 font-semibold">
+          <div className="lg:col-span-8 bg-white/90 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 md:p-8 shadow-xs space-y-6 transition-colors duration-300">
+            <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil border-b border-gold/20 pb-3 font-semibold">
               Commissioned Garments
             </h2>
 

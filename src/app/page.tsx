@@ -43,7 +43,7 @@ export default async function HomePage() {
   }));
 
   return (
-    <main className="relative bg-ivory">
+    <main className="relative bg-ivory dark:bg-[#0C0A0B] transition-colors duration-300">
       {/* 1. Opening Ritual: The Atelier Opens (<1.8s, session-flagged) */}
       <AtelierIntro />
 
@@ -63,17 +63,17 @@ export default async function HomePage() {
       <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto border-t border-gold/20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark font-semibold mb-2 flex items-center gap-1.5">
-              <Gem className="w-3.5 h-3.5 text-gold-dark" />
+            <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark dark:text-gold-light font-semibold mb-2 flex items-center gap-1.5">
+              <Gem className="w-3.5 h-3.5 text-gold-dark dark:text-gold-light" />
               Vault Highlights
             </p>
-            <h2 className="text-3xl md:text-5xl font-serif text-oxblood">
+            <h2 className="text-3xl md:text-5xl font-serif text-oxblood dark:text-gold-foil">
               Curated Heirlooms
             </h2>
           </div>
 
           <Link href="/shop">
-            <Button variant="outline" size="sm" className="gap-2 text-xs text-oxblood border-gold/40">
+            <Button variant="outline" size="sm" className="gap-2 text-xs text-oxblood dark:text-gold-light border-gold/40 dark:border-gold/30 hover:bg-gold/10">
               View Entire Collection <ArrowRight className="w-3.5 h-3.5" />
             </Button>
           </Link>
@@ -87,13 +87,13 @@ export default async function HomePage() {
       </section>
 
       {/* 7. Shop by Category Showcase */}
-      <section className="py-20 bg-white/50 border-t border-gold/25 px-4 md:px-8">
+      <section className="py-20 bg-white/50 dark:bg-[#110D0F] border-t border-gold/25 dark:border-gold/15 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-lg mx-auto mb-12">
-            <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark font-semibold mb-2">
+            <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark dark:text-gold-light font-semibold mb-2">
               Bespoke Silhouettes
             </p>
-            <h2 className="text-3xl md:text-4xl font-serif text-oxblood">
+            <h2 className="text-3xl md:text-4xl font-serif text-oxblood dark:text-gold-foil">
               Shop by Category
             </h2>
           </div>

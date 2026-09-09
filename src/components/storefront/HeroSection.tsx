@@ -81,7 +81,7 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[calc(100vh-105px)] flex items-center justify-center overflow-hidden bg-ivory px-4 md:px-8 pt-4 md:pt-6 pb-8 md:pb-12"
+      className="relative min-h-[calc(100vh-105px)] flex items-center justify-center overflow-hidden bg-ivory dark:bg-[#0C0A0B] px-4 md:px-8 pt-4 md:pt-6 pb-8 md:pb-12 transition-colors duration-300"
     >
       {/* Background Ornamental Radial Glow */}
       <div
@@ -95,14 +95,14 @@ export function HeroSection() {
         {/* Left Column: Kinetic Typography & CTAs */}
         <div className="lg:col-span-7 space-y-4 md:space-y-5 text-center lg:text-left">
           <div className="inline-flex items-center px-3 py-1 bg-gold/10 border border-gold/30 backdrop-blur-xs">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-oxblood font-semibold">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-oxblood dark:text-gold-light font-semibold">
               The Festive Pret & Couture 2026
             </span>
           </div>
 
           <h1
             ref={headlineRef}
-            className="text-3xl sm:text-5xl md:text-6xl font-serif text-oxblood leading-[1.1] tracking-tight"
+            className="text-3xl sm:text-5xl md:text-6xl font-serif text-oxblood dark:text-ivory leading-[1.1] tracking-tight"
           >
             <span className="block overflow-hidden">Threaded in Gold,</span>
             <span className="block overflow-hidden">
@@ -110,7 +110,7 @@ export function HeroSection() {
             </span>
           </h1>
 
-          <p className="max-w-xl mx-auto lg:mx-0 text-xs md:text-sm text-noir/70 leading-relaxed font-sans">
+          <p className="max-w-xl mx-auto lg:mx-0 text-xs md:text-sm text-noir/70 dark:text-ivory/70 leading-relaxed font-sans">
             Handcrafted across 300+ artisan hours in Jaipur and Varanasi. Limited-batch bridal
             lehengas, tissue organza sarees, and tailored bandhgalas cut for timeless celebration.
           </p>
@@ -129,26 +129,26 @@ export function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto h-12 px-7 text-xs tracking-[0.25em]"
+                className="w-full sm:w-auto h-12 px-7 text-xs tracking-[0.25em] text-noir dark:text-ivory border-gold/40 hover:bg-gold/10"
               >
                 Varanasi Brocades
               </Button>
             </Link>
           </div>
 
-          <div className="pt-5 border-t border-gold/15 flex items-center justify-center lg:justify-start gap-8 text-[10px] md:text-[11px] uppercase tracking-widest text-noir/50">
+          <div className="pt-5 border-t border-gold/15 dark:border-gold/10 flex items-center justify-center lg:justify-start gap-8 text-[10px] md:text-[11px] uppercase tracking-widest text-noir/50 dark:text-ivory/50">
             <div>
-              <strong className="block text-oxblood font-serif text-base font-semibold">340+</strong>
+              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">340+</strong>
               Artisan Hours
             </div>
             <div className="w-[1px] h-7 bg-gold/30" />
             <div>
-              <strong className="block text-oxblood font-serif text-base font-semibold">100%</strong>
+              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">100%</strong>
               Mulberry Silk
             </div>
             <div className="w-[1px] h-7 bg-gold/30" />
             <div>
-              <strong className="block text-oxblood font-serif text-base font-semibold">Tested</strong>
+              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">Tested</strong>
               Metallic Zari
             </div>
           </div>
@@ -159,7 +159,7 @@ export function HeroSection() {
           {/* Main Hero Editorial Garment */}
           <div
             ref={garmentRef}
-            className="relative w-full max-w-xs sm:max-w-sm lg:max-w-[400px] aspect-[3/4] max-h-[500px] bg-white border border-gold/40 shadow-2xl overflow-hidden will-change-transform"
+            className="relative w-full max-w-xs sm:max-w-sm lg:max-w-[400px] aspect-[3/4] max-h-[500px] bg-white dark:bg-[#161214] border border-gold/40 shadow-2xl overflow-hidden will-change-transform"
           >
             <Image
               src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1200&auto=format&fit=crop"
@@ -171,23 +171,23 @@ export function HeroSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-noir/70 via-transparent to-transparent opacity-60" />
 
-            <div className="absolute bottom-4 left-4 right-4 p-4 bg-ivory/95 border border-gold/30 backdrop-blur-md">
-              <p className="text-[9px] uppercase tracking-[0.25em] text-gold-dark font-semibold">
+            <div className="absolute bottom-4 left-4 right-4 p-4 bg-ivory/95 dark:bg-[#171215]/95 border border-gold/30 backdrop-blur-md">
+              <p className="text-[9px] uppercase tracking-[0.25em] text-gold-dark dark:text-gold-light font-semibold">
                 Featured Heirloom
               </p>
-              <h3 className="font-serif text-sm text-oxblood font-semibold mt-0.5">
+              <h3 className="font-serif text-sm text-oxblood dark:text-gold-foil font-semibold mt-0.5">
                 The Noor Mahal Velvet Lehenga
               </h3>
-              <p className="text-[11px] text-noir/60 mt-0.5">Pure Zari on Silk Velvet</p>
+              <p className="text-[11px] text-noir/60 dark:text-ivory/60 mt-0.5">Pure Zari on Silk Velvet</p>
             </div>
           </div>
 
           {/* Floating Foreground Detail Accent Card */}
           <div
             ref={foregroundAccentRef}
-            className="hidden sm:block absolute -bottom-4 -left-6 w-36 sm:w-40 h-44 bg-ivory border border-gold/50 shadow-xl overflow-hidden will-change-transform z-20 p-2"
+            className="hidden sm:block absolute -bottom-4 -left-6 w-36 sm:w-40 h-44 bg-ivory dark:bg-[#171215] border border-gold/50 shadow-xl overflow-hidden will-change-transform z-20 p-2"
           >
-            <div className="relative w-full h-24 sm:h-26 overflow-hidden bg-noir/5">
+            <div className="relative w-full h-24 sm:h-26 overflow-hidden bg-noir/5 dark:bg-noir/40">
               <Image
                 src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=600&auto=format&fit=crop"
                 alt="Embroidery detail"
@@ -197,10 +197,10 @@ export function HeroSection() {
               />
             </div>
             <div className="pt-1.5 text-center">
-              <p className="text-[8.5px] uppercase tracking-widest text-gold-dark font-semibold">
+              <p className="text-[8.5px] uppercase tracking-widest text-gold-dark dark:text-gold-light font-semibold">
                 Varanasi Kadhwa
               </p>
-              <p className="font-serif text-[10.5px] text-oxblood italic">Scalloped Zari Jaal</p>
+              <p className="font-serif text-[10.5px] text-oxblood dark:text-gold-light italic">Scalloped Zari Jaal</p>
             </div>
           </div>
         </div>

@@ -138,23 +138,23 @@ function AccountContent() {
   }
 
   return (
-    <div className="min-h-screen bg-regal-texture py-16 px-4 md:px-8">
+    <div className="min-h-screen bg-regal-texture py-16 px-4 md:px-8 transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-gold/20">
           <Link
             href="/"
-            className="text-xs uppercase tracking-[0.25em] text-oxblood hover:text-gold transition-colors font-medium flex items-center gap-1"
+            className="text-xs uppercase tracking-[0.25em] text-oxblood dark:text-gold-light hover:text-gold transition-colors font-medium flex items-center gap-1"
           >
             ← Return to Atelier
           </Link>
-          <p className="text-[11px] uppercase tracking-[0.3em] text-noir/40">Client Privileges</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-noir/40 dark:text-ivory/40">Client Privileges</p>
         </div>
 
         {session?.user ? (
           /* Logged In Dashboard */
           <div className="space-y-8">
-            <div className="bg-ivory border border-gold/30 p-8 shadow-sm">
+            <div className="bg-ivory dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-8 shadow-sm transition-colors duration-300">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-gold/15">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-full bg-oxblood text-gold-light flex items-center justify-center font-serif text-xl border border-gold">
@@ -162,12 +162,12 @@ function AccountContent() {
                   </div>
                   <div>
                     <div className="flex items-center gap-3">
-                      <h1 className="text-2xl font-serif text-oxblood">{session.user.name}</h1>
-                      <span className="text-[10px] uppercase tracking-[0.2em] px-2.5 py-0.5 border border-gold/40 text-gold-dark bg-gold/10 font-medium">
+                      <h1 className="text-2xl font-serif text-oxblood dark:text-gold-foil">{session.user.name}</h1>
+                      <span className="text-[10px] uppercase tracking-[0.2em] px-2.5 py-0.5 border border-gold/40 text-gold-dark dark:text-gold-light bg-gold/10 font-medium">
                         {(session.user as any).role || "CUSTOMER"}
                       </span>
                     </div>
-                    <p className="text-xs text-noir/60 tracking-wider mt-1">{session.user.email}</p>
+                    <p className="text-xs text-noir/60 dark:text-ivory/60 tracking-wider mt-1">{session.user.email}</p>
                   </div>
                 </div>
 
@@ -274,27 +274,27 @@ function AccountContent() {
           </div>
         ) : (
           /* Authentication Forms */
-          <div className="bg-ivory border border-gold/30 p-8 md:p-12 shadow-sm max-w-lg mx-auto">
+          <div className="bg-ivory dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-8 md:p-12 shadow-sm max-w-lg mx-auto transition-colors duration-300">
             <div className="text-center mb-8">
-              <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique mb-2 font-semibold">
+              <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique dark:text-gold-light mb-2 font-semibold">
                 Client Sanctuary
               </p>
-              <h1 className="text-3xl font-serif text-oxblood">The Atelier Account</h1>
-              <p className="text-xs text-noir/60 mt-2">
+              <h1 className="text-3xl font-serif text-oxblood dark:text-gold-foil">The Atelier Account</h1>
+              <p className="text-xs text-noir/60 dark:text-ivory/60 mt-2">
                 Access your bespoke orders, curated wishlist, and private consultations.
               </p>
             </div>
 
             {/* Quick Demo Credentials Bar */}
             <div className="mb-6 p-3 bg-gold/10 border border-gold/30 rounded-sm">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-gold-dark font-semibold text-center mb-2">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-gold-dark dark:text-gold-light font-semibold text-center mb-2">
                 Instant Evaluator Logins
               </p>
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={fillDemoCustomer}
-                  className="flex-1 text-[11px] py-1.5 px-2 bg-white/70 hover:bg-white text-oxblood border border-gold/30 tracking-wider transition-colors"
+                  className="flex-1 text-[11px] py-1.5 px-2 bg-white/70 dark:bg-[#20181B] hover:bg-white text-oxblood dark:text-gold-light border border-gold/30 tracking-wider transition-colors"
                 >
                   Fill Customer
                 </button>

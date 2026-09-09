@@ -90,21 +90,21 @@ export default function CartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-regal-texture py-16 px-4 md:px-8">
+    <div className="min-h-screen bg-regal-texture py-16 px-4 md:px-8 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between pb-6 mb-8 border-b border-gold/20">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique font-semibold mb-1">
+            <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique dark:text-gold-light font-semibold mb-1">
               Your Curated Bag
             </p>
-            <h1 className="text-3xl md:text-4xl font-serif text-oxblood">
+            <h1 className="text-3xl md:text-4xl font-serif text-oxblood dark:text-gold-foil">
               Atelier Acquisitions
             </h1>
           </div>
           <Link
             href="/shop"
-            className="text-xs uppercase tracking-[0.2em] text-oxblood hover:text-gold transition-colors font-medium"
+            className="text-xs uppercase tracking-[0.2em] text-oxblood dark:text-gold-light hover:text-gold transition-colors font-medium"
           >
             ← Continue Browsing
           </Link>
@@ -128,8 +128,8 @@ export default function CartPage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Items Column */}
-            <div className="lg:col-span-8 bg-white/80 border border-gold/30 p-6 md:p-8 shadow-xs space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-gold/20 text-xs uppercase tracking-widest text-noir/50 font-medium">
+            <div className="lg:col-span-8 bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 md:p-8 shadow-xs space-y-6 transition-colors duration-300">
+              <div className="flex items-center justify-between pb-4 border-b border-gold/20 text-xs uppercase tracking-widest text-noir/50 dark:text-ivory/50 font-medium">
                 <span>Selected Garments</span>
                 <button
                   onClick={clearCart}
@@ -294,12 +294,12 @@ export default function CartPage() {
               </div>
 
               {/* Totals Box */}
-              <div className="bg-white/80 border border-gold/30 p-6 shadow-xs space-y-4">
-                <h3 className="font-serif text-base text-oxblood uppercase tracking-wider border-b border-gold/20 pb-3 font-semibold">
+              <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-xs space-y-4 transition-colors duration-300">
+                <h3 className="font-serif text-base text-oxblood dark:text-gold-foil uppercase tracking-wider border-b border-gold/20 pb-3 font-semibold">
                   Investment Summary
                 </h3>
 
-                <div className="space-y-2.5 text-xs text-noir/70">
+                <div className="space-y-2.5 text-xs text-noir/70 dark:text-ivory/70">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
                     <span>{formatPrice(subtotal)}</span>
