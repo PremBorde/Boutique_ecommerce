@@ -89,32 +89,32 @@ export function CraftPillars() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen bg-noir text-ivory py-20 px-4 md:px-8 flex flex-col justify-center overflow-hidden border-t border-gold/30"
+      className="relative min-h-screen bg-noir text-ivory pt-28 md:pt-32 pb-10 px-4 md:px-8 flex flex-col justify-center overflow-hidden border-t border-gold/30"
     >
-      <div className="max-w-7xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
         {/* Section Header */}
-        <div className="text-center max-w-xl mx-auto mb-12">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold mb-2 flex items-center justify-center gap-2">
+        <div className="text-center max-w-xl mx-auto mb-6 md:mb-8">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold mb-1.5 flex items-center justify-center gap-2">
             <Sparkles className="w-3 h-3 text-gold" />
             The Five Pillars of the Atelier
             <Sparkles className="w-3 h-3 text-gold" />
           </p>
-          <h2 className="text-3xl md:text-5xl font-serif text-ivory">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-ivory">
             Devotion to the Craft
           </h2>
         </div>
 
         {/* Pillar Showcase Display */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Numbered Stepper & Narratives */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-4 md:space-y-5">
             {/* Step Indicators */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               {PILLARS.map((p, idx) => (
                 <button
                   key={p.num}
                   onClick={() => setActiveIdx(idx)}
-                  className={`py-1.5 px-3 border text-xs font-serif transition-all ${
+                  className={`py-1 px-3 border text-xs font-serif transition-all ${
                     activeIdx === idx
                       ? "bg-gold text-noir font-semibold border-gold shadow-[0_0_15px_rgba(201,160,80,0.3)]"
                       : "border-gold/30 text-ivory/60 hover:text-ivory"
@@ -126,24 +126,24 @@ export function CraftPillars() {
             </div>
 
             {/* Current Pillar Details */}
-            <div className="space-y-4 pt-4">
-              <span className="font-display text-5xl md:text-7xl font-light text-gold-foil/80 block">
+            <div className="space-y-3 pt-2">
+              <span className="font-display text-4xl sm:text-5xl md:text-6xl font-light text-gold-foil/80 block">
                 {activePillar.num}
               </span>
 
-              <h3 className="font-serif text-2xl md:text-4xl text-ivory leading-tight font-normal">
+              <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-ivory leading-tight font-normal">
                 {activePillar.title}
               </h3>
 
-              <p className="text-xs uppercase tracking-[0.25em] text-gold-antique font-semibold">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-gold-antique font-semibold">
                 {activePillar.subtitle}
               </p>
 
-              <p className="text-sm md:text-base text-ivory/70 leading-relaxed font-sans max-w-lg">
+              <p className="text-xs sm:text-sm text-ivory/70 leading-relaxed font-sans max-w-lg">
                 {activePillar.narrative}
               </p>
 
-              <div className="pt-4 border-t border-gold/20 flex items-center gap-2 text-xs text-gold-light">
+              <div className="pt-3 border-t border-gold/20 flex items-center gap-2 text-xs text-gold-light">
                 <span className="font-semibold uppercase tracking-wider text-[10px]">
                   Archival Motif:
                 </span>
@@ -154,22 +154,22 @@ export function CraftPillars() {
 
           {/* Right Column: Supporting Macro Garment Shot */}
           <div className="lg:col-span-6 relative flex justify-center">
-            <div className="relative w-full max-w-md aspect-[4/5] bg-noir-surface border border-gold/40 shadow-2xl overflow-hidden">
+            <div className="relative w-full max-w-xs sm:max-w-sm lg:max-w-[380px] aspect-[4/5] max-h-[440px] bg-noir-surface border border-gold/40 shadow-2xl overflow-hidden">
               <Image
                 key={activePillar.image}
                 src={activePillar.image}
                 alt={activePillar.title}
                 fill
-                sizes="(max-width: 1024px) 100vw, 450px"
+                sizes="(max-width: 1024px) 100vw, 380px"
                 className="object-cover transition-opacity duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-noir/80 via-transparent to-transparent opacity-50" />
 
-              <div className="absolute bottom-4 left-4 right-4 p-4 bg-noir/90 border border-gold/30 backdrop-blur-md text-center">
-                <p className="font-serif text-sm text-gold-foil italic">
+              <div className="absolute bottom-3 left-3 right-3 p-3 bg-noir/90 border border-gold/30 backdrop-blur-md text-center">
+                <p className="font-serif text-xs sm:text-sm text-gold-foil italic">
                   &ldquo;{activePillar.title}&rdquo;
                 </p>
-                <p className="text-[10px] text-ivory/60 uppercase tracking-widest mt-0.5">
+                <p className="text-[9.5px] text-ivory/60 uppercase tracking-widest mt-0.5">
                   Jaipur & Varanasi Guild Handcraft
                 </p>
               </div>
