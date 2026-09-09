@@ -34,7 +34,7 @@ export function Navbar() {
         <span>Complimentary Insured Delivery</span>
       </div>
 
-      <nav className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-18 flex items-center justify-between">
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
