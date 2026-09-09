@@ -137,9 +137,9 @@ export function AiChatWidget() {
       {/* ══════════════════════════════════════════════════
           FLOATING LAUNCHER — Three Visual Layers
       ══════════════════════════════════════════════════ */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2 sm:gap-2.5">
 
-        {/* ── LAYER 3: Compact brand label (always visible, compact) ── */}
+        {/* ── LAYER 3: Compact brand label (visible on tablet/desktop only to avoid covering mobile content) ── */}
         <AnimatePresence>
           {!isOpen && (
             <motion.div
@@ -147,7 +147,7 @@ export function AiChatWidget() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 4 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FAF7F2] border border-[#C9A050]/50 shadow-[0_2px_12px_rgba(74,14,23,0.10)] cursor-pointer select-none"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-[#FAF7F2] dark:bg-[#161214] border border-[#C9A050]/50 dark:border-[#C9A050]/30 shadow-[0_2px_12px_rgba(74,14,23,0.10)] cursor-pointer select-none"
               onClick={() => setIsOpen(true)}
             >
               {/* Tiny ✦ brand mark */}
@@ -157,11 +157,8 @@ export function AiChatWidget() {
                   fill="#B38F3F"
                 />
               </svg>
-              <span className="font-sans text-[8px] uppercase tracking-[0.32em] text-[#4A0E17] font-semibold whitespace-nowrap hidden sm:inline">
+              <span className="font-sans text-[8px] uppercase tracking-[0.32em] text-[#4A0E17] dark:text-gold-light font-semibold whitespace-nowrap">
                 Atelier Concierge
-              </span>
-              <span className="font-sans text-[8px] uppercase tracking-[0.28em] text-[#4A0E17] font-semibold whitespace-nowrap sm:hidden">
-                Concierge
               </span>
             </motion.div>
           )}
@@ -180,7 +177,7 @@ export function AiChatWidget() {
         >
           {/* LAYER 1 — Soft champagne ambient glow (candlelight) */}
           <motion.span
-            className="absolute -inset-[18px] rounded-full pointer-events-none"
+            className="absolute -inset-[14px] sm:-inset-[18px] rounded-full pointer-events-none"
             style={{
               background:
                 "radial-gradient(circle, rgba(201,160,80,0.18) 0%, rgba(201,160,80,0.07) 50%, transparent 72%)",
@@ -196,7 +193,7 @@ export function AiChatWidget() {
 
           {/* LAYER 2 — Luxury circular button */}
           <motion.span
-            className="relative flex items-center justify-center w-[58px] h-[58px] sm:w-[62px] sm:h-[62px] rounded-full"
+            className="relative flex items-center justify-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-full shadow-lg"
             variants={{
               hovered: { scale: 1.04 },
             }}
@@ -204,14 +201,14 @@ export function AiChatWidget() {
             style={{
               /* Outer faint ornamental ring */
               boxShadow:
-                "0 0 0 1px rgba(201,160,80,0.25), 0 0 0 5px rgba(201,160,80,0.08), 0 6px 22px rgba(74,14,23,0.30), 0 2px 8px rgba(74,14,23,0.18)",
+                "0 0 0 1px rgba(201,160,80,0.25), 0 0 0 4px rgba(201,160,80,0.08), 0 6px 22px rgba(74,14,23,0.30), 0 2px 8px rgba(74,14,23,0.18)",
               background: "linear-gradient(145deg, #5C1020 0%, #3B0A12 55%, #4A0E17 100%)",
               border: "1.5px solid rgba(201,160,80,0.65)",
             }}
           >
             {/* Second inner ornamental ring — very subtle */}
             <span
-              className="absolute inset-[5px] rounded-full pointer-events-none"
+              className="absolute inset-[4px] sm:inset-[5px] rounded-full pointer-events-none"
               style={{
                 border: "0.75px solid rgba(201,160,80,0.22)",
               }}
@@ -239,7 +236,7 @@ export function AiChatWidget() {
                   transition={{ duration: 0.18 }}
                   className="flex items-center justify-center"
                 >
-                  <StarSeal size={22} />
+                  <StarSeal size={19} />
                 </motion.span>
               )}
             </AnimatePresence>

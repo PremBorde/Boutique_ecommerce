@@ -136,7 +136,7 @@ export function HeroSection() {
             </Link>
           </div>
 
-          <div className="pt-5 border-t border-gold/15 dark:border-gold/10 flex items-center justify-center lg:justify-start gap-8 text-[10px] md:text-[11px] uppercase tracking-widest text-noir/50 dark:text-ivory/50">
+          <div className="pt-5 border-t border-gold/15 dark:border-gold/10 flex items-center justify-center lg:justify-start gap-4 sm:gap-8 text-[9px] sm:text-[10px] md:text-[11px] uppercase tracking-wider sm:tracking-widest text-noir/50 dark:text-ivory/50">
             <div>
               <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">340+</strong>
               Artisan Hours

@@ -88,11 +88,11 @@ export function CraftPillars() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen bg-noir text-ivory pt-28 md:pt-32 pb-10 px-4 md:px-8 flex flex-col justify-center overflow-hidden border-t border-gold/30"
+      className="relative min-h-0 lg:min-h-screen bg-noir text-ivory py-16 sm:py-24 lg:py-28 px-4 md:px-8 flex flex-col justify-center overflow-hidden border-t border-gold/30"
     >
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
         {/* Section Header */}
-        <div className="text-center max-w-xl mx-auto mb-6 md:mb-8">
+        <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
           <p className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold mb-1.5">
             The Five Pillars of the Atelier
           </p>
@@ -106,12 +106,12 @@ export function CraftPillars() {
           {/* Left Column: Numbered Stepper & Narratives */}
           <div className="lg:col-span-6 space-y-4 md:space-y-5">
             {/* Step Indicators */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap justify-center lg:justify-start">
               {PILLARS.map((p, idx) => (
                 <button
                   key={p.num}
                   onClick={() => setActiveIdx(idx)}
-                  className={`py-1 px-3 border text-xs font-serif transition-all ${
+                  className={`py-1 px-2.5 sm:px-3 border text-xs font-serif transition-all ${
                     activeIdx === idx
                       ? "bg-gold text-noir font-semibold border-gold shadow-[0_0_15px_rgba(201,160,80,0.3)]"
                       : "border-gold/30 text-ivory/60 hover:text-ivory"
@@ -123,7 +123,7 @@ export function CraftPillars() {
             </div>
 
             {/* Current Pillar Details */}
-            <div className="space-y-3 pt-2">
+            <div className="space-y-3 pt-2 text-center lg:text-left">
               <span className="font-display text-4xl sm:text-5xl md:text-6xl font-light text-gold-foil/80 block">
                 {activePillar.num}
               </span>
@@ -136,11 +136,11 @@ export function CraftPillars() {
                 {activePillar.subtitle}
               </p>
 
-              <p className="text-xs sm:text-sm text-ivory/70 leading-relaxed font-sans max-w-lg">
+              <p className="text-xs sm:text-sm text-ivory/70 leading-relaxed font-sans max-w-lg mx-auto lg:mx-0">
                 {activePillar.narrative}
               </p>
 
-              <div className="pt-3 border-t border-gold/20 flex items-center gap-2 text-xs text-gold-light">
+              <div className="pt-3 border-t border-gold/20 flex items-center justify-center lg:justify-start gap-2 text-xs text-gold-light">
                 <span className="font-semibold uppercase tracking-wider text-[10px]">
                   Archival Motif:
                 </span>
@@ -151,7 +151,7 @@ export function CraftPillars() {
 
           {/* Right Column: Supporting Macro Garment Shot */}
           <div className="lg:col-span-6 relative flex justify-center">
-            <div className="relative w-full max-w-xs sm:max-w-sm lg:max-w-[380px] aspect-[4/5] max-h-[440px] bg-noir-surface border border-gold/40 shadow-2xl overflow-hidden">
+            <div className="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-[380px] aspect-[4/5] max-h-[380px] sm:max-h-[440px] bg-noir-surface border border-gold/40 shadow-2xl overflow-hidden">
               <Image
                 key={activePillar.image}
                 src={activePillar.image}

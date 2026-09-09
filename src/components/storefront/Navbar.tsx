@@ -26,31 +26,29 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 bg-ivory/95 dark:bg-[#0C0A0B]/95 backdrop-blur-md border-b border-gold/25 dark:border-gold/15 transition-colors duration-300">
-      {/* Top Heritage Micro-Ticker */}
-      <div className="bg-oxblood dark:bg-[#20070B] text-gold-foil py-1.5 px-4 text-center text-[10px] uppercase tracking-[0.3em] font-medium flex items-center justify-center gap-3 border-b border-gold/15">
-        <span>Hand-Crafted in Small Batches</span>
-        <span>·</span>
-        <span>Bespoke Indian Luxury</span>
-        <span>·</span>
-        <span>Complimentary Insured Delivery</span>
+      {/* Top Heritage Micro-Ticker (Responsive) */}
+      <div className="bg-oxblood dark:bg-[#20070B] text-gold-foil py-1.5 px-3 sm:px-4 text-center text-[9px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] font-medium flex items-center justify-center gap-2 sm:gap-3 border-b border-gold/15 overflow-hidden whitespace-nowrap">
+        <span className="hidden md:inline">Hand-Crafted in Small Batches ·</span>
+        <span className="truncate">Bespoke Indian Luxury</span>
+        <span className="hidden sm:inline">· Complimentary Insured Delivery</span>
       </div>
 
-      <nav className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-18 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 h-15 sm:h-16 md:h-18 flex items-center justify-between">
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-noir dark:text-ivory hover:text-oxblood dark:hover:text-gold p-1"
+          className="md:hidden text-noir dark:text-ivory hover:text-oxblood dark:hover:text-gold p-1 shrink-0"
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
 
         {/* Brand Wordmark */}
-        <Link href="/" className="flex flex-col items-center group">
-          <span className="font-display text-2xl md:text-3xl tracking-[0.22em] text-oxblood dark:text-gold-foil uppercase group-hover:text-gold transition-colors font-semibold">
+        <Link href="/" className="flex flex-col items-center group px-1">
+          <span className="font-display text-xl sm:text-2xl md:text-3xl tracking-[0.18em] sm:tracking-[0.22em] text-oxblood dark:text-gold-foil uppercase group-hover:text-gold transition-colors font-semibold">
             Zaria
           </span>
-          <span className="text-[9px] uppercase tracking-[0.45em] text-gold-antique dark:text-gold-light/70 -mt-1 font-sans font-medium">
+          <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.32em] sm:tracking-[0.45em] text-gold-antique dark:text-gold-light/70 -mt-1 font-sans font-medium">
             Atelier · Jaipur
           </span>
         </Link>
@@ -76,7 +74,7 @@ export function Navbar() {
         </div>
 
         {/* Right Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           <Link
             href="/shop"
             className="text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light transition-colors p-1"
