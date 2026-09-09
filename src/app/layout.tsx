@@ -43,6 +43,8 @@ import { Navbar } from "@/components/storefront/Navbar";
 import { Footer } from "@/components/storefront/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { AiChatWidget } from "@/components/chat/AiChatWidget";
+import { SmoothScrollProvider } from "@/components/animations/SmoothScrollProvider";
+import { CustomCursor } from "@/components/animations/CustomCursor";
 
 export default function RootLayout({
   children,
@@ -56,11 +58,14 @@ export default function RootLayout({
     >
       <body className="bg-ivory text-noir antialiased selection:bg-oxblood selection:text-gold-light flex flex-col min-h-screen">
         <Providers>
-          <Navbar />
-          <CartDrawer />
-          <AiChatWidget />
-          <div className="flex-1">{children}</div>
-          <Footer />
+          <SmoothScrollProvider>
+            <CustomCursor />
+            <Navbar />
+            <CartDrawer />
+            <AiChatWidget />
+            <div className="flex-1">{children}</div>
+            <Footer />
+          </SmoothScrollProvider>
         </Providers>
       </body>
     </html>
