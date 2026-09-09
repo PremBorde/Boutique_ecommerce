@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Search, SlidersHorizontal, X, ArrowUpDown, Sparkles } from "lucide-react";
 
-export default function ShopPage() {
+function ShopContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -306,5 +306,22 @@ export default function ShopPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-[70vh] flex items-center justify-center">
+          <div className="w-10 h-10 border-2 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="font-serif text-sm uppercase tracking-[0.25em] text-oxblood">
+            Curating Atelier Catalogue...
+          </p>
+        </div>
+      }
+    >
+      <ShopContent />
+    </Suspense>
   );
 }
