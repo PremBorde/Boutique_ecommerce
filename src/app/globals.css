@@ -43,20 +43,30 @@
 
 /* Custom Luxury Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAF7F2;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #B38F3F;
-  border-radius: 4px;
+  background: #C9A05040;
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4A0E17;
+  background: #B38F3F80;
+}
+
+/* Hide scrollbar utility (keeps scroll behavior) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Metallic Gold Shimmer Foil */
