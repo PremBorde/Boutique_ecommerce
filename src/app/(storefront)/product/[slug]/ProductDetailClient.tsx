@@ -8,7 +8,6 @@ import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
-  Sparkles,
   ShieldCheck,
   Truck,
   RotateCcw,
@@ -225,8 +224,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
               </AnimatePresence>
 
               {/* Hallmark Ribbon */}
-              <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1 bg-ivory/95 border border-gold/40 backdrop-blur-md">
-                <Sparkles className="w-3.5 h-3.5 text-gold-dark" />
+              <div className="absolute top-4 left-4 z-10 flex items-center px-3 py-1 bg-ivory/95 border border-gold/40 backdrop-blur-md">
                 <span className="text-[10px] uppercase tracking-[0.25em] text-oxblood font-semibold">
                   Artisan Handcrafted
                 </span>
@@ -370,15 +368,14 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                       </span>
                     </div>
                   ) : currentStock <= 2 ? (
-                    <div className="flex items-center gap-2 text-xs text-amber-800 bg-amber-50 p-2.5 border border-amber-200 font-medium">
-                      <Sparkles className="w-4 h-4 text-amber-600 shrink-0" />
+                    <div className="flex items-center text-xs text-amber-900 bg-amber-50/70 p-2.5 border border-amber-200 font-medium">
                       <span>
                         Rare Piece: Only <strong>{currentStock}</strong> available in vault.
                       </span>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2 text-xs text-emerald-800 bg-emerald-50 p-2.5 border border-emerald-200 font-medium">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <div className="flex items-center gap-2 text-xs text-emerald-800 bg-emerald-50/70 p-2.5 border border-emerald-200 font-medium">
+                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                       <span>
                         In Stock · SKU: <strong className="font-mono text-[11px]">{selectedVariant.sku}</strong>
                       </span>
@@ -446,8 +443,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
               {/* ---------------- CRAFT NARRATIVE ---------------- */}
               {product.story && (
                 <div className="mt-8 pt-6 border-t border-gold/20">
-                  <h3 className="text-xs uppercase tracking-[0.25em] font-semibold text-oxblood mb-2 flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-gold-dark" />
+                  <h3 className="text-xs uppercase tracking-[0.25em] font-semibold text-oxblood mb-2">
                     The Craft Story
                   </h3>
                   <p className="text-xs text-noir/70 leading-relaxed italic font-serif">

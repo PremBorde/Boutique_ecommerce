@@ -9,7 +9,6 @@ import {
   Clock,
   Package,
   Truck,
-  Sparkles,
   AlertTriangle,
   ArrowLeft,
   XCircle,
@@ -25,7 +24,7 @@ const STEPS = [
   { status: "CONFIRMED", label: "Payment Honored", icon: CheckCircle2 },
   { status: "PROCESSING", label: "Atelier Tailoring", icon: Package },
   { status: "SHIPPED", label: "Insured Transit", icon: Truck },
-  { status: "DELIVERED", label: "Client Handover", icon: Sparkles },
+  { status: "DELIVERED", label: "Client Handover", icon: ShieldCheck },
 ];
 
 export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClientProps) {

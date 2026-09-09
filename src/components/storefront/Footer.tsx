@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Sparkles, Shield, Clock, Compass } from "lucide-react";
+import { Gem, Shield, Clock, Compass } from "lucide-react";
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
         {/* Heritage Trust Badges */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-16 border-b border-gold/20 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start space-y-2">
-            <Sparkles className="w-5 h-5 text-gold mb-1" />
+            <Gem className="w-5 h-5 text-gold mb-1" />
             <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Heritage Craft</h4>
             <p className="text-xs text-ivory/60 leading-relaxed">
               Authentic hand-embroidery, dabka, and pit-loom weaves from master generational artisans.

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { formatPrice } from "@/lib/utils";
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface LookbookItem {
   id: string;
@@ -80,8 +80,7 @@ export function LookbookRail() {
     <section className="py-24 bg-ivory overflow-hidden border-t border-gold/25 select-none">
       <div className="max-w-7xl mx-auto px-4 md:px-8 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark font-semibold mb-2 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-gold-dark" />
+          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark font-semibold mb-2">
             Editorial Lookbook
           </p>
           <h2 className="text-3xl md:text-5xl font-serif text-oxblood">

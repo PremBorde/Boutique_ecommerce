@@ -6,7 +6,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
-import { Sparkles, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -94,8 +94,7 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
         {/* Left Column: Kinetic Typography & CTAs */}
         <div className="lg:col-span-7 space-y-4 md:space-y-5 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold/10 border border-gold/30 backdrop-blur-xs">
-            <Sparkles className="w-3.5 h-3.5 text-gold-dark" />
+          <div className="inline-flex items-center px-3 py-1 bg-gold/10 border border-gold/30 backdrop-blur-xs">
             <span className="text-[10px] uppercase tracking-[0.3em] text-oxblood font-semibold">
               The Festive Pret & Couture 2026
             </span>

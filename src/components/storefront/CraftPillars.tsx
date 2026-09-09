@@ -4,7 +4,6 @@ import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Sparkles } from "lucide-react";
 
 const PILLARS = [
   {
@@ -94,10 +93,8 @@ export function CraftPillars() {
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center">
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-6 md:mb-8">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold mb-1.5 flex items-center justify-center gap-2">
-            <Sparkles className="w-3 h-3 text-gold" />
+          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold mb-1.5">
             The Five Pillars of the Atelier
-            <Sparkles className="w-3 h-3 text-gold" />
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-ivory">
             Devotion to the Craft

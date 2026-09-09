@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { Button } from "@/components/ui/button";
-import { Search, SlidersHorizontal, X, ArrowUpDown, Sparkles } from "lucide-react";
+import { Search, SlidersHorizontal, X, ArrowUpDown } from "lucide-react";
 
 function ShopContent() {
   const router = useRouter();
@@ -96,10 +96,8 @@ function ShopContent() {
       <div className="max-w-7xl mx-auto">
         {/* Editorial Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique mb-2 font-semibold flex items-center justify-center gap-2">
-            <Sparkles className="w-3 h-3 text-gold" />
+          <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique mb-2 font-semibold">
             Bespoke Collection Archive
-            <Sparkles className="w-3 h-3 text-gold" />
           </p>
           <h1 className="text-4xl md:text-5xl font-serif text-oxblood">
             The Atelier Catalogue

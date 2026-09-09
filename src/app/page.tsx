@@ -8,7 +8,7 @@ import { CraftPillars } from "@/components/storefront/CraftPillars";
 import { LookbookRail } from "@/components/storefront/LookbookRail";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { Button } from "@/components/ui/button";
-import { Sparkles, ArrowRight, ShieldCheck, Gem } from "lucide-react";
+import { ArrowRight, ShieldCheck, Gem } from "lucide-react";
 
 export default async function HomePage() {
   // Fetch featured products and categories for the storefront
@@ -34,24 +34,11 @@ export default async function HomePage() {
   ]);
 
   const serializedFeaturedProducts = featuredProducts.map((p) => ({
-    id: p.id,
-    name: p.name,
-    slug: p.slug,
-    description: p.description,
-    fabric: p.fabric,
+    ...p,
     basePrice: Number(p.basePrice),
-    category: p.category ? { name: p.category.name, slug: p.category.slug } : null,
-    images: p.images.map((img) => ({
-      url: img.url,
-      altText: img.altText,
-      isPrimary: img.isPrimary,
-    })),
     variants: p.variants.map((v) => ({
-      id: v.id,
-      color: v.color,
-      colorHex: v.colorHex,
-      size: v.size,
-      inventory: v.inventory ? { quantity: v.inventory.quantity } : null,
+      ...v,
+      priceOverride: v.priceOverride ? Number(v.priceOverride) : null,
     })),
   }));
 
@@ -146,7 +133,6 @@ export default async function HomePage() {
       {/* 8. Brand Story Editorial Strip */}
       <section className="py-24 bg-oxblood text-ivory px-4 md:px-8 border-t border-gold/30">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <Sparkles className="w-6 h-6 text-gold mx-auto" />
           <h2 className="text-3xl md:text-5xl font-serif leading-tight text-gold-foil">
             &ldquo;In an age of haste, we measure time in stitches.&rdquo;
           </h2>

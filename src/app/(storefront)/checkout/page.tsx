@@ -16,7 +16,6 @@ import {
   ArrowLeft,
   AlertTriangle,
   CheckCircle2,
-  Sparkles,
 } from "lucide-react";
 
 export default function CheckoutPage() {
