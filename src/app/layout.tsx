@@ -38,6 +38,8 @@ export const viewport: Viewport = {
   themeColor: "#4A0E17",
 };
 
+import { Providers } from "./providers";
+
 export default function RootLayout({
   children,
 }: {
@@ -49,7 +51,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${cinzel.variable} ${jakarta.variable}`}
     >
       <body className="bg-ivory text-noir antialiased selection:bg-oxblood selection:text-gold-light">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
