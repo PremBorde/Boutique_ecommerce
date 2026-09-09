@@ -33,6 +33,15 @@ export default async function HomePage() {
     }),
   ]);
 
+  const serializedFeaturedProducts = featuredProducts.map((p) => ({
+    ...p,
+    basePrice: Number(p.basePrice),
+    variants: p.variants.map((v) => ({
+      ...v,
+      priceOverride: v.priceOverride ? Number(v.priceOverride) : null,
+    })),
+  }));
+
   return (
     <main className="relative bg-ivory">
       {/* 1. Opening Ritual: The Atelier Opens (<1.8s, session-flagged) */}
@@ -71,7 +80,7 @@ export default async function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredProducts.map((p) => (
+          {serializedFeaturedProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>
