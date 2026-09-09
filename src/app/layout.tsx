@@ -39,6 +39,9 @@ export const viewport: Viewport = {
 };
 
 import { Providers } from "./providers";
+import { Navbar } from "@/components/storefront/Navbar";
+import { Footer } from "@/components/storefront/Footer";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 
 export default function RootLayout({
   children,
@@ -50,8 +53,13 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${cinzel.variable} ${jakarta.variable}`}
     >
-      <body className="bg-ivory text-noir antialiased selection:bg-oxblood selection:text-gold-light">
-        <Providers>{children}</Providers>
+      <body className="bg-ivory text-noir antialiased selection:bg-oxblood selection:text-gold-light flex flex-col min-h-screen">
+        <Providers>
+          <Navbar />
+          <CartDrawer />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
