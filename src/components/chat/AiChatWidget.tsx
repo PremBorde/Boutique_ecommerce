@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatPrice } from "@/lib/utils";
 import { useCart } from "@/hooks/useCart";
-import { Button } from "@/components/ui/button";
 import { X, Send, ShoppingBag } from "lucide-react";
+import { useEffect } from "react";
 
 interface Message {
   id: string;
@@ -23,9 +23,32 @@ const SUGGESTED_PROMPTS = [
   "Recommend a regal ensemble for a Jaipur wedding",
 ];
 
+/* ── Small ornamental ✦ SVG ── */
+function StarSeal({ size = 22 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Outer thin ring */}
+      <circle cx="12" cy="12" r="10.5" stroke="#C9A050" strokeWidth="0.6" opacity="0.55" />
+      {/* Four-point star */}
+      <path
+        d="M12 3.5 L13.05 10.95 L20.5 12 L13.05 13.05 L12 20.5 L10.95 13.05 L3.5 12 L10.95 10.95 Z"
+        fill="#DFC07B"
+      />
+      {/* Tiny centre dot */}
+      <circle cx="12" cy="12" r="1.4" fill="#FAF7F2" opacity="0.7" />
+    </svg>
+  );
+}
+
 export function AiChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hovered, setHovered] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -46,7 +69,9 @@ export function AiChatWidget() {
     if (stored) {
       setSessionToken(stored);
     } else {
-      const newToken = `session_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+      const newToken = `session_${Date.now()}_${Math.random()
+        .toString(36)
+        .substring(2, 9)}`;
       localStorage.setItem("zaria_chat_token", newToken);
       setSessionToken(newToken);
     }
@@ -78,7 +103,6 @@ export function AiChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text.trim(), sessionToken }),
       });
-
       const data = await res.json();
 
       const assistantMessage: Message = {
@@ -100,8 +124,7 @@ export function AiChatWidget() {
         {
           id: `err_${Date.now()}`,
           role: "assistant",
-          content:
-            "The connection was momentarily interrupted. Please ask again.",
+          content: "The connection was momentarily interrupted. Please ask again.",
         },
       ]);
     } finally {
@@ -111,131 +134,231 @@ export function AiChatWidget() {
 
   return (
     <>
-      {/* ── Collapsed Trigger ─────────────────────────────── */}
-      <div
-        className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        {/* Tooltip — visible on hover, hidden when panel is open */}
+      {/* ══════════════════════════════════════════════════
+          FLOATING LAUNCHER — Three Visual Layers
+      ══════════════════════════════════════════════════ */}
+      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5">
+
+        {/* ── LAYER 3: Compact brand label (always visible, compact) ── */}
         <AnimatePresence>
-          {hovered && !isOpen && (
+          {!isOpen && (
             <motion.div
-              initial={{ opacity: 0, x: 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 8 }}
-              transition={{ duration: 0.18 }}
-              className="mb-1 mr-1 bg-ivory border border-gold/50 px-3 py-1.5 shadow-sm pointer-events-none"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 4 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FAF7F2] border border-[#C9A050]/50 shadow-[0_2px_12px_rgba(74,14,23,0.10)] cursor-pointer select-none"
+              onClick={() => setIsOpen(true)}
             >
-              <span className="font-sans text-[9px] uppercase tracking-[0.28em] text-oxblood font-semibold whitespace-nowrap">
-                Zaria Concierge
+              {/* Tiny ✦ brand mark */}
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path
+                  d="M5 0.5 L5.7 4.3 L9.5 5 L5.7 5.7 L5 9.5 L4.3 5.7 L0.5 5 L4.3 4.3 Z"
+                  fill="#B38F3F"
+                />
+              </svg>
+              <span className="font-sans text-[8px] uppercase tracking-[0.32em] text-[#4A0E17] font-semibold whitespace-nowrap hidden sm:inline">
+                Atelier Concierge
+              </span>
+              <span className="font-sans text-[8px] uppercase tracking-[0.28em] text-[#4A0E17] font-semibold whitespace-nowrap sm:hidden">
+                Concierge
               </span>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Circular Trigger Button */}
+        {/* ── LAYER 1 (glow) + LAYER 2 (button) together ── */}
         <motion.button
           id="ai-chat-launcher"
           onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.15 }}
+          initial={false}
+          whileHover="hovered"
+          whileTap={{ scale: 0.96 }}
           aria-label="Open Zaria Concierge"
-          className="w-14 h-14 md:w-[54px] md:h-[54px] rounded-full bg-oxblood border border-gold/50 shadow-[0_4px_18px_rgba(74,14,23,0.28)] hover:shadow-[0_6px_24px_rgba(74,14,23,0.38)] flex items-center justify-center transition-shadow duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
+          className="relative focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A050]/60 rounded-full"
+          style={{ isolation: "isolate" }}
         >
-          {isOpen ? (
-            <X className="w-4 h-4 text-gold-light" strokeWidth={1.5} />
-          ) : (
-            /* Elegant ✦ monogram */
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z"
-                fill="#DFC07B"
-                opacity="0.9"
-              />
-            </svg>
-          )}
+          {/* LAYER 1 — Soft champagne ambient glow (candlelight) */}
+          <motion.span
+            className="absolute -inset-[18px] rounded-full pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(201,160,80,0.18) 0%, rgba(201,160,80,0.07) 50%, transparent 72%)",
+            }}
+            variants={{
+              hovered: {
+                opacity: 1.6,
+                scale: 1.08,
+              },
+            }}
+            transition={{ duration: 0.25 }}
+          />
+
+          {/* LAYER 2 — Luxury circular button */}
+          <motion.span
+            className="relative flex items-center justify-center w-[58px] h-[58px] sm:w-[62px] sm:h-[62px] rounded-full"
+            variants={{
+              hovered: { scale: 1.04 },
+            }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            style={{
+              /* Outer faint ornamental ring */
+              boxShadow:
+                "0 0 0 1px rgba(201,160,80,0.25), 0 0 0 5px rgba(201,160,80,0.08), 0 6px 22px rgba(74,14,23,0.30), 0 2px 8px rgba(74,14,23,0.18)",
+              background: "linear-gradient(145deg, #5C1020 0%, #3B0A12 55%, #4A0E17 100%)",
+              border: "1.5px solid rgba(201,160,80,0.65)",
+            }}
+          >
+            {/* Second inner ornamental ring — very subtle */}
+            <span
+              className="absolute inset-[5px] rounded-full pointer-events-none"
+              style={{
+                border: "0.75px solid rgba(201,160,80,0.22)",
+              }}
+            />
+
+            {/* Icon — close X when open, ✦ seal when closed */}
+            <AnimatePresence mode="wait" initial={false}>
+              {isOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ opacity: 0, rotate: -45, scale: 0.7 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: 45, scale: 0.7 }}
+                  transition={{ duration: 0.18 }}
+                  className="flex items-center justify-center"
+                >
+                  <X className="w-4 h-4 text-[#DFC07B]" strokeWidth={1.5} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="star"
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.7 }}
+                  transition={{ duration: 0.18 }}
+                  className="flex items-center justify-center"
+                >
+                  <StarSeal size={22} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.span>
         </motion.button>
       </div>
 
-      {/* ── Chat Panel ────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════
+          CHAT PANEL — Private Luxury Concierge
+      ══════════════════════════════════════════════════ */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Mobile Backdrop */}
+            {/* Mobile backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setIsOpen(false)}
-              className="md:hidden fixed inset-0 bg-noir/40 z-40 backdrop-blur-[2px]"
+              className="md:hidden fixed inset-0 bg-noir/30 z-40 backdrop-blur-[2px]"
             />
 
+            {/* Panel */}
             <motion.div
-              initial={{ opacity: 0, y: 16, scale: 0.98 }}
+              initial={{ opacity: 0, y: 18, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 16, scale: 0.98 }}
-              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed bottom-0 right-0 md:bottom-24 md:right-6 w-full md:w-[420px] h-[88vh] md:h-[580px] bg-[#FAF7F2] border-t md:border border-gold/30 shadow-[0_12px_48px_rgba(74,14,23,0.14)] z-50 flex flex-col overflow-hidden"
+              exit={{ opacity: 0, y: 18, scale: 0.97 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed bottom-0 right-0 md:bottom-[88px] md:right-6 w-full md:w-[420px] h-[88vh] md:h-[580px] z-50 flex flex-col overflow-hidden md:rounded-sm"
+              style={{
+                background: "#FAF7F2",
+                border: "1px solid rgba(201,160,80,0.30)",
+                boxShadow:
+                  "0 20px 60px rgba(74,14,23,0.16), 0 4px 16px rgba(74,14,23,0.10)",
+              }}
             >
-              {/* Panel Header */}
-              <div className="px-5 py-4 border-b border-gold/20 flex items-start justify-between bg-[#FAF7F2]">
-                <div>
-                  <h3 className="font-serif text-sm text-oxblood font-semibold tracking-[0.08em]">
-                    Zaria Concierge
-                  </h3>
-                  <p className="text-[10px] text-noir/40 uppercase tracking-[0.22em] mt-0.5 font-sans">
-                    Personal Atelier Assistance
-                  </p>
+              {/* ── Header ── */}
+              <div
+                className="px-5 py-4 flex items-start justify-between shrink-0"
+                style={{
+                  borderBottom: "1px solid rgba(201,160,80,0.22)",
+                  background:
+                    "linear-gradient(to bottom, rgba(74,14,23,0.03) 0%, transparent 100%)",
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  {/* Decorative seal mark */}
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0"
+                    style={{
+                      border: "1px solid rgba(201,160,80,0.40)",
+                      background: "linear-gradient(145deg, #5C1020, #3B0A12)",
+                    }}
+                  >
+                    <StarSeal size={14} />
+                  </span>
+                  <div>
+                    <h3 className="font-serif text-[13px] text-oxblood font-semibold tracking-[0.06em]">
+                      Zaria Concierge
+                    </h3>
+                    <p className="font-sans text-[9px] uppercase tracking-[0.24em] text-noir/38 mt-0.5">
+                      Personal Atelier Assistance
+                    </p>
+                  </div>
                 </div>
+
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="mt-0.5 w-6 h-6 flex items-center justify-center text-noir/30 hover:text-oxblood transition-colors"
+                  className="mt-0.5 w-6 h-6 flex items-center justify-center text-noir/25 hover:text-oxblood/70 transition-colors"
                   aria-label="Close"
                 >
                   <X className="w-3.5 h-3.5" strokeWidth={1.5} />
                 </button>
               </div>
 
-              {/* Thin gold hairline divider */}
-              <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+              {/* Thin gold hairline */}
+              <div
+                className="h-px shrink-0"
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, rgba(201,160,80,0.35), transparent)",
+                }}
+              />
 
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
+              {/* ── Messages ── */}
+              <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 no-scrollbar">
                 {messages.map((m) => (
                   <div
                     key={m.id}
-                    className={`flex flex-col ${
-                      m.role === "user" ? "items-end" : "items-start"
-                    }`}
+                    className={`flex flex-col ${m.role === "user" ? "items-end" : "items-start"}`}
                   >
-                    {/* Role label */}
-                    <span className="text-[9px] uppercase tracking-[0.2em] text-noir/30 mb-1 font-sans">
+                    <span className="font-sans text-[8.5px] uppercase tracking-[0.2em] text-noir/28 mb-1">
                       {m.role === "user" ? "You" : "Concierge"}
                     </span>
 
                     <div
-                      className={`max-w-[86%] px-3.5 py-2.5 text-xs leading-relaxed font-sans ${
+                      className="max-w-[88%] px-3.5 py-2.5 text-[11.5px] leading-relaxed font-sans"
+                      style={
                         m.role === "user"
-                          ? "bg-oxblood text-ivory/90"
-                          : "bg-white text-noir/75 border border-gold/20"
-                      }`}
+                          ? {
+                              background:
+                                "linear-gradient(135deg, #5C1020 0%, #4A0E17 100%)",
+                              color: "rgba(250,247,242,0.88)",
+                            }
+                          : {
+                              background: "#FFFFFF",
+                              color: "rgba(20,17,19,0.72)",
+                              border: "1px solid rgba(201,160,80,0.20)",
+                            }
+                      }
                     >
                       <p className="whitespace-pre-line">{m.content}</p>
                     </div>
 
-                    {/* Inline product cards */}
+                    {/* Product cards */}
                     {m.products && m.products.length > 0 && (
                       <div className="mt-3 w-full space-y-2">
-                        <p className="text-[9px] uppercase tracking-[0.2em] text-gold-dark font-semibold font-sans">
-                          Selected Pieces
+                        <p className="font-sans text-[8.5px] uppercase tracking-[0.2em] text-[#B38F3F] font-semibold">
+                          ✦ Selected Pieces
                         </p>
                         {m.products.map((p) => {
                           const firstImage =
@@ -249,9 +372,11 @@ export function AiChatWidget() {
                           return (
                             <div
                               key={p.id}
-                              className="bg-white border border-gold/20 p-2.5 flex items-center gap-3 hover:border-gold/50 transition-colors"
+                              className="bg-white flex items-center gap-3 p-2.5 hover:border-[rgba(201,160,80,0.5)] transition-colors"
+                              style={{ border: "1px solid rgba(201,160,80,0.18)" }}
                             >
-                              <div className="relative w-12 h-16 bg-noir/5 shrink-0 overflow-hidden border border-gold/15">
+                              <div className="relative w-12 h-16 shrink-0 overflow-hidden"
+                                style={{ border: "1px solid rgba(201,160,80,0.15)" }}>
                                 <Image
                                   src={firstImage}
                                   alt={p.name}
@@ -265,14 +390,14 @@ export function AiChatWidget() {
                                 <Link
                                   href={`/product/${p.slug}`}
                                   onClick={() => setIsOpen(false)}
-                                  className="font-serif text-[11px] font-semibold text-oxblood hover:text-gold-dark transition-colors truncate block"
+                                  className="font-serif text-[11px] font-semibold text-oxblood hover:text-[#B38F3F] transition-colors truncate block"
                                 >
                                   {p.name}
                                 </Link>
-                                <p className="text-[9px] text-noir/40 truncate font-sans mt-0.5">
+                                <p className="font-sans text-[9px] text-noir/38 truncate mt-0.5">
                                   {p.category?.name || "Couture"}
                                 </p>
-                                <p className="font-serif text-[11px] font-semibold text-gold-dark mt-0.5">
+                                <p className="font-serif text-[11px] font-semibold text-[#B38F3F] mt-0.5">
                                   {formatPrice(p.basePrice)}
                                 </p>
                               </div>
@@ -297,12 +422,13 @@ export function AiChatWidget() {
                                       openDrawer();
                                     }}
                                     title="Add to Bag"
-                                    className="w-7 h-7 border border-gold/30 hover:bg-oxblood hover:border-oxblood hover:text-ivory text-oxblood flex items-center justify-center transition-colors"
+                                    className="w-7 h-7 flex items-center justify-center text-oxblood hover:bg-oxblood hover:text-[#DFC07B] transition-colors"
+                                    style={{ border: "1px solid rgba(201,160,80,0.30)" }}
                                   >
                                     <ShoppingBag className="w-3 h-3" strokeWidth={1.5} />
                                   </button>
                                 ) : (
-                                  <span className="text-[9px] uppercase text-noir/30 font-sans tracking-wide">
+                                  <span className="font-sans text-[8.5px] uppercase text-noir/28 tracking-wide">
                                     Sold
                                   </span>
                                 )}
@@ -315,13 +441,20 @@ export function AiChatWidget() {
                   </div>
                 ))}
 
-                {/* Thinking indicator */}
+                {/* Typing indicator */}
                 {loading && (
                   <div className="flex items-start">
-                    <div className="bg-white border border-gold/20 px-4 py-2.5 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-gold-dark animate-bounce" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-gold-dark animate-bounce [animation-delay:0.15s]" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-gold-dark animate-bounce [animation-delay:0.3s]" />
+                    <div
+                      className="px-4 py-2.5 flex items-center gap-1.5 bg-white"
+                      style={{ border: "1px solid rgba(201,160,80,0.18)" }}
+                    >
+                      {[0, 0.15, 0.3].map((delay, i) => (
+                        <span
+                          key={i}
+                          className="w-1.5 h-1.5 rounded-full bg-[#C9A050] animate-bounce"
+                          style={{ animationDelay: `${delay}s` }}
+                        />
+                      ))}
                     </div>
                   </div>
                 )}
@@ -329,18 +462,26 @@ export function AiChatWidget() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Suggested Prompts */}
+              {/* ── Suggested Prompts ── */}
               {messages.length <= 2 && (
-                <div className="px-5 py-3 border-t border-gold/15 bg-[#FAF7F2]">
-                  <p className="text-[8.5px] uppercase tracking-[0.22em] text-noir/30 mb-2 font-sans">
+                <div
+                  className="px-5 py-3 shrink-0"
+                  style={{ borderTop: "1px solid rgba(201,160,80,0.15)" }}
+                >
+                  <p className="font-sans text-[8px] uppercase tracking-[0.22em] text-noir/28 mb-2">
                     Suggested
                   </p>
-                  <div className="flex gap-1.5 overflow-x-auto pb-0.5 no-scrollbar">
+                  <div className="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
                     {SUGGESTED_PROMPTS.map((prompt, i) => (
                       <button
                         key={i}
                         onClick={() => handleSend(prompt)}
-                        className="text-[9px] whitespace-nowrap px-2.5 py-1 bg-white border border-gold/25 hover:border-oxblood/40 hover:bg-oxblood/5 text-noir/60 hover:text-oxblood transition-colors shrink-0 font-sans tracking-wide"
+                        className="font-sans text-[9px] whitespace-nowrap px-2.5 py-1 text-noir/55 hover:text-oxblood hover:bg-oxblood/5 transition-colors shrink-0"
+                        style={{
+                          border: "1px solid rgba(201,160,80,0.22)",
+                          background: "white",
+                          letterSpacing: "0.02em",
+                        }}
                       >
                         {prompt}
                       </button>
@@ -349,8 +490,14 @@ export function AiChatWidget() {
                 </div>
               )}
 
-              {/* Input Bar */}
-              <div className="px-4 py-3 border-t border-gold/20 bg-white">
+              {/* ── Input Bar ── */}
+              <div
+                className="px-4 py-3 shrink-0"
+                style={{
+                  borderTop: "1px solid rgba(201,160,80,0.22)",
+                  background: "white",
+                }}
+              >
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -363,17 +510,33 @@ export function AiChatWidget() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask your concierge…"
-                    className="flex-1 h-9 px-3 text-[11px] bg-[#FAF7F2] border border-gold/25 focus:border-oxblood/50 outline-none transition-all placeholder:text-noir/30 font-sans"
+                    className="flex-1 h-9 px-3 font-sans text-[11px] outline-none placeholder:text-noir/28 text-noir/75 transition-all bg-[#FAF7F2]"
+                    style={{ border: "1px solid rgba(201,160,80,0.28)" }}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = "rgba(74,14,23,0.35)")
+                    }
+                    onBlur={(e) =>
+                      (e.target.style.borderColor = "rgba(201,160,80,0.28)")
+                    }
                   />
                   <button
                     type="submit"
                     disabled={!input.trim() || loading}
-                    className="h-9 w-9 flex items-center justify-center bg-oxblood text-gold-light disabled:opacity-30 hover:bg-oxblood/90 transition-colors shrink-0"
+                    className="h-9 w-9 flex items-center justify-center text-[#DFC07B] disabled:opacity-30 hover:opacity-90 transition-opacity shrink-0"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #5C1020 0%, #4A0E17 100%)",
+                    }}
                     aria-label="Send"
                   >
                     <Send className="w-3.5 h-3.5" strokeWidth={1.5} />
                   </button>
                 </form>
+
+                {/* Footer attribution */}
+                <p className="font-sans text-[7.5px] uppercase tracking-[0.2em] text-noir/20 text-center mt-2">
+                  ✦ Zaria Atelier · Powered by Gemini
+                </p>
               </div>
             </motion.div>
           </>
