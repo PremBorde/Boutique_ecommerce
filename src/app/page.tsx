@@ -34,11 +34,24 @@ export default async function HomePage() {
   ]);
 
   const serializedFeaturedProducts = featuredProducts.map((p) => ({
-    ...p,
+    id: p.id,
+    name: p.name,
+    slug: p.slug,
+    description: p.description,
+    fabric: p.fabric,
     basePrice: Number(p.basePrice),
+    category: p.category ? { name: p.category.name, slug: p.category.slug } : null,
+    images: p.images.map((img) => ({
+      url: img.url,
+      altText: img.altText,
+      isPrimary: img.isPrimary,
+    })),
     variants: p.variants.map((v) => ({
-      ...v,
-      priceOverride: v.priceOverride ? Number(v.priceOverride) : null,
+      id: v.id,
+      color: v.color,
+      colorHex: v.colorHex,
+      size: v.size,
+      inventory: v.inventory ? { quantity: v.inventory.quantity } : null,
     })),
   }));
 
