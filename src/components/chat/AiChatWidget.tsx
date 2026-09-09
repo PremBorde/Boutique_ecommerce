@@ -123,24 +123,150 @@ export function AiChatWidget() {
 
   return (
     <>
-      {/* Floating Branded Launcher Button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      {/* 3D Holographic AI Avatar Launcher */}
+      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-center gap-2">
+        {/* Tooltip label — shown when not open */}
+        <AnimatePresence>
+          {!isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 6, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 6, scale: 0.9 }}
+              transition={{ delay: 1.2, duration: 0.4 }}
+              className="pointer-events-none text-center"
+            >
+              <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-gold/80 bg-noir/80 backdrop-blur-sm px-2.5 py-1 border border-gold/30 shadow-md">
+                Atelier AI
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* The 3D Avatar Button */}
         <motion.button
           id="ai-chat-launcher"
           onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="group relative flex items-center gap-2.5 px-4 py-3.5 bg-oxblood text-gold-foil border border-gold shadow-[0_10px_30px_rgba(74,14,23,0.45)] hover:shadow-[0_15px_40px_rgba(201,160,80,0.4)] transition-all overflow-hidden"
+          whileHover={{ scale: 1.06, y: -4 }}
+          whileTap={{ scale: 0.94 }}
+          animate={isOpen ? { scale: 1 } : {
+            y: [0, -5, 0],
+            transition: { repeat: Infinity, duration: 3, ease: "easeInOut" }
+          }}
           aria-label="Open AI Shopping Assistant"
+          className="relative w-[72px] h-[72px] rounded-full focus:outline-none group"
+          style={{ filter: "drop-shadow(0 12px 28px rgba(201,160,80,0.55))" }}
         >
-          {/* Subtle breathing glow */}
-          <span className="absolute -inset-1 rounded-full bg-gold/20 animate-ping opacity-40 group-hover:opacity-60" />
+          {/* Outer Pulsing Halo Ring */}
+          <span
+            className="absolute -inset-2 rounded-full bg-gold/20 animate-ping opacity-50"
+            style={{ animationDuration: "2.4s" }}
+          />
 
-          <Sparkles className="w-4 h-4 text-gold-light animate-pulse" />
-          <span className="font-serif text-xs uppercase tracking-[0.2em] font-semibold">
-            Atelier Stylist
+          {/* Orbital particle ring */}
+          <span
+            className="absolute inset-[-6px] rounded-full border border-dashed border-gold/40"
+            style={{
+              animation: "spin 8s linear infinite",
+            }}
+          />
+
+          {/* Glowing backdrop disc */}
+          <span className="absolute inset-0 rounded-full bg-gradient-radial from-[#3B0A12] via-[#1a0808] to-[#0D0000] border-2 border-gold/60 shadow-[inset_0_2px_8px_rgba(245,208,97,0.3),0_0_20px_rgba(201,160,80,0.5)]" />
+
+          {/* 3D Face / Bust SVG Avatar */}
+          <span className="absolute inset-0 flex items-center justify-center">
+            <svg
+              viewBox="0 0 72 72"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+            >
+              {/* Glow filter */}
+              <defs>
+                <radialGradient id="faceGrad" cx="50%" cy="42%" r="45%">
+                  <stop offset="0%" stopColor="#F5D061" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#DFC07B" stopOpacity="0" />
+                </radialGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="1.8" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* Ambient face glow disc */}
+              <ellipse cx="36" cy="30" rx="18" ry="20" fill="url(#faceGrad)" />
+
+              {/* Neck */}
+              <rect x="30.5" y="46" width="11" height="8" rx="2" fill="#DFC07B" opacity="0.7" filter="url(#glow)" />
+
+              {/* Shoulder arc */}
+              <path
+                d="M14 64 C14 54, 24 50, 36 50 C48 50, 58 54, 58 64"
+                stroke="#DFC07B"
+                strokeWidth="1.5"
+                fill="#1a0808"
+                filter="url(#glow)"
+              />
+
+              {/* Head */}
+              <ellipse
+                cx="36" cy="28" rx="14" ry="16"
+                fill="#2A0A10"
+                stroke="#DFC07B"
+                strokeWidth="1.2"
+                filter="url(#glow)"
+              />
+
+              {/* Hair highlight */}
+              <path
+                d="M22 22 Q28 12 36 12 Q44 12 50 22"
+                stroke="#F5D061"
+                strokeWidth="1.5"
+                fill="none"
+                strokeLinecap="round"
+                filter="url(#glow)"
+              />
+
+              {/* Eyes */}
+              <ellipse cx="29.5" cy="27" rx="2.2" ry="1.6" fill="#F5D061" filter="url(#glow)" />
+              <ellipse cx="42.5" cy="27" rx="2.2" ry="1.6" fill="#F5D061" filter="url(#glow)" />
+              {/* Pupil */}
+              <circle cx="29.5" cy="27" r="1" fill="#0D0000" />
+              <circle cx="42.5" cy="27" r="1" fill="#0D0000" />
+
+              {/* Nose subtle line */}
+              <path d="M35 30 L34 34 L38 34" stroke="#B38F3F" strokeWidth="0.8" fill="none" strokeLinecap="round" />
+
+              {/* Lips */}
+              <path
+                d="M31 38 Q36 41 41 38"
+                stroke="#DFC07B"
+                strokeWidth="1.2"
+                fill="none"
+                strokeLinecap="round"
+                filter="url(#glow)"
+              />
+
+              {/* Crown / Maang tikka ornament */}
+              <line x1="36" y1="12" x2="36" y2="8" stroke="#F5D061" strokeWidth="1" filter="url(#glow)" />
+              <circle cx="36" cy="7" r="2.2" fill="#F5D061" filter="url(#glow)" />
+              <circle cx="36" cy="7" r="1" fill="#4A0E17" />
+
+              {/* Ear ornaments */}
+              <circle cx="22" cy="30" r="2" fill="#DFC07B" opacity="0.8" filter="url(#glow)" />
+              <circle cx="50" cy="30" r="2" fill="#DFC07B" opacity="0.8" filter="url(#glow)" />
+
+              {/* AI sparkle badge bottom-right */}
+              <circle cx="56" cy="52" r="7" fill="#0B3B24" stroke="#DFC07B" strokeWidth="1" />
+              <text x="56" y="55.5" textAnchor="middle" fontSize="7" fill="#F5D061" fontFamily="serif">AI</text>
+            </svg>
           </span>
-          <span className="w-2 h-2 rounded-full bg-emerald shrink-0" title="Online" />
+
+          {/* Online indicator dot */}
+          <span className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-emerald border-2 border-[#1a0808] shadow-[0_0_6px_#0B3B24]" />
         </motion.button>
       </div>
 
@@ -164,18 +290,41 @@ export function AiChatWidget() {
               transition={{ type: "spring", damping: 28, stiffness: 280 }}
               className="fixed bottom-0 right-0 md:bottom-22 md:right-6 w-full md:w-[460px] h-[85vh] md:h-[620px] bg-ivory border-t md:border border-gold/40 shadow-2xl z-50 flex flex-col overflow-hidden"
             >
-              {/* Header */}
-              <div className="p-4 bg-oxblood text-ivory flex items-center justify-between border-b border-gold/30">
+              {/* Header with mini avatar */}
+              <div className="px-4 py-3 bg-gradient-to-r from-[#2A0A10] to-[#1a0808] text-ivory flex items-center justify-between border-b border-gold/30">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold flex items-center justify-center">
-                    <Sparkles className="w-4 h-4 text-gold-light" />
+                  {/* Mini 3D avatar in header */}
+                  <div className="relative w-10 h-10 rounded-full shrink-0"
+                    style={{ filter: "drop-shadow(0 4px 8px rgba(201,160,80,0.5))" }}
+                  >
+                    <span className="absolute inset-0 rounded-full bg-gradient-to-b from-[#3B0A12] to-[#1a0808] border border-gold/60" />
+                    <svg viewBox="0 0 72 72" fill="none" className="absolute inset-0 w-full h-full">
+                      <defs>
+                        <filter id="glowH">
+                          <feGaussianBlur stdDeviation="1.5" result="b" />
+                          <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                        </filter>
+                      </defs>
+                      <ellipse cx="36" cy="28" rx="14" ry="16" fill="#2A0A10" stroke="#DFC07B" strokeWidth="1.2" filter="url(#glowH)" />
+                      <path d="M22 22 Q28 12 36 12 Q44 12 50 22" stroke="#F5D061" strokeWidth="1.5" fill="none" strokeLinecap="round" filter="url(#glowH)" />
+                      <ellipse cx="29.5" cy="27" rx="2.2" ry="1.6" fill="#F5D061" filter="url(#glowH)" />
+                      <ellipse cx="42.5" cy="27" rx="2.2" ry="1.6" fill="#F5D061" filter="url(#glowH)" />
+                      <circle cx="29.5" cy="27" r="1" fill="#0D0000" />
+                      <circle cx="42.5" cy="27" r="1" fill="#0D0000" />
+                      <path d="M31 38 Q36 41 41 38" stroke="#DFC07B" strokeWidth="1.2" fill="none" strokeLinecap="round" filter="url(#glowH)" />
+                      <line x1="36" y1="12" x2="36" y2="8" stroke="#F5D061" strokeWidth="1" filter="url(#glowH)" />
+                      <circle cx="36" cy="7" r="2.2" fill="#F5D061" filter="url(#glowH)" />
+                      <rect x="30.5" y="46" width="11" height="8" rx="2" fill="#DFC07B" opacity="0.7" filter="url(#glowH)" />
+                      <path d="M14 64 C14 54, 24 50, 36 50 C48 50, 58 54, 58 64" stroke="#DFC07B" strokeWidth="1.5" fill="#1a0808" filter="url(#glowH)" />
+                    </svg>
+                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald border border-[#1a0808]" />
                   </div>
                   <div>
                     <h3 className="font-serif text-sm text-gold-foil font-semibold tracking-wider">
                       Zaria Atelier Stylist
                     </h3>
-                    <p className="text-[10px] text-ivory/60 uppercase tracking-widest">
-                      Gemini 2.0 Flash · Live Catalogue Verified
+                    <p className="text-[10px] text-ivory/50 uppercase tracking-widest">
+                      Gemini 2.0 Flash · Live Catalogue
                     </p>
                   </div>
                 </div>

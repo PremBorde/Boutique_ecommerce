@@ -81,6 +81,16 @@
   }
 }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Radial gradient utility for avatar glow */
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
 /* Subtle Indian Baroque Background Pattern */
 .bg-regal-texture {
   background-color: #FAF7F2;
