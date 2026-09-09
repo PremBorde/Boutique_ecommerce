@@ -42,6 +42,7 @@ import { Providers } from "./providers";
 import { Navbar } from "@/components/storefront/Navbar";
 import { Footer } from "@/components/storefront/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { AiChatWidget } from "@/components/chat/AiChatWidget";
 
 export default function RootLayout({
   children,
@@ -57,6 +58,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <CartDrawer />
+          <AiChatWidget />
           <div className="flex-1">{children}</div>
           <Footer />
         </Providers>
