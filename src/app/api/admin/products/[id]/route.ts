@@ -12,6 +12,11 @@ export async function PATCH(
     if (basePrice !== undefined) data.basePrice = Number(basePrice);
     if (description) data.description = description;
 
+    const existing = await prisma.product.findUnique({ where: { id: params.id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Product not found." }, { status: 404 });
+    }
+
     const product = await prisma.product.update({
       where: { id: params.id },
       data,

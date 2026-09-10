@@ -47,10 +47,14 @@ export async function PATCH(
       // If transitioning to CANCELLED, restore inventory
       if (nextStatus === "CANCELLED" && order.status !== "CANCELLED") {
         for (const it of order.items) {
-          await tx.inventory.update({
+          await tx.inventory.upsert({
             where: { variantId: it.variantId },
-            data: {
+            update: {
               quantity: { increment: it.qty },
+            },
+            create: {
+              variantId: it.variantId,
+              quantity: it.qty,
             },
           });
         }

@@ -21,7 +21,7 @@ import {
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const {
     items,
     coupon,
@@ -135,13 +135,64 @@ export default function CheckoutPage() {
     setPostalCode("302006");
   };
 
-  if (!mounted) {
+  if (!mounted || status === "loading") {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center bg-regal-texture">
         <div className="w-12 h-12 rounded-full border-2 border-gold/40 border-t-gold animate-spin mb-4" />
         <p className="text-xs uppercase tracking-[0.2em] text-gold-antique dark:text-gold-light">
           Preparing bespoke checkout...
         </p>
+      </div>
+    );
+  }
+
+  // Patron Privilege Barrier: Orders require authenticated client account
+  if (!session?.user) {
+    return (
+      <div className="min-h-[75vh] flex flex-col items-center justify-center p-6 text-center bg-regal-texture">
+        <div className="max-w-md w-full p-8 md:p-10 border border-gold/40 rounded-xl bg-white/80 dark:bg-[#161214]/90 backdrop-blur-md shadow-2xl space-y-6">
+          <div className="w-16 h-16 mx-auto rounded-full bg-oxblood/10 dark:bg-gold/10 border border-gold/40 flex items-center justify-center text-oxblood dark:text-gold">
+            <Lock className="w-7 h-7" />
+          </div>
+
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-gold-antique dark:text-gold-light font-semibold mb-2">
+              Privilege Access Required
+            </p>
+            <h1 className="font-serif text-2xl md:text-3xl text-oxblood dark:text-gold-foil">
+              Sign In to Complete Acquisition
+            </h1>
+          </div>
+
+          <p className="text-xs text-noir/70 dark:text-ivory/80 leading-relaxed font-light">
+            In accordance with Zaria Atelier patronage protocol, all couture commissions and purchases require an authenticated client account for verified insurance and delivery tracking.
+          </p>
+
+          <div className="pt-2 space-y-3">
+            <Link href="/account?callbackUrl=/checkout" className="block w-full">
+              <Button
+                variant="oxblood"
+                className="w-full h-12 text-xs tracking-[0.2em] uppercase font-medium flex items-center justify-center gap-2"
+              >
+                Sign In to Account
+              </Button>
+            </Link>
+
+            <Link href="/cart" className="block w-full">
+              <Button
+                variant="outline"
+                className="w-full h-11 text-xs tracking-[0.2em] uppercase border-gold/30 hover:border-gold text-oxblood dark:text-gold-light"
+              >
+                Return to Bag
+              </Button>
+            </Link>
+          </div>
+
+          <div className="pt-4 border-t border-gold/20 flex items-center justify-center gap-2 text-[11px] text-noir/50 dark:text-ivory/50">
+            <ShieldCheck className="w-4 h-4 text-emerald" />
+            <span>Encrypted Checkout · Verified Atelier Patronage</span>
+          </div>
+        </div>
       </div>
     );
   }

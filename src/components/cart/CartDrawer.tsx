@@ -8,8 +8,10 @@ import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { X, Plus, Minus, ShoppingBag, ArrowRight, ShieldCheck } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 export function CartDrawer() {
+  const { data: session } = useSession();
   const {
     items,
     isDrawerOpen,
@@ -227,12 +229,15 @@ export function CartDrawer() {
                 </div>
 
                 <div className="pt-2">
-                  <Link href="/checkout" onClick={closeDrawer}>
+                  <Link
+                    href={session?.user ? "/checkout" : "/account?callbackUrl=/checkout"}
+                    onClick={closeDrawer}
+                  >
                     <Button
                       variant="oxblood"
                       className="w-full h-12 text-xs tracking-[0.25em] flex items-center justify-center gap-2 group"
                     >
-                      Proceed to Checkout
+                      {session?.user ? "Proceed to Checkout" : "Sign In to Checkout"}
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>

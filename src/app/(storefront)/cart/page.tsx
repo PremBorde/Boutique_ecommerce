@@ -17,8 +17,10 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 export default function CartPage() {
+  const { data: session } = useSession();
   const {
     items,
     updateQuantity,
@@ -344,12 +346,15 @@ export default function CartPage() {
                   </div>
                 </div>
 
-                <Link href="/checkout" className="block pt-2">
+                <Link
+                  href={session?.user ? "/checkout" : "/account?callbackUrl=/checkout"}
+                  className="block pt-2"
+                >
                   <Button
                     variant="oxblood"
                     className="w-full h-13 text-xs tracking-[0.25em] flex items-center justify-center gap-2 group"
                   >
-                    Proceed to Checkout
+                    {session?.user ? "Proceed to Checkout" : "Sign In to Checkout"}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>

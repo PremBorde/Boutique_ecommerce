@@ -56,6 +56,19 @@ export async function POST(req: Request) {
       },
     });
 
+    // Link any prior guest orders placed with this email
+    await prisma.order
+      .updateMany({
+        where: {
+          email: normalizedEmail,
+          userId: null,
+        },
+        data: {
+          userId: newUser.id,
+        },
+      })
+      .catch(() => {});
+
     return NextResponse.json(
       {
         message: "Account created successfully.",

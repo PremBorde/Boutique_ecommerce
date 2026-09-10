@@ -12,6 +12,18 @@ export async function PATCH(req: Request) {
       );
     }
 
+    // Pre-flight validation: check that variant exists to prevent foreign key violation
+    const variant = await prisma.variant.findUnique({
+      where: { id: variantId },
+    });
+
+    if (!variant) {
+      return NextResponse.json(
+        { error: `Variant with id "${variantId}" does not exist in vault.` },
+        { status: 404 }
+      );
+    }
+
     const inventory = await prisma.inventory.upsert({
       where: { variantId },
       update: { quantity: Number(quantity) },

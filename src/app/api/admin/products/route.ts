@@ -71,6 +71,30 @@ export async function POST(req: Request) {
       variants,
     } = result.data;
 
+    // Verify category exists to prevent foreign key violation
+    const categoryExists = await prisma.category.findUnique({
+      where: { id: categoryId },
+    });
+    if (!categoryExists) {
+      return NextResponse.json(
+        { error: "Specified category does not exist in the atelier database." },
+        { status: 400 }
+      );
+    }
+
+    // Verify variant SKUs are unique
+    for (const v of variants) {
+      const existingSku = await prisma.variant.findUnique({
+        where: { sku: v.sku.toUpperCase().trim() },
+      });
+      if (existingSku) {
+        return NextResponse.json(
+          { error: `Variant SKU "${v.sku.toUpperCase()}" is already registered.` },
+          { status: 400 }
+        );
+      }
+    }
+
     let slug = slugify(name);
     const existingSlug = await prisma.product.findUnique({ where: { slug } });
     if (existingSlug) {

@@ -29,6 +29,11 @@ export async function PATCH(
     const data: any = { ...result.data };
     if (data.expiresAt) data.expiresAt = new Date(data.expiresAt);
 
+    const existing = await prisma.coupon.findUnique({ where: { id: params.id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Coupon not found." }, { status: 404 });
+    }
+
     const coupon = await prisma.coupon.update({
       where: { id: params.id },
       data,
@@ -49,6 +54,11 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    const existing = await prisma.coupon.findUnique({ where: { id: params.id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Coupon not found." }, { status: 404 });
+    }
+
     await prisma.coupon.delete({ where: { id: params.id } });
     return NextResponse.json({ success: true });
   } catch (error: any) {

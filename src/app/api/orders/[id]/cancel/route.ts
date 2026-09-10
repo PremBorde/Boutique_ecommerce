@@ -20,10 +20,24 @@ export async function POST(
       return NextResponse.json({ error: "Order not found." }, { status: 404 });
     }
 
-    // Security: Only order owner or admin can cancel
-    if (order.userId && (!session?.user || ((session.user as any).id !== order.userId && (session.user as any).role !== "ADMIN"))) {
+    // Security: Only order owner (by userId or matching email) or admin can cancel
+    const sessionUser = session?.user as any;
+    const isOwner = sessionUser && (
+      (order.userId && sessionUser.id === order.userId) ||
+      (order.email && sessionUser.email && sessionUser.email.toLowerCase() === order.email.toLowerCase())
+    );
+    const isAdmin = sessionUser?.role === "ADMIN";
+
+    if (order.userId && !isOwner && !isAdmin) {
       return NextResponse.json(
         { error: "Forbidden. You cannot cancel an order belonging to another client." },
+        { status: 403 }
+      );
+    }
+
+    if (!order.userId && !isAdmin && (!sessionUser || sessionUser.email?.toLowerCase() !== order.email?.toLowerCase())) {
+      return NextResponse.json(
+        { error: "Forbidden. Order cancellation requires authentication matching the order email." },
         { status: 403 }
       );
     }
@@ -40,12 +54,16 @@ export async function POST(
 
     // Atomically restore inventory and update status
     await prisma.$transaction(async (tx) => {
-      // 1. Restore inventory for all items
+      // 1. Restore inventory for all items resiliently
       for (const item of order.items) {
-        await tx.inventory.update({
+        await tx.inventory.upsert({
           where: { variantId: item.variantId },
-          data: {
+          update: {
             quantity: { increment: item.qty },
+          },
+          create: {
+            variantId: item.variantId,
+            quantity: item.qty,
           },
         });
       }

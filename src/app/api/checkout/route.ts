@@ -31,7 +31,15 @@ const checkoutSchema = z.object({
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
-    const userId = (session?.user as any)?.id || null;
+    if (!session?.user) {
+      return NextResponse.json(
+        {
+          error: "Authentication required. Please sign in to your Zaria Atelier client account to place an order.",
+          code: "AUTH_REQUIRED",
+        },
+        { status: 401 }
+      );
+    }
 
     const body = await req.json();
     const result = checkoutSchema.safeParse(body);
@@ -150,11 +158,12 @@ export async function POST(req: Request) {
         const randomHex = Math.random().toString(16).substring(2, 6).toUpperCase();
         const orderNumber = `ZR-${new Date().getFullYear()}-${randomHex}`;
 
-        // 5.5 Verify and resolve valid userId to guarantee foreign key integrity
+        // 5.5 Verify and resolve valid userId from authenticated session
         let validUserId: string | null = null;
-        if (userId) {
+        const sessionUserId = (session.user as any)?.id;
+        if (sessionUserId) {
           const userById = await tx.user.findUnique({
-            where: { id: userId },
+            where: { id: sessionUserId },
             select: { id: true },
           });
           if (userById) {
@@ -163,17 +172,18 @@ export async function POST(req: Request) {
         }
 
         // If session token has a stale ID (e.g. after DB reseed), match by verified email
-        if (!validUserId) {
-          const emailToMatch = session?.user?.email || email;
-          if (emailToMatch) {
-            const userByEmail = await tx.user.findUnique({
-              where: { email: emailToMatch.toLowerCase().trim() },
-              select: { id: true },
-            });
-            if (userByEmail) {
-              validUserId = userByEmail.id;
-            }
+        if (!validUserId && session.user?.email) {
+          const userByEmail = await tx.user.findUnique({
+            where: { email: session.user.email.toLowerCase().trim() },
+            select: { id: true },
+          });
+          if (userByEmail) {
+            validUserId = userByEmail.id;
           }
+        }
+
+        if (!validUserId) {
+          throw new Error("Client account not found. Please sign in to your Zaria Atelier account.");
         }
 
         // 6. Create Order with Items and Status History
