@@ -239,10 +239,16 @@ export default function AdminOrdersPage() {
                     )}
 
                     <Link
-                      href={`/orders/${order.id}`}
-                      className="text-[11px] uppercase tracking-wider text-oxblood hover:text-gold font-medium ml-2"
+                      href={`/admin/orders/${order.id}`}
+                      className="text-[11px] uppercase tracking-wider text-oxblood hover:text-gold font-medium ml-2 border-b border-oxblood/30 hover:border-gold/60 transition-colors"
                     >
-                      Customer View →
+                      View Invoice →
+                    </Link>
+                    <Link
+                      href={`/orders/${order.id}`}
+                      className="text-[11px] uppercase tracking-wider text-noir/40 hover:text-oxblood font-medium ml-2 transition-colors"
+                    >
+                      Client View
                     </Link>
                   </div>
                 </div>
