@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import gsap from "gsap";
+import React from "react";
 
 interface MarqueeTickerProps {
   items?: string[];
@@ -22,35 +21,20 @@ export function MarqueeTicker({
   reverse = false,
   className = "",
 }: MarqueeTickerProps) {
-  const tickerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = tickerRef.current;
-    if (!el) return;
-
-    // Respect reduced motion
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
-
-    const direction = reverse ? 1 : -1;
-    const tween = gsap.to(el, {
-      xPercent: direction * 50,
-      repeat: -1,
-      duration: 35,
-      ease: "none",
-    });
-
-    return () => {
-      tween.kill();
-    };
-  }, [reverse]);
-
-  const repeated = [...items, ...items, ...items, ...items];
+  // Duplicate once (not 4×) — the CSS seamless loop only needs 2 sets
+  const repeated = [...items, ...items];
 
   return (
-    <div className={`overflow-hidden py-3 bg-oxblood text-gold-light border-y border-gold/40 select-none ${className}`}>
-      <div ref={tickerRef} className="flex whitespace-nowrap will-change-transform">
+    <div
+      className={`overflow-hidden py-3 bg-oxblood text-gold-light border-y border-gold/40 select-none ${className}`}
+      style={{ WebkitMaskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)" }}
+    >
+      <div
+        className="flex whitespace-nowrap will-change-transform"
+        style={{
+          animation: `marquee-scroll ${reverse ? "reverse" : "normal"} 35s linear infinite`,
+        }}
+      >
         {repeated.map((text, idx) => (
           <div key={idx} className="flex items-center shrink-0">
             <span className="font-serif text-[11px] uppercase tracking-[0.35em] font-medium px-4">
@@ -60,6 +44,21 @@ export function MarqueeTicker({
           </div>
         ))}
       </div>
+
+      {/* Keyframe defined inline so it's self-contained with no global CSS dependency */}
+      <style>{`
+        @keyframes marquee-scroll {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @keyframes marquee-scroll-reverse {
+          from { transform: translateX(-50%); }
+          to   { transform: translateX(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-track { animation-play-state: paused !important; }
+        }
+      `}</style>
     </div>
   );
 }

@@ -17,6 +17,8 @@ export async function GET(req: Request) {
     const page = Math.max(1, Number(searchParams.get("page") || "1"));
     const limit = Math.max(1, Math.min(50, Number(searchParams.get("limit") || "12")));
     const skip = (page - 1) * limit;
+    // Only fetch categories when the client explicitly needs them (first load only)
+    const withCategories = searchParams.get("withCategories") === "true";
 
     const idsParam = searchParams.get("ids");
 
@@ -85,7 +87,8 @@ export async function GET(req: Request) {
       orderBy = { name: "asc" };
     }
 
-    const [total, products, categories] = await Promise.all([
+    // Run product count + products in parallel. Categories only on first load.
+    const queries: [Promise<number>, Promise<any[]>, Promise<any[]> | null] = [
       prisma.product.count({ where }),
       prisma.product.findMany({
         where,
@@ -93,7 +96,7 @@ export async function GET(req: Request) {
         skip,
         take: limit,
         include: {
-          category: true,
+          category: { select: { id: true, name: true, slug: true } },
           images: {
             orderBy: { order: "asc" },
           },
@@ -105,16 +108,27 @@ export async function GET(req: Request) {
           },
         },
       }),
-      prisma.category.findMany({
-        include: {
-          _count: { select: { products: { where: { active: true } } } },
-        },
-      }),
-    ]);
+      withCategories
+        ? prisma.category.findMany({
+            select: {
+              id: true,
+              name: true,
+              slug: true,
+              _count: { select: { products: { where: { active: true } } } },
+            },
+          })
+        : null,
+    ];
 
-    return NextResponse.json({
+    const [total, products, categoriesRaw] = await Promise.all(queries);
+
+    // Determine cache duration: shorter when filters are active (data more volatile)
+    const isFiltered = !!(q || category || color || size || inStock);
+    const cacheMaxAge = isFiltered ? 30 : 60;
+
+    const response = NextResponse.json({
       products,
-      categories,
+      categories: categoriesRaw ?? [],
       pagination: {
         total,
         page,
@@ -122,6 +136,14 @@ export async function GET(req: Request) {
         totalPages: Math.ceil(total / limit),
       },
     });
+
+    // Allow CDN/browser caching with stale-while-revalidate for snappy repeat visits
+    response.headers.set(
+      "Cache-Control",
+      `public, s-maxage=${cacheMaxAge}, stale-while-revalidate=300`
+    );
+
+    return response;
   } catch (error) {
     console.error("Products API error:", error);
     return NextResponse.json(

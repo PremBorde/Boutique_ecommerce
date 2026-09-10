@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { formatPrice, formatDate } from "@/lib/utils";
-import { User, Package, ShieldCheck, LogOut, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
+import { User, Package, ShieldCheck, LogOut, ArrowRight, CheckCircle2, AlertCircle, Loader2, LayoutDashboard, ShoppingBag, Tag } from "lucide-react";
 
 function AccountContent() {
   const { data: session, status } = useSession();
@@ -70,12 +70,13 @@ function AccountContent() {
 
       if (res?.error) {
         setErrorMsg(res.error);
+        setLoading(false);
       } else {
+        setSuccessMsg("Welcome back. Entering your sanctuary...");
         router.refresh();
       }
     } catch (err: any) {
       setErrorMsg("An unexpected error occurred. Please try again.");
-    } finally {
       setLoading(false);
     }
   };
@@ -97,6 +98,7 @@ function AccountContent() {
 
       if (!res.ok) {
         setErrorMsg(data.error || "Failed to create account.");
+        setLoading(false);
       } else {
         setSuccessMsg("Account created with distinction! Signing you in...");
         // Auto-login after registration
@@ -109,7 +111,6 @@ function AccountContent() {
       }
     } catch (err) {
       setErrorMsg("Failed to connect to atelier server.");
-    } finally {
       setLoading(false);
     }
   };
@@ -196,12 +197,91 @@ function AccountContent() {
                 </div>
               </div>
 
+              {/* Administrator Command Hub (Only for Admin Role) */}
+              {(session.user as any)?.role === "ADMIN" && (
+                <div className="mt-6 p-5 sm:p-6 bg-gold/10 border border-gold/40 rounded-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gold/20">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs uppercase tracking-[0.2em] font-semibold text-oxblood dark:text-gold-foil flex items-center gap-1.5">
+                          <ShieldCheck className="w-4 h-4 text-gold-dark dark:text-gold" />
+                          Administrator Command Hub
+                        </span>
+                        <span className="text-[9px] uppercase tracking-widest px-2 py-0.5 bg-oxblood text-gold-light font-medium">
+                          Full Store Access
+                        </span>
+                      </div>
+                      <p className="text-xs text-noir/70 dark:text-ivory/70 mt-1 max-w-xl">
+                        You have master privileges over Zaria Atelier. Manage client orders, catalogue inventory, and promotional campaigns from the console.
+                      </p>
+                    </div>
+                    <Link href="/admin">
+                      <Button variant="oxblood" size="sm" className="gap-1.5 text-xs whitespace-nowrap">
+                        <LayoutDashboard className="w-3.5 h-3.5" />
+                        Admin Dashboard →
+                      </Button>
+                    </Link>
+                  </div>
+
+                  {/* Admin Quick Tiles */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4">
+                    <Link
+                      href="/admin/orders"
+                      className="p-3.5 bg-white/70 dark:bg-[#1C1719] border border-gold/30 hover:border-gold transition-all group flex flex-col justify-between"
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[11px] uppercase tracking-wider font-semibold text-oxblood dark:text-gold-light flex items-center gap-1.5">
+                          <Package className="w-3.5 h-3.5 text-gold" />
+                          Client Orders
+                        </span>
+                        <ArrowRight className="w-3 h-3 text-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      <p className="text-[11px] text-noir/60 dark:text-ivory/60">
+                        View, dispatch, and print invoices for all patron orders
+                      </p>
+                    </Link>
+
+                    <Link
+                      href="/admin/inventory"
+                      className="p-3.5 bg-white/70 dark:bg-[#1C1719] border border-gold/30 hover:border-gold transition-all group flex flex-col justify-between"
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[11px] uppercase tracking-wider font-semibold text-oxblood dark:text-gold-light flex items-center gap-1.5">
+                          <ShoppingBag className="w-3.5 h-3.5 text-gold" />
+                          Inventory Vault
+                        </span>
+                        <ArrowRight className="w-3 h-3 text-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      <p className="text-[11px] text-noir/60 dark:text-ivory/60">
+                        Manage stock levels, sizes, and artisan variants
+                      </p>
+                    </Link>
+
+                    <Link
+                      href="/admin/coupons"
+                      className="p-3.5 bg-white/70 dark:bg-[#1C1719] border border-gold/30 hover:border-gold transition-all group flex flex-col justify-between"
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[11px] uppercase tracking-wider font-semibold text-oxblood dark:text-gold-light flex items-center gap-1.5">
+                          <Tag className="w-3.5 h-3.5 text-gold" />
+                          Coupons & Offers
+                        </span>
+                        <ArrowRight className="w-3 h-3 text-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      <p className="text-[11px] text-noir/60 dark:text-ivory/60">
+                        Configure festive promotional codes and discounts
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+              )}
+
               {/* Order History Section */}
               <div className="mt-6 sm:mt-8">
                 <div className="flex items-center justify-between mb-5">
                   <h2 className="text-base sm:text-lg font-serif font-normal text-noir dark:text-ivory flex items-center gap-2">
                     <Package className="w-4 h-4 text-gold shrink-0" />
-                    Bespoke Order History
+                    {(session.user as any)?.role === "ADMIN" ? "Personal Order History" : "Bespoke Order History"}
                   </h2>
                   <span className="text-[11px] sm:text-xs text-noir/50 dark:text-ivory/50">
                     {orders.length} {orders.length === 1 ? "order" : "orders"} on record
@@ -213,19 +293,46 @@ function AccountContent() {
                     Retrieving orders from archive...
                   </div>
                 ) : orders.length === 0 ? (
-                  <div className="py-10 sm:py-12 text-center border border-dashed border-gold/30 p-5 sm:p-8">
-                    <p className="font-serif text-base sm:text-lg text-noir/70 dark:text-ivory/70 font-normal mb-1.5">
-                      No orders placed yet
-                    </p>
-                    <p className="text-xs text-noir/50 dark:text-ivory/50 max-w-sm mx-auto mb-5">
-                      Explore our handcrafted collections and acquire your first heirloom piece.
-                    </p>
-                    <Link href="/shop">
-                      <Button variant="oxblood" size="sm" className="text-xs px-5">
-                        Explore Catalogue
-                      </Button>
-                    </Link>
-                  </div>
+                  (session.user as any)?.role === "ADMIN" ? (
+                    <div className="py-10 sm:py-12 text-center border border-dashed border-gold/30 p-5 sm:p-8 bg-gold/5">
+                      <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mx-auto mb-3 text-gold-dark dark:text-gold">
+                        <ShieldCheck className="w-5 h-5" />
+                      </div>
+                      <p className="font-serif text-base sm:text-lg text-noir/80 dark:text-ivory/80 font-normal mb-1.5">
+                        No Personal Purchases on this Admin Account
+                      </p>
+                      <p className="text-xs text-noir/60 dark:text-ivory/60 max-w-md mx-auto mb-5 leading-relaxed">
+                        As the boutique administrator, all customer orders across the platform are recorded and managed inside the Master Orders Console.
+                      </p>
+                      <div className="flex flex-wrap items-center justify-center gap-3">
+                        <Link href="/admin/orders">
+                          <Button variant="oxblood" size="sm" className="text-xs px-5 gap-1.5">
+                            <Package className="w-3.5 h-3.5" />
+                            Manage Customer Orders
+                          </Button>
+                        </Link>
+                        <Link href="/shop">
+                          <Button variant="outline" size="sm" className="text-xs px-5 border-gold/40 hover:bg-gold/10">
+                            Browse Storefront
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="py-10 sm:py-12 text-center border border-dashed border-gold/30 p-5 sm:p-8">
+                      <p className="font-serif text-base sm:text-lg text-noir/70 dark:text-ivory/70 font-normal mb-1.5">
+                        No orders placed yet
+                      </p>
+                      <p className="text-xs text-noir/50 dark:text-ivory/50 max-w-sm mx-auto mb-5">
+                        Explore our handcrafted collections and acquire your first heirloom piece.
+                      </p>
+                      <Link href="/shop">
+                        <Button variant="oxblood" size="sm" className="text-xs px-5">
+                          Explore Catalogue
+                        </Button>
+                      </Link>
+                    </div>
+                  )
                 ) : (
                   <div className="space-y-4">
                     {orders.map((order) => (
@@ -282,7 +389,28 @@ function AccountContent() {
           </div>
         ) : (
           /* Authentication Forms */
-          <div className="bg-ivory dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-8 md:p-12 shadow-sm max-w-lg mx-auto transition-colors duration-300">
+          <div className="relative bg-ivory dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-8 md:p-12 shadow-sm max-w-lg mx-auto transition-colors duration-300 overflow-hidden">
+            {/* Elegant Luxury Signing In Overlay Loader */}
+            {loading && (
+              <div className="absolute inset-0 z-30 bg-ivory/90 dark:bg-[#161214]/92 backdrop-blur-xs flex flex-col items-center justify-center p-6 text-center animate-fade-in transition-all">
+                <div className="relative mb-5">
+                  <div className="w-14 h-14 rounded-full border-2 border-gold/25 border-t-gold animate-spin" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-gold text-sm animate-pulse">✦</span>
+                  </div>
+                </div>
+                <h3 className="font-serif text-lg text-oxblood dark:text-gold-foil font-semibold tracking-wide">
+                  {activeTab === "login" ? "Authenticating Credentials" : "Inscribing Atelier Registry"}
+                </h3>
+                <p className="text-[11px] uppercase tracking-[0.25em] text-gold-dark dark:text-gold-light mt-1.5 font-medium">
+                  Signing in & opening sanctuary...
+                </p>
+                <div className="w-40 h-0.5 bg-gold/20 rounded-full overflow-hidden mt-4">
+                  <div className="w-full h-full bg-gradient-to-r from-transparent via-gold to-transparent animate-pulse" />
+                </div>
+              </div>
+            )}
+
             <div className="text-center mb-8">
               <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique dark:text-gold-light mb-2 font-semibold">
                 Client Sanctuary
@@ -398,9 +526,16 @@ function AccountContent() {
                   type="submit"
                   disabled={loading}
                   variant="oxblood"
-                  className="w-full mt-6 h-12 text-xs tracking-[0.25em]"
+                  className="w-full mt-6 h-12 text-xs tracking-[0.25em] flex items-center justify-center gap-2.5 transition-all shadow-sm"
                 >
-                  {loading ? "Verifying Credentials..." : "Enter Atelier"}
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-gold-light" />
+                      <span className="gold-foil-text font-medium">Signing In...</span>
+                    </>
+                  ) : (
+                    <span>Enter Atelier</span>
+                  )}
                 </Button>
               </form>
             ) : (
@@ -452,9 +587,16 @@ function AccountContent() {
                   type="submit"
                   disabled={loading}
                   variant="oxblood"
-                  className="w-full mt-6 h-12 text-xs tracking-[0.25em]"
+                  className="w-full mt-6 h-12 text-xs tracking-[0.25em] flex items-center justify-center gap-2.5 transition-all shadow-sm"
                 >
-                  {loading ? "Inscribing Registry..." : "Register Atelier Profile"}
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-gold-light" />
+                      <span className="gold-foil-text font-medium">Creating Profile...</span>
+                    </>
+                  ) : (
+                    <span>Register Atelier Profile</span>
+                  )}
                 </Button>
               </form>
             )}

@@ -28,6 +28,7 @@ export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
 
     // Smooth simulated load from 0 to 100
     const progressObj = { value: 0 };
+    let lastRenderedProgress = -1;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
@@ -38,7 +39,11 @@ export function AtelierIntro({ onComplete }: { onComplete?: () => void }) {
         duration: 2.2,
         ease: "power2.inOut",
         onUpdate: () => {
-          setProgress(Math.floor(progressObj.value));
+          const rounded = Math.floor(progressObj.value);
+          if (rounded !== lastRenderedProgress) {
+            lastRenderedProgress = rounded;
+            setProgress(rounded);
+          }
         },
       });
 

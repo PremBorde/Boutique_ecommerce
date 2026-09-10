@@ -10,6 +10,8 @@ export function CustomCursor() {
   const [label, setLabel] = useState("");
   const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
   const [visible, setVisible] = useState(false);
+  // Use a ref to track visibility inside the listener without re-subscribing
+  const visibleRef = useRef(false);
 
   useEffect(() => {
     // Only mount on devices that support hover (not touch devices)
@@ -29,7 +31,10 @@ export function CustomCursor() {
     const followYTo = gsap.quickTo(follower, "y", { duration: 0.35, ease: "power2.out" });
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!visible) setVisible(true);
+      if (!visibleRef.current) {
+        visibleRef.current = true;
+        setVisible(true);
+      }
       xTo(e.clientX);
       yTo(e.clientY);
       followXTo(e.clientX);
@@ -55,8 +60,14 @@ export function CustomCursor() {
       }
     };
 
-    const handleMouseLeave = () => setVisible(false);
-    const handleMouseEnter = () => setVisible(true);
+    const handleMouseLeave = () => {
+      visibleRef.current = false;
+      setVisible(false);
+    };
+    const handleMouseEnter = () => {
+      visibleRef.current = true;
+      setVisible(true);
+    };
 
     window.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseleave", handleMouseLeave);
@@ -67,7 +78,9 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [visible]);
+  // Empty deps: attach listeners exactly once, use visibleRef to avoid re-subscribing
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!visible) return null;
 

@@ -9,8 +9,9 @@ import { ProductCard } from "@/components/storefront/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Gem } from "lucide-react";
 
-// Always render server-side so Prisma queries run at request time, not build time.
-export const dynamic = "force-dynamic";
+// ISR: serve cached page, revalidate in background every 5 minutes.
+// Admin product changes will be live within 5 minutes.
+export const revalidate = 300;
 
 export default async function HomePage() {
   // Fetch featured products and categories for the storefront.
@@ -122,7 +123,7 @@ export default async function HomePage() {
                     src={cat.imageUrl}
                     alt={cat.name}
                     fill
-                    sizes="250px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                 )}

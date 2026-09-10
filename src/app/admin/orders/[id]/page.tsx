@@ -431,7 +431,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
             <h1 className="text-3xl font-bold tracking-[0.2em] uppercase">
               ZARIA ATELIER
             </h1>
-            <p className="text-sm tracking-widest text-gray-600">JAIPUR</p>
+            <p className="text-sm tracking-widest text-gray-600">ALL OVER INDIA · PAN-INDIA ATELIER</p>
             <p className="text-xs text-gray-500 mt-1">
               Bespoke Heirloom Atelier
             </p>
@@ -540,7 +540,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
           </div>
 
           <div className="text-center text-xs text-gray-500 border-t border-gray-300 pt-4">
-            <p>Thank you for your patronage — Zaria Atelier, Jaipur</p>
+            <p>Thank you for your patronage — Zaria Atelier, Crafted Across India</p>
             <p className="mt-0.5">Authorized by: Prem Borde (Administrator)</p>
           </div>
         </div>

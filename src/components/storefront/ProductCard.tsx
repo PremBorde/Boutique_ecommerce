@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { formatPrice } from "@/lib/utils";
 import { resolveShadeImage } from "@/lib/colorShades";
+import { useCompanionStore } from "@/lib/companion/store";
 
 interface ProductCardProps {
   product: {
@@ -52,10 +53,33 @@ export function ProductCard({ product }: ProductCardProps) {
     mouseY.set(y);
   };
 
+  const dwellTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startDwellTimer = (customColor?: string) => {
+    if (dwellTimerRef.current) clearTimeout(dwellTimerRef.current);
+    dwellTimerRef.current = setTimeout(() => {
+      useCompanionStore.getState().triggerOpinion(product, {
+        selectedColor: customColor || activeColorShade?.color,
+      });
+    }, 500);
+  };
+
+  const cancelDwellTimer = () => {
+    if (dwellTimerRef.current) {
+      clearTimeout(dwellTimerRef.current);
+      dwellTimerRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    return () => cancelDwellTimer();
+  }, []);
+
   const handleMouseLeave = () => {
     setIsHovered(false);
     mouseX.set(0);
     mouseY.set(0);
+    cancelDwellTimer();
   };
 
   const [activeColorShade, setActiveColorShade] = useState<{
@@ -101,8 +125,14 @@ export function ProductCard({ product }: ProductCardProps) {
         transformStyle: "preserve-3d",
       }}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        startDwellTimer();
+      }}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={() => {
+        startDwellTimer();
+      }}
       className="group relative flex flex-col bg-white dark:bg-[#161214] border border-gold/25 dark:border-gold/20 p-3.5 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(74,14,23,0.18)] dark:hover:shadow-[0_20px_40px_-15px_rgba(201,160,80,0.15)]"
     >
       <Link href={`/product/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/30">

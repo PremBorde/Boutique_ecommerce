@@ -8,6 +8,7 @@ import { getActiveFestival } from "@/lib/ai/festivals";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
 import { X, Send, MessageSquare, AlertCircle, RefreshCw, ArrowRight } from "lucide-react";
+import { CompanionAvatar } from "@/components/companion/CompanionAvatar";
 
 interface Message {
   id: string;
@@ -324,46 +325,17 @@ export function ChatPanel() {
 
   return (
     <>
-      {/* ── Floating Launcher Button (Hidden when Bag Drawer or Chat is Open) ── */}
-      <AnimatePresence>
-        {!isDrawerOpen && !isOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 4, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 4, scale: 0.95 }}
-              className="hidden sm:flex items-center px-3.5 py-1.5 bg-[#FAF7F2] dark:bg-[#161214] border border-[#C9A050]/60 shadow-[0_4px_16px_rgba(74,14,23,0.12)] cursor-pointer select-none rounded-md"
-              onClick={() => setIsOpen(true)}
-            >
-              <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#4A0E17] dark:text-gold-light font-semibold whitespace-nowrap">
-                Atelier Concierge
-              </span>
-            </motion.div>
-
-            <motion.button
-              id="ai-chat-launcher"
-              onClick={() => setIsOpen(true)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Open Zaria Concierge Chat"
-              className="relative flex items-center justify-center w-[52px] h-[52px] sm:w-[58px] sm:h-[58px] rounded-full bg-gradient-to-br from-[#58111A] via-[#4A0E17] to-[#250409] border border-[#C9A050]/70 text-[#F7F4EB] shadow-[0_8px_28px_rgba(74,14,23,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A050]"
-            >
-              {/* Ambient idle glow */}
-              <span className="absolute -inset-1.5 rounded-full bg-[#C9A050]/20 blur-sm pointer-events-none animate-pulse" />
-
-              <div className="relative z-10 flex flex-col items-center justify-center text-[#DFC07B]">
-                <MessageSquare className="w-5 h-5 stroke-[1.6]" />
-              </div>
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* ── Cohesive Companion Character Avatar Trigger (Replaces disconnected launcher) ── */}
+      {!isDrawerOpen && !isOpen && (
+        <CompanionAvatar
+          onOpenChat={(prefill) => {
+            setIsOpen(true);
+            if (prefill) {
+              setInput(prefill);
+            }
+          }}
+        />
+      )}
 
       {/* ── Slide-in Panel (Desktop / Tablet) / Bottom Sheet (Mobile) ── */}
       <AnimatePresence>

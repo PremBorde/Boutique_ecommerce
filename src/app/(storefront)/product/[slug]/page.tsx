@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import prisma from "@/lib/prisma";
 import { ProductDetailClient } from "./ProductDetailClient";
 
-// Dynamic route — never statically pre-render product pages at build time.
-export const dynamic = "force-dynamic";
+// ISR: cache individual product pages, revalidate every 3 minutes.
+export const revalidate = 180;
 
 interface Props {
   params: {

@@ -52,7 +52,7 @@ export const STYLE_PERSONAS: StylePersona[] = [
     badge: "🏛️ Patron of Heritage",
     favoredCategories: ["Heritage Sarees", "Regal Menswear", "heritage-sarees", "regal-menswear"],
     favoredColors: ["antique gold", "mustard", "deep emerald", "copper", "wine"],
-    biasKeywords: ["shikargah", "artisan", "handwoven", "jaipur"],
+    biasKeywords: ["shikargah", "artisan", "handwoven", "pan-india", "all over india", "heritage"],
   },
   {
     id: "regal-cavalier",

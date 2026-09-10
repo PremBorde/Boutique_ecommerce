@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { Button } from "@/components/ui/button";
@@ -35,6 +35,11 @@ function ShopContent() {
   });
   const [loading, setLoading] = useState(true);
 
+  // Debounce ref — avoids multiple rapid API calls on quick filter changes
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
+  // Track whether categories have been fetched yet
+  const categoriesFetchedRef = useRef(false);
+
   // Sync category when query param changes
   useEffect(() => {
     const cat = searchParams.get("category");
@@ -45,10 +50,17 @@ function ShopContent() {
   }, [searchParams]);
 
   useEffect(() => {
-    fetchProducts();
+    // Debounce filter changes — wait 250ms after the last change before fetching
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      fetchProducts();
+    }, 250);
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
   }, [selectedCategory, selectedSort, selectedSize, inStockOnly, page]);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (forceWithCategories = false) => {
     try {
       setLoading(true);
       const params = new URLSearchParams();
@@ -60,12 +72,20 @@ function ShopContent() {
       params.set("page", page.toString());
       params.set("limit", "9");
 
+      // Only ask for categories on the first load — they rarely change between filter interactions
+      const needsCategories = forceWithCategories || !categoriesFetchedRef.current;
+      if (needsCategories) params.set("withCategories", "true");
+
       const res = await fetch(`/api/products?${params.toString()}`);
       if (res.ok) {
         const data = await res.json();
         setProducts(data.products || []);
-        setCategories(data.categories || []);
         setPagination(data.pagination || { total: 0, page: 1, totalPages: 1 });
+        // Only update categories when the API returned them
+        if (needsCategories && data.categories?.length > 0) {
+          setCategories(data.categories);
+          categoriesFetchedRef.current = true;
+        }
       }
     } catch (err) {
       console.error("Failed to load products:", err);

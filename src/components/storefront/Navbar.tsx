@@ -157,7 +157,7 @@ export function Navbar() {
             Zaria
           </span>
           <span className="text-[7.5px] sm:text-[9px] uppercase tracking-[0.32em] sm:tracking-[0.45em] text-gold-antique dark:text-gold-light/70 -mt-0.5 font-sans font-medium whitespace-nowrap">
-            Atelier · Jaipur
+            Atelier · Across India
           </span>
         </Link>
 

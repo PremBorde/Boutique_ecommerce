@@ -53,7 +53,7 @@ export function Footer() {
                 Zaria
               </span>
               <span className="block text-[10px] uppercase tracking-[0.45em] text-ivory/50">
-                Atelier · Jaipur
+                Atelier · Across India
               </span>
             </Link>
             <p className="text-xs text-ivory/70 max-w-sm leading-relaxed">
@@ -61,7 +61,7 @@ export function Footer() {
               artisan embroidery, rich fabrics, and timeless design.
             </p>
             <p className="text-[11px] text-gold-antique tracking-widest font-mono">
-              EST. MMXXVI · JAIPUR
+              EST. MMXXVI · ALL OVER INDIA
             </p>
           </div>
 
@@ -131,15 +131,15 @@ export function Footer() {
           {/* Store Hours & Atelier */}
           <div className="md:col-span-3 space-y-3">
             <p className="text-[11px] uppercase tracking-[0.25em] text-gold font-semibold">
-              Flagship Atelier
+              Artisan Guilds Across India
             </p>
             <p className="text-xs text-ivory/70 leading-relaxed">
-              Haveli 14, Civil Lines, Jaipur 302006<br />
-              Rajasthan, India
+              Weaving Looms & Ateliers in Varanasi, Chanderi, Kanchipuram & Kashmir<br />
+              All-India Express Delivery & Bespoke Fittings
             </p>
             <p className="text-xs text-ivory/60 pt-1">
-              Private Viewings: Mon – Sat, 11:00 – 19:30 IST<br />
-              Concierge: concierge@zariaatelier.com
+              Private Concierge: Mon – Sat, 11:00 – 19:30 IST<br />
+              Direct Line: concierge@zariaatelier.com
             </p>
           </div>
         </div>

@@ -278,7 +278,7 @@ export default function CheckoutPage() {
                       required
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
-                      placeholder="Jaipur"
+                      placeholder="New Delhi, Mumbai, Bengaluru..."
                       className="w-full h-11 px-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
                     />
                   </div>
