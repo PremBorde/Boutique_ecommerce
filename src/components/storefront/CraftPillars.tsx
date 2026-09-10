@@ -11,7 +11,7 @@ const PILLARS = [
     title: "Hand-Embroidered Devotion",
     subtitle: "Over 300+ artisan hours per heirloom piece",
     narrative:
-      "Crafted by fifth-generation artisans in Jaipur and Varanasi using authentic dabka, marodi, and French knot needles. Every single stitch is placed with meditative precision.",
+      "Crafted by fifth-generation artisans all over India using authentic dabka, marodi, and French knot needles. Every single stitch is placed with meditative precision.",
     image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop",
     motif: "Mughal Jaal & Scalloped Paisleys",
   },
@@ -20,7 +20,7 @@ const PILLARS = [
     title: "Heritage Archival Motifs",
     subtitle: "Restoring royal court portraiture patterns",
     narrative:
-      "We dig into royal museum archives and private Jaipur collections to re-author forgotten geometric cartouches, lotus medleys, and architectural archways.",
+      "We dig into royal museum archives and private heritage collections all over India to re-author forgotten geometric cartouches, lotus medleys, and architectural archways.",
     image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1000&auto=format&fit=crop",
     motif: "Mehrab Arches & Cypress Trees",
   },
@@ -167,7 +167,7 @@ export function CraftPillars() {
                   &ldquo;{activePillar.title}&rdquo;
                 </p>
                 <p className="text-[9.5px] text-ivory/60 uppercase tracking-widest mt-0.5">
-                  Jaipur & Varanasi Guild Handcraft
+                  All Over India Guild Handcraft
                 </p>
               </div>
             </div>

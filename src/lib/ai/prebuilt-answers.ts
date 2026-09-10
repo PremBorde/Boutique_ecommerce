@@ -83,7 +83,7 @@ export async function matchPrebuiltIntent(
     return {
       matched: true,
       message:
-        "We offer complimentary bespoke tailoring consultations for all couture commissions. You may schedule a virtual fitting with our master cutting artisan or visit our flagship Haveli in Jaipur.",
+        "We offer complimentary bespoke tailoring consultations for all couture commissions. You may schedule a virtual fitting with our master cutting artisan or request a private concierge consultation anywhere all over India.",
       products: [],
     };
   }
@@ -189,7 +189,7 @@ export async function matchPrebuiltIntent(
     return {
       matched: true,
       message:
-        "For wedding celebrations, we recommend our regal imperial lehengas and hand-tailored silk sherwanis, woven over 200+ artisan hours in Jaipur.",
+        "For wedding celebrations, we recommend our regal imperial lehengas and hand-tailored silk sherwanis, woven over 200+ artisan hours by master clusters all over India.",
       products: ids,
     };
   }

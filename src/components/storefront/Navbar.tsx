@@ -151,8 +151,8 @@ export function Navbar() {
           <span className="font-display text-xl sm:text-2xl md:text-3xl tracking-[0.18em] sm:tracking-[0.22em] text-oxblood dark:text-gold-foil uppercase group-hover:text-gold transition-colors font-semibold">
             Zaria
           </span>
-          <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.32em] sm:tracking-[0.45em] text-gold-antique dark:text-gold-light/70 -mt-1 font-sans font-medium">
-            Atelier · Jaipur
+          <span className="text-[7.5px] sm:text-[8.5px] uppercase tracking-[0.25em] sm:tracking-[0.35em] text-gold-antique dark:text-gold-light/70 -mt-0.5 font-sans font-medium whitespace-nowrap">
+            Atelier · All Over India
           </span>
         </Link>
 

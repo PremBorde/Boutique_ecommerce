@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { getActiveFestival } from "@/lib/ai/festivals";
 import { useCart } from "@/hooks/useCart";
-import { X, Send, Sparkles, AlertCircle, RefreshCw } from "lucide-react";
+import { X, Send, MessageSquare, AlertCircle, RefreshCw } from "lucide-react";
 
 interface Message {
   id: string;
@@ -252,10 +252,9 @@ export function ChatPanel() {
               initial={{ opacity: 0, y: 4, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 4, scale: 0.95 }}
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#FAF7F2] dark:bg-[#161214] border border-[#C9A050]/60 shadow-[0_4px_16px_rgba(74,14,23,0.12)] cursor-pointer select-none rounded-md"
+              className="hidden sm:flex items-center px-3.5 py-1.5 bg-[#FAF7F2] dark:bg-[#161214] border border-[#C9A050]/60 shadow-[0_4px_16px_rgba(74,14,23,0.12)] cursor-pointer select-none rounded-md"
               onClick={() => setIsOpen(true)}
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#C9A050] animate-pulse" />
               <span className="font-sans text-[9px] uppercase tracking-[0.25em] text-[#4A0E17] dark:text-gold-light font-semibold whitespace-nowrap">
                 Atelier Concierge
               </span>
@@ -272,22 +271,8 @@ export function ChatPanel() {
               {/* Ambient idle glow */}
               <span className="absolute -inset-1.5 rounded-full bg-[#C9A050]/20 blur-sm pointer-events-none animate-pulse" />
 
-              <div className="relative z-10 flex flex-col items-center justify-center">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="12" r="10.5" stroke="#C9A050" strokeWidth="0.8" opacity="0.6" />
-                  <path
-                    d="M12 4 L13.1 10.9 L20 12 L13.1 13.1 L12 20 L10.9 13.1 L4 12 L10.9 10.9 Z"
-                    fill="#DFC07B"
-                  />
-                  <circle cx="12" cy="12" r="1.5" fill="#FAF7F2" />
-                </svg>
+              <div className="relative z-10 flex flex-col items-center justify-center text-[#DFC07B]">
+                <MessageSquare className="w-5 h-5 stroke-[1.6]" />
               </div>
             </motion.button>
           </motion.div>

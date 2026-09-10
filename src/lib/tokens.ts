@@ -14,7 +14,7 @@ export const tokens = {
     name: "Zaria Atelier",
     tagline: "Threaded in Gold, Cut in Silk",
     founded: "2026",
-    origin: "Jaipur & Varanasi",
+    origin: "All Over India",
     currency: "INR",
     currencySymbol: "₹",
   },

@@ -24,7 +24,7 @@ const FEATURED_LOOKS: LookbookItem[] = [
     slug: "noor-mahal-velvet-lehenga",
     category: "Bridal Couture",
     price: 28500,
-    image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1000&auto=format&fit=crop",
+    image: "/products/lehenga_crimson_bridal.jpg",
     tagline: "18-Panel Mulberry Silk Velvet with Zari Borders",
   },
   {
@@ -33,7 +33,7 @@ const FEATURED_LOOKS: LookbookItem[] = [
     slug: "varanasi-katan-brocade-saree",
     category: "Heritage Sarees",
     price: 14800,
-    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1000&auto=format&fit=crop",
+    image: "/products/saree_varanasi_katan.jpg",
     tagline: "Interlaced Silver & Gold Gilded Kadhwa Weft",
   },
   {
@@ -42,7 +42,7 @@ const FEATURED_LOOKS: LookbookItem[] = [
     slug: "mehrunnisa-anarkali-ensemble",
     category: "Kalidar Ensembles",
     price: 18900,
-    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop",
+    image: "/products/anarkali_ivory.jpg",
     tagline: "48-Meter Pleated Tissue Organza Drape",
   },
   {
@@ -51,7 +51,7 @@ const FEATURED_LOOKS: LookbookItem[] = [
     slug: "darbar-silk-sherwani",
     category: "Regal Menswear",
     price: 22500,
-    image: "https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=1000&auto=format&fit=crop",
+    image: "/products/menswear_sherwani.jpg",
     tagline: "Hand-Tailored Matka Silk with Cast Brass Accents",
   },
   {
@@ -60,7 +60,7 @@ const FEATURED_LOOKS: LookbookItem[] = [
     slug: "sitara-tissue-silk-drape",
     category: "Heritage Sarees",
     price: 11200,
-    image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop",
+    image: "/products/saree_sitara_gold.jpg",
     tagline: "Liquid Gold Iridescent Metallic Yarn Weave",
   },
 ];
@@ -113,51 +113,52 @@ export function LookbookRail() {
       {/* Horizontal Drag-to-Explore Rail */}
       <div
         ref={scrollRef}
-        data-cursor="Drag Rail"
-        className="flex gap-6 overflow-x-auto px-4 md:px-8 pb-8 no-scrollbar scroll-smooth cursor-grab active:cursor-grabbing"
+        className="flex gap-6 overflow-x-auto px-4 md:px-8 pb-8 no-scrollbar scroll-smooth"
       >
         {FEATURED_LOOKS.map((look) => (
-          <motion.div
+          <Link
             key={look.id}
-            whileHover={{ y: -6 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="shrink-0 w-[300px] sm:w-[380px] bg-white dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-4 shadow-sm flex flex-col justify-between group transition-colors duration-300"
+            href={`/product/${look.slug}`}
+            className="block cursor-pointer shrink-0"
           >
-            {/* Image */}
-            <div className="relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/40 border border-gold/20 mb-4">
-              <Image
-                src={look.image}
-                alt={look.name}
-                fill
-                sizes="380px"
-                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute top-3 left-3 px-2.5 py-0.5 bg-ivory/95 dark:bg-[#20181B]/95 border border-gold/30 text-[9px] uppercase tracking-widest text-oxblood dark:text-gold-foil font-semibold backdrop-blur-xs">
-                {look.category}
+            <motion.div
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="w-[300px] sm:w-[380px] bg-white dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-4 shadow-sm flex flex-col justify-between group transition-colors duration-300 h-full"
+            >
+              {/* Image */}
+              <div className="relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/40 border border-gold/20 mb-4">
+                <Image
+                  src={look.image}
+                  alt={look.name}
+                  fill
+                  sizes="380px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute top-3 left-3 px-2.5 py-0.5 bg-ivory/95 dark:bg-[#20181B]/95 border border-gold/30 text-[9px] uppercase tracking-widest text-oxblood dark:text-gold-foil font-semibold backdrop-blur-xs">
+                  {look.category}
+                </div>
               </div>
-            </div>
 
-            {/* Details */}
-            <div className="space-y-1.5">
-              <h3 className="font-serif text-lg text-oxblood dark:text-ivory font-medium truncate">
-                {look.name}
-              </h3>
-              <p className="text-[11px] text-noir/60 dark:text-ivory/60 line-clamp-1 italic font-serif">
-                {look.tagline}
-              </p>
-              <div className="pt-3 border-t border-gold/15 dark:border-gold/10 flex items-center justify-between">
-                <span className="font-serif text-sm font-semibold text-oxblood dark:text-gold-foil">
-                  {formatPrice(look.price)}
-                </span>
-                <Link
-                  href={`/product/${look.slug}`}
-                  className="text-[10px] uppercase tracking-widest text-gold-dark dark:text-gold-light hover:text-oxblood dark:hover:text-gold flex items-center gap-1 font-semibold transition-colors"
-                >
-                  Explore Creation <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                </Link>
+              {/* Details */}
+              <div className="space-y-1.5">
+                <h3 className="font-serif text-lg text-oxblood dark:text-ivory font-medium truncate group-hover:text-gold transition-colors">
+                  {look.name}
+                </h3>
+                <p className="text-[11px] text-noir/60 dark:text-ivory/60 line-clamp-1 italic font-serif">
+                  {look.tagline}
+                </p>
+                <div className="pt-3 border-t border-gold/15 dark:border-gold/10 flex items-center justify-between">
+                  <span className="font-serif text-sm font-semibold text-oxblood dark:text-gold-foil">
+                    {formatPrice(look.price)}
+                  </span>
+                  <span className="text-[10px] uppercase tracking-widest text-gold-dark dark:text-gold-light group-hover:text-oxblood dark:group-hover:text-gold flex items-center gap-1 font-semibold transition-colors">
+                    Explore Creation <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  </span>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </Link>
         ))}
       </div>
     </section>

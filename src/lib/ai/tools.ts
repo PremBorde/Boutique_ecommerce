@@ -262,7 +262,7 @@ export const STORE_INFO = {
   cod:
     "Cash on Delivery (COD) is not accepted due to the high-value transit insurance required for handwoven silk couture and zari embroideries. We accept all major credit/debit cards, Net Banking, and UPI.",
   craftsmanship:
-    "All pieces are hallmarked and handcrafted in Jaipur and Varanasi with certified Mulberry silks, pure Katan, and lab-tested gold/silver zari.",
+    "All pieces are hallmarked and handcrafted by master artisans all over India with certified Mulberry silks, pure Katan, and lab-tested gold/silver zari.",
 } as const;
 
 /**

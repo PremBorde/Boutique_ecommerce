@@ -149,8 +149,8 @@ export default async function HomePage() {
             &ldquo;In an age of haste, we measure time in stitches.&rdquo;
           </h2>
           <p className="text-sm md:text-base text-ivory/80 leading-relaxed font-sans max-w-2xl mx-auto">
-            Zaria was conceived to safeguard the vanishing weaving guilds of Varanasi and the master
-            dabka embroiderers of Jaipur. Every garment that leaves our haveli is catalogued with an
+            Zaria was conceived to safeguard vanishing royal weaving guilds and master
+            dabka embroiderers all over India. Every garment that leaves our atelier is catalogued with an
             individual hallmark certificate, assuring its authenticity for generations.
           </p>
           <div className="pt-4">

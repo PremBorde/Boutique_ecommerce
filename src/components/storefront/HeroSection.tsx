@@ -111,12 +111,12 @@ export function HeroSection() {
           </h1>
 
           <p className="max-w-xl mx-auto lg:mx-0 text-xs md:text-sm text-noir/70 dark:text-ivory/70 leading-relaxed font-sans">
-            Handcrafted across 300+ artisan hours in Jaipur and Varanasi. Limited-batch bridal
+            Handcrafted across 300+ artisan hours by master artisans all over India. Limited-batch bridal
             lehengas, tissue organza sarees, and tailored bandhgalas cut for timeless celebration.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
-            <Link href="/shop" data-cursor="Explore">
+            <Link href="/shop">
               <Button
                 variant="oxblood"
                 size="lg"
@@ -125,13 +125,13 @@ export function HeroSection() {
                 Explore The Vault
               </Button>
             </Link>
-            <Link href="/shop?category=heritage-sarees" data-cursor="View Sarees">
+            <Link href="/shop?category=heritage-sarees">
               <Button
                 variant="outline"
                 size="lg"
                 className="w-full sm:w-auto h-12 px-7 text-xs tracking-[0.25em] text-noir dark:text-ivory border-gold/40 hover:bg-gold/10"
               >
-                Varanasi Brocades
+                Heritage Sarees
               </Button>
             </Link>
           </div>
@@ -198,7 +198,7 @@ export function HeroSection() {
             </div>
             <div className="pt-1.5 text-center">
               <p className="text-[8.5px] uppercase tracking-widest text-gold-dark dark:text-gold-light font-semibold">
-                Varanasi Kadhwa
+                Master Handloom
               </p>
               <p className="font-serif text-[10.5px] text-oxblood dark:text-gold-light italic">Scalloped Zari Jaal</p>
             </div>

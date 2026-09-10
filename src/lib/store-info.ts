@@ -17,12 +17,12 @@ export const storeInfoConfig = {
   craftsmanship: {
     title: "Craft & Authenticity Hallmark",
     content:
-      "Every creation is certified by the Jaipur Artisan Guild. We weave with genuine Mulberry raw silk, Varanasi pure Katan, and lab-tested gold/silver zari thread. Each piece takes between 80 to 350 artisan hours.",
+      "Every creation is certified by the Master Artisan Guild. We weave with genuine Mulberry raw silk, Varanasi pure Katan, and lab-tested gold/silver zari thread from heritage clusters all over India. Each piece takes between 80 to 350 artisan hours.",
   },
   custom_fit: {
     title: "Bespoke Fitting Services",
     content:
-      "We provide bespoke tailoring consultations at our flagship haveli in Jaipur (Civil Lines) or via virtual video appointment with our master cutting master.",
+      "We provide bespoke tailoring consultations across all over India or via virtual video appointment with our master cutting master.",
   },
 };
 
@@ -43,5 +43,5 @@ export function getStorePolicy(topic: string): string {
   if (normalized.includes("fit") || normalized.includes("tailor") || normalized.includes("measure") || normalized.includes("size")) {
     return storeInfoConfig.custom_fit.content;
   }
-  return "Zaria Atelier is an Indian luxury pret and couture house based in Jaipur and Varanasi, creating small-batch hand-embroidered garments with certified pure zari and raw silks.";
+  return "Zaria Atelier is an Indian luxury pret and couture house celebrating master artisan clusters all over India, creating small-batch hand-embroidered garments with certified pure zari and raw silks.";
 }
