@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Gem, Shield, Clock, Compass } from "lucide-react";
+
 
 export function Footer() {
   const pathname = usePathname();
@@ -12,38 +12,6 @@ export function Footer() {
   return (
     <footer className="bg-noir text-ivory/80 pt-20 pb-12 border-t border-gold/30">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {/* Heritage Trust Badges */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-16 border-b border-gold/20 text-center md:text-left">
-          <div className="flex flex-col items-center md:items-start space-y-2">
-            <Gem className="w-5 h-5 text-gold mb-1" />
-            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Handmade Craft</h4>
-            <p className="text-xs text-ivory/60 leading-relaxed">
-              Authentic hand-embroidery and traditional handloom weaves made by skilled artisans.
-            </p>
-          </div>
-          <div className="flex flex-col items-center md:items-start space-y-2">
-            <Shield className="w-5 h-5 text-gold mb-1" />
-            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Purity Promise</h4>
-            <p className="text-xs text-ivory/60 leading-relaxed">
-              Pure silks, fine textiles, and artisan zari embroidery.
-            </p>
-          </div>
-          <div className="flex flex-col items-center md:items-start space-y-2">
-            <Compass className="w-5 h-5 text-gold mb-1" />
-            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Custom Sizing</h4>
-            <p className="text-xs text-ivory/60 leading-relaxed">
-              Tailored measurements and instant recommendations with our AI stylist.
-            </p>
-          </div>
-          <div className="flex flex-col items-center md:items-start space-y-2">
-            <Clock className="w-5 h-5 text-gold mb-1" />
-            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Express Delivery</h4>
-            <p className="text-xs text-ivory/60 leading-relaxed">
-              Safe, fast worldwide shipping delivered in premium keepsake packaging.
-            </p>
-          </div>
-        </div>
-
         {/* Main Footer Links */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 py-16">
           {/* Brand Col */}
