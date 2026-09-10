@@ -304,14 +304,14 @@ function AccountContent() {
                   onClick={fillDemoCustomer}
                   className="flex-1 text-[11px] py-1.5 px-2 bg-white/70 dark:bg-[#20181B] hover:bg-white text-oxblood dark:text-gold-light border border-gold/30 tracking-wider transition-colors"
                 >
-                  Fill Customer
+                  Customer (Ananya)
                 </button>
                 <button
                   type="button"
                   onClick={fillDemoAdmin}
                   className="flex-1 text-[11px] py-1.5 px-2 bg-oxblood text-gold-light hover:bg-oxblood-light tracking-wider transition-colors"
                 >
-                  Fill Admin
+                  Admin (Prem Borde)
                 </button>
               </div>
             </div>

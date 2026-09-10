@@ -91,12 +91,15 @@ export default function AdminLayout({
             <span className="font-display text-lg tracking-[0.2em] text-gold-foil uppercase font-semibold">
               Zaria Atelier Console
             </span>
-            <span className="hidden sm:inline-block text-[10px] uppercase tracking-widest px-2 py-0.5 bg-oxblood text-gold-light border border-gold/40 font-mono">
-              Master Artisan Mode
+            <span className="hidden sm:inline-block text-[10px] uppercase tracking-widest px-2.5 py-0.5 bg-oxblood text-gold-light border border-gold/40 font-mono">
+              Admin: Prem Borde
             </span>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
+            <span className="hidden md:inline-block text-xs text-gold-foil font-serif">
+              Logged in as <strong className="text-gold-light font-sans font-semibold">Prem Borde</strong>
+            </span>
             <Link
               href="/"
               className="text-xs uppercase tracking-wider text-ivory/60 hover:text-gold flex items-center gap-1.5 transition-colors"

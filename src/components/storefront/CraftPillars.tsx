@@ -8,48 +8,48 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const PILLARS = [
   {
     num: "01",
-    title: "Hand-Embroidered Devotion",
-    subtitle: "Over 300+ artisan hours per heirloom piece",
+    title: "Master Hand-Embroidery",
+    subtitle: "Over 300 hours of detailed needlework per piece",
     narrative:
-      "Crafted by fifth-generation artisans all over India using authentic dabka, marodi, and French knot needles. Every single stitch is placed with meditative precision.",
+      "Handmade by expert artisans across India using authentic dabka, zardozi, and fine threadwork. Every single stitch is placed with patience and precision.",
     image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop",
-    motif: "Mughal Jaal & Scalloped Paisleys",
+    motif: "Classic Floral & Paisley Patterns",
   },
   {
     num: "02",
-    title: "Heritage Archival Motifs",
-    subtitle: "Restoring royal court portraiture patterns",
+    title: "Royal Heritage Motifs",
+    subtitle: "Inspired by India's rich royal history",
     narrative:
-      "We dig into royal museum archives and private heritage collections all over India to re-author forgotten geometric cartouches, lotus medleys, and architectural archways.",
+      "We draw inspiration from royal palace architecture and vintage textile art, recreating timeless arches, lotus motifs, and classic borders for modern wear.",
     image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1000&auto=format&fit=crop",
-    motif: "Mehrab Arches & Cypress Trees",
+    motif: "Royal Arches & Floral Vines",
   },
   {
     num: "03",
-    title: "Small-Batch Cut",
-    subtitle: "Zero mass manufacturing, strictly limited editions",
+    title: "Limited Small Batches",
+    subtitle: "No mass production — only limited quantities",
     narrative:
-      "We cut no more than 10 to 25 units per silhouette to eliminate excess fabric waste, respect artisan rhythm, and guarantee that your acquisition remains truly rare.",
+      "We produce only 10 to 25 pieces per design. This avoids fabric waste, ensures the highest quality, and keeps your outfit truly rare and special.",
     image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=1000&auto=format&fit=crop",
-    motif: "Individual Edition Hallmark",
+    motif: "Authenticity Certificate Included",
   },
   {
     num: "04",
-    title: "Pure Zari & Mulberry Silk",
-    subtitle: "100% lab-verified metals and raw weaves",
+    title: "Pure Silk & Real Zari",
+    subtitle: "100% genuine fabrics and certified metallic threads",
     narrative:
-      "We weave exclusively with genuine silver and gold gilded wire interlaced on handlooms across Varanasi, Paithan, and Chanderi. Breathable, heavy, and luminous.",
+      "We weave only with authentic gold and silver zari threads on traditional handlooms in Varanasi and Chanderi. Comfortable, radiant, and built to last.",
     image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1000&auto=format&fit=crop",
-    motif: "Kadhwa Pit-Loom Weft",
+    motif: "Traditional Handloom Weaving",
   },
   {
     num: "05",
-    title: "Heirlooms Made To Last",
-    subtitle: "Garments designed to be passed down generations",
+    title: "Made to Last Generations",
+    subtitle: "Designed to be worn, loved, and passed down",
     narrative:
-      "Reinforced silk facings, archival preservation boxing, and timeless silhouette tailoring ensure that every Zaria creation endures as a family treasure.",
+      "Crafted with durable silk linings, premium keepsake packaging, and timeless cuts so your outfit stays beautiful for years to come.",
     image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop",
-    motif: "Preservation Grade Keepsake",
+    motif: "Keepsake Storage Included",
   },
 ];
 
@@ -94,10 +94,10 @@ export function CraftPillars() {
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
           <p className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold mb-1.5">
-            The Five Pillars of the Atelier
+            Our Quality Promise
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-ivory">
-            Devotion to the Craft
+            The Craft Behind Every Piece
           </h2>
         </div>
 

@@ -55,9 +55,19 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials. Please verify your email and password.");
         }
 
+        // Keep Admin name as Prem Borde
+        if (user.role === "ADMIN" && user.name !== "Prem Borde") {
+          await prisma.user
+            .update({
+              where: { id: user.id },
+              data: { name: "Prem Borde" },
+            })
+            .catch(() => {});
+        }
+
         return {
           id: user.id,
-          name: user.name,
+          name: user.role === "ADMIN" ? "Prem Borde" : user.name,
           email: user.email,
           role: user.role,
         };

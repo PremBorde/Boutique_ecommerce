@@ -195,7 +195,7 @@ export function Navbar() {
               className="hidden sm:flex items-center gap-1 text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 border border-gold/40 text-gold-dark dark:text-gold-light bg-gold/10 font-medium hover:bg-gold/20 transition-colors"
             >
               <ShieldCheck className="w-3 h-3" />
-              Admin
+              Prem Borde (Admin)
             </Link>
           )}
 

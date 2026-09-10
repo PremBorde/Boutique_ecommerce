@@ -96,7 +96,7 @@ export function HeroSection() {
         <div className="lg:col-span-7 space-y-4 md:space-y-5 text-center lg:text-left">
           <div className="inline-flex items-center px-3 py-1 bg-gold/10 border border-gold/30 backdrop-blur-xs">
             <span className="text-[10px] uppercase tracking-[0.3em] text-oxblood dark:text-gold-light font-semibold">
-              The Festive Pret & Couture 2026
+              Festive & Wedding Collection 2026
             </span>
           </div>
 
@@ -111,8 +111,8 @@ export function HeroSection() {
           </h1>
 
           <p className="max-w-xl mx-auto lg:mx-0 text-xs md:text-sm text-noir/70 dark:text-ivory/70 leading-relaxed font-sans">
-            Handcrafted across 300+ artisan hours by master artisans all over India. Limited-batch bridal
-            lehengas, tissue organza sarees, and tailored bandhgalas cut for timeless celebration.
+            Handcrafted with 300+ hours of artisan work across India. Featuring bridal
+            lehengas, tissue silk sarees, and tailored menswear designed for life&apos;s special celebrations.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
@@ -122,7 +122,7 @@ export function HeroSection() {
                 size="lg"
                 className="w-full sm:w-auto h-12 px-8 text-xs tracking-[0.25em]"
               >
-                Explore The Vault
+                Shop Collection
               </Button>
             </Link>
             <Link href="/shop?category=heritage-sarees">
@@ -148,8 +148,8 @@ export function HeroSection() {
             </div>
             <div className="w-[1px] h-7 bg-gold/30" />
             <div>
-              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">Tested</strong>
-              Metallic Zari
+              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">Certified</strong>
+              Pure Zari Work
             </div>
           </div>
         </div>
@@ -173,7 +173,7 @@ export function HeroSection() {
 
             <div className="absolute bottom-4 left-4 right-4 p-4 bg-ivory/95 dark:bg-[#171215]/95 border border-gold/30 backdrop-blur-md">
               <p className="text-[9px] uppercase tracking-[0.25em] text-gold-dark dark:text-gold-light font-semibold">
-                Featured Heirloom
+                Featured Design
               </p>
               <h3 className="font-serif text-sm text-oxblood dark:text-gold-foil font-semibold mt-0.5">
                 The Noor Mahal Velvet Lehenga

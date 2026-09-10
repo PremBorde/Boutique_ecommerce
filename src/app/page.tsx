@@ -71,22 +71,22 @@ export default async function HomePage() {
       {/* 5. Scroll-Pinned 5 Craft Pillars Sequence */}
       <CraftPillars />
 
-      {/* 6. Featured Vault Acquisitions Grid */}
+      {/* 6. Featured Outfits Grid */}
       <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto border-t border-gold/20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
             <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark dark:text-gold-light font-semibold mb-2 flex items-center gap-1.5">
               <Gem className="w-3.5 h-3.5 text-gold-dark dark:text-gold-light" />
-              Vault Highlights
+              Featured Picks
             </p>
             <h2 className="text-3xl md:text-5xl font-serif text-oxblood dark:text-gold-foil">
-              Curated Heirlooms
+              Our Signature Collection
             </h2>
           </div>
 
           <Link href="/shop">
             <Button variant="outline" size="sm" className="gap-2 text-xs text-oxblood dark:text-gold-light border-gold/40 dark:border-gold/30 hover:bg-gold/10">
-              View Entire Collection <ArrowRight className="w-3.5 h-3.5" />
+              View All Outfits <ArrowRight className="w-3.5 h-3.5" />
             </Button>
           </Link>
         </div>
@@ -103,7 +103,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-lg mx-auto mb-12">
             <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark dark:text-gold-light font-semibold mb-2">
-              Bespoke Silhouettes
+              Browse Categories
             </p>
             <h2 className="text-3xl md:text-4xl font-serif text-oxblood dark:text-gold-foil">
               Shop by Category
@@ -133,7 +133,7 @@ export default async function HomePage() {
                     {cat.name}
                   </h3>
                   <span className="text-[10px] uppercase tracking-widest text-ivory/70 mt-1 block">
-                    {cat._count.products} Creations
+                    {cat._count.products} Designs
                   </span>
                 </div>
               </Link>
@@ -146,12 +146,12 @@ export default async function HomePage() {
       <section className="py-24 bg-oxblood text-ivory px-4 md:px-8 border-t border-gold/30">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h2 className="text-3xl md:text-5xl font-serif leading-tight text-gold-foil">
-            &ldquo;In an age of haste, we measure time in stitches.&rdquo;
+            &ldquo;In a world of fast fashion, we craft every piece with patience and care.&rdquo;
           </h2>
           <p className="text-sm md:text-base text-ivory/80 leading-relaxed font-sans max-w-2xl mx-auto">
-            Zaria was conceived to safeguard vanishing royal weaving guilds and master
-            dabka embroiderers all over India. Every garment that leaves our atelier is catalogued with an
-            individual hallmark certificate, assuring its authenticity for generations.
+            Zaria was founded to keep traditional Indian craftsmanship alive. Every outfit is
+            handcrafted by skilled artisans using pure fabrics, certified for authenticity, and designed
+            to be cherished in your family for years to come.
           </p>
           <div className="pt-4">
             <Link href="/shop">
@@ -160,7 +160,7 @@ export default async function HomePage() {
                 size="lg"
                 className="h-13 px-8 text-xs tracking-[0.25em]"
               >
-                Acquire an Heirloom
+                Explore The Collection
               </Button>
             </Link>
           </div>

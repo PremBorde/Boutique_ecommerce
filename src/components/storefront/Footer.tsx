@@ -10,30 +10,30 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-16 border-b border-gold/20 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start space-y-2">
             <Gem className="w-5 h-5 text-gold mb-1" />
-            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Heritage Craft</h4>
+            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Handmade Craft</h4>
             <p className="text-xs text-ivory/60 leading-relaxed">
-              Authentic hand-embroidery, dabka, and pit-loom weaves from master generational artisans.
+              Authentic hand-embroidery and traditional handloom weaves made by skilled artisans.
             </p>
           </div>
           <div className="flex flex-col items-center md:items-start space-y-2">
             <Shield className="w-5 h-5 text-gold mb-1" />
-            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Purity Hallmark</h4>
+            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Purity Promise</h4>
             <p className="text-xs text-ivory/60 leading-relaxed">
-              100% genuine Mulberry silks, Katan brocades, and verified metallic zari threads.
+              100% pure silks, fine fabrics, and certified metallic zari threads.
             </p>
           </div>
           <div className="flex flex-col items-center md:items-start space-y-2">
             <Compass className="w-5 h-5 text-gold mb-1" />
-            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Bespoke Fit</h4>
+            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Custom Sizing</h4>
             <p className="text-xs text-ivory/60 leading-relaxed">
-              Personalized size consultations with our virtual AI stylist and atelier tailors.
+              Tailored measurements and instant recommendations with our AI stylist.
             </p>
           </div>
           <div className="flex flex-col items-center md:items-start space-y-2">
             <Clock className="w-5 h-5 text-gold mb-1" />
-            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">White-Glove Delivery</h4>
+            <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Express Delivery</h4>
             <p className="text-xs text-ivory/60 leading-relaxed">
-              Fully insured express transit worldwide in custom archival keepsake boxes.
+              Safe, fast worldwide shipping delivered in premium keepsake packaging.
             </p>
           </div>
         </div>
@@ -51,8 +51,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-xs text-ivory/70 max-w-sm leading-relaxed">
-              Threaded in Gold, Cut in Silk. An editorial Indian couture house celebrating regional
-              weaving guilds, regal silhouettes, and baroque ornament.
+              Threaded in Gold, Cut in Silk. Handcrafted Indian festive couture celebrating authentic
+              artisan embroidery, rich fabrics, and timeless design.
             </p>
             <p className="text-[11px] text-gold-antique tracking-widest font-mono">
               EST. MMXXVI · JAIPUR

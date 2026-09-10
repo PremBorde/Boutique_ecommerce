@@ -541,7 +541,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
 
           <div className="text-center text-xs text-gray-500 border-t border-gray-300 pt-4">
             <p>Thank you for your patronage — Zaria Atelier, Jaipur</p>
-            <p className="mt-0.5">This is a computer-generated invoice.</p>
+            <p className="mt-0.5">Authorized by: Prem Borde (Administrator)</p>
           </div>
         </div>
       </div>

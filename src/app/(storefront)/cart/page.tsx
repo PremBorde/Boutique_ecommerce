@@ -130,11 +130,11 @@ export default function CartPage() {
             </div>
             <h2 className="font-serif text-2xl text-oxblood mb-2">Your Bag is Empty</h2>
             <p className="text-xs text-noir/60 max-w-sm mx-auto mb-8 leading-relaxed">
-              Explore our master-crafted heritage lehengas, sarees, and silk pret to acquire an heirloom.
+              Discover our handcrafted lehengas, sarees, and festive wear to find your perfect look.
             </p>
             <Link href="/shop">
               <Button variant="oxblood" className="text-xs tracking-[0.25em]">
-                Discover Catalogue
+                Start Shopping
               </Button>
             </Link>
           </div>
