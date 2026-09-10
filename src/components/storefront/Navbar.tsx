@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -13,7 +13,13 @@ export function Navbar() {
   const { data: session } = useSession();
   const { toggleDrawer, getItemCount } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const itemCount = getItemCount();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const itemCount = mounted ? getItemCount() : 0;
 
   const navLinks = [
     { label: "The Atelier", href: "/" },

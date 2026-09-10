@@ -44,6 +44,11 @@ export default function CheckoutPage() {
   const [simulatedStatus, setSimulatedStatus] = useState<"SUCCESS" | "FAILED">("SUCCESS");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Pre-fill from session if available
   useEffect(() => {
@@ -128,6 +133,17 @@ export default function CheckoutPage() {
     setStateName("Rajasthan");
     setPostalCode("302006");
   };
+
+  if (!mounted) {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center bg-regal-texture">
+        <div className="w-12 h-12 rounded-full border-2 border-gold/40 border-t-gold animate-spin mb-4" />
+        <p className="text-xs uppercase tracking-[0.2em] text-gold-antique dark:text-gold-light">
+          Preparing bespoke checkout...
+        </p>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (

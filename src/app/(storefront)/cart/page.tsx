@@ -32,6 +32,12 @@ export default function CartPage() {
     setCoupon,
   } = useCart();
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const [couponCodeInput, setCouponCodeInput] = useState(coupon?.code || "");
   const [couponError, setCouponError] = useState("");
   const [couponSuccess, setCouponSuccess] = useState(
@@ -110,7 +116,14 @@ export default function CartPage() {
           </Link>
         </div>
 
-        {items.length === 0 ? (
+        {!mounted ? (
+          <div className="py-24 text-center p-12 max-w-xl mx-auto">
+            <div className="w-12 h-12 rounded-full border-2 border-gold/40 border-t-gold animate-spin mx-auto mb-4" />
+            <p className="text-xs uppercase tracking-[0.2em] text-gold-antique dark:text-gold-light">
+              Loading your curated acquisitions...
+            </p>
+          </div>
+        ) : items.length === 0 ? (
           <div className="py-24 text-center bg-white/60 border border-dashed border-gold/30 p-12 max-w-xl mx-auto shadow-xs">
             <div className="w-16 h-16 rounded-full bg-gold/10 text-gold-dark flex items-center justify-center mx-auto mb-4">
               <ShoppingBag className="w-8 h-8 stroke-1" />
