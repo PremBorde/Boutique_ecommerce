@@ -1,15 +1,121 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useCart } from "@/hooks/useCart";
 import { ShoppingBag, User, Search, Menu, X, ShieldCheck } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
-export function Navbar() {
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const NAV_LINKS: NavItem[] = [
+  { label: "The Atelier", href: "/" },
+  { label: "All Creations", href: "/shop" },
+  { label: "Lehengas", href: "/shop?category=lehengas-couture" },
+  { label: "Sarees", href: "/shop?category=heritage-sarees" },
+  { label: "Festive Pret", href: "/shop?category=festive-pret" },
+  { label: "Menswear", href: "/shop?category=regal-menswear" },
+];
+
+function DesktopNavLinks() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentCategory = searchParams.get("category");
+
+  return (
+    <div className="hidden md:flex items-center space-x-8">
+      {NAV_LINKS.map((link) => {
+        let isActive = false;
+        if (link.href === "/") {
+          isActive = pathname === "/";
+        } else if (link.href === "/shop") {
+          isActive = pathname === "/shop" && !currentCategory;
+        } else if (link.href.includes("category=")) {
+          const cat = link.href.split("category=")[1];
+          isActive = pathname === "/shop" && currentCategory === cat;
+        } else {
+          isActive = pathname === link.href;
+        }
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`text-xs uppercase tracking-[0.2em] font-medium transition-colors relative py-1 ${
+              isActive
+                ? "text-oxblood dark:text-gold-light font-semibold after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1.5px] after:bg-gold"
+                : "text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light"
+            }`}
+          >
+            {link.label}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
+function MobileNavLinks({ onClose }: { onClose: () => void }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentCategory = searchParams.get("category");
+
+  return (
+    <>
+      {NAV_LINKS.map((link) => {
+        let isActive = false;
+        if (link.href === "/") {
+          isActive = pathname === "/";
+        } else if (link.href === "/shop") {
+          isActive = pathname === "/shop" && !currentCategory;
+        } else if (link.href.includes("category=")) {
+          const cat = link.href.split("category=")[1];
+          isActive = pathname === "/shop" && currentCategory === cat;
+        } else {
+          isActive = pathname === link.href;
+        }
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={onClose}
+            className={`block text-xs uppercase tracking-[0.25em] py-2 font-medium border-b border-gold/10 transition-colors ${
+              isActive
+                ? "text-oxblood dark:text-gold-light font-semibold border-gold"
+                : "text-noir/80 dark:text-ivory/80 hover:text-oxblood dark:hover:text-gold"
+            }`}
+          >
+            {link.label}
+          </Link>
+        );
+      })}
+    </>
+  );
+}
+
+function DesktopNavFallback() {
+  return (
+    <div className="hidden md:flex items-center space-x-8">
+      {NAV_LINKS.map((link) => (
+        <Link
+          key={link.href}
+          href={link.href}
+          className="text-xs uppercase tracking-[0.2em] font-medium transition-colors relative py-1 text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light"
+        >
+          {link.label}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+export function Navbar() {
   const { data: session } = useSession();
   const { toggleDrawer, getItemCount } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,15 +126,6 @@ export function Navbar() {
   }, []);
 
   const itemCount = mounted ? getItemCount() : 0;
-
-  const navLinks = [
-    { label: "The Atelier", href: "/" },
-    { label: "All Creations", href: "/shop" },
-    { label: "Lehengas", href: "/shop?category=lehengas-couture" },
-    { label: "Sarees", href: "/shop?category=heritage-sarees" },
-    { label: "Festive Pret", href: "/shop?category=festive-pret" },
-    { label: "Menswear", href: "/shop?category=regal-menswear" },
-  ];
 
   return (
     <header className="sticky top-0 z-40 bg-ivory/95 dark:bg-[#0C0A0B]/95 backdrop-blur-md border-b border-gold/25 dark:border-gold/15 transition-colors duration-300">
@@ -60,24 +157,9 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-xs uppercase tracking-[0.2em] font-medium transition-colors relative py-1 ${
-                  isActive
-                    ? "text-oxblood dark:text-gold-light font-semibold after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1.5px] after:bg-gold"
-                    : "text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </div>
+        <Suspense fallback={<DesktopNavFallback />}>
+          <DesktopNavLinks />
+        </Suspense>
 
         {/* Right Actions */}
         <div className="flex items-center space-x-2 sm:space-x-4">
@@ -135,16 +217,9 @@ export function Navbar() {
       {/* Mobile Drawer */}
       {mobileOpen && (
         <div className="md:hidden border-t border-gold/20 bg-ivory dark:bg-[#141012] px-6 py-6 space-y-4 animate-slide-up">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="block text-xs uppercase tracking-[0.25em] text-noir/80 dark:text-ivory/80 hover:text-oxblood dark:hover:text-gold py-2 font-medium border-b border-gold/10"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Suspense fallback={null}>
+            <MobileNavLinks onClose={() => setMobileOpen(false)} />
+          </Suspense>
           <div className="pt-2 flex items-center justify-between">
             <Link
               href="/account"

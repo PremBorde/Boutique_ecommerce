@@ -87,6 +87,7 @@ function ShopContent() {
     setInStockOnly(false);
     setSelectedSort("newest");
     setPage(1);
+    router.push("/shop");
   };
 
   const sizes = ["all", "XS", "S", "M", "L", "XL", "Free Size"];
@@ -99,24 +100,23 @@ function ShopContent() {
           <p className="text-[10px] uppercase tracking-[0.35em] text-gold-antique dark:text-gold-light mb-2 font-semibold">
             Bespoke Collection Archive
           </p>
-          <h1 className="text-4xl md:text-5xl font-serif text-oxblood dark:text-gold-foil">
+          <h1 className="text-4xl md:text-5xl font-serif text-oxblood dark:text-gold-foil mb-4 tracking-tight">
             The Atelier Catalogue
           </h1>
-          <p className="text-xs md:text-sm text-noir/60 dark:text-ivory/60 mt-3 leading-relaxed">
-            Every garment cut by hand from heritage weaves. Browse our limited-batch lehengas,
-            Banarasi sarees, and tailored festive silhouettes.
+          <p className="text-xs text-noir/70 dark:text-ivory/70 leading-relaxed font-sans max-w-lg mx-auto">
+            Every garment cut by hand from heritage weaves. Browse our limited-batch lehengas, Banarasi sarees, and tailored festive silhouettes.
           </p>
         </div>
 
-        {/* Filter & Sort Bar */}
-        <div className="bg-ivory dark:bg-[#141012] border border-gold/30 dark:border-gold/20 p-4 mb-8 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4 transition-colors duration-300">
+        {/* Filter / Search Bar */}
+        <div className="bg-white/80 dark:bg-[#141012] border border-gold/30 dark:border-gold/20 p-4 mb-8 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Search Input */}
-          <form onSubmit={handleSearchSubmit} className="relative w-full md:w-80">
+          <form onSubmit={handleSearchSubmit} className="relative w-full md:w-72">
             <input
               type="text"
+              placeholder="Search silk, velvet, zari..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search silk, velvet, zari..."
               className="w-full h-10 pl-9 pr-4 text-xs bg-white/70 dark:bg-[#1D171A] border border-gold/30 dark:border-gold/20 focus:border-oxblood dark:focus:border-gold outline-none transition-all placeholder:text-noir/40 dark:placeholder:text-ivory/40 text-noir dark:text-ivory"
             />
             <Search className="w-4 h-4 text-noir/40 dark:text-ivory/40 absolute left-3 top-3 pointer-events-none" />
@@ -128,6 +128,7 @@ function ShopContent() {
               onClick={() => {
                 setSelectedCategory("all");
                 setPage(1);
+                router.push("/shop");
               }}
               className={`text-[11px] uppercase tracking-[0.18em] px-3.5 py-1.5 transition-all font-medium whitespace-nowrap ${
                 selectedCategory === "all"
@@ -143,6 +144,7 @@ function ShopContent() {
                 onClick={() => {
                   setSelectedCategory(c.slug);
                   setPage(1);
+                  router.push(`/shop?category=${c.slug}`);
                 }}
                 className={`text-[11px] uppercase tracking-[0.18em] px-3.5 py-1.5 transition-all font-medium whitespace-nowrap ${
                   selectedCategory === c.slug

@@ -3,6 +3,10 @@
 > *"Threaded in Gold, Cut in Silk"*  
 > An editorial e-commerce experience celebrating generational weaving guilds, royal baroque minimalism, and high-fashion craft. Built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, **Prisma ORM**, **PostgreSQL**, **Google Gemini 2.0 Flash function calling**, **GSAP ScrollTrigger**, and **Lenis Smooth Scroll**.
 
+📚 **Project Documentation Guides**:
+- 🏛️ **[ARCHITECTURE.md](file:///d:/Internship%20Challege/Boutique_ecommerce/ARCHITECTURE.md)**: In-depth technical architecture, concurrency models, state machine transitions, and hydration patterns.
+- 🚀 **[DEPLOYMENT.md](file:///d:/Internship%20Challege/Boutique_ecommerce/DEPLOYMENT.md)**: Production deployment instructions for Vercel, PostgreSQL/Supabase configuration, environment variables, and verification checklists.
+
 ---
 
 ## 🏛️ System Architecture
@@ -112,6 +116,15 @@ stateDiagram-v2
 - **Drag-to-Explore Lookbook Rail**: Horizontal rail with inertia momentum on mouse release.
 - **Custom Morphing Cursor**: Sub-pixel `gsap.quickTo` tracking with pill hover labels (`Explore`, `Drag Rail`, `View Bag`).
 - **Product Card 3D Tilt & Swatch Crossfade**: Dual-image hover crossfade with Framer Motion 3D perspective tilt.
+
+### 5. Royal Nocturne Dark Mode & Active Nav Synchronization
+- **Nocturne Mode**: One-click toggle between warm ivory parchment (`#FAF7F2`) and obsidian velvet nocturne (`#0C0A0B`) with gilded borders (`#D4AF37`).
+- **Anti-FOUC Engine**: Zero flash of unstyled content via blocking inline `<head>` script reading `localStorage` before layout paint.
+- **Synchronized Vault Navigation**: Nav links accurately detect active categories via `useSearchParams()` (e.g. `/shop?category=lehengas-couture` highlights **LEHENGAS** with a gold underline, while `/shop` highlights **ALL CREATIONS**). Category filter tabs on the `/shop` page dynamically sync browser URLs.
+
+### 6. Expanded 17-Piece Heirloom Catalog
+- **Diverse Categories**: Fully seeded vault spanning Lehengas & Couture (4), Heritage Sarees (4), Anarkalis & Ensembles (3), Festive Pret (3), and Regal Menswear (3).
+- **Rich Specs**: Every garment features authentic Indian couture details — artisanal weave stories, fabric compositions, colorways, multi-angle photos, and SKU-level inventory tracking.
 
 ---
 

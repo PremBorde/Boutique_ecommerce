@@ -369,6 +369,312 @@ async function main() {
         { color: "Rose Copper", colorHex: "#B87063", size: "Free Size", sku: "ZR-STD-COP-FS", stock: 3 },
       ],
     },
+    // --- ADDITIONAL COUTURE PRODUCTS ---
+    {
+      name: "The Mehrunissa Zardozi Bridal Lehenga",
+      slug: "mehrunissa-zardozi-bridal-lehenga",
+      description:
+        "Hand-spun crimson raw silk kalidar embellished with 24-karat gold dipped zardozi embroidery, peacock medallion motifs, and semi-precious quartz crystals. Complemented by an antique tissue veil.",
+      story:
+        "Master karigars in Old Delhi spent 420 hours hand-couching real gold wire onto heavy Bangalore silk to sculpt this royal heirloom.",
+      fabric: "Pure Raw Silk with 24k Gold Zardozi & Hand-Embroidered Resham",
+      basePrice: 42000,
+      categoryId: catLehengas.id,
+      featured: true,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1200&auto=format&fit=crop",
+          altText: "Mehrunissa Bridal Lehenga in Imperial Crimson",
+          color: "Imperial Crimson",
+          order: 0,
+          isPrimary: true,
+        },
+        {
+          url: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1200&auto=format&fit=crop",
+          altText: "Mehrunissa Bridal Zardozi motif close-up",
+          color: "Imperial Crimson",
+          order: 1,
+          isPrimary: false,
+        },
+      ],
+      variants: [
+        { color: "Imperial Crimson", colorHex: "#5E0B1B", size: "XS", sku: "ZR-MZL-CRM-XS", stock: 2 },
+        { color: "Imperial Crimson", colorHex: "#5E0B1B", size: "S", sku: "ZR-MZL-CRM-S", stock: 4 },
+        { color: "Imperial Crimson", colorHex: "#5E0B1B", size: "M", sku: "ZR-MZL-CRM-M", stock: 3 },
+        { color: "Imperial Crimson", colorHex: "#5E0B1B", size: "L", sku: "ZR-MZL-CRM-L", stock: 2 },
+        { color: "Imperial Crimson", colorHex: "#5E0B1B", size: "XL", sku: "ZR-MZL-CRM-XL", stock: 1 },
+      ],
+    },
+    {
+      name: "The Gul-e-Bahar Ivory Organza Lehenga",
+      slug: "gul-e-bahar-ivory-organza-lehenga",
+      description:
+        "A diaphanous ivory organza skirt adorned with pastel Kashmiri threadwork, lustrous pearl borders, and silver gota ribbons. Paired with a sweetheart neckline corset blouse.",
+      story:
+        "Conceived for moonlit summer soirées, this silhouette pairs Persian floral creepers with gossamer organza that floats with every step.",
+      fabric: "Triple-Layered Gossamer Silk Organza with Fine Pearl Beading",
+      basePrice: 31500,
+      categoryId: catLehengas.id,
+      featured: true,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?q=80&w=1200&auto=format&fit=crop",
+          altText: "Gul-e-Bahar Organza Lehenga in Moonlit Ivory",
+          color: "Moonlit Ivory",
+          order: 0,
+          isPrimary: true,
+        },
+        {
+          url: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop",
+          altText: "Gul-e-Bahar Lehenga pearl detail",
+          color: "Moonlit Ivory",
+          order: 1,
+          isPrimary: false,
+        },
+      ],
+      variants: [
+        { color: "Moonlit Ivory", colorHex: "#FBF9F4", size: "XS", sku: "ZR-GBL-IVR-XS", stock: 3 },
+        { color: "Moonlit Ivory", colorHex: "#FBF9F4", size: "S", sku: "ZR-GBL-IVR-S", stock: 5 },
+        { color: "Moonlit Ivory", colorHex: "#FBF9F4", size: "M", sku: "ZR-GBL-IVR-M", stock: 4 },
+        { color: "Moonlit Ivory", colorHex: "#FBF9F4", size: "L", sku: "ZR-GBL-IVR-L", stock: 2 },
+      ],
+    },
+    {
+      name: "The Rajkumari Emerald Kalidar Lehenga",
+      slug: "rajkumari-emerald-kalidar-lehenga",
+      description:
+        "Deep forest emerald silk brocade crafted with 24 tiered kalis, antique marodi border work, and an embroidered velvet choli.",
+      story:
+        "Inspired by Rajasthani royal wedding archives, the borders feature hand-beaten gold leaf appliqués.",
+      fabric: "Heritage Brocade Silk with Antique Marodi & Zari",
+      basePrice: 36000,
+      categoryId: catLehengas.id,
+      featured: false,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=1200&auto=format&fit=crop",
+          altText: "Rajkumari Kalidar Lehenga in Royal Emerald",
+          color: "Royal Emerald",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Royal Emerald", colorHex: "#0D3822", size: "S", sku: "ZR-RKL-EMR-S", stock: 3 },
+        { color: "Royal Emerald", colorHex: "#0D3822", size: "M", sku: "ZR-RKL-EMR-M", stock: 4 },
+        { color: "Royal Emerald", colorHex: "#0D3822", size: "L", sku: "ZR-RKL-EMR-L", stock: 2 },
+        { color: "Royal Emerald", colorHex: "#0D3822", size: "XL", sku: "ZR-RKL-EMR-XL", stock: 1 },
+      ],
+    },
+    {
+      name: "The Shikargah Antique Banarasi Saree",
+      slug: "shikargah-antique-banarasi-saree",
+      description:
+        "Museum-grade pure silk Banarasi saree exhibiting the legendary Shikargah weave — depicting royal hunting fauna, flora, and galloping deer in liquid silver and gold kadhwa zari.",
+      story:
+        "Taking over three months on jacquard pit looms, Shikargah is considered the crown jewel of Varanasi weaving.",
+      fabric: "Pure Handspun Mulberry Silk with Certified Tested Zari",
+      basePrice: 24000,
+      categoryId: catSarees.id,
+      featured: true,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1200&auto=format&fit=crop",
+          altText: "Shikargah Banarasi Saree in Midnight Wine",
+          color: "Midnight Wine",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Midnight Wine", colorHex: "#3B0813", size: "Free Size", sku: "ZR-SKS-WIN-FS", stock: 4 },
+        { color: "Antique Bronze", colorHex: "#8C6239", size: "Free Size", sku: "ZR-SKS-BRZ-FS", stock: 2 },
+      ],
+    },
+    {
+      name: "The Chandrika Organza Tissue Saree",
+      slug: "chandrika-organza-tissue-saree",
+      description:
+        "Subtle rose-gold metallic organza saree finished with hand-scalloped pearl borders, cutwork lace pallu, and unstitched brocade blouse fabric.",
+      story:
+        "An ultra-modern interpretation of vintage royalty, reflecting gentle candlelight in evening settings.",
+      fabric: "Rose Gold Metallic Organza Silk with Pearl Scallops",
+      basePrice: 13500,
+      categoryId: catSarees.id,
+      featured: false,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1200&auto=format&fit=crop",
+          altText: "Chandrika Organza Saree in Rose Gold",
+          color: "Rose Gold",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Rose Gold", colorHex: "#B76E79", size: "Free Size", sku: "ZR-COS-RSG-FS", stock: 6 },
+        { color: "Champagne Shimmer", colorHex: "#E7D3A6", size: "Free Size", sku: "ZR-COS-CHP-FS", stock: 3 },
+      ],
+    },
+    {
+      name: "The Mumtaz Mahal Angrakha Suit",
+      slug: "mumtaz-mahal-angrakha-suit",
+      description:
+        "Cross-over angrakha silhouette in dusty cedar rose georgette, accented with dabka embroidery along the neckline, hand-knotted pearl latkans, and a crinkled silk sharara.",
+      story:
+        "Tailored to recall the court garments of Agra, each latkan is assembled bead by bead by women artisans.",
+      fabric: "Pure Viscose Georgette with Pure Silk Lining",
+      basePrice: 16500,
+      categoryId: catAnarkalis.id,
+      featured: true,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop",
+          altText: "Mumtaz Mahal Angrakha Suit in Dusty Cedar",
+          color: "Dust Cedar",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Dust Cedar", colorHex: "#A05A61", size: "XS", sku: "ZR-MMA-DCS-XS", stock: 3 },
+        { color: "Dust Cedar", colorHex: "#A05A61", size: "S", sku: "ZR-MMA-DCS-S", stock: 5 },
+        { color: "Dust Cedar", colorHex: "#A05A61", size: "M", sku: "ZR-MMA-DCS-M", stock: 4 },
+        { color: "Dust Cedar", colorHex: "#A05A61", size: "L", sku: "ZR-MMA-DCS-L", stock: 2 },
+      ],
+    },
+    {
+      name: "The Badshah Begum Velvet Peshwas",
+      slug: "badshah-begum-velvet-peshwas",
+      description:
+        "Heavy mulberry silk velvet long tunic featuring high side slits, antique tilla threadwork, and an intricate bullion fringe hemline.",
+      story:
+        "Peshwas silhouettes date back to imperial Awadh, offering regal stature and warm winter elegance.",
+      fabric: "Heavy Silk Velvet with Gilded Tilla Work",
+      basePrice: 22000,
+      categoryId: catAnarkalis.id,
+      featured: false,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1200&auto=format&fit=crop",
+          altText: "Badshah Begum Velvet Peshwas in Royal Plum",
+          color: "Royal Plum",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Royal Plum", colorHex: "#351229", size: "S", sku: "ZR-BBP-PLM-S", stock: 3 },
+        { color: "Royal Plum", colorHex: "#351229", size: "M", sku: "ZR-BBP-PLM-M", stock: 4 },
+        { color: "Royal Plum", colorHex: "#351229", size: "L", sku: "ZR-BBP-PLM-L", stock: 2 },
+      ],
+    },
+    {
+      name: "The Ruhaniyat Silk Sharara Set",
+      slug: "ruhaniyat-silk-sharara-set",
+      description:
+        "Short tailored silk kurta with gota patti neck embroidery, paired with a flared tiered sharara and a gold-speckled organza dupatta.",
+      story:
+        "Designed for effortless sangeet celebrations, the tiered sharara has 8 meters of dramatic flare.",
+      fabric: "Handloom Tussar Silk with Chiffon Sharara",
+      basePrice: 12800,
+      categoryId: catPret.id,
+      featured: true,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1200&auto=format&fit=crop",
+          altText: "Ruhaniyat Silk Sharara Set in Saffron Turmeric",
+          color: "Saffron Turmeric",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Saffron Turmeric", colorHex: "#D98E1A", size: "S", sku: "ZR-RSS-TRM-S", stock: 5 },
+        { color: "Saffron Turmeric", colorHex: "#D98E1A", size: "M", sku: "ZR-RSS-TRM-M", stock: 6 },
+        { color: "Saffron Turmeric", colorHex: "#D98E1A", size: "L", sku: "ZR-RSS-TRM-L", stock: 3 },
+      ],
+    },
+    {
+      name: "The Niloufer Tussar Silk Co-ord",
+      slug: "niloufer-tussar-silk-coord",
+      description:
+        "A contemporary fusion ensemble featuring a relaxed asymmetric silk tunic, tailored cigarette trousers, and a handcrafted metallic cord belt.",
+      story:
+        "Blending heritage handloom texture with sharp modern tailoring for the modern Indian connoisseur.",
+      fabric: "100% Wild Tussar Handloom Silk",
+      basePrice: 9600,
+      categoryId: catPret.id,
+      featured: false,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop",
+          altText: "Niloufer Tussar Silk Co-ord in Powder Blue",
+          color: "Powder Blue",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Powder Blue", colorHex: "#7D9BB3", size: "XS", sku: "ZR-NTC-BLU-XS", stock: 4 },
+        { color: "Powder Blue", colorHex: "#7D9BB3", size: "S", sku: "ZR-NTC-BLU-S", stock: 5 },
+        { color: "Powder Blue", colorHex: "#7D9BB3", size: "M", sku: "ZR-NTC-BLU-M", stock: 4 },
+        { color: "Powder Blue", colorHex: "#7D9BB3", size: "L", sku: "ZR-NTC-BLU-L", stock: 2 },
+      ],
+    },
+    {
+      name: "The Jodhpur Bandhgala Jacket",
+      slug: "jodhpur-bandhgala-jacket",
+      description:
+        "Structured royal Bandhgala jacket cut from deep obsidian raw silk with tailored shoulder definition, hand-enameled crested buttons, and a pocket square.",
+      story:
+        "First tailored in the royal court of Jodhpur, this clean masculine silhouette represents modern Indian formalwear at its finest.",
+      fabric: "Structured Raw Silk with Pure Cupro Lining",
+      basePrice: 18500,
+      categoryId: catMenswear.id,
+      featured: true,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop",
+          altText: "Jodhpur Bandhgala in Obsidian Black",
+          color: "Obsidian Black",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Obsidian Black", colorHex: "#111111", size: "38", sku: "ZR-JBG-BLK-38", stock: 4 },
+        { color: "Obsidian Black", colorHex: "#111111", size: "40", sku: "ZR-JBG-BLK-40", stock: 5 },
+        { color: "Obsidian Black", colorHex: "#111111", size: "42", sku: "ZR-JBG-BLK-42", stock: 3 },
+        { color: "Obsidian Black", colorHex: "#111111", size: "44", sku: "ZR-JBG-BLK-44", stock: 2 },
+      ],
+    },
+    {
+      name: "The Shahi Jamawar Silk Kurta & Bundi",
+      slug: "shahi-jamawar-silk-kurta-bundi",
+      description:
+        "Pure raw silk kurta in antique sand paired with a woven Jamawar Nehru jacket (bundi) featuring Kashmiri paisley tapestries.",
+      story:
+        "Jamawar weaving takes its name from ancient royal robes woven for emperors across the Himalayas.",
+      fabric: "Raw Silk Kurta with Jacquard Jamawar Bundi",
+      basePrice: 15200,
+      categoryId: catMenswear.id,
+      featured: false,
+      images: [
+        {
+          url: "https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=1200&auto=format&fit=crop",
+          altText: "Shahi Jamawar Silk Kurta and Bundi",
+          color: "Antique Sand & Ruby",
+          order: 0,
+          isPrimary: true,
+        },
+      ],
+      variants: [
+        { color: "Antique Sand & Ruby", colorHex: "#DDD2BF", size: "38", sku: "ZR-SJK-SND-38", stock: 3 },
+        { color: "Antique Sand & Ruby", colorHex: "#DDD2BF", size: "40", sku: "ZR-SJK-SND-40", stock: 4 },
+        { color: "Antique Sand & Ruby", colorHex: "#DDD2BF", size: "42", sku: "ZR-SJK-SND-42", stock: 2 },
+      ],
+    },
   ];
 
   for (const p of productsData) {
