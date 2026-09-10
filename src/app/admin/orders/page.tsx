@@ -94,13 +94,13 @@ export default function AdminOrdersPage() {
   return (
     <div className="space-y-6">
       {/* Title & Filter Bar */}
-      <div className="bg-white/80 border border-gold/30 p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors">
         <div>
-          <h1 className="font-serif text-2xl text-oxblood font-semibold flex items-center gap-2">
-            <Package className="w-5 h-5 text-gold-dark" />
+          <h1 className="font-serif text-2xl text-oxblood dark:text-gold-foil font-semibold flex items-center gap-2">
+            <Package className="w-5 h-5 text-gold-dark dark:text-gold" />
             Bespoke Order State Machine Console
           </h1>
-          <p className="text-xs text-noir/60 mt-1">
+          <p className="text-xs text-noir/60 dark:text-ivory/60 mt-1">
             Server-enforced lifecycle: PENDING → CONFIRMED → PROCESSING → SHIPPED → DELIVERED (Cancelling restores stock).
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function AdminOrdersPage() {
             variant="outline"
             size="sm"
             onClick={fetchOrders}
-            className="text-xs text-oxblood border-gold/30"
+            className="text-xs text-oxblood dark:text-gold-light border-gold/30 dark:border-gold/30 hover:bg-gold/10"
           >
             <RefreshCw className="w-3.5 h-3.5 mr-1" />
             Sync
@@ -119,32 +119,32 @@ export default function AdminOrdersPage() {
       </div>
 
       {/* Search & Filter Controls */}
-      <div className="bg-white/80 border border-gold/30 p-4 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-4 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors">
         <form onSubmit={handleSearchSubmit} className="relative w-full sm:w-80">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search order number or client..."
-            className="w-full h-10 pl-9 pr-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
+            className="w-full h-10 pl-9 pr-3 text-xs bg-white dark:bg-[#120F10] text-noir dark:text-ivory border border-gold/30 dark:border-gold/30 focus:border-oxblood dark:focus:border-gold outline-none"
           />
-          <Search className="w-4 h-4 text-noir/40 absolute left-3 top-3" />
+          <Search className="w-4 h-4 text-noir/40 dark:text-ivory/40 absolute left-3 top-3" />
         </form>
 
         <div className="flex items-center gap-2 text-xs w-full sm:w-auto">
-          <span className="text-noir/50 uppercase tracking-widest text-[10px]">Filter Status:</span>
+          <span className="text-noir/50 dark:text-ivory/50 uppercase tracking-widest text-[10px]">Filter Status:</span>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-10 px-3 text-xs bg-white border border-gold/30 text-noir focus:border-oxblood outline-none cursor-pointer"
+            className="h-10 px-3 text-xs bg-white dark:bg-[#120F10] border border-gold/30 dark:border-gold/30 text-noir dark:text-ivory focus:border-oxblood dark:focus:border-gold outline-none cursor-pointer"
           >
-            <option value="ALL">All Statuses</option>
-            <option value="PENDING">PENDING</option>
-            <option value="CONFIRMED">CONFIRMED</option>
-            <option value="PROCESSING">PROCESSING</option>
-            <option value="SHIPPED">SHIPPED</option>
-            <option value="DELIVERED">DELIVERED</option>
-            <option value="CANCELLED">CANCELLED</option>
+            <option value="ALL" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">All Statuses</option>
+            <option value="PENDING" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">PENDING</option>
+            <option value="CONFIRMED" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">CONFIRMED</option>
+            <option value="PROCESSING" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">PROCESSING</option>
+            <option value="SHIPPED" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">SHIPPED</option>
+            <option value="DELIVERED" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">DELIVERED</option>
+            <option value="CANCELLED" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">CANCELLED</option>
           </select>
         </div>
       </div>
@@ -155,7 +155,7 @@ export default function AdminOrdersPage() {
           className={`p-3.5 text-xs flex items-center gap-2 border ${
             feedback.type === "success"
               ? "bg-emerald/10 border-emerald/30 text-emerald"
-              : "bg-red-50 border-red-200 text-red-700"
+              : "bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-300"
           }`}
         >
           {feedback.type === "success" ? (
@@ -169,12 +169,12 @@ export default function AdminOrdersPage() {
 
       {/* Orders List */}
       {loading ? (
-        <div className="py-20 text-center text-xs uppercase tracking-widest text-noir/50">
+        <div className="py-20 text-center text-xs uppercase tracking-widest text-noir/50 dark:text-ivory/50">
           Auditing order registry...
         </div>
       ) : orders.length === 0 ? (
-        <div className="py-16 text-center bg-white/60 border border-dashed border-gold/30 p-8">
-          <p className="font-serif text-lg text-noir/70">No orders matching criteria.</p>
+        <div className="py-16 text-center bg-white/60 dark:bg-[#161214] border border-dashed border-gold/30 dark:border-gold/20 p-8">
+          <p className="font-serif text-lg text-noir/70 dark:text-ivory/70">No orders matching criteria.</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -185,12 +185,12 @@ export default function AdminOrdersPage() {
             return (
               <div
                 key={order.id}
-                className="bg-white/95 border border-gold/30 p-6 shadow-xs hover:border-gold transition-colors"
+                className="bg-white/95 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-xs hover:border-gold transition-colors"
               >
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-gold/15 text-xs">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-gold/15 dark:border-gold/10 text-xs">
                   <div>
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-sm font-semibold text-oxblood">
+                      <span className="font-mono text-sm font-semibold text-oxblood dark:text-gold-light">
                         {order.orderNumber}
                       </span>
                       <span
@@ -198,26 +198,26 @@ export default function AdminOrdersPage() {
                           order.status === "DELIVERED"
                             ? "bg-emerald/10 text-emerald border-emerald/30"
                             : order.status === "CANCELLED"
-                            ? "bg-red-50 text-red-700 border-red-200"
-                            : "bg-gold/15 text-gold-dark border-gold/40"
+                            ? "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border-red-200 dark:border-red-900/50"
+                            : "bg-gold/15 text-gold-dark dark:text-gold-light border-gold/40"
                         }`}
                       >
                         {order.status}
                       </span>
                     </div>
-                    <p className="text-noir/60 mt-1">
-                      Client: <strong className="text-noir">{order.customerName}</strong> ({order.email}) ·{" "}
+                    <p className="text-noir/60 dark:text-ivory/60 mt-1">
+                      Client: <strong className="text-noir dark:text-ivory">{order.customerName}</strong> ({order.email}) ·{" "}
                       {formatDate(order.createdAt)}
                     </p>
                   </div>
 
                   {/* State Machine Transition Dropdown */}
                   <div className="flex items-center gap-3">
-                    <span className="text-[11px] uppercase tracking-wider text-noir/50">
+                    <span className="text-[11px] uppercase tracking-wider text-noir/50 dark:text-ivory/50">
                       Transition State:
                     </span>
                     {isFinished ? (
-                      <span className="text-[11px] italic text-noir/40">
+                      <span className="text-[11px] italic text-noir/40 dark:text-ivory/40">
                         Terminal State (No further transitions)
                       </span>
                     ) : (
@@ -227,11 +227,11 @@ export default function AdminOrdersPage() {
                         onChange={(e) => {
                           if (e.target.value) handleStatusChange(order.id, e.target.value);
                         }}
-                        className="h-9 px-3 text-xs bg-ivory border border-gold/40 text-oxblood font-semibold focus:border-oxblood outline-none cursor-pointer"
+                        className="h-9 px-3 text-xs bg-ivory dark:bg-[#120F10] border border-gold/40 dark:border-gold/30 text-oxblood dark:text-gold-light font-semibold focus:border-oxblood dark:focus:border-gold outline-none cursor-pointer"
                       >
-                        <option value="">Choose Next Valid Stage...</option>
+                        <option value="" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">Choose Next Valid Stage...</option>
                         {allowed.map((next) => (
-                          <option key={next} value={next}>
+                          <option key={next} value={next} className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">
                             → Advance to {next}
                           </option>
                         ))}
@@ -240,13 +240,13 @@ export default function AdminOrdersPage() {
 
                     <Link
                       href={`/admin/orders/${order.id}`}
-                      className="text-[11px] uppercase tracking-wider text-oxblood hover:text-gold font-medium ml-2 border-b border-oxblood/30 hover:border-gold/60 transition-colors"
+                      className="text-[11px] uppercase tracking-wider text-oxblood dark:text-gold-light hover:text-gold font-medium ml-2 border-b border-oxblood/30 dark:border-gold/30 hover:border-gold/60 transition-colors"
                     >
                       View Invoice →
                     </Link>
                     <Link
                       href={`/orders/${order.id}`}
-                      className="text-[11px] uppercase tracking-wider text-noir/40 hover:text-oxblood font-medium ml-2 transition-colors"
+                      className="text-[11px] uppercase tracking-wider text-noir/40 dark:text-ivory/40 hover:text-oxblood dark:hover:text-gold font-medium ml-2 transition-colors"
                     >
                       Client View
                     </Link>
@@ -255,7 +255,7 @@ export default function AdminOrdersPage() {
 
                 {/* Items and Totals */}
                 <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
-                  <div className="text-noir/70 space-y-1">
+                  <div className="text-noir/70 dark:text-ivory/70 space-y-1">
                     {order.items.map((it: any) => (
                       <p key={it.id}>
                         {it.title} ({it.color}, {it.size}) × {it.qty} · SKU:{" "}
@@ -266,8 +266,8 @@ export default function AdminOrdersPage() {
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="text-[10px] text-noir/40 uppercase block">Settled Amount</span>
-                    <span className="font-serif text-base font-semibold text-oxblood">
+                    <span className="text-[10px] text-noir/40 dark:text-ivory/40 uppercase block">Settled Amount</span>
+                    <span className="font-serif text-base font-semibold text-oxblood dark:text-gold-foil">
                       {formatPrice(order.total)}
                     </span>
                   </div>

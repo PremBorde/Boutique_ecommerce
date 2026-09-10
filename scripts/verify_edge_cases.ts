@@ -70,21 +70,24 @@ async function runEdgeCaseTests() {
     // Simulate 2 parallel order transactions attempting to decrement 1 unit simultaneously
     const attemptOrder = async (orderId: string) => {
       try {
-        return await prisma.$transaction(async (tx) => {
-          const res = await tx.inventory.updateMany({
-            where: {
-              variantId: raceVariant.id,
-              quantity: { gte: 1 },
-            },
-            data: {
-              quantity: { decrement: 1 },
-            },
-          });
-          if (res.count !== 1) {
-            throw new Error("INSUFFICIENT_STOCK");
-          }
-          return `SUCCESS_${orderId}`;
-        });
+        return await prisma.$transaction(
+          async (tx) => {
+            const res = await tx.inventory.updateMany({
+              where: {
+                variantId: raceVariant.id,
+                quantity: { gte: 1 },
+              },
+              data: {
+                quantity: { decrement: 1 },
+              },
+            });
+            if (res.count !== 1) {
+              throw new Error("INSUFFICIENT_STOCK");
+            }
+            return `SUCCESS_${orderId}`;
+          },
+          { maxWait: 10000, timeout: 15000 }
+        );
       } catch (err: any) {
         return `FAILED_${err.message}`;
       }

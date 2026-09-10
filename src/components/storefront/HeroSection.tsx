@@ -96,7 +96,7 @@ export function HeroSection() {
         <div className="lg:col-span-7 space-y-4 md:space-y-5 text-center lg:text-left">
           <div className="inline-flex items-center px-3 py-1 bg-gold/10 border border-gold/30 backdrop-blur-xs">
             <span className="text-[10px] uppercase tracking-[0.3em] text-oxblood dark:text-gold-light font-semibold">
-              Festive & Wedding Collection 2026
+              THE HERITAGE EDIT · 2026
             </span>
           </div>
 
@@ -111,8 +111,7 @@ export function HeroSection() {
           </h1>
 
           <p className="max-w-xl mx-auto lg:mx-0 text-xs md:text-sm text-noir/70 dark:text-ivory/70 leading-relaxed font-sans">
-            Handcrafted with 300+ hours of artisan work across India. Featuring bridal
-            lehengas, tissue silk sarees, and tailored menswear designed for life&apos;s special celebrations.
+            Contemporary Indian luxury, shaped by heritage textiles, intricate craftsmanship and modern silhouettes.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
@@ -138,18 +137,18 @@ export function HeroSection() {
 
           <div className="pt-5 border-t border-gold/15 dark:border-gold/10 flex items-center justify-center lg:justify-start gap-2.5 xs:gap-4 sm:gap-8 text-[8.5px] xs:text-[9.5px] sm:text-[11px] uppercase tracking-wider sm:tracking-widest text-noir/50 dark:text-ivory/50">
             <div>
-              <strong className="block text-oxblood dark:text-gold-foil font-serif text-sm sm:text-base font-semibold">340+</strong>
-              Artisan Hours
+              <strong className="block text-oxblood dark:text-gold-foil font-serif text-sm sm:text-base font-semibold">Master</strong>
+              Karigars
             </div>
             <div className="w-[1px] h-7 bg-gold/30" />
             <div>
-              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">100%</strong>
-              Mulberry Silk
+              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">Mulberry</strong>
+              Silk
             </div>
             <div className="w-[1px] h-7 bg-gold/30" />
             <div>
-              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">Certified</strong>
-              Pure Zari Work
+              <strong className="block text-oxblood dark:text-gold-foil font-serif text-base font-semibold">Handwork</strong>
+              Zari Embroidery
             </div>
           </div>
         </div>

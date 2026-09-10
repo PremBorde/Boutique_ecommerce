@@ -13,11 +13,11 @@ export const searchProductsDeclaration: FunctionDeclaration = {
     properties: {
       query: {
         type: SchemaType.STRING,
-        description: "Keywords such as 'silk', 'lehenga', 'velvet', 'zari', 'saree', 'sherwani'",
+        description: "Keywords such as 'silk', 'lehenga', 'velvet', 'zari', 'saree', 'column dress', 'jacket'",
       },
       category: {
         type: SchemaType.STRING,
-        description: "Category slug, e.g. 'lehengas-couture', 'heritage-sarees', 'anarkalis-ensembles', 'festive-pret', 'regal-menswear'",
+        description: "Category slug, e.g. 'lehengas-couture', 'heritage-sarees', 'anarkalis-ensembles', 'festive-pret', 'contemporary-luxury'",
       },
       maxPrice: {
         type: SchemaType.NUMBER,
@@ -82,7 +82,7 @@ export const checkStockDeclaration: FunctionDeclaration = {
 export const getStoreInfoDeclaration: FunctionDeclaration = {
   name: "getStoreInfo",
   description:
-    "Retrieve verified atelier store policies regarding white-glove shipping, 7-day exchange window, COD policy, genuine zari hallmark, and bespoke fittings.",
+    "Retrieve authentic atelier store policies regarding express shipping, 7-day exchange window, COD policy, genuine zari embroidery, and bespoke fittings.",
   parameters: {
     type: SchemaType.OBJECT,
     properties: {
@@ -378,7 +378,7 @@ async function runFallbackHeuristicStylist(
   else if (lastMsg.includes("saree")) category = "heritage-sarees";
   else if (lastMsg.includes("anarkali")) category = "anarkalis-ensembles";
   else if (lastMsg.includes("pret") || lastMsg.includes("kurta")) category = "festive-pret";
-  else if (lastMsg.includes("men") || lastMsg.includes("sherwani")) category = "regal-menswear";
+  else if (lastMsg.includes("contemporary") || lastMsg.includes("dress") || lastMsg.includes("jacket") || lastMsg.includes("coord") || lastMsg.includes("modern") || lastMsg.includes("western")) category = "contemporary-luxury";
 
   if (lastMsg.includes("under 15000") || lastMsg.includes("under 15,000") || lastMsg.includes("under ₹15,000")) {
     maxPrice = 15000;

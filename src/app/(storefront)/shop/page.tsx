@@ -355,7 +355,7 @@ function ShopContent() {
             <button
               disabled={page <= 1}
               onClick={() => setPage((p) => Math.max(1, p - 1))}
-              className="px-4 py-2 border border-gold/30 text-xs uppercase tracking-wider text-noir disabled:opacity-30 hover:bg-gold/10 transition-colors"
+              className="px-4 py-2 border border-gold/30 dark:border-gold/20 text-xs uppercase tracking-wider text-noir dark:text-ivory disabled:opacity-30 hover:bg-gold/10 transition-colors"
             >
               Previous
             </button>
@@ -365,8 +365,8 @@ function ShopContent() {
                 onClick={() => setPage(num)}
                 className={`w-9 h-9 border text-xs font-serif transition-colors ${
                   page === num
-                    ? "bg-oxblood text-gold-light border-oxblood font-semibold"
-                    : "border-gold/30 text-noir hover:bg-gold/10"
+                    ? "bg-oxblood text-gold-light border-oxblood font-semibold shadow-xs"
+                    : "border-gold/30 dark:border-gold/20 text-noir dark:text-ivory hover:bg-gold/10"
                 }`}
               >
                 {num}
@@ -375,7 +375,7 @@ function ShopContent() {
             <button
               disabled={page >= pagination.totalPages}
               onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))}
-              className="px-4 py-2 border border-gold/30 text-xs uppercase tracking-wider text-noir disabled:opacity-30 hover:bg-gold/10 transition-colors"
+              className="px-4 py-2 border border-gold/30 dark:border-gold/20 text-xs uppercase tracking-wider text-noir dark:text-ivory disabled:opacity-30 hover:bg-gold/10 transition-colors"
             >
               Next
             </button>

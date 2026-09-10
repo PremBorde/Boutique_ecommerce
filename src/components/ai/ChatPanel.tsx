@@ -109,7 +109,7 @@ export function ChatPanel() {
       id: "welcome",
       role: "assistant",
       content:
-        "Namaste. I am your in-house style guide at Zaria Atelier. I can assist with verified vault stock, drape nuances, bespoke fit queries, or authentic store policies.",
+        "Namaste. I am your in-house style guide at Zaria Atelier. I can assist with current boutique stock, drape nuances, bespoke fit queries, or authentic store policies.",
     },
   ]);
 
@@ -254,7 +254,7 @@ export function ChatPanel() {
       const assistantMessage: Message = {
         id: assistantMessageId,
         role: "assistant",
-        content: data.message || "I have gathered these verified selections from our atelier.",
+        content: data.message || "I have gathered these curated selections from our atelier.",
         productIds,
         isLoadingProducts: productIds.length > 0,
         resolvedProducts: [],
@@ -428,7 +428,7 @@ export function ChatPanel() {
                     {msg.resolvedProducts && msg.resolvedProducts.length > 0 && (
                       <div className="mt-2.5 w-full space-y-1.5">
                         <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E7A2F] dark:text-[#DFC07B] font-medium block">
-                          Verified Atelier Curations ({msg.resolvedProducts.length})
+                          Curated For You ({msg.resolvedProducts.length})
                         </span>
                         <div
                           className="flex gap-2.5 overflow-x-auto snap-x no-scrollbar pb-1.5 pt-0.5 touch-pan-x"
@@ -445,7 +445,7 @@ export function ChatPanel() {
                     {msg.isLoadingProducts && (
                       <div className="mt-2 flex items-center gap-2 text-[10px] text-[#9E7A2F] italic">
                         <RefreshCw className="w-3 h-3 animate-spin" />
-                        <span>Retrieving verified atelier garment records...</span>
+                        <span>Retrieving curated garment recommendations...</span>
                       </div>
                     )}
                   </div>

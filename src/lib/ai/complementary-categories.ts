@@ -16,12 +16,12 @@ export const COMPLEMENTARY_CATEGORIES: Record<string, { complementarySlugs: stri
     stylingAdvice: "Elevate with a handcrafted Banarasi dupatta or metallic mojris.",
   },
   "festive-pret": {
-    complementarySlugs: ["heritage-sarees", "anarkalis-ensembles"],
-    stylingAdvice: "Layer with subtle gold-accented overlays or heritage silk jackets.",
+    complementarySlugs: ["contemporary-luxury", "heritage-sarees"],
+    stylingAdvice: "Layer with subtle gold-accented overlays or tailored heritage silk jackets.",
   },
-  "regal-menswear": {
+  "contemporary-luxury": {
     complementarySlugs: ["festive-pret", "heritage-sarees"],
-    stylingAdvice: "Style with a handspun raw silk pocket square or gold-plated buttons.",
+    stylingAdvice: "Style with handcrafted metallic stilettos or heirloom pearl accents for modern evening glamour.",
   },
 };
 

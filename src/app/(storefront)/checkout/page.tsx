@@ -16,6 +16,7 @@ import {
   ArrowLeft,
   AlertTriangle,
   CheckCircle2,
+  XCircle,
 } from "lucide-react";
 
 export default function CheckoutPage() {
@@ -148,8 +149,8 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center bg-regal-texture">
-        <h1 className="font-serif text-3xl text-oxblood mb-2">No Items in Bag</h1>
-        <p className="text-xs text-noir/60 mb-6">
+        <h1 className="font-serif text-3xl text-oxblood dark:text-gold-foil mb-2">No Items in Bag</h1>
+        <p className="text-xs text-noir/60 dark:text-ivory/70 mb-6">
           Your bag is currently empty. Please select a creation from our catalogue.
         </p>
         <Link href="/shop">
@@ -204,7 +205,7 @@ export default function CheckoutPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1 font-medium">
                     Full Name *
                   </label>
                   <input
@@ -213,12 +214,12 @@ export default function CheckoutPage() {
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                     placeholder="e.g. Maharani Gayatri Devi"
-                    className="w-full h-11 px-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
+                    className="w-full h-11 px-3 text-xs bg-white dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1 font-medium">
                     Email for Confirmation *
                   </label>
                   <input
@@ -227,12 +228,12 @@ export default function CheckoutPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="client@luxury.com"
-                    className="w-full h-11 px-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
+                    className="w-full h-11 px-3 text-xs bg-white dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1 font-medium">
                     Contact Phone *
                   </label>
                   <input
@@ -241,21 +242,21 @@ export default function CheckoutPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 98200 12345"
-                    className="w-full h-11 px-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
+                    className="w-full h-11 px-3 text-xs bg-white dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold outline-none"
                   />
                 </div>
               </div>
             </div>
 
             {/* 2. Shipping Address */}
-            <div className="bg-white/80 border border-gold/30 p-6 md:p-8 shadow-xs space-y-4">
-              <h2 className="font-serif text-lg text-oxblood border-b border-gold/20 pb-3 font-semibold">
+            <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 md:p-8 shadow-xs space-y-4 transition-colors duration-300">
+              <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil border-b border-gold/20 pb-3 font-semibold">
                 2. Bespoke Delivery Address
               </h2>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1 font-medium">
                     Street Address / Estate / Suite *
                   </label>
                   <input
@@ -264,13 +265,13 @@ export default function CheckoutPage() {
                     value={line1}
                     onChange={(e) => setLine1(e.target.value)}
                     placeholder="Haveli 14, Civil Lines"
-                    className="w-full h-11 px-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
+                    className="w-full h-11 px-3 text-xs bg-white dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold outline-none"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1 font-medium">
+                    <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1 font-medium">
                       City *
                     </label>
                     <input
@@ -279,12 +280,12 @@ export default function CheckoutPage() {
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                       placeholder="New Delhi, Mumbai, Bengaluru..."
-                      className="w-full h-11 px-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
+                      className="w-full h-11 px-3 text-xs bg-white dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1 font-medium">
+                    <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1 font-medium">
                       State / Province *
                     </label>
                     <input
@@ -293,12 +294,12 @@ export default function CheckoutPage() {
                       value={stateName}
                       onChange={(e) => setStateName(e.target.value)}
                       placeholder="Rajasthan"
-                      className="w-full h-11 px-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
+                      className="w-full h-11 px-3 text-xs bg-white dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1 font-medium">
+                    <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1 font-medium">
                       Postal Code *
                     </label>
                     <input
@@ -307,7 +308,7 @@ export default function CheckoutPage() {
                       value={postalCode}
                       onChange={(e) => setPostalCode(e.target.value)}
                       placeholder="302006"
-                      className="w-full h-11 px-3 text-xs bg-white border border-gold/30 focus:border-oxblood outline-none"
+                      className="w-full h-11 px-3 text-xs bg-white dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold outline-none"
                     />
                   </div>
                 </div>
@@ -318,57 +319,62 @@ export default function CheckoutPage() {
             <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 md:p-8 shadow-xs space-y-4 transition-colors duration-300">
               <div className="flex items-center justify-between border-b border-gold/20 pb-3">
                 <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil font-semibold flex items-center gap-2">
-                  <CreditCard className="w-4 h-4 text-gold-dark dark:text-gold-light" />
+                  <Lock className="w-4 h-4 text-gold-dark dark:text-gold" />
                   3. Payment Authorization (Demo Gateway)
                 </h2>
-                <span className="text-[10px] uppercase tracking-wider text-emerald bg-emerald/10 px-2 py-0.5 border border-emerald/30 font-medium">
+                <span className="text-[10px] uppercase tracking-widest px-2 py-0.5 bg-gold/15 text-gold-dark dark:text-gold-light border border-gold/30 font-mono">
                   Sandbox Active
                 </span>
               </div>
 
-              <p className="text-xs text-noir/60 leading-relaxed">
-                This project features a fully simulated payment authorization pipeline. You can toggle
-                between simulated success and simulated card decline to test error states and inventory rollback.
+              <p className="text-xs text-noir/70 dark:text-ivory/70 leading-relaxed">
+                Experience Zaria Atelier’s atomic order workflow. Toggle below to simulate an instant authorized transaction, or a simulated card decline to verify that inventory is safely restored.
               </p>
 
-              {/* Success / Failure Toggle */}
-              <div className="grid grid-cols-2 gap-3 pt-2">
+              {/* State Machine Toggle for Interview Evaluation */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setSimulatedStatus("SUCCESS")}
-                  className={`p-3.5 text-xs text-left border transition-all flex flex-col justify-between ${
+                  className={`p-3.5 border text-left flex flex-col justify-between transition-all cursor-pointer ${
                     simulatedStatus === "SUCCESS"
-                      ? "border-emerald bg-emerald/5 ring-1 ring-emerald font-medium"
-                      : "border-gold/30 bg-white hover:border-gold opacity-70"
+                      ? "border-emerald bg-emerald/10 ring-1 ring-emerald shadow-xs"
+                      : "border-gold/30 bg-white/70 dark:bg-[#1C1719] hover:bg-gold/5"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-emerald">Simulate Payment Success</span>
-                    {simulatedStatus === "SUCCESS" && (
-                      <CheckCircle2 className="w-4 h-4 text-emerald" />
-                    )}
+                    <span className="text-xs font-semibold uppercase tracking-wider text-noir dark:text-ivory flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald" />
+                      Simulate Success
+                    </span>
+                    <span className="text-[9px] uppercase tracking-widest px-1.5 py-0.5 bg-emerald/20 text-emerald font-mono">
+                      HTTP 200
+                    </span>
                   </div>
-                  <span className="text-[10px] text-noir/50 mt-1">
-                    Reserves inventory atomically and creates order.
+                  <span className="text-[10px] text-noir/60 dark:text-ivory/60 mt-1">
+                    Confirms order, reserves stock atomically, generates invoice ID.
                   </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setSimulatedStatus("FAILED")}
-                  className={`p-3.5 text-xs text-left border transition-all flex flex-col justify-between ${
+                  className={`p-3.5 border text-left flex flex-col justify-between transition-all cursor-pointer ${
                     simulatedStatus === "FAILED"
-                      ? "border-red-600 bg-red-50 ring-1 ring-red-600 font-medium"
-                      : "border-gold/30 bg-white hover:border-gold opacity-70"
+                      ? "border-red-600 bg-red-500/10 ring-1 ring-red-600 shadow-xs"
+                      : "border-gold/30 bg-white/70 dark:bg-[#1C1719] hover:bg-gold/5"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-red-700">Simulate Payment Failure</span>
-                    {simulatedStatus === "FAILED" && (
-                      <AlertTriangle className="w-4 h-4 text-red-600" />
-                    )}
+                    <span className="text-xs font-semibold uppercase tracking-wider text-noir dark:text-ivory flex items-center gap-1.5">
+                      <XCircle className="w-3.5 h-3.5 text-red-600" />
+                      Simulate Failure
+                    </span>
+                    <span className="text-[9px] uppercase tracking-widest px-1.5 py-0.5 bg-red-500/20 text-red-700 dark:text-red-400 font-mono">
+                      HTTP 402
+                    </span>
                   </div>
-                  <span className="text-[10px] text-noir/50 mt-1">
+                  <span className="text-[10px] text-noir/60 dark:text-ivory/60 mt-1">
                     Simulates issuer card decline. Leaves stock untouched.
                   </span>
                 </button>
@@ -397,14 +403,14 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div className="flex-1 min-w-0 text-xs">
-                      <p className="font-serif text-sm text-oxblood truncate font-medium">
+                      <p className="font-serif text-sm text-oxblood dark:text-ivory truncate font-medium">
                         {item.name}
                       </p>
-                      <p className="text-noir/60 mt-0.5">
+                      <p className="text-noir/60 dark:text-ivory/60 mt-0.5">
                         {item.color} · Size {item.size}
                       </p>
-                      <p className="text-noir/50 mt-0.5">Qty: {item.quantity}</p>
-                      <p className="font-serif text-gold-dark font-semibold mt-1">
+                      <p className="text-noir/50 dark:text-ivory/50 mt-0.5">Qty: {item.quantity}</p>
+                      <p className="font-serif text-gold-dark dark:text-gold-foil font-semibold mt-1">
                         {formatPrice(item.price * item.quantity)}
                       </p>
                     </div>
@@ -413,7 +419,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* Calculation Breakdown */}
-              <div className="pt-4 border-t border-gold/20 space-y-2.5 text-xs text-noir/70">
+              <div className="pt-4 border-t border-gold/20 space-y-2.5 text-xs text-noir/70 dark:text-ivory/70">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
                   <span>{formatPrice(subtotal)}</span>

@@ -176,13 +176,13 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
         <div className="flex items-center gap-3">
           <Link
             href="/admin/orders"
-            className="text-xs uppercase tracking-wider text-noir/50 hover:text-oxblood flex items-center gap-1.5 transition-colors"
+            className="text-xs uppercase tracking-wider text-noir/50 dark:text-ivory/50 hover:text-oxblood dark:hover:text-gold flex items-center gap-1.5 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             All Orders
           </Link>
-          <span className="text-noir/30">/</span>
-          <span className="text-xs font-mono font-semibold text-oxblood">
+          <span className="text-noir/30 dark:text-ivory/30">/</span>
+          <span className="text-xs font-mono font-semibold text-oxblood dark:text-gold-light">
             {order.orderNumber}
           </span>
         </div>
@@ -193,7 +193,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
             className={`p-3.5 text-xs flex items-center gap-2 border ${
               feedback.type === "success"
                 ? "bg-emerald/10 border-emerald/30 text-emerald"
-                : "bg-red-50 border-red-200 text-red-700"
+                : "bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-300"
             }`}
           >
             {feedback.type === "success" ? (
@@ -206,11 +206,11 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
         )}
 
         {/* Order Header Card */}
-        <div className="bg-white/90 border border-gold/30 p-6 shadow-xs">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-gold/15">
+        <div className="bg-white/90 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-xs transition-colors">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-gold/15 dark:border-gold/10">
             <div>
               <div className="flex items-center gap-3 flex-wrap">
-                <span className="font-mono text-xl font-bold text-oxblood tracking-widest">
+                <span className="font-mono text-xl font-bold text-oxblood dark:text-gold-foil tracking-widest">
                   {order.orderNumber}
                 </span>
                 <span
@@ -219,14 +219,14 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                   {order.status}
                 </span>
               </div>
-              <p className="text-xs text-noir/50 mt-1">
+              <p className="text-xs text-noir/50 dark:text-ivory/50 mt-1">
                 Placed on {formatDate(order.createdAt)} · Payment:{" "}
-                <span className="font-medium text-noir">
+                <span className="font-medium text-noir dark:text-ivory">
                   {order.paymentStatus}
                 </span>
               </p>
               {order.notes && (
-                <p className="text-xs text-blue-700 mt-1.5 flex items-center gap-1.5">
+                <p className="text-xs text-blue-700 dark:text-blue-400 mt-1.5 flex items-center gap-1.5">
                   <Truck className="w-3.5 h-3.5" />
                   {order.notes}
                 </p>
@@ -242,11 +242,11 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                   onChange={(e) => {
                     if (e.target.value) handleStatusChange(e.target.value);
                   }}
-                  className="h-9 px-3 text-xs bg-ivory border border-gold/40 text-oxblood font-semibold focus:border-oxblood outline-none cursor-pointer"
+                  className="h-9 px-3 text-xs bg-ivory dark:bg-[#120F10] border border-gold/40 dark:border-gold/30 text-oxblood dark:text-gold-light font-semibold focus:border-oxblood dark:focus:border-gold outline-none cursor-pointer"
                 >
-                  <option value="">Advance Stage...</option>
+                  <option value="" className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">Advance Stage...</option>
                   {allowed.map((next) => (
-                    <option key={next} value={next}>
+                    <option key={next} value={next} className="bg-white dark:bg-[#161214] text-noir dark:text-ivory">
                       → {next}
                     </option>
                   ))}
@@ -257,7 +257,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                 variant="outline"
                 size="sm"
                 onClick={fetchOrder}
-                className="gap-1.5 text-xs text-oxblood border-gold/30"
+                className="gap-1.5 text-xs text-oxblood dark:text-gold-light border-gold/30 dark:border-gold/30 hover:bg-gold/10"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 Refresh
@@ -278,22 +278,22 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
           {/* Client & Address Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-5 text-xs">
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-noir/40 font-semibold mb-2 flex items-center gap-1.5">
+              <p className="text-[10px] uppercase tracking-widest text-noir/40 dark:text-ivory/40 font-semibold mb-2 flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5" />
                 Client Details
               </p>
-              <p className="font-semibold text-noir">{order.customerName}</p>
-              <p className="text-noir/60">{order.email}</p>
-              <p className="text-noir/60">{order.phone}</p>
+              <p className="font-semibold text-noir dark:text-ivory">{order.customerName}</p>
+              <p className="text-noir/60 dark:text-ivory/60">{order.email}</p>
+              <p className="text-noir/60 dark:text-ivory/60">{order.phone}</p>
             </div>
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-noir/40 font-semibold mb-2 flex items-center gap-1.5">
+              <p className="text-[10px] uppercase tracking-widest text-noir/40 dark:text-ivory/40 font-semibold mb-2 flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5" />
                 Shipping Address
               </p>
               {address ? (
-                <div className="text-noir/70 space-y-0.5">
-                  <p className="font-medium text-noir">{address.line1 || address.address}</p>
+                <div className="text-noir/70 dark:text-ivory/70 space-y-0.5">
+                  <p className="font-medium text-noir dark:text-ivory">{address.line1 || address.address}</p>
                   {address.line2 && <p>{address.line2}</p>}
                   <p>
                     {[address.city, address.state, address.pincode || address.zip]
@@ -303,62 +303,62 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                   {address.country && <p>{address.country}</p>}
                 </div>
               ) : (
-                <p className="text-noir/40 italic">No address recorded.</p>
+                <p className="text-noir/40 dark:text-ivory/40 italic">No address recorded.</p>
               )}
             </div>
           </div>
         </div>
 
         {/* Items Table */}
-        <div className="bg-white/90 border border-gold/30 shadow-xs overflow-x-auto">
-          <div className="p-5 border-b border-gold/15">
-            <h2 className="font-serif text-lg text-oxblood font-semibold flex items-center gap-2">
+        <div className="bg-white/90 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 shadow-xs overflow-x-auto transition-colors">
+          <div className="p-5 border-b border-gold/15 dark:border-gold/10">
+            <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil font-semibold flex items-center gap-2">
               <Package className="w-4 h-4 text-gold" />
               Order Items
             </h2>
           </div>
           <table className="w-full text-xs">
-            <thead className="bg-noir/5 border-b border-gold/15">
+            <thead className="bg-noir/5 dark:bg-white/5 border-b border-gold/15 dark:border-gold/10">
               <tr>
-                <th className="text-left px-5 py-3 text-[10px] uppercase tracking-widest text-noir/50 font-semibold">
+                <th className="text-left px-5 py-3 text-[10px] uppercase tracking-widest text-noir/50 dark:text-ivory/50 font-semibold">
                   Garment
                 </th>
-                <th className="text-center px-3 py-3 text-[10px] uppercase tracking-widest text-noir/50 font-semibold">
+                <th className="text-center px-3 py-3 text-[10px] uppercase tracking-widest text-noir/50 dark:text-ivory/50 font-semibold">
                   Shade · Size
                 </th>
-                <th className="text-center px-3 py-3 text-[10px] uppercase tracking-widest text-noir/50 font-semibold">
+                <th className="text-center px-3 py-3 text-[10px] uppercase tracking-widest text-noir/50 dark:text-ivory/50 font-semibold">
                   SKU
                 </th>
-                <th className="text-center px-3 py-3 text-[10px] uppercase tracking-widest text-noir/50 font-semibold">
+                <th className="text-center px-3 py-3 text-[10px] uppercase tracking-widest text-noir/50 dark:text-ivory/50 font-semibold">
                   Qty
                 </th>
-                <th className="text-right px-5 py-3 text-[10px] uppercase tracking-widest text-noir/50 font-semibold">
+                <th className="text-right px-5 py-3 text-[10px] uppercase tracking-widest text-noir/50 dark:text-ivory/50 font-semibold">
                   Unit Price
                 </th>
-                <th className="text-right px-5 py-3 text-[10px] uppercase tracking-widest text-noir/50 font-semibold">
+                <th className="text-right px-5 py-3 text-[10px] uppercase tracking-widest text-noir/50 dark:text-ivory/50 font-semibold">
                   Subtotal
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gold/10">
               {order.items.map((item: any) => (
-                <tr key={item.id} className="hover:bg-gold/5 transition-colors">
-                  <td className="px-5 py-4 font-semibold text-noir">
+                <tr key={item.id} className="hover:bg-gold/5 dark:hover:bg-white/5 transition-colors">
+                  <td className="px-5 py-4 font-semibold text-noir dark:text-ivory">
                     {item.title}
                   </td>
-                  <td className="px-3 py-4 text-center text-noir/70">
+                  <td className="px-3 py-4 text-center text-noir/70 dark:text-ivory/70">
                     {item.color} · {item.size}
                   </td>
-                  <td className="px-3 py-4 text-center font-mono text-[10px] text-noir/50">
+                  <td className="px-3 py-4 text-center font-mono text-[10px] text-noir/50 dark:text-ivory/50">
                     {item.sku}
                   </td>
-                  <td className="px-3 py-4 text-center text-noir">
+                  <td className="px-3 py-4 text-center text-noir dark:text-ivory">
                     {item.qty}
                   </td>
-                  <td className="px-5 py-4 text-right text-noir">
+                  <td className="px-5 py-4 text-right text-noir dark:text-ivory">
                     {formatPrice(item.unitPriceAtPurchase)}
                   </td>
-                  <td className="px-5 py-4 text-right font-semibold text-oxblood">
+                  <td className="px-5 py-4 text-right font-semibold text-oxblood dark:text-gold-light">
                     {formatPrice(item.subtotal)}
                   </td>
                 </tr>
@@ -367,9 +367,9 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
           </table>
 
           {/* Totals */}
-          <div className="p-5 border-t border-gold/15 flex justify-end">
+          <div className="p-5 border-t border-gold/15 dark:border-gold/10 flex justify-end">
             <div className="w-64 space-y-2 text-xs">
-              <div className="flex justify-between text-noir/60">
+              <div className="flex justify-between text-noir/60 dark:text-ivory/60">
                 <span>Subtotal</span>
                 <span>{formatPrice(order.subtotal)}</span>
               </div>
@@ -381,7 +381,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                   <span>−{formatPrice(order.discount)}</span>
                 </div>
               )}
-              <div className="flex justify-between text-noir/60">
+              <div className="flex justify-between text-noir/60 dark:text-ivory/60">
                 <span>Shipping</span>
                 <span>
                   {Number(order.shipping) === 0
@@ -389,7 +389,7 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                     : formatPrice(order.shipping)}
                 </span>
               </div>
-              <div className="flex justify-between font-semibold text-oxblood text-sm border-t border-gold/20 pt-2">
+              <div className="flex justify-between font-semibold text-oxblood dark:text-gold-foil text-sm border-t border-gold/20 dark:border-gold/10 pt-2">
                 <span>Total Settled</span>
                 <span>{formatPrice(order.total)}</span>
               </div>
@@ -399,8 +399,8 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
 
         {/* Status History */}
         {order.statusHistory?.length > 0 && (
-          <div className="bg-white/90 border border-gold/30 p-5 shadow-xs">
-            <h2 className="font-serif text-base text-oxblood font-semibold mb-4">
+          <div className="bg-white/90 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-5 shadow-xs transition-colors">
+            <h2 className="font-serif text-base text-oxblood dark:text-gold-foil font-semibold mb-4">
               Order Timeline
             </h2>
             <div className="space-y-3">
@@ -408,11 +408,11 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                 <div key={h.id} className="flex items-start gap-3 text-xs">
                   <div className="w-2 h-2 rounded-full bg-gold mt-1.5 shrink-0" />
                   <div>
-                    <p className="font-semibold text-noir uppercase tracking-wider text-[10px]">
+                    <p className="font-semibold text-noir dark:text-ivory uppercase tracking-wider text-[10px]">
                       {h.status}
                     </p>
-                    {h.note && <p className="text-noir/60 mt-0.5">{h.note}</p>}
-                    <p className="text-[10px] text-noir/40 mt-0.5">
+                    {h.note && <p className="text-noir/60 dark:text-ivory/60 mt-0.5">{h.note}</p>}
+                    <p className="text-[10px] text-noir/40 dark:text-ivory/40 mt-0.5">
                       {formatDate(h.createdAt)}
                     </p>
                   </div>
@@ -549,20 +549,20 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
       {/* Dispatch Modal */}
       {showDispatchModal && (
         <div className="fixed inset-0 z-50 bg-noir/70 backdrop-blur-sm flex items-center justify-center p-4 print:hidden">
-          <div className="bg-ivory border border-gold/40 p-8 max-w-md w-full shadow-2xl space-y-5">
+          <div className="bg-ivory dark:bg-[#161214] border border-gold/40 dark:border-gold/30 p-8 max-w-md w-full shadow-2xl space-y-5 text-noir dark:text-ivory transition-colors">
             <div className="border-b border-gold/20 pb-4">
-              <h2 className="font-serif text-xl text-oxblood font-semibold flex items-center gap-2">
+              <h2 className="font-serif text-xl text-oxblood dark:text-gold-foil font-semibold flex items-center gap-2">
                 <Truck className="w-5 h-5" />
                 Dispatch Order
               </h2>
-              <p className="text-xs text-noir/60 mt-1">
+              <p className="text-xs text-noir/60 dark:text-ivory/60 mt-1">
                 Add courier details before marking as SHIPPED.
               </p>
             </div>
 
             <form onSubmit={handleDispatchSubmit} className="space-y-4 text-xs">
               <div>
-                <label className="block uppercase tracking-wider font-semibold mb-1">
+                <label className="block uppercase tracking-wider font-semibold mb-1 text-noir/80 dark:text-ivory/80">
                   Courier / Carrier
                 </label>
                 <input
@@ -570,11 +570,11 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                   value={courierName}
                   onChange={(e) => setCourierName(e.target.value)}
                   placeholder="e.g. BlueDart, DTDC, Delhivery..."
-                  className="w-full h-10 px-3 bg-white border border-gold/30 outline-none focus:border-oxblood"
+                  className="w-full h-10 px-3 bg-white dark:bg-[#120F10] text-noir dark:text-ivory border border-gold/30 dark:border-gold/30 outline-none focus:border-oxblood dark:focus:border-gold"
                 />
               </div>
               <div>
-                <label className="block uppercase tracking-wider font-semibold mb-1">
+                <label className="block uppercase tracking-wider font-semibold mb-1 text-noir/80 dark:text-ivory/80">
                   Tracking Reference / AWB
                 </label>
                 <input
@@ -582,15 +582,16 @@ export default function OrderDetailPage({ params }: OrderDetailPageProps) {
                   value={trackingRef}
                   onChange={(e) => setTrackingRef(e.target.value)}
                   placeholder="e.g. 1234567890"
-                  className="w-full h-10 px-3 bg-white border border-gold/30 outline-none focus:border-oxblood font-mono"
+                  className="w-full h-10 px-3 bg-white dark:bg-[#120F10] text-noir dark:text-ivory border border-gold/30 dark:border-gold/30 outline-none focus:border-oxblood dark:focus:border-gold font-mono"
                 />
               </div>
-              <div className="flex justify-end gap-3 pt-2 border-t border-gold/20">
+              <div className="flex justify-end gap-3 pt-2 border-t border-gold/20 dark:border-gold/15">
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={() => setShowDispatchModal(false)}
+                  className="text-noir dark:text-ivory border-gold/30 dark:border-gold/30 hover:bg-gold/10"
                 >
                   Cancel
                 </Button>

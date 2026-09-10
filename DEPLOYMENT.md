@@ -80,7 +80,7 @@ pnpm tsx prisma/seed.ts
 - [ ] **Navbar Active Underlines**:
   - Click **All Creations** (`/shop`) → Underline appears under "ALL CREATIONS".
   - Click **Lehengas** (`/shop?category=lehengas-couture`) → Underline shifts to "LEHENGAS".
-  - Click **Sarees**, **Festive Pret**, and **Menswear** → Underline accurately reflects the selected vault section.
+  - Click **Sarees**, **Festive Pret**, and **Contemporary** → Underline accurately reflects the selected vault section.
 - [ ] **Catalogue Facets**: In `/shop`, verify that category tabs filter products and update the URL synchronously.
 - [ ] **Bag & Cart Drawer**: Add items to the curated bag; verify live count badge and drawer slide-in without hydration errors.
 - [ ] **Checkout Simulation**: Use privilege coupon `ROYAL15` or `FESTIVE25` and complete an order to verify atomic inventory decrement.

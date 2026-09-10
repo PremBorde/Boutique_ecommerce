@@ -36,7 +36,7 @@ async function testPrebuiltSystem() {
   console.log("Products Count:", priceResult?.products.length);
 
   // 4. Smart Local Fallback for arbitrary query
-  const arbitraryQuery = "Do you have midnight blue velvet sherwani for sangeet?";
+  const arbitraryQuery = "Do you have contemporary silk column dress or jacket for sangeet?";
   const fallbackResult = await executeSmartFallback(arbitraryQuery);
   console.log("\n[Test 4] Smart Fallback Query:", arbitraryQuery);
   console.log("Fallback Message:", fallbackResult.message);

@@ -155,7 +155,7 @@ export async function matchPrebuiltIntent(
           matched: true,
           message: `Here are our finest handcrafted atelier creations comfortably within ₹${extractedMaxPrice.toLocaleString(
             "en-IN"
-          )}, tailored in certified mulberry and chanderi silks.`,
+          )}, tailored in fine mulberry and chanderi silks.`,
           products: ids,
         };
       }
@@ -189,7 +189,7 @@ export async function matchPrebuiltIntent(
     return {
       matched: true,
       message:
-        "For wedding celebrations, we recommend our regal imperial lehengas and hand-tailored silk sherwanis, woven over 200+ artisan hours by master clusters all over India.",
+        "For wedding celebrations, we recommend our regal imperial lehengas, Varanasi Katan drapes, and contemporary silk column dresses, woven over 200+ artisan hours by master clusters all over India.",
       products: ids,
     };
   }
@@ -232,28 +232,86 @@ export async function matchPrebuiltIntent(
 export async function executeSmartFallback(userText: string): Promise<PrebuiltAnswerResult> {
   const query = userText.toLowerCase().trim();
 
-  // Extract keywords
+  // Extract price constraints (e.g. "under 40 thousands", "under 40k", "under 40000", "under 50,000")
+  let maxPrice: number | undefined = undefined;
+  const thousandMatch = query.match(/(?:under|below|less than|within|upto|up to|uder)\s*(?:₹|rs\.?|inr)?\s*(\d+)\s*(?:k|thousand|thousands|lakh|lakhs)?/i);
+  if (thousandMatch) {
+    let val = parseInt(thousandMatch[1], 10);
+    const fullPhrase = thousandMatch[0].toLowerCase();
+    if (fullPhrase.includes("k") || fullPhrase.includes("thousand")) {
+      val = val * 1000;
+    } else if (fullPhrase.includes("lakh")) {
+      val = val * 100000;
+    } else if (val < 100) {
+      // Common shorthand like "under 40" meaning 40k in luxury pret context
+      val = val * 1000;
+    }
+    maxPrice = val;
+  }
+
+  // Extract category and style keywords
   let category: string | undefined = undefined;
-  if (query.includes("saree") || query.includes("drape")) category = "heritage-sarees";
-  else if (query.includes("lehenga") || query.includes("couture")) category = "lehengas-couture";
-  else if (query.includes("anarkali") || query.includes("ensemble")) category = "anarkalis-ensembles";
-  else if (query.includes("kurta") || query.includes("pret") || query.includes("sharara")) category = "festive-pret";
-  else if (query.includes("men") || query.includes("sherwani") || query.includes("bandhgala")) category = "regal-menswear";
+  if (query.includes("saree") || query.includes("sari") || query.includes("drape")) {
+    category = "heritage-sarees";
+  } else if (query.includes("lehenga") || query.includes("couture") || query.includes("bridal")) {
+    category = "lehengas-couture";
+  } else if (query.includes("anarkali") || query.includes("peshwas") || query.includes("angrakha")) {
+    category = "anarkalis-ensembles";
+  } else if (query.includes("kurta") || query.includes("pret") || query.includes("sharara") || query.includes("suit")) {
+    category = "festive-pret";
+  } else if (
+    query.includes("contemporary") ||
+    query.includes("column dress") ||
+    query.includes("dress") ||
+    query.includes("dresses") ||
+    query.includes("jacket") ||
+    query.includes("blazer") ||
+    query.includes("coord") ||
+    query.includes("co-ord") ||
+    query.includes("indo-western") ||
+    query.includes("western")
+  ) {
+    category = "contemporary-luxury";
+  }
+
+  // Extract clean search keywords by stripping stop words and filler phrases
+  const cleanSearchQuery = query
+    .replace(/(?:show me|find me|give me|suggest|i want|looking for|under|below|uder|less than|within|upto|up to|\d+|thousands?|k|lakhs?|rs\.?|inr|₹)/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
   // Search real Prisma database
-  const products = await searchProducts({
-    query: category ? undefined : query,
+  let products = await searchProducts({
+    query: cleanSearchQuery.length >= 3 && !category ? cleanSearchQuery : undefined,
     category,
+    maxPrice,
     inStockOnly: true,
   });
+
+  // If no category match for "dresses", also search festive-pret
+  if (products.length === 0 && (query.includes("dress") || query.includes("dresses"))) {
+    products = await searchProducts({
+      category: "festive-pret",
+      maxPrice,
+      inStockOnly: true,
+    });
+  }
+
+  // If still empty with maxPrice, try relaxing category
+  if (products.length === 0 && maxPrice) {
+    products = await searchProducts({
+      maxPrice,
+      inStockOnly: true,
+    });
+  }
 
   const ids = products.slice(0, 4).map((p) => p.id);
 
   if (ids.length > 0) {
-    const categoryName = products[0].category || "Atelier";
+    const priceText = maxPrice ? ` under ₹${maxPrice.toLocaleString("en-IN")}` : "";
     return {
       matched: true,
-      message: `I have curated these verified ${categoryName} pieces from our active vault that beautifully match your inquiry.`,
+      message: `Here are our exquisite hand-tailored pieces${priceText} from our atelier vault:`,
       products: ids,
     };
   }

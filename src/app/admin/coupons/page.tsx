@@ -153,13 +153,13 @@ export default function CouponsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/80 border border-gold/30 p-6 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-xs transition-colors">
         <div>
-          <h1 className="font-serif text-2xl text-oxblood font-semibold flex items-center gap-2">
-            <Tag className="w-5 h-5 text-gold-dark" />
+          <h1 className="font-serif text-2xl text-oxblood dark:text-gold-foil font-semibold flex items-center gap-2">
+            <Tag className="w-5 h-5 text-gold-dark dark:text-gold" />
             Promotional Coupon Engine
           </h1>
-          <p className="text-xs text-noir/60 mt-1">
+          <p className="text-xs text-noir/60 dark:text-ivory/60 mt-1">
             Create and manage exclusive discount codes for Zaria Atelier
             patrons.
           </p>
@@ -169,7 +169,7 @@ export default function CouponsPage() {
             variant="outline"
             size="sm"
             onClick={fetchCoupons}
-            className="gap-1.5 text-xs text-oxblood border-gold/30"
+            className="gap-1.5 text-xs text-oxblood dark:text-gold-light border-gold/30 dark:border-gold/30 hover:bg-gold/10"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             Refresh
@@ -192,7 +192,7 @@ export default function CouponsPage() {
           className={`p-3.5 text-xs flex items-center gap-2 border ${
             feedback.type === "success"
               ? "bg-emerald/10 border-emerald/30 text-emerald"
-              : "bg-red-50 border-red-200 text-red-700"
+              : "bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-300"
           }`}
         >
           {feedback.type === "success" ? (
@@ -206,14 +206,14 @@ export default function CouponsPage() {
 
       {/* Coupons Grid */}
       {loading ? (
-        <div className="py-20 text-center text-xs uppercase tracking-widest text-noir/50">
+        <div className="py-20 text-center text-xs uppercase tracking-widest text-noir/50 dark:text-ivory/50">
           Loading coupon registry...
         </div>
       ) : coupons.length === 0 ? (
-        <div className="py-16 text-center border border-dashed border-gold/30 bg-white/60">
+        <div className="py-16 text-center border border-dashed border-gold/30 dark:border-gold/20 bg-white/60 dark:bg-[#161214] p-8">
           <Tag className="w-8 h-8 text-gold/40 mx-auto mb-3" />
-          <p className="font-serif text-lg text-noir/60">No coupon codes yet</p>
-          <p className="text-xs text-noir/40 mt-1">
+          <p className="font-serif text-lg text-noir/60 dark:text-ivory/60">No coupon codes yet</p>
+          <p className="text-xs text-noir/40 dark:text-ivory/40 mt-1">
             Create your first promotional code for the atelier.
           </p>
         </div>
@@ -226,30 +226,30 @@ export default function CouponsPage() {
             return (
               <div
                 key={coupon.id}
-                className={`bg-white/90 border p-5 shadow-xs transition-all ${
-                  isInactive ? "opacity-60 border-gray-300" : "border-gold/30 hover:border-gold"
+                className={`bg-white/90 dark:bg-[#161214] border p-5 shadow-xs transition-all ${
+                  isInactive ? "opacity-60 border-gray-300 dark:border-white/10 bg-gray-50 dark:bg-white/5" : "border-gold/30 dark:border-gold/20 hover:border-gold"
                 }`}
               >
                 {/* Code Header */}
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-mono text-lg font-bold text-oxblood tracking-widest">
+                      <span className="font-mono text-lg font-bold text-oxblood dark:text-gold-light tracking-widest">
                         {coupon.code}
                       </span>
                       <span
                         className={`text-[9px] uppercase tracking-widest px-2 py-0.5 border font-semibold ${
                           expired
-                            ? "bg-red-50 text-red-600 border-red-200"
+                            ? "bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border-red-200 dark:border-red-900/50"
                             : coupon.active
                             ? "bg-emerald/10 text-emerald border-emerald/30"
-                            : "bg-gray-100 text-gray-500 border-gray-300"
+                            : "bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-ivory/50 border-gray-300 dark:border-white/10"
                         }`}
                       >
                         {expired ? "Expired" : coupon.active ? "Active" : "Inactive"}
                       </span>
                     </div>
-                    <p className="text-[10px] text-noir/40 mt-0.5 font-mono">
+                    <p className="text-[10px] text-noir/40 dark:text-ivory/40 mt-0.5 font-mono">
                       Created {formatDate(coupon.createdAt)}
                     </p>
                   </div>
@@ -258,7 +258,7 @@ export default function CouponsPage() {
                     <button
                       onClick={() => handleToggle(coupon.id, coupon.active)}
                       disabled={expired}
-                      className="w-8 h-8 flex items-center justify-center text-noir/40 hover:text-oxblood transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="w-8 h-8 flex items-center justify-center text-noir/40 dark:text-ivory/40 hover:text-oxblood dark:hover:text-gold transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                       title={coupon.active ? "Deactivate" : "Activate"}
                     >
                       {coupon.active ? (
@@ -269,7 +269,7 @@ export default function CouponsPage() {
                     </button>
                     <button
                       onClick={() => handleDelete(coupon.id, coupon.code)}
-                      className="w-8 h-8 flex items-center justify-center text-noir/40 hover:text-red-600 transition-colors"
+                      className="w-8 h-8 flex items-center justify-center text-noir/40 dark:text-ivory/40 hover:text-red-600 dark:hover:text-red-400 transition-colors"
                       title="Delete Coupon"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -279,19 +279,19 @@ export default function CouponsPage() {
 
                 {/* Details */}
                 <div className="space-y-2 text-xs">
-                  <div className="flex items-center gap-2 text-noir/70">
+                  <div className="flex items-center gap-2 text-noir/70 dark:text-ivory/70">
                     <Percent className="w-3.5 h-3.5 text-gold shrink-0" />
                     <span>
                       <strong>{coupon.percentOff}% off</strong>
                       {coupon.maxDiscount && (
-                        <span className="text-noir/50">
+                        <span className="text-noir/50 dark:text-ivory/50">
                           {" "}(max {formatPrice(coupon.maxDiscount)})
                         </span>
                       )}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-noir/70">
+                  <div className="flex items-center gap-2 text-noir/70 dark:text-ivory/70">
                     <ShoppingBag className="w-3.5 h-3.5 text-gold shrink-0" />
                     <span>
                       Min order:{" "}
@@ -303,11 +303,11 @@ export default function CouponsPage() {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-noir/70">
+                  <div className="flex items-center gap-2 text-noir/70 dark:text-ivory/70">
                     <CalendarDays className="w-3.5 h-3.5 text-gold shrink-0" />
                     <span>
                       Expires:{" "}
-                      <strong className={expired ? "text-red-600" : ""}>
+                      <strong className={expired ? "text-red-600 dark:text-red-400" : ""}>
                         {formatDate(coupon.expiresAt)}
                       </strong>
                     </span>
@@ -322,14 +322,14 @@ export default function CouponsPage() {
       {/* Create Coupon Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 bg-noir/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-ivory border border-gold/40 p-8 max-w-lg w-full shadow-2xl space-y-6">
+          <div className="bg-ivory dark:bg-[#161214] border border-gold/40 dark:border-gold/30 p-8 max-w-lg w-full shadow-2xl space-y-6 text-noir dark:text-ivory transition-colors">
             <div className="flex items-center justify-between border-b border-gold/20 pb-4">
-              <h2 className="font-serif text-2xl text-oxblood font-semibold">
+              <h2 className="font-serif text-2xl text-oxblood dark:text-gold-foil font-semibold">
                 Commission New Code
               </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-noir/60 hover:text-oxblood"
+                className="text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -337,7 +337,7 @@ export default function CouponsPage() {
 
             <form onSubmit={handleCreate} className="space-y-4 text-xs">
               <div>
-                <label className="block uppercase tracking-wider font-semibold mb-1">
+                <label className="block uppercase tracking-wider font-semibold mb-1 text-noir/80 dark:text-ivory/80">
                   Coupon Code *
                 </label>
                 <input
@@ -346,13 +346,13 @@ export default function CouponsPage() {
                   value={code}
                   onChange={(e) => setCode(e.target.value.toUpperCase())}
                   placeholder="e.g. ROYAL15"
-                  className="w-full h-10 px-3 bg-white border border-gold/30 outline-none focus:border-oxblood font-mono uppercase tracking-widest"
+                  className="w-full h-10 px-3 bg-white dark:bg-[#120F10] text-noir dark:text-ivory border border-gold/30 dark:border-gold/30 outline-none focus:border-oxblood dark:focus:border-gold font-mono uppercase tracking-widest"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block uppercase tracking-wider font-semibold mb-1">
+                  <label className="block uppercase tracking-wider font-semibold mb-1 text-noir/80 dark:text-ivory/80">
                     Discount % *
                   </label>
                   <input
@@ -362,12 +362,12 @@ export default function CouponsPage() {
                     max="100"
                     value={percentOff}
                     onChange={(e) => setPercentOff(e.target.value)}
-                    className="w-full h-10 px-3 bg-white border border-gold/30 outline-none focus:border-oxblood"
+                    className="w-full h-10 px-3 bg-white dark:bg-[#120F10] text-noir dark:text-ivory border border-gold/30 dark:border-gold/30 outline-none focus:border-oxblood dark:focus:border-gold"
                   />
                 </div>
 
                 <div>
-                  <label className="block uppercase tracking-wider font-semibold mb-1">
+                  <label className="block uppercase tracking-wider font-semibold mb-1 text-noir/80 dark:text-ivory/80">
                     Min Order (₹)
                   </label>
                   <input
@@ -375,12 +375,12 @@ export default function CouponsPage() {
                     min="0"
                     value={minOrderValue}
                     onChange={(e) => setMinOrderValue(e.target.value)}
-                    className="w-full h-10 px-3 bg-white border border-gold/30 outline-none focus:border-oxblood"
+                    className="w-full h-10 px-3 bg-white dark:bg-[#120F10] text-noir dark:text-ivory border border-gold/30 dark:border-gold/30 outline-none focus:border-oxblood dark:focus:border-gold"
                   />
                 </div>
 
                 <div>
-                  <label className="block uppercase tracking-wider font-semibold mb-1">
+                  <label className="block uppercase tracking-wider font-semibold mb-1 text-noir/80 dark:text-ivory/80">
                     Max Discount (₹)
                   </label>
                   <input
@@ -389,12 +389,12 @@ export default function CouponsPage() {
                     value={maxDiscount}
                     onChange={(e) => setMaxDiscount(e.target.value)}
                     placeholder="No cap"
-                    className="w-full h-10 px-3 bg-white border border-gold/30 outline-none focus:border-oxblood"
+                    className="w-full h-10 px-3 bg-white dark:bg-[#120F10] text-noir dark:text-ivory border border-gold/30 dark:border-gold/30 outline-none focus:border-oxblood dark:focus:border-gold"
                   />
                 </div>
 
                 <div>
-                  <label className="block uppercase tracking-wider font-semibold mb-1">
+                  <label className="block uppercase tracking-wider font-semibold mb-1 text-noir/80 dark:text-ivory/80">
                     Expires At *
                   </label>
                   <input
@@ -402,17 +402,18 @@ export default function CouponsPage() {
                     required
                     value={expiresAt}
                     onChange={(e) => setExpiresAt(e.target.value)}
-                    className="w-full h-10 px-3 bg-white border border-gold/30 outline-none focus:border-oxblood text-xs"
+                    className="w-full h-10 px-3 bg-white dark:bg-[#120F10] text-noir dark:text-ivory border border-gold/30 dark:border-gold/30 outline-none focus:border-oxblood dark:focus:border-gold text-xs"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-gold/20">
+              <div className="flex justify-end gap-3 pt-4 border-t border-gold/20 dark:border-gold/15">
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
                   onClick={() => setShowModal(false)}
+                  className="text-noir dark:text-ivory border-gold/30 dark:border-gold/30 hover:bg-gold/10"
                 >
                   Cancel
                 </Button>

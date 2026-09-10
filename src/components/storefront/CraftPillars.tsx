@@ -9,18 +9,18 @@ const PILLARS = [
   {
     num: "01",
     title: "Master Hand-Embroidery",
-    subtitle: "Over 300 hours of detailed needlework per piece",
+    subtitle: "Artisan hand embroidery and fine needlework",
     narrative:
-      "Handmade by expert artisans across India using authentic dabka, zardozi, and fine threadwork. Every single stitch is placed with patience and precision.",
+      "Handmade by master karigars using authentic dabka, zardozi, and fine threadwork. Every single stitch is placed with patience and precision.",
     image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop",
     motif: "Classic Floral & Paisley Patterns",
   },
   {
     num: "02",
     title: "Royal Heritage Motifs",
-    subtitle: "Inspired by India's rich royal history",
+    subtitle: "Inspired by India's rich architectural heritage",
     narrative:
-      "We draw inspiration from royal palace architecture and vintage textile art, recreating timeless arches, lotus motifs, and classic borders for modern wear.",
+      "We draw inspiration from royal architectural heritage and archival textile art, reinterpreting timeless arches, lotus motifs, and classic borders through contemporary Indian silhouettes.",
     image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=80&w=1000&auto=format&fit=crop",
     motif: "Royal Arches & Floral Vines",
   },
@@ -31,14 +31,14 @@ const PILLARS = [
     narrative:
       "We produce only 10 to 25 pieces per design. This avoids fabric waste, ensures the highest quality, and keeps your outfit truly rare and special.",
     image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=1000&auto=format&fit=crop",
-    motif: "Authenticity Certificate Included",
+    motif: "Limited Batch Craftsmanship",
   },
   {
     num: "04",
-    title: "Pure Silk & Real Zari",
-    subtitle: "100% genuine fabrics and certified metallic threads",
+    title: "Mulberry Silk & Zari",
+    subtitle: "Fine handloom textiles and metallic threadwork",
     narrative:
-      "We weave only with authentic gold and silver zari threads on traditional handlooms in Varanasi and Chanderi. Comfortable, radiant, and built to last.",
+      "We weave with fine gold and silver zari threads on traditional handlooms in Varanasi and Chanderi. Radiant, graceful, and built to last.",
     image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1000&auto=format&fit=crop",
     motif: "Traditional Handloom Weaving",
   },
@@ -94,7 +94,7 @@ export function CraftPillars() {
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
           <p className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold mb-1.5">
-            Our Quality Promise
+            Heritage · Craft · Contemporary
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-ivory">
             The Craft Behind Every Piece

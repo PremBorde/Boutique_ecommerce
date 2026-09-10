@@ -16,6 +16,7 @@ import {
   IndianRupee,
 } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface Metrics {
   totalRevenue: number;
@@ -84,7 +85,7 @@ export default function AdminLayout({
   ];
 
   return (
-    <div className="min-h-screen bg-regal-texture text-noir">
+    <div className="min-h-screen bg-regal-texture text-noir dark:text-ivory transition-colors duration-300">
       {/* Admin Top Header */}
       <header className="bg-noir text-ivory border-b border-gold/40 sticky top-0 z-30 shadow-md">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
@@ -98,10 +99,11 @@ export default function AdminLayout({
             </span>
           </div>
 
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex items-center gap-3 sm:gap-5">
             <span className="hidden md:inline-block text-xs text-gold-foil font-serif">
               Logged in as <strong className="text-gold-light font-sans font-semibold">Prem Borde</strong>
             </span>
+            <ThemeToggle />
             <Link
               href="/"
               className="text-xs uppercase tracking-wider text-ivory/70 hover:text-gold flex items-center gap-1.5 px-3 py-1.5 border border-gold/30 hover:border-gold transition-colors"

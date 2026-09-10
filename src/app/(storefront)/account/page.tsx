@@ -189,7 +189,7 @@ function AccountContent() {
                     variant="outline"
                     size="sm"
                     onClick={() => signOut({ callbackUrl: "/account" })}
-                    className="gap-1.5 text-xs text-oxblood border-oxblood/30 hover:bg-oxblood/10"
+                    className="gap-1.5 text-xs text-oxblood dark:text-gold-light border-oxblood/30 dark:border-gold/30 hover:bg-oxblood/10 dark:hover:bg-gold/10"
                   >
                     <LogOut className="w-3.5 h-3.5" />
                     Sign Out
@@ -312,14 +312,14 @@ function AccountContent() {
                           </Button>
                         </Link>
                         <Link href="/shop">
-                          <Button variant="outline" size="sm" className="text-xs px-5 border-gold/40 hover:bg-gold/10">
+                          <Button variant="outline" size="sm" className="text-xs px-5 border-gold/40 hover:bg-gold/10 text-noir dark:text-ivory">
                             Browse Storefront
                           </Button>
                         </Link>
                       </div>
                     </div>
                   ) : (
-                    <div className="py-10 sm:py-12 text-center border border-dashed border-gold/30 p-5 sm:p-8">
+                    <div className="py-10 sm:py-12 text-center border border-dashed border-gold/30 dark:border-gold/20 p-5 sm:p-8">
                       <p className="font-serif text-base sm:text-lg text-noir/70 dark:text-ivory/70 font-normal mb-1.5">
                         No orders placed yet
                       </p>
@@ -338,14 +338,14 @@ function AccountContent() {
                     {orders.map((order) => (
                       <div
                         key={order.id}
-                        className="border border-gold/25 p-5 bg-white/40 hover:bg-white/80 transition-colors"
+                        className="border border-gold/25 dark:border-gold/20 p-5 bg-white/40 dark:bg-[#161214] hover:bg-white/80 dark:hover:bg-[#1C1719] transition-colors"
                       >
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gold/15 text-xs">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gold/15 dark:border-gold/10 text-xs">
                           <div>
-                            <span className="text-noir/50 tracking-wider">Order No:</span>{" "}
-                            <span className="font-medium text-oxblood tracking-wide">{order.orderNumber}</span>
-                            <span className="text-noir/30 mx-2">·</span>
-                            <span className="text-noir/60">{formatDate(order.createdAt)}</span>
+                            <span className="text-noir/50 dark:text-ivory/50 tracking-wider">Order No:</span>{" "}
+                            <span className="font-medium text-oxblood dark:text-gold-light tracking-wide">{order.orderNumber}</span>
+                            <span className="text-noir/30 dark:text-ivory/30 mx-2">·</span>
+                            <span className="text-noir/60 dark:text-ivory/60">{formatDate(order.createdAt)}</span>
                           </div>
                           <div className="flex items-center gap-3">
                             <span
@@ -353,14 +353,14 @@ function AccountContent() {
                                 order.status === "DELIVERED"
                                   ? "bg-emerald/10 text-emerald border-emerald/30"
                                   : order.status === "CANCELLED"
-                                  ? "bg-red-50 text-red-700 border-red-200"
-                                  : "bg-gold/10 text-gold-dark border-gold/30"
+                                  ? "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border-red-200 dark:border-red-900/50"
+                                  : "bg-gold/10 text-gold-dark dark:text-gold-light border-gold/30"
                               }`}
                             >
                               {order.status}
                             </span>
                             <Link href={`/orders/${order.id}`}>
-                              <span className="text-[11px] uppercase tracking-wider text-oxblood hover:text-gold flex items-center gap-1 font-medium">
+                              <span className="text-[11px] uppercase tracking-wider text-oxblood dark:text-gold-light hover:text-gold flex items-center gap-1 font-medium">
                                 View Timeline →
                               </span>
                             </Link>
@@ -368,7 +368,7 @@ function AccountContent() {
                         </div>
 
                         <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-                          <div className="text-noir/70">
+                          <div className="text-noir/70 dark:text-ivory/70">
                             {order.items.map((it: any, idx: number) => (
                               <span key={it.id}>
                                 {it.title} ({it.color}, {it.size}) × {it.qty}
@@ -376,7 +376,7 @@ function AccountContent() {
                               </span>
                             ))}
                           </div>
-                          <div className="font-serif text-sm text-oxblood font-semibold">
+                          <div className="font-serif text-sm text-oxblood dark:text-gold-foil font-semibold">
                             {formatPrice(order.total)}
                           </div>
                         </div>
@@ -455,8 +455,8 @@ function AccountContent() {
                 }}
                 className={`flex-1 pb-3 text-xs uppercase tracking-[0.2em] font-medium transition-all ${
                   activeTab === "login"
-                    ? "border-b-2 border-oxblood text-oxblood font-semibold"
-                    : "text-noir/40 hover:text-noir/70"
+                    ? "border-b-2 border-oxblood dark:border-gold text-oxblood dark:text-gold-foil font-semibold"
+                    : "text-noir/40 dark:text-ivory/50 hover:text-noir/70 dark:hover:text-ivory"
                 }`}
               >
                 Sign In
@@ -470,8 +470,8 @@ function AccountContent() {
                 }}
                 className={`flex-1 pb-3 text-xs uppercase tracking-[0.2em] font-medium transition-all ${
                   activeTab === "register"
-                    ? "border-b-2 border-oxblood text-oxblood font-semibold"
-                    : "text-noir/40 hover:text-noir/70"
+                    ? "border-b-2 border-oxblood dark:border-gold text-oxblood dark:text-gold-foil font-semibold"
+                    : "text-noir/40 dark:text-ivory/50 hover:text-noir/70 dark:hover:text-ivory"
                 }`}
               >
                 Create Account
@@ -480,13 +480,13 @@ function AccountContent() {
 
             {/* Alerts */}
             {errorMsg && (
-              <div className="mb-6 p-3.5 bg-red-50 border border-red-200 text-red-800 text-xs flex items-start gap-2.5">
+              <div className="mb-6 p-3.5 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-800 dark:text-red-300 text-xs flex items-start gap-2.5">
                 <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
                 <span>{errorMsg}</span>
               </div>
             )}
             {successMsg && (
-              <div className="mb-6 p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-2.5">
+              <div className="mb-6 p-3.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900 text-emerald-800 dark:text-emerald-300 text-xs flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>{successMsg}</span>
               </div>
@@ -495,7 +495,7 @@ function AccountContent() {
             {activeTab === "login" ? (
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1.5 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1.5 font-medium">
                     Email Address
                   </label>
                   <input
@@ -504,12 +504,12 @@ function AccountContent() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="client@luxury.com"
-                    className="w-full h-11 px-3.5 text-xs bg-white/70 border border-gold/30 focus:border-oxblood focus:ring-1 focus:ring-oxblood outline-none transition-all"
+                    className="w-full h-11 px-3.5 text-xs bg-white/70 dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold focus:ring-1 focus:ring-oxblood dark:focus:ring-gold outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1.5 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1.5 font-medium">
                     Password
                   </label>
                   <input
@@ -518,7 +518,7 @@ function AccountContent() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full h-11 px-3.5 text-xs bg-white/70 border border-gold/30 focus:border-oxblood focus:ring-1 focus:ring-oxblood outline-none transition-all"
+                    className="w-full h-11 px-3.5 text-xs bg-white/70 dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold focus:ring-1 focus:ring-oxblood dark:focus:ring-gold outline-none transition-all"
                   />
                 </div>
 
@@ -531,7 +531,7 @@ function AccountContent() {
                   {loading ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin text-gold-light" />
-                      <span className="gold-foil-text font-medium">Signing In...</span>
+                      <span className="gold-foil-text font-medium">Entering Sanctuary...</span>
                     </>
                   ) : (
                     <span>Enter Atelier</span>
@@ -541,7 +541,7 @@ function AccountContent() {
             ) : (
               <form onSubmit={handleRegister} className="space-y-4">
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1.5 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1.5 font-medium">
                     Full Name
                   </label>
                   <input
@@ -550,12 +550,12 @@ function AccountContent() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Ananya Singhania"
-                    className="w-full h-11 px-3.5 text-xs bg-white/70 border border-gold/30 focus:border-oxblood focus:ring-1 focus:ring-oxblood outline-none transition-all"
+                    className="w-full h-11 px-3.5 text-xs bg-white/70 dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold focus:ring-1 focus:ring-oxblood dark:focus:ring-gold outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1.5 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1.5 font-medium">
                     Email Address
                   </label>
                   <input
@@ -564,12 +564,12 @@ function AccountContent() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="client@luxury.com"
-                    className="w-full h-11 px-3.5 text-xs bg-white/70 border border-gold/30 focus:border-oxblood focus:ring-1 focus:ring-oxblood outline-none transition-all"
+                    className="w-full h-11 px-3.5 text-xs bg-white/70 dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold focus:ring-1 focus:ring-oxblood dark:focus:ring-gold outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 mb-1.5 font-medium">
+                  <label className="block text-[11px] uppercase tracking-[0.2em] text-noir/70 dark:text-ivory/70 mb-1.5 font-medium">
                     Password (min. 6 characters)
                   </label>
                   <input
@@ -579,7 +579,7 @@ function AccountContent() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full h-11 px-3.5 text-xs bg-white/70 border border-gold/30 focus:border-oxblood focus:ring-1 focus:ring-oxblood outline-none transition-all"
+                    className="w-full h-11 px-3.5 text-xs bg-white/70 dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold focus:ring-1 focus:ring-oxblood dark:focus:ring-gold outline-none transition-all"
                   />
                 </div>
 

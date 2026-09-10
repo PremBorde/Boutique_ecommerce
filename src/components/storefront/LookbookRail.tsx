@@ -47,12 +47,12 @@ const FEATURED_LOOKS: LookbookItem[] = [
   },
   {
     id: "look-4",
-    name: "The Darbar Silk Sherwani",
-    slug: "darbar-silk-sherwani",
-    category: "Regal Menswear",
-    price: 22500,
-    image: "/products/menswear_sherwani.jpg",
-    tagline: "Hand-Tailored Matka Silk with Cast Brass Accents",
+    name: "The Aria Banarasi Silk Column Dress",
+    slug: "aria-banarasi-silk-column-dress",
+    category: "Contemporary Luxury",
+    price: 19800,
+    image: "/products/contemporary_banarasi_dress.jpg",
+    tagline: "Varanasi Brocade Silk with Modern Architectural Slit",
   },
   {
     id: "look-5",

@@ -184,7 +184,7 @@ stateDiagram-v2
 - **Synchronized Header Navigation**: Nav links accurately detect active categories via `useSearchParams()` (e.g. `/shop?category=lehengas-couture` highlights **LEHENGAS** with a gold underline, while `/shop` highlights **ALL CREATIONS**). Category filter tabs on the `/shop` page dynamically sync browser URLs.
 
 ### 6. Expanded 17-Piece Heirloom Catalog
-- **Diverse Categories**: Fully seeded catalogue database spanning Lehengas & Couture (4), Heritage Sarees (4), Anarkalis & Ensembles (3), Festive Pret (3), and Regal Menswear (3).
+- **Diverse Categories**: Fully seeded catalogue database spanning Lehengas & Couture (4), Heritage Sarees (4), Anarkalis & Ensembles (3), Festive Pret (3), and Contemporary Luxury (3).
 - **Rich Specs**: Every garment features authentic Indian couture details — artisanal weave stories, fabric compositions, colorways, multi-angle photos, and SKU-level inventory tracking.
 
 ---

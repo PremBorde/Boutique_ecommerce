@@ -15,14 +15,14 @@ export const storeInfoConfig = {
       "We accept all major credit/debit cards, Net Banking, and instant UPI. Cash on Delivery (COD) is not accepted due to the high value and insured security of pure silk couture.",
   },
   craftsmanship: {
-    title: "Craft & Authenticity Hallmark",
+    title: "Craft & Textile Artistry",
     content:
-      "Every creation is certified by the Master Artisan Guild. We weave with genuine Mulberry raw silk, Varanasi pure Katan, and lab-tested gold/silver zari thread from heritage clusters all over India. Each piece takes between 80 to 350 artisan hours.",
+      "Every creation is handcrafted with care. We craft with genuine Mulberry raw silk, Varanasi pure Katan, and fine metallic zari threadwork from renowned heritage textile clusters. Each piece reflects meticulous attention to detail.",
   },
   custom_fit: {
     title: "Bespoke Fitting Services",
     content:
-      "We provide bespoke tailoring consultations across all over India or via virtual video appointment with our master cutting master.",
+      "We provide bespoke tailoring consultations in-house or via virtual video appointment with our master cutting specialist.",
   },
 };
 
@@ -43,5 +43,5 @@ export function getStorePolicy(topic: string): string {
   if (normalized.includes("fit") || normalized.includes("tailor") || normalized.includes("measure") || normalized.includes("size")) {
     return storeInfoConfig.custom_fit.content;
   }
-  return "Zaria Atelier is an Indian luxury pret and couture house celebrating master artisan clusters all over India, creating small-batch hand-embroidered garments with certified pure zari and raw silks.";
+  return "Zaria Atelier is an Indian luxury womenswear atelier celebrating heritage craftsmanship and contemporary silhouettes, creating small-batch hand-embroidered garments with fine zari embroidery and pure silks.";
 }

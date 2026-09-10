@@ -256,13 +256,13 @@ export async function checkStock(args: {
  */
 export const STORE_INFO = {
   returns:
-    "We offer a 7-day exchange window for unworn items with security tags and hallmark certificates intact. Bespoke bridal orders made to custom measurements are final sale.",
+    "We offer a 7-day exchange window for unworn items with security tags intact. Bespoke orders made to custom measurements are final sale.",
   shipping:
     "Complimentary express shipping on all orders above ₹10,000 across India. For orders below ₹10,000, insured standard delivery is ₹500. Typical atelier dispatch takes 2 to 4 business days in tamper-proof keepsake boxes.",
   cod:
     "Cash on Delivery (COD) is not accepted due to the high-value transit insurance required for handwoven silk couture and zari embroideries. We accept all major credit/debit cards, Net Banking, and UPI.",
   craftsmanship:
-    "All pieces are hallmarked and handcrafted by master artisans all over India with certified Mulberry silks, pure Katan, and lab-tested gold/silver zari.",
+    "All pieces are handcrafted by master karigars with fine Mulberry silks, pure Katan, and traditional gold/silver zari embroidery.",
 } as const;
 
 /**

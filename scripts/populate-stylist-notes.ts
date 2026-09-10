@@ -20,8 +20,8 @@ const STYLIST_NOTES_BY_KEYWORD: Array<{ match: string; note: string }> = [
     note: "A festive daytime staple; pair with golden mojris and a crisp organza stole for pujas and celebrations.",
   },
   {
-    match: "darbar silk sherwani",
-    note: "Elevate with an emerald seven-strand kantha necklace and gold-hilted ceremonial crest for wedding royalty.",
+    match: "aria banarasi",
+    note: "Sleek architectural elegance; pair with sculptural gold drop earrings and metallic stiletto heels for modern black-tie receptions.",
   },
   {
     match: "sitara tissue",
@@ -64,12 +64,12 @@ const STYLIST_NOTES_BY_KEYWORD: Array<{ match: string; note: string }> = [
     note: "Effortlessly modern yet rooted; style with minimalist brass cuffs and tan leather mojaris.",
   },
   {
-    match: "jodhpur bandhgala",
-    note: "Uncompromising evening elegance; finish with antique monogrammed gold buttons and tailored silk trousers.",
+    match: "ruhani embroidered",
+    note: "Empowered modern tailoring; style over an ivory slip or wide-leg silk trousers with minimalist gold ear cuffs for evening galas.",
   },
   {
-    match: "shahi jamawar",
-    note: "Tailored for aristocratic charm; style with hand-polished leather mojaris and a raw silk pocket square.",
+    match: "zoya metallic",
+    note: "Fluid evening glamour; accentuate the copper-gold sheen with champagne diamond studs and a sleek metallic box clutch.",
   },
 ];
 

@@ -14,12 +14,11 @@ interface NavItem {
 }
 
 const NAV_LINKS: NavItem[] = [
-  { label: "The Atelier", href: "/" },
   { label: "All Creations", href: "/shop" },
   { label: "Lehengas", href: "/shop?category=lehengas-couture" },
   { label: "Sarees", href: "/shop?category=heritage-sarees" },
   { label: "Festive Pret", href: "/shop?category=festive-pret" },
-  { label: "Menswear", href: "/shop?category=regal-menswear" },
+  { label: "Contemporary", href: "/shop?category=contemporary-luxury" },
 ];
 
 function DesktopNavLinks() {
@@ -28,7 +27,7 @@ function DesktopNavLinks() {
   const currentCategory = searchParams.get("category");
 
   return (
-    <div className="hidden md:flex items-center space-x-8">
+    <div className="hidden md:flex items-center gap-5 lg:gap-7 xl:gap-8 mx-4 lg:mx-8">
       {NAV_LINKS.map((link) => {
         let isActive = false;
         if (link.href === "/") {
@@ -46,7 +45,7 @@ function DesktopNavLinks() {
           <Link
             key={link.href}
             href={link.href}
-            className={`text-xs uppercase tracking-[0.2em] font-medium transition-colors relative py-1 ${
+            className={`text-[11px] lg:text-xs uppercase tracking-[0.14em] lg:tracking-[0.18em] font-medium transition-colors relative py-1 whitespace-nowrap ${
               isActive
                 ? "text-oxblood dark:text-gold-light font-semibold after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1.5px] after:bg-gold"
                 : "text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light"
@@ -67,11 +66,20 @@ function MobileNavLinks({ onClose }: { onClose: () => void }) {
 
   return (
     <>
+      <Link
+        href="/"
+        onClick={onClose}
+        className={`block text-xs uppercase tracking-[0.25em] py-2 font-medium border-b border-gold/10 transition-colors ${
+          pathname === "/"
+            ? "text-oxblood dark:text-gold-light font-semibold border-gold"
+            : "text-noir/80 dark:text-ivory/80 hover:text-oxblood dark:hover:text-gold"
+        }`}
+      >
+        The Atelier (Home)
+      </Link>
       {NAV_LINKS.map((link) => {
         let isActive = false;
-        if (link.href === "/") {
-          isActive = pathname === "/";
-        } else if (link.href === "/shop") {
+        if (link.href === "/shop") {
           isActive = pathname === "/shop" && !currentCategory;
         } else if (link.href.includes("category=")) {
           const cat = link.href.split("category=")[1];
@@ -85,7 +93,7 @@ function MobileNavLinks({ onClose }: { onClose: () => void }) {
             key={link.href}
             href={link.href}
             onClick={onClose}
-            className={`block text-xs uppercase tracking-[0.25em] py-2 font-medium border-b border-gold/10 transition-colors ${
+            className={`block text-xs uppercase tracking-[0.25em] py-2 font-medium border-b border-gold/10 transition-colors whitespace-nowrap ${
               isActive
                 ? "text-oxblood dark:text-gold-light font-semibold border-gold"
                 : "text-noir/80 dark:text-ivory/80 hover:text-oxblood dark:hover:text-gold"
@@ -101,12 +109,12 @@ function MobileNavLinks({ onClose }: { onClose: () => void }) {
 
 function DesktopNavFallback() {
   return (
-    <div className="hidden md:flex items-center space-x-8">
+    <div className="hidden md:flex items-center gap-5 lg:gap-7 xl:gap-8 mx-4 lg:mx-8">
       {NAV_LINKS.map((link) => (
         <Link
           key={link.href}
           href={link.href}
-          className="text-xs uppercase tracking-[0.2em] font-medium transition-colors relative py-1 text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light"
+          className="text-[11px] lg:text-xs uppercase tracking-[0.14em] lg:tracking-[0.18em] font-medium transition-colors relative py-1 whitespace-nowrap text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light"
         >
           {link.label}
         </Link>
@@ -141,7 +149,7 @@ export function Navbar() {
         <span className="hidden sm:inline">· Complimentary Insured Delivery</span>
       </div>
 
-      <nav className="max-w-7xl mx-auto px-3 sm:px-6 md:px-8 h-15 sm:h-16 md:h-18 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-3 lg:gap-6">
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -152,12 +160,12 @@ export function Navbar() {
         </button>
 
         {/* Brand Wordmark */}
-        <Link href="/" className="flex flex-col items-center group px-1 text-center">
+        <Link href="/" className="flex flex-col items-center group px-1 text-center shrink-0">
           <span className="font-display text-xl sm:text-2xl md:text-3xl tracking-[0.18em] sm:tracking-[0.22em] text-oxblood dark:text-gold-foil uppercase group-hover:text-gold transition-colors font-semibold">
             Zaria
           </span>
           <span className="text-[7.5px] sm:text-[9px] uppercase tracking-[0.32em] sm:tracking-[0.45em] text-gold-antique dark:text-gold-light/70 -mt-0.5 font-sans font-medium whitespace-nowrap">
-            Atelier · Across India
+            Atelier · India
           </span>
         </Link>
 
@@ -167,7 +175,7 @@ export function Navbar() {
         </Suspense>
 
         {/* Right Actions */}
-        <div className="flex items-center space-x-1 sm:space-x-3.5 shrink-0">
+        <div className="flex items-center space-x-1 sm:space-x-2.5 lg:space-x-3 shrink-0 pl-2.5 sm:pl-4 border-l border-gold/25 dark:border-gold/20">
           <Link
             href="/shop"
             className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light transition-colors"

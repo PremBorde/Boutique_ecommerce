@@ -115,37 +115,37 @@ export function CartDrawer() {
                           <Link
                             href={`/product/${item.slug}`}
                             onClick={closeDrawer}
-                            className="font-serif text-sm text-oxblood hover:text-gold transition-colors truncate font-medium"
+                            className="font-serif text-sm text-oxblood dark:text-ivory hover:text-gold dark:hover:text-gold transition-colors truncate font-medium"
                           >
                             {item.name}
                           </Link>
                           <button
                             onClick={() => removeItem(item.variantId)}
-                            className="text-noir/40 hover:text-red-700 transition-colors"
+                            className="text-noir/40 dark:text-ivory/50 hover:text-red-700 dark:hover:text-gold transition-colors"
                           >
                             <X className="w-3.5 h-3.5" />
                           </button>
                         </div>
-                        <p className="text-[11px] text-noir/60 mt-0.5">
+                        <p className="text-[11px] text-noir/60 dark:text-ivory/60 mt-0.5">
                           {item.color} · Size {item.size}
                         </p>
-                        <p className="font-serif text-xs text-gold-dark mt-1 font-semibold">
+                        <p className="font-serif text-xs text-gold-dark dark:text-gold-light mt-1 font-semibold">
                           {formatPrice(item.price)}
                         </p>
                       </div>
 
                       {/* Quantity Stepper */}
                       <div className="flex items-center justify-between mt-3">
-                        <div className="flex items-center border border-gold/30 bg-white">
+                        <div className="flex items-center border border-gold/30 dark:border-gold/25 bg-white dark:bg-[#1C1719]">
                           <button
                             onClick={() =>
                               updateQuantity(item.variantId, item.quantity - 1)
                             }
-                            className="w-7 h-7 flex items-center justify-center text-noir/60 hover:text-oxblood hover:bg-gold/10 transition-colors"
+                            className="w-7 h-7 flex items-center justify-center text-noir/60 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold hover:bg-gold/10 transition-colors"
                           >
-                            <Minus className="w-3 h-3" />
+                            <Minus className="w-3.5 h-3.5" />
                           </button>
-                          <span className="w-8 text-center text-xs font-medium text-noir">
+                          <span className="w-8 text-center text-xs font-medium text-noir dark:text-ivory">
                             {item.quantity}
                           </span>
                           <button
@@ -153,17 +153,17 @@ export function CartDrawer() {
                             onClick={() =>
                               updateQuantity(item.variantId, item.quantity + 1)
                             }
-                            className="w-7 h-7 flex items-center justify-center text-noir/60 hover:text-oxblood hover:bg-gold/10 transition-colors disabled:opacity-30"
+                            className="w-7 h-7 flex items-center justify-center text-noir/60 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold hover:bg-gold/10 transition-colors disabled:opacity-30"
                           >
-                            <Plus className="w-3 h-3" />
+                            <Plus className="w-3.5 h-3.5" />
                           </button>
                         </div>
                         {item.quantity >= item.maxStock && (
-                          <span className="text-[10px] text-amber-700 font-medium">
+                          <span className="text-[10px] text-amber-700 dark:text-amber-400 font-medium">
                             Max stock reached
                           </span>
                         )}
-                        <span className="font-serif text-xs font-semibold text-oxblood">
+                        <span className="font-serif text-xs font-semibold text-oxblood dark:text-gold-light">
                           {formatPrice(item.price * item.quantity)}
                         </span>
                       </div>

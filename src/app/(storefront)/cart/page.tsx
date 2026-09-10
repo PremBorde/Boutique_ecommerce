@@ -124,12 +124,12 @@ export default function CartPage() {
             </p>
           </div>
         ) : items.length === 0 ? (
-          <div className="py-24 text-center bg-white/60 border border-dashed border-gold/30 p-12 max-w-xl mx-auto shadow-xs">
-            <div className="w-16 h-16 rounded-full bg-gold/10 text-gold-dark flex items-center justify-center mx-auto mb-4">
+          <div className="py-24 text-center bg-white/60 dark:bg-[#161214] border border-dashed border-gold/30 dark:border-gold/20 p-12 max-w-xl mx-auto shadow-xs">
+            <div className="w-16 h-16 rounded-full bg-gold/10 text-gold-dark dark:text-gold flex items-center justify-center mx-auto mb-4">
               <ShoppingBag className="w-8 h-8 stroke-1" />
             </div>
-            <h2 className="font-serif text-2xl text-oxblood mb-2">Your Bag is Empty</h2>
-            <p className="text-xs text-noir/60 max-w-sm mx-auto mb-8 leading-relaxed">
+            <h2 className="font-serif text-2xl text-oxblood dark:text-gold-foil mb-2">Your Bag is Empty</h2>
+            <p className="text-xs text-noir/60 dark:text-ivory/70 max-w-sm mx-auto mb-8 leading-relaxed">
               Discover our handcrafted lehengas, sarees, and festive wear to find your perfect look.
             </p>
             <Link href="/shop">
@@ -172,51 +172,51 @@ export default function CartPage() {
                         <div className="flex items-start justify-between gap-4">
                           <Link
                             href={`/product/${item.slug}`}
-                            className="font-serif text-base md:text-lg text-oxblood hover:text-gold transition-colors font-medium"
+                            className="font-serif text-base md:text-lg text-oxblood dark:text-ivory hover:text-gold dark:hover:text-gold transition-colors font-medium"
                           >
                             {item.name}
                           </Link>
                           <button
                             onClick={() => removeItem(item.variantId)}
-                            className="text-noir/40 hover:text-red-700 transition-colors p-1"
+                            className="text-noir/40 dark:text-ivory/50 hover:text-red-700 dark:hover:text-gold transition-colors p-1"
                             title="Remove from bag"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
-                        <p className="text-xs text-noir/60 mt-1">
-                          Shade: <span className="font-medium text-noir">{item.color}</span> · Size:{" "}
-                          <span className="font-medium text-noir">{item.size}</span>
+                        <p className="text-xs text-noir/60 dark:text-ivory/60 mt-1">
+                          Shade: <span className="font-medium text-noir dark:text-ivory">{item.color}</span> · Size:{" "}
+                          <span className="font-medium text-noir dark:text-ivory">{item.size}</span>
                         </p>
-                        <p className="font-serif text-sm text-gold-dark mt-1 font-semibold">
+                        <p className="font-serif text-sm text-gold-dark dark:text-gold-light mt-1 font-semibold">
                           {formatPrice(item.price)}
                         </p>
                       </div>
 
                       {/* Stepper and Row Total */}
                       <div className="flex items-center justify-between mt-4 pt-3 border-t border-gold/10">
-                        <div className="flex items-center border border-gold/30 bg-white">
+                        <div className="flex items-center border border-gold/30 dark:border-gold/25 bg-white dark:bg-[#1C1719]">
                           <button
                             onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
-                            className="w-8 h-8 flex items-center justify-center text-noir/60 hover:text-oxblood hover:bg-gold/10 transition-colors"
+                            className="w-8 h-8 flex items-center justify-center text-noir/60 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold hover:bg-gold/10 transition-colors"
                           >
                             <Minus className="w-3.5 h-3.5" />
                           </button>
-                          <span className="w-10 text-center text-xs font-semibold text-noir">
+                          <span className="w-10 text-center text-xs font-semibold text-noir dark:text-ivory">
                             {item.quantity}
                           </span>
                           <button
                             disabled={item.quantity >= item.maxStock}
                             onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                            className="w-8 h-8 flex items-center justify-center text-noir/60 hover:text-oxblood hover:bg-gold/10 transition-colors disabled:opacity-30"
+                            className="w-8 h-8 flex items-center justify-center text-noir/60 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold hover:bg-gold/10 transition-colors disabled:opacity-30"
                           >
                             <Plus className="w-3.5 h-3.5" />
                           </button>
                         </div>
 
                         <div className="text-right">
-                          <span className="text-[10px] text-noir/40 block">Line Investment</span>
-                          <span className="font-serif text-base font-semibold text-oxblood">
+                          <span className="text-[10px] text-noir/40 dark:text-ivory/50 block">Line Investment</span>
+                          <span className="font-serif text-base font-semibold text-oxblood dark:text-gold-light">
                             {formatPrice(item.price * item.quantity)}
                           </span>
                         </div>
@@ -230,10 +230,10 @@ export default function CartPage() {
             {/* Order Summary & Coupon Column */}
             <div className="lg:col-span-4 space-y-6">
               {/* Coupon Box */}
-              <div className="bg-white/80 border border-gold/30 p-6 shadow-xs">
+              <div className="bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-xs transition-colors duration-300">
                 <div className="flex items-center gap-2 mb-3">
-                  <Tag className="w-4 h-4 text-gold-dark" />
-                  <h3 className="font-serif text-sm text-oxblood uppercase tracking-wider font-semibold">
+                  <Tag className="w-4 h-4 text-gold-dark dark:text-gold" />
+                  <h3 className="font-serif text-sm text-oxblood dark:text-gold-foil uppercase tracking-wider font-semibold">
                     Privilege Code
                   </h3>
                 </div>
@@ -245,7 +245,7 @@ export default function CartPage() {
                       value={couponCodeInput}
                       onChange={(e) => setCouponCodeInput(e.target.value.toUpperCase())}
                       placeholder="e.g. ROYAL15"
-                      className="flex-1 h-10 px-3 text-xs uppercase tracking-wider bg-white border border-gold/30 focus:border-oxblood outline-none"
+                      className="flex-1 h-10 px-3 text-xs uppercase tracking-wider bg-white dark:bg-[#1C1719] border border-gold/30 dark:border-gold/20 text-noir dark:text-ivory placeholder:text-noir/40 dark:placeholder:text-ivory/40 focus:border-oxblood dark:focus:border-gold outline-none"
                     />
                     <Button
                       type="submit"
@@ -260,21 +260,21 @@ export default function CartPage() {
 
                   {/* Coupon Demo Badges */}
                   <div className="pt-2">
-                    <p className="text-[10px] uppercase tracking-wider text-noir/40 mb-1">
+                    <p className="text-[10px] uppercase tracking-wider text-noir/40 dark:text-ivory/50 mb-1">
                       Available Demo Codes:
                     </p>
                     <div className="flex gap-2 flex-wrap">
                       <button
                         type="button"
                         onClick={() => setCouponCodeInput("ROYAL15")}
-                        className="text-[10px] px-2 py-0.5 bg-gold/10 border border-gold/30 text-gold-dark hover:bg-gold/20 font-mono"
+                        className="text-[10px] px-2 py-0.5 bg-gold/10 border border-gold/30 text-gold-dark dark:text-gold-light hover:bg-gold/20 font-mono"
                       >
                         ROYAL15 (15% off)
                       </button>
                       <button
                         type="button"
                         onClick={() => setCouponCodeInput("FESTIVE25")}
-                        className="text-[10px] px-2 py-0.5 bg-gold/10 border border-gold/30 text-gold-dark hover:bg-gold/20 font-mono"
+                        className="text-[10px] px-2 py-0.5 bg-gold/10 border border-gold/30 text-gold-dark dark:text-gold-light hover:bg-gold/20 font-mono"
                       >
                         FESTIVE25 (25% off)
                       </button>
@@ -290,7 +290,7 @@ export default function CartPage() {
                       <button
                         type="button"
                         onClick={handleRemoveCoupon}
-                        className="text-[10px] text-red-700 hover:underline uppercase ml-2"
+                        className="text-[10px] text-red-700 dark:text-red-400 hover:underline uppercase ml-2"
                       >
                         Remove
                       </button>
@@ -298,7 +298,7 @@ export default function CartPage() {
                   )}
 
                   {couponError && (
-                    <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-1.5">
+                    <div className="p-2.5 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-700 dark:text-red-300 text-xs flex items-center gap-1.5">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                       {couponError}
                     </div>
@@ -338,7 +338,7 @@ export default function CartPage() {
                     </span>
                   </div>
 
-                  <div className="pt-3 border-t border-gold/20 flex justify-between font-serif text-lg text-oxblood font-semibold">
+                  <div className="pt-3 border-t border-gold/20 flex justify-between font-serif text-lg text-oxblood dark:text-gold-foil font-semibold">
                     <span>Total Investment</span>
                     <span>{formatPrice(total)}</span>
                   </div>

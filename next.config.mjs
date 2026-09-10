@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compress: true,
+  transpilePackages: ['framer-motion', 'lucide-react'],
 
   images: {
     formats: ["image/avif", "image/webp"],

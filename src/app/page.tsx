@@ -150,9 +150,9 @@ export default async function HomePage() {
             &ldquo;In a world of fast fashion, we craft every piece with patience and care.&rdquo;
           </h2>
           <p className="text-sm md:text-base text-ivory/80 leading-relaxed font-sans max-w-2xl mx-auto">
-            Zaria was founded to keep traditional Indian craftsmanship alive. Every outfit is
-            handcrafted by skilled artisans using pure fabrics, certified for authenticity, and designed
-            to be cherished in your family for years to come.
+            Zaria bridges timeless heritage with contemporary Indian luxury. Every piece is
+            handcrafted by skilled artisans using pure handloom silks, intricate embroidery, and modern cuts
+            designed to be cherished for years to come.
           </p>
           <div className="pt-4">
             <Link href="/shop">

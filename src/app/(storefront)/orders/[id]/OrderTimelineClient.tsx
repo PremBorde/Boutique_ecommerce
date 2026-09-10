@@ -172,8 +172,8 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
                       isCurrent
                         ? "bg-oxblood text-gold-light border-oxblood shadow-xs"
                         : isPassed
-                        ? "bg-gold/10 text-oxblood border-gold/40"
-                        : "bg-white/40 text-noir/30 border-gold/15"
+                        ? "bg-gold/10 text-oxblood dark:text-gold-light border-gold/40"
+                        : "bg-white/40 dark:bg-[#1C1719] text-noir/50 dark:text-ivory/60 border-gold/15 dark:border-gold/20"
                     }`}
                   >
                     <Icon className={`w-5 h-5 mb-2 ${isCurrent ? "text-gold-foil" : ""}`} />
@@ -188,11 +188,11 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
               })}
             </div>
           ) : (
-            <div className="p-4 bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-3">
-              <XCircle className="w-5 h-5 text-red-600 shrink-0" />
+            <div className="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 text-red-800 dark:text-red-300 text-xs flex items-center gap-3">
+              <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0" />
               <div>
                 <p className="font-semibold">Order Retracted</p>
-                <p className="text-red-700 mt-0.5">
+                <p className="text-red-700 dark:text-red-300 mt-0.5">
                   This commission has been cancelled. Inventory units were immediately restored to the active catalogue.
                 </p>
               </div>
@@ -201,7 +201,7 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
 
           {/* Status Change Audit Log */}
           <div className="mt-8 pt-6 border-t border-gold/20">
-            <h3 className="text-xs uppercase tracking-[0.25em] text-noir/60 font-semibold mb-4">
+            <h3 className="text-xs uppercase tracking-[0.25em] text-noir/60 dark:text-ivory/60 font-semibold mb-4">
               Atelier Ledger Log
             </h3>
             <div className="space-y-3">
@@ -211,14 +211,14 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
                   className="flex items-start justify-between text-xs py-2 border-b border-gold/10 last:border-0"
                 >
                   <div className="space-y-0.5">
-                    <span className="font-serif font-semibold text-oxblood uppercase tracking-wider">
+                    <span className="font-serif font-semibold text-oxblood dark:text-gold-light uppercase tracking-wider">
                       {hist.status}
                     </span>
                     {hist.note && (
-                      <p className="text-noir/70 italic">&ldquo;{hist.note}&rdquo;</p>
+                      <p className="text-noir/70 dark:text-ivory/70 italic">&ldquo;{hist.note}&rdquo;</p>
                     )}
                   </div>
-                  <span className="text-noir/40 text-[11px] shrink-0 ml-4">
+                  <span className="text-noir/40 dark:text-ivory/40 text-[11px] shrink-0 ml-4">
                     {formatDate(hist.createdAt)}
                   </span>
                 </div>
@@ -239,17 +239,17 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
               {order.items.map((it: any) => (
                 <div key={it.id} className="py-4 first:pt-0 flex justify-between items-center text-xs">
                   <div>
-                    <h3 className="font-serif text-sm md:text-base text-oxblood font-semibold">
+                    <h3 className="font-serif text-sm md:text-base text-oxblood dark:text-ivory font-semibold">
                       {it.title}
                     </h3>
-                    <p className="text-noir/60 mt-0.5">
+                    <p className="text-noir/60 dark:text-ivory/60 mt-0.5">
                       Shade: {it.color} · Size: {it.size} · SKU: <span className="font-mono text-[10px]">{it.sku}</span>
                     </p>
-                    <p className="text-noir/50 mt-0.5">
+                    <p className="text-noir/50 dark:text-ivory/50 mt-0.5">
                       {formatPrice(it.unitPriceAtPurchase)} × {it.qty}
                     </p>
                   </div>
-                  <span className="font-serif text-sm font-semibold text-oxblood">
+                  <span className="font-serif text-sm font-semibold text-oxblood dark:text-gold-light">
                     {formatPrice(it.subtotal)}
                   </span>
                 </div>
@@ -257,7 +257,7 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
             </div>
 
             {/* Financial Summary */}
-            <div className="pt-4 border-t border-gold/20 space-y-2 text-xs text-noir/70">
+            <div className="pt-4 border-t border-gold/20 space-y-2 text-xs text-noir/70 dark:text-ivory/70">
               <div className="flex justify-between">
                 <span>Subtotal</span>
                 <span>{formatPrice(order.subtotal)}</span>
@@ -272,7 +272,7 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
                 <span>White-Glove Delivery</span>
                 <span>{order.shipping === 0 ? "Complimentary" : formatPrice(order.shipping)}</span>
               </div>
-              <div className="pt-2 border-t border-gold/20 flex justify-between font-serif text-base text-oxblood font-semibold">
+              <div className="pt-2 border-t border-gold/20 flex justify-between font-serif text-base text-oxblood dark:text-gold-foil font-semibold">
                 <span>Total Amount Paid</span>
                 <span>{formatPrice(order.total)}</span>
               </div>
@@ -281,20 +281,20 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
 
           {/* Shipping & Payment Meta (Right Col) */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="bg-white/90 border border-gold/30 p-6 shadow-xs space-y-4 text-xs">
-              <h3 className="font-serif text-base text-oxblood border-b border-gold/20 pb-2 font-semibold">
+            <div className="bg-white/90 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-xs space-y-4 text-xs transition-colors duration-300">
+              <h3 className="font-serif text-base text-oxblood dark:text-gold-foil border-b border-gold/20 pb-2 font-semibold">
                 Client & Delivery Details
               </h3>
               <div>
-                <p className="text-noir/50 uppercase tracking-wider text-[10px]">Client</p>
-                <p className="font-semibold text-noir mt-0.5">{order.customerName}</p>
-                <p className="text-noir/60">{order.email}</p>
-                <p className="text-noir/60">{order.phone}</p>
+                <p className="text-noir/50 dark:text-ivory/50 uppercase tracking-wider text-[10px]">Client</p>
+                <p className="font-semibold text-noir dark:text-ivory mt-0.5">{order.customerName}</p>
+                <p className="text-noir/60 dark:text-ivory/60">{order.email}</p>
+                <p className="text-noir/60 dark:text-ivory/60">{order.phone}</p>
               </div>
 
               <div className="pt-2 border-t border-gold/10">
-                <p className="text-noir/50 uppercase tracking-wider text-[10px]">Delivery Address</p>
-                <p className="text-noir/80 mt-0.5">
+                <p className="text-noir/50 dark:text-ivory/50 uppercase tracking-wider text-[10px]">Delivery Address</p>
+                <p className="text-noir/80 dark:text-ivory/80 mt-0.5">
                   {order.shippingAddress?.line1}<br />
                   {order.shippingAddress?.city}, {order.shippingAddress?.state} {order.shippingAddress?.postalCode}<br />
                   {order.shippingAddress?.country}
@@ -302,7 +302,7 @@ export function OrderTimelineClient({ order: initialOrder }: OrderTimelineClient
               </div>
 
               <div className="pt-2 border-t border-gold/10">
-                <p className="text-noir/50 uppercase tracking-wider text-[10px]">Payment Protocol</p>
+                <p className="text-noir/50 dark:text-ivory/50 uppercase tracking-wider text-[10px]">Payment Protocol</p>
                 <p className="font-medium text-emerald flex items-center gap-1 mt-0.5">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   {order.paymentMethod} · {order.paymentStatus}

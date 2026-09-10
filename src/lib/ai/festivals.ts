@@ -41,7 +41,7 @@ export const FESTIVALS: FestivalConfig[] = [
     name: "Winter Royal Wedding Season",
     start: "2026-11-16",
     end: "2027-02-28",
-    theme: "bridal, heavy zari, katan silk, sherwani, velvet",
+    theme: "bridal, heavy zari, katan silk, contemporary silk, velvet",
     chipLabel: "The Bridal & Couture Edit 👑",
     suggestedPrompt: "Recommend royal heirloom pieces for a winter palace wedding",
   },

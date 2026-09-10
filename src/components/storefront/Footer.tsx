@@ -25,7 +25,7 @@ export function Footer() {
             <Shield className="w-5 h-5 text-gold mb-1" />
             <h4 className="font-serif text-sm text-ivory uppercase tracking-wider">Purity Promise</h4>
             <p className="text-xs text-ivory/60 leading-relaxed">
-              100% pure silks, fine fabrics, and certified metallic zari threads.
+              Pure silks, fine textiles, and artisan zari embroidery.
             </p>
           </div>
           <div className="flex flex-col items-center md:items-start space-y-2">
@@ -53,7 +53,7 @@ export function Footer() {
                 Zaria
               </span>
               <span className="block text-[10px] uppercase tracking-[0.45em] text-ivory/50">
-                Atelier · Across India
+                Atelier · India
               </span>
             </Link>
             <p className="text-xs text-ivory/70 max-w-sm leading-relaxed">
@@ -61,7 +61,7 @@ export function Footer() {
               artisan embroidery, rich fabrics, and timeless design.
             </p>
             <p className="text-[11px] text-gold-antique tracking-widest font-mono">
-              EST. MMXXVI · ALL OVER INDIA
+              EST. MMXXVI
             </p>
           </div>
 
@@ -73,7 +73,7 @@ export function Footer() {
             <ul className="space-y-2 text-xs text-ivory/70">
               <li>
                 <Link href="/shop?category=lehengas-couture" className="hover:text-gold transition-colors">
-                  Heirloom Bridal Lehengas
+                  Heirloom Lehengas & Couture
                 </Link>
               </li>
               <li>
@@ -92,8 +92,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=regal-menswear" className="hover:text-gold transition-colors">
-                  Achkans & Sherwanis
+                <Link href="/shop?category=contemporary-luxury" className="hover:text-gold transition-colors">
+                  Contemporary Luxury
                 </Link>
               </li>
             </ul>
@@ -131,7 +131,7 @@ export function Footer() {
           {/* Store Hours & Atelier */}
           <div className="md:col-span-3 space-y-3">
             <p className="text-[11px] uppercase tracking-[0.25em] text-gold font-semibold">
-              Artisan Guilds Across India
+              Artisan Textile Clusters
             </p>
             <p className="text-xs text-ivory/70 leading-relaxed">
               Weaving Looms & Ateliers in Varanasi, Chanderi, Kanchipuram & Kashmir<br />
