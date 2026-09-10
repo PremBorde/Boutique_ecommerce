@@ -53,31 +53,45 @@ export default function AdminLayout({
       label: "Total Revenue",
       value: metrics ? formatPrice(metrics.totalRevenue) : "—",
       icon: IndianRupee,
-      color: "text-gold-dark",
-      bg: "bg-gold/10",
+      iconColor: "text-amber-300",
+      iconBg: "bg-amber-500/20 border border-amber-400/30",
+      cardBorder: "border-amber-500/30 bg-gradient-to-br from-amber-950/30 to-black/40 hover:border-amber-400/60",
+      valueColor: "text-amber-200 font-bold",
+      labelColor: "text-amber-200/80",
     },
     {
       label: "Month Revenue",
       value: metrics ? formatPrice(metrics.revenueThisMonth) : "—",
       icon: TrendingUp,
-      color: "text-emerald",
-      bg: "bg-emerald/10",
+      iconColor: "text-emerald-300",
+      iconBg: "bg-emerald-500/20 border border-emerald-400/30",
+      cardBorder: "border-emerald-500/30 bg-gradient-to-br from-emerald-950/30 to-black/40 hover:border-emerald-400/60",
+      valueColor: "text-emerald-300 font-bold",
+      labelColor: "text-emerald-200/80",
     },
     {
       label: "Pending Orders",
       value: metrics ? String(metrics.pendingOrders) : "—",
       icon: Clock,
-      color: metrics && metrics.pendingOrders > 0 ? "text-amber-600" : "text-noir/50",
-      bg: metrics && metrics.pendingOrders > 0 ? "bg-amber-50" : "bg-noir/5",
-      urgent: metrics && metrics.pendingOrders > 0,
+      iconColor: metrics && metrics.pendingOrders > 0 ? "text-amber-300" : "text-sky-300",
+      iconBg: metrics && metrics.pendingOrders > 0 ? "bg-amber-500/20 border border-amber-400/40" : "bg-sky-500/20 border border-sky-400/30",
+      cardBorder: metrics && metrics.pendingOrders > 0
+        ? "border-amber-500/50 bg-gradient-to-br from-amber-950/40 to-black/40 hover:border-amber-400"
+        : "border-sky-500/30 bg-gradient-to-br from-sky-950/30 to-black/40 hover:border-sky-400/60",
+      valueColor: metrics && metrics.pendingOrders > 0 ? "text-amber-300 font-bold" : "text-sky-200 font-bold",
+      labelColor: metrics && metrics.pendingOrders > 0 ? "text-amber-200/90" : "text-sky-200/80",
     },
     {
       label: "Low / Zero Stock SKUs",
       value: metrics ? String(metrics.lowStockCount) : "—",
       icon: AlertTriangle,
-      color: metrics && metrics.lowStockCount > 0 ? "text-red-600" : "text-noir/50",
-      bg: metrics && metrics.lowStockCount > 0 ? "bg-red-50" : "bg-noir/5",
-      urgent: metrics && metrics.lowStockCount > 0,
+      iconColor: metrics && metrics.lowStockCount > 0 ? "text-rose-300" : "text-emerald-300",
+      iconBg: metrics && metrics.lowStockCount > 0 ? "bg-rose-500/25 border border-rose-400/40" : "bg-emerald-500/20 border border-emerald-400/30",
+      cardBorder: metrics && metrics.lowStockCount > 0
+        ? "border-rose-500/50 bg-gradient-to-br from-rose-950/40 to-black/40 hover:border-rose-400 shadow-xs shadow-rose-950"
+        : "border-emerald-500/30 bg-gradient-to-br from-emerald-950/30 to-black/40 hover:border-emerald-400/60",
+      valueColor: metrics && metrics.lowStockCount > 0 ? "text-rose-300 font-bold" : "text-emerald-300 font-bold",
+      labelColor: metrics && metrics.lowStockCount > 0 ? "text-rose-200/90" : "text-emerald-200/80",
     },
   ];
 
@@ -111,31 +125,25 @@ export default function AdminLayout({
         </div>
 
         {/* KPI Metrics Bar */}
-        <div className="bg-noir/80 border-t border-gold/15 px-4 md:px-8 py-2">
+        <div className="bg-[#120E11] border-t border-gold/20 px-4 md:px-8 py-2.5 shadow-inner">
           <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
             {kpiCards.map((card) => {
               const Icon = card.icon;
               return (
                 <div
                   key={card.label}
-                  className={`flex items-center gap-2.5 px-3 py-2 rounded border ${
-                    card.urgent
-                      ? "border-amber-400/40 bg-amber-900/20"
-                      : "border-gold/20 bg-white/5"
-                  }`}
+                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-md border transition-all ${card.cardBorder}`}
                 >
                   <div
-                    className={`w-7 h-7 rounded flex items-center justify-center shrink-0 ${card.bg}`}
+                    className={`w-8 h-8 rounded-md flex items-center justify-center shrink-0 ${card.iconBg}`}
                   >
-                    <Icon className={`w-3.5 h-3.5 ${card.color}`} />
+                    <Icon className={`w-4 h-4 ${card.iconColor}`} />
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-[9px] uppercase tracking-widest text-ivory/40 truncate">
+                  <div className="min-w-0 flex-1">
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold truncate ${card.labelColor}`}>
                       {card.label}
                     </p>
-                    <p
-                      className={`text-sm font-semibold font-mono leading-tight ${card.color}`}
-                    >
+                    <p className={`text-base font-mono leading-tight tracking-tight mt-0.5 ${card.valueColor}`}>
                       {card.value}
                     </p>
                   </div>
