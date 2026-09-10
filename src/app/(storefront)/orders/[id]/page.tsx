@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
 import { OrderTimelineClient } from "./OrderTimelineClient";
 
+// Always render on-demand \u2014 order data is user-specific and must never be statically cached.
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: {
     id: string;

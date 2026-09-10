@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import prisma from "@/lib/prisma";
 import { ProductDetailClient } from "./ProductDetailClient";
 
+// Dynamic route — never statically pre-render product pages at build time.
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: {
     slug: string;
@@ -10,26 +13,28 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = await prisma.product.findUnique({
-    where: { slug: params.slug },
-    include: { category: true, images: true },
-  });
+  try {
+    const product = await prisma.product.findUnique({
+      where: { slug: params.slug },
+      include: { category: true, images: true },
+    });
 
-  if (!product) {
+    if (!product) {
+      return { title: "Creations | Zaria Atelier" };
+    }
+
     return {
-      title: "Creations | Zaria Atelier",
-    };
-  }
-
-  return {
-    title: `${product.name} | Zaria Atelier`,
-    description: product.description,
-    openGraph: {
       title: `${product.name} | Zaria Atelier`,
       description: product.description,
-      images: product.images[0]?.url ? [{ url: product.images[0].url }] : [],
-    },
-  };
+      openGraph: {
+        title: `${product.name} | Zaria Atelier`,
+        description: product.description,
+        images: product.images[0]?.url ? [{ url: product.images[0].url }] : [],
+      },
+    };
+  } catch {
+    return { title: "Creations | Zaria Atelier" };
+  }
 }
 
 export default async function ProductPage({ params }: Props) {

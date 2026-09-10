@@ -8,30 +8,46 @@ import { CraftPillars } from "@/components/storefront/CraftPillars";
 import { LookbookRail } from "@/components/storefront/LookbookRail";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Gem } from "lucide-react";
+import { ArrowRight, Gem } from "lucide-react";
+
+// Always render server-side so Prisma queries run at request time, not build time.
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  // Fetch featured products and categories for the storefront
-  const [featuredProducts, categories] = await Promise.all([
-    prisma.product.findMany({
-      where: { active: true, featured: true },
-      take: 4,
-      include: {
-        category: true,
-        images: { orderBy: { order: "asc" } },
-        variants: {
-          where: { active: true },
-          include: { inventory: true },
-        },
+  // Fetch featured products and categories for the storefront.
+  // Wrapped in try/catch so a DB hiccup never crashes the whole page.
+  const productQuery = prisma.product.findMany({
+    where: { active: true, featured: true },
+    take: 4,
+    include: {
+      category: true,
+      images: { orderBy: { order: "asc" } },
+      variants: {
+        where: { active: true },
+        include: { inventory: true },
       },
-    }),
-    prisma.category.findMany({
-      take: 5,
-      include: {
-        _count: { select: { products: { where: { active: true } } } },
-      },
-    }),
-  ]);
+    },
+  });
+
+  const categoryQuery = prisma.category.findMany({
+    take: 5,
+    include: {
+      _count: { select: { products: { where: { active: true } } } },
+    },
+  });
+
+  type FeaturedProduct = Awaited<typeof productQuery>[number];
+  type CategoryWithCount = Awaited<typeof categoryQuery>[number];
+
+  let featuredProducts: FeaturedProduct[] = [];
+  let categories: CategoryWithCount[] = [];
+
+  try {
+    [featuredProducts, categories] = await Promise.all([productQuery, categoryQuery]);
+  } catch (err) {
+    console.error("[HomePage] DB fetch failed:", err);
+    // Page will render with empty collections — graceful degradation.
+  }
 
   const serializedFeaturedProducts = featuredProducts.map((p) => ({
     ...p,
