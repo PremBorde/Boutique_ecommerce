@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI, FunctionDeclaration, SchemaType } from "@google/generative-ai";
 import prisma from "./prisma";
 import { getStorePolicy } from "./store-info";
+import { GEMINI_MODEL_NAME } from "./ai/config";
 
 // 1. Declare Gemini Function Tools
 export const searchProductsDeclaration: FunctionDeclaration = {
@@ -284,9 +285,8 @@ export async function runGeminiChatLoop(
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    // Use gemini-2.0-flash or gemini-1.5-flash
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
+      model: GEMINI_MODEL_NAME,
       systemInstruction: STYLIST_SYSTEM_INSTRUCTION,
       tools: [
         {

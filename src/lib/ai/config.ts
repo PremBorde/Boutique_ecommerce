@@ -3,8 +3,9 @@
  * Centralized model designation. Swapping models is a one-line change.
  */
 
-// Primary model: gemini-2.0-flash (swap to "gemini-1.5-flash" if quota/availability limits are reached)
-export const GEMINI_MODEL_NAME = "gemini-2.0-flash";
+// Configurable model: defaults to gemini-2.0-flash-lite or gemini-2.0-flash
+export const GEMINI_MODEL_NAME =
+  process.env.GEMINI_MODEL_NAME || "gemini-2.0-flash-lite";
 
 export const GEMINI_FALLBACK_MODEL_NAME = "gemini-1.5-flash";
 
