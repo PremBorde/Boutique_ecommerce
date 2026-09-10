@@ -13,11 +13,22 @@ export async function GET() {
     );
   }
 
-  const userId = (session.user as any).id;
+  const userId = (session.user as any)?.id;
+  const userEmail = session.user.email?.toLowerCase().trim();
 
-  // Strict tenant security: user can ONLY fetch their own orders
+  // Strict tenant security: user can fetch orders tied to their userId or account email
+  const whereConditions: any[] = [];
+  if (userId) whereConditions.push({ userId });
+  if (userEmail) whereConditions.push({ email: userEmail });
+
+  if (whereConditions.length === 0) {
+    return NextResponse.json({ orders: [] });
+  }
+
   const orders = await prisma.order.findMany({
-    where: { userId },
+    where: {
+      OR: whereConditions,
+    },
     include: {
       items: true,
       statusHistory: {

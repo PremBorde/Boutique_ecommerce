@@ -150,11 +150,37 @@ export async function POST(req: Request) {
         const randomHex = Math.random().toString(16).substring(2, 6).toUpperCase();
         const orderNumber = `ZR-${new Date().getFullYear()}-${randomHex}`;
 
+        // 5.5 Verify and resolve valid userId to guarantee foreign key integrity
+        let validUserId: string | null = null;
+        if (userId) {
+          const userById = await tx.user.findUnique({
+            where: { id: userId },
+            select: { id: true },
+          });
+          if (userById) {
+            validUserId = userById.id;
+          }
+        }
+
+        // If session token has a stale ID (e.g. after DB reseed), match by verified email
+        if (!validUserId) {
+          const emailToMatch = session?.user?.email || email;
+          if (emailToMatch) {
+            const userByEmail = await tx.user.findUnique({
+              where: { email: emailToMatch.toLowerCase().trim() },
+              select: { id: true },
+            });
+            if (userByEmail) {
+              validUserId = userByEmail.id;
+            }
+          }
+        }
+
         // 6. Create Order with Items and Status History
         const createdOrder = await tx.order.create({
           data: {
             orderNumber,
-            userId,
+            userId: validUserId,
             customerName,
             email: email.toLowerCase().trim(),
             phone,
