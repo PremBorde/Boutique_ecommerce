@@ -46,6 +46,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [mounted, setMounted] = useState(false);
+  const [orderSuccess, setOrderSuccess] = useState<{ id: string } | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -111,14 +112,18 @@ export default function CheckoutPage() {
 
       // Success celebration
       confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.5 },
         colors: ["#C9A050", "#4A0E17", "#0B3B24", "#DFC07B"],
       });
 
+      setOrderSuccess({ id: data.order.id });
       clearCart();
-      router.push(`/orders/${data.order.id}`);
+
+      setTimeout(() => {
+        router.push(`/orders/${data.order.id}`);
+      }, 1800);
     } catch (err: any) {
       setErrorMsg(err.message || "An error occurred during payment processing.");
       setLoading(false);
@@ -142,6 +147,55 @@ export default function CheckoutPage() {
         <p className="text-xs uppercase tracking-[0.2em] text-gold-antique dark:text-gold-light">
           Preparing bespoke checkout...
         </p>
+      </div>
+    );
+  }
+
+  // Order Placed Success Banner
+  if (orderSuccess) {
+    return (
+      <div className="min-h-[75vh] flex flex-col items-center justify-center p-6 text-center bg-regal-texture">
+        <div className="max-w-md w-full p-8 md:p-10 border border-gold/40 rounded-xl bg-white/90 dark:bg-[#161214]/95 backdrop-blur-md shadow-2xl space-y-6 animate-in fade-in zoom-in duration-300">
+          <div className="w-16 h-16 mx-auto rounded-full bg-emerald/10 border border-emerald/40 flex items-center justify-center text-emerald">
+            <CheckCircle2 className="w-8 h-8" />
+          </div>
+
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-gold-dark dark:text-gold-light font-semibold mb-2">
+              Order Placed Successfully
+            </p>
+            <h1 className="font-serif text-2xl md:text-3xl text-oxblood dark:text-gold-foil">
+              Commission Confirmed
+            </h1>
+            <p className="text-xs text-gold-dark dark:text-gold-light font-mono mt-1.5 font-semibold">
+              Order Reference: #{orderSuccess.id.slice(-8).toUpperCase()}
+            </p>
+          </div>
+
+          <p className="text-xs text-noir/70 dark:text-ivory/80 leading-relaxed font-light">
+            Your atelier order has been placed. Directing to the Order State Machine timeline...
+          </p>
+
+          <div className="pt-2 space-y-2">
+            <div className="w-full bg-gold/20 h-1.5 rounded-full overflow-hidden">
+              <div className="bg-gradient-to-r from-oxblood via-gold to-emerald h-full w-full animate-pulse" />
+            </div>
+            <p className="text-[10px] uppercase tracking-widest text-gold-dark dark:text-gold-light font-mono">
+              Redirecting to Order Tracking...
+            </p>
+          </div>
+
+          <div className="pt-2">
+            <Link href={`/orders/${orderSuccess.id}`}>
+              <Button
+                variant="oxblood"
+                className="w-full h-11 text-xs tracking-[0.2em] uppercase font-medium flex items-center justify-center gap-2"
+              >
+                View Order State Machine
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
