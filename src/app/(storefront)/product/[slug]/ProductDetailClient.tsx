@@ -319,7 +319,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                       <span className="text-oxblood dark:text-gold-light font-normal">{selectedColor}</span>
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 flex-wrap">
+                  <div className="flex items-center gap-2.5 flex-wrap">
                     {uniqueColors.map((c) => {
                       const isSelected = selectedColor === c.color;
                       return (
@@ -327,7 +327,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                           key={c.color}
                           onClick={() => handleColorSelect(c.color)}
                           title={c.color}
-                          className={`group flex items-center gap-2 px-3 py-1.5 border transition-all ${
+                          className={`group h-10 flex items-center gap-2.5 px-3.5 border transition-all ${
                             isSelected
                               ? "border-oxblood dark:border-gold bg-white dark:bg-[#20181B] shadow-xs ring-1 ring-oxblood dark:ring-gold"
                               : "border-gold/30 dark:border-gold/20 bg-white/60 dark:bg-[#181315] hover:border-gold"
@@ -346,7 +346,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                   </div>
                 </div>
 
-                {/* 2. Size Selector (Matrix validation against selected color) */}
+                {/* 2. Size Selector (Consistent height and baseline across all buttons) */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs uppercase tracking-[0.2em] font-semibold text-noir dark:text-ivory">
@@ -372,7 +372,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                             setSelectedSize(sz);
                             setQuantity(1);
                           }}
-                          className={`relative py-3 px-2 border text-xs font-medium uppercase tracking-wider transition-all flex flex-col items-center justify-center ${
+                          className={`relative h-14 px-2 border transition-all flex flex-col items-center justify-center ${
                             isSelected && !isOutOfStock
                               ? "bg-oxblood dark:bg-gold-dark text-gold-light dark:text-noir border-oxblood dark:border-gold shadow-xs font-semibold"
                               : isOutOfStock
@@ -380,16 +380,22 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                               : "bg-white/80 dark:bg-[#181315] text-noir dark:text-ivory border-gold/30 dark:border-gold/20 hover:border-gold hover:bg-white dark:hover:bg-[#20181B]"
                           }`}
                         >
-                          <span>{sz}</span>
-                          {isOutOfStock ? (
-                            <span className="text-[8px] tracking-normal text-noir/40 dark:text-ivory/40 mt-0.5 no-underline">
-                              Sold Out
-                            </span>
-                          ) : stock <= 2 ? (
-                            <span className="text-[8px] text-amber-700 dark:text-amber-400 tracking-normal mt-0.5">
-                              {stock} left
-                            </span>
-                          ) : null}
+                          <span className="text-xs font-semibold uppercase tracking-wider">{sz}</span>
+                          <span className="text-[9px] tracking-normal mt-0.5 h-3.5 flex items-center justify-center leading-none">
+                            {isOutOfStock ? (
+                              <span className="text-noir/40 dark:text-ivory/40 no-underline">
+                                Sold Out
+                              </span>
+                            ) : stock <= 2 ? (
+                              <span className="text-amber-700 dark:text-amber-400 font-medium">
+                                {stock} left
+                              </span>
+                            ) : (
+                              <span className="text-emerald-700/80 dark:text-emerald-400/80">
+                                In Stock
+                              </span>
+                            )}
+                          </span>
                         </button>
                       );
                     })}
@@ -426,14 +432,15 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                   )}
                 </div>
 
-                {/* 4. Quantity Stepper & Add To Cart Button */}
-                <div className="flex items-center gap-4 pt-2">
+                {/* 4. Quantity Stepper & Add To Cart Button (Matched h-12 height) */}
+                <div className="flex items-center gap-3 pt-2">
                   {/* Stepper */}
-                  <div className="flex items-center border border-gold/40 dark:border-gold/25 bg-white dark:bg-[#181315] h-13 px-2">
+                  <div className="flex items-center border border-gold/40 dark:border-gold/25 bg-white dark:bg-[#181315] h-12 px-1 shrink-0">
                     <button
                       disabled={quantity <= 1 || !isVariantInStock}
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="w-8 h-full flex items-center justify-center text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold disabled:opacity-30 transition-colors"
+                      aria-label="Decrease quantity"
+                      className="w-9 h-full flex items-center justify-center text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold disabled:opacity-30 transition-colors"
                     >
                       <Minus className="w-3.5 h-3.5" />
                     </button>
@@ -443,7 +450,8 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                     <button
                       disabled={quantity >= currentStock || !isVariantInStock}
                       onClick={() => setQuantity((q) => Math.min(currentStock, q + 1))}
-                      className="w-8 h-full flex items-center justify-center text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold disabled:opacity-30 transition-colors"
+                      aria-label="Increase quantity"
+                      className="w-9 h-full flex items-center justify-center text-noir/60 dark:text-ivory/60 hover:text-oxblood dark:hover:text-gold disabled:opacity-30 transition-colors"
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>
@@ -455,7 +463,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                     disabled={!selectedVariant || !isVariantInStock}
                     onClick={handleAddToCart}
                     variant="oxblood"
-                    className="flex-1 h-13 text-xs tracking-[0.25em]"
+                    className="flex-1 h-12 text-xs tracking-[0.25em] font-semibold"
                   >
                     {!selectedVariant
                       ? "Select Color & Size"
