@@ -165,7 +165,7 @@ export default function CheckoutPage() {
               Order Placed Successfully
             </p>
             <h1 className="font-serif text-2xl md:text-3xl text-oxblood dark:text-gold-foil">
-              Commission Confirmed
+              Order Confirmed
             </h1>
             <p className="text-xs text-gold-dark dark:text-gold-light font-mono mt-1.5 font-semibold">
               Order Reference: #{orderSuccess.id.slice(-8).toUpperCase()}
@@ -191,7 +191,7 @@ export default function CheckoutPage() {
                 variant="oxblood"
                 className="w-full h-11 text-xs tracking-[0.2em] uppercase font-medium flex items-center justify-center gap-2"
               >
-                View Order State Machine
+                Track Your Order
               </Button>
             </Link>
           </div>
