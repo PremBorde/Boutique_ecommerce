@@ -44,7 +44,7 @@ export function CompanionAvatar({ onOpenChat }: CompanionAvatarProps) {
 
       {/* ── 2. Introductory Name Label (Shown once, then auto-collapses) ── */}
       <AnimatePresence>
-        {showIntroLabel && !isBubbleVisible && (
+        {showIntroLabel && (
           <motion.div
             initial={{ opacity: 0, y: 6, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
