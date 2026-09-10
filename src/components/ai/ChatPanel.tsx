@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProductCard } from "@/components/storefront/ProductCard";
 import { getActiveFestival } from "@/lib/ai/festivals";
+import { useCart } from "@/hooks/useCart";
 import { X, Send, Sparkles, AlertCircle, RefreshCw } from "lucide-react";
 
 interface Message {
@@ -23,6 +24,7 @@ interface PersonaBadgeData {
 }
 
 export function ChatPanel() {
+  const isDrawerOpen = useCart((state) => state.isDrawerOpen);
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -41,6 +43,7 @@ export function ChatPanel() {
     },
   ]);
 
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -80,10 +83,17 @@ export function ChatPanel() {
 
   // Scroll to bottom on message update
   useEffect(() => {
-    if (isOpen) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (isOpen && messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   }, [messages, isOpen, loading]);
+
+  // Close chat if bag/cart drawer opens so they don't collide
+  useEffect(() => {
+    if (isDrawerOpen) {
+      setIsOpen(false);
+    }
+  }, [isDrawerOpen]);
 
   // Focus input when opened
   useEffect(() => {
@@ -228,14 +238,16 @@ export function ChatPanel() {
 
   return (
     <>
-      {/* ── Floating Launcher Button (Section 5) ── */}
-      <div
-        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 ${
-          isOpen ? "hidden sm:flex" : "flex"
-        } flex-col items-end gap-2`}
-      >
-        <AnimatePresence>
-          {!isOpen && (
+      {/* ── Floating Launcher Button (Hidden when Bag Drawer or Chat is Open) ── */}
+      <AnimatePresence>
+        {!isDrawerOpen && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2"
+          >
             <motion.div
               initial={{ opacity: 0, y: 4, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -248,43 +260,39 @@ export function ChatPanel() {
                 Atelier Concierge
               </span>
             </motion.div>
-          )}
-        </AnimatePresence>
 
-        <motion.button
-          id="ai-chat-launcher"
-          onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Open Zaria Concierge Chat"
-          className="relative flex items-center justify-center w-[52px] h-[52px] sm:w-[58px] sm:h-[58px] rounded-full bg-gradient-to-br from-[#58111A] via-[#4A0E17] to-[#250409] border border-[#C9A050]/70 text-[#F7F4EB] shadow-[0_8px_28px_rgba(74,14,23,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A050]"
-        >
-          {/* Ambient idle glow */}
-          <span className="absolute -inset-1.5 rounded-full bg-[#C9A050]/20 blur-sm pointer-events-none animate-pulse" />
+            <motion.button
+              id="ai-chat-launcher"
+              onClick={() => setIsOpen(true)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Open Zaria Concierge Chat"
+              className="relative flex items-center justify-center w-[52px] h-[52px] sm:w-[58px] sm:h-[58px] rounded-full bg-gradient-to-br from-[#58111A] via-[#4A0E17] to-[#250409] border border-[#C9A050]/70 text-[#F7F4EB] shadow-[0_8px_28px_rgba(74,14,23,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A050]"
+            >
+              {/* Ambient idle glow */}
+              <span className="absolute -inset-1.5 rounded-full bg-[#C9A050]/20 blur-sm pointer-events-none animate-pulse" />
 
-          {isOpen ? (
-            <X className="w-5 h-5 text-[#F7F4EB] relative z-10" />
-          ) : (
-            <div className="relative z-10 flex flex-col items-center justify-center">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10.5" stroke="#C9A050" strokeWidth="0.8" opacity="0.6" />
-                <path
-                  d="M12 4 L13.1 10.9 L20 12 L13.1 13.1 L12 20 L10.9 13.1 L4 12 L10.9 10.9 Z"
-                  fill="#DFC07B"
-                />
-                <circle cx="12" cy="12" r="1.5" fill="#FAF7F2" />
-              </svg>
-            </div>
-          )}
-        </motion.button>
-      </div>
+              <div className="relative z-10 flex flex-col items-center justify-center">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10.5" stroke="#C9A050" strokeWidth="0.8" opacity="0.6" />
+                  <path
+                    d="M12 4 L13.1 10.9 L20 12 L13.1 13.1 L12 20 L10.9 13.1 L4 12 L10.9 10.9 Z"
+                    fill="#DFC07B"
+                  />
+                  <circle cx="12" cy="12" r="1.5" fill="#FAF7F2" />
+                </svg>
+              </div>
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── Slide-in Panel (Desktop / Tablet) / Bottom Sheet (Mobile) ── */}
       <AnimatePresence>
@@ -302,36 +310,23 @@ export function ChatPanel() {
 
             <motion.div
               id="ai-chat-panel"
+              data-lenis-prevent="true"
               initial={{ opacity: 0, y: 20, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.98 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-x-0 bottom-0 sm:inset-x-auto sm:bottom-24 sm:right-6 z-50 w-full sm:w-[410px] md:w-[440px] h-[85dvh] sm:h-[580px] md:h-[620px] max-h-[90dvh] sm:max-h-[calc(100dvh-7.5rem)] flex flex-col bg-[#FAF7F2] dark:bg-[#141012] rounded-t-3xl sm:rounded-2xl border-t sm:border border-[#C9A050]/40 shadow-[0_-8px_32px_rgba(0,0,0,0.3)] sm:shadow-[0_20px_60px_rgba(74,14,23,0.35)] overflow-hidden"
+              className="fixed inset-x-0 bottom-0 sm:inset-x-auto sm:bottom-6 sm:right-6 z-50 w-full sm:w-[400px] md:w-[420px] h-[82dvh] sm:h-[540px] md:h-[560px] max-h-[85dvh] sm:max-h-[calc(100vh-5rem)] flex flex-col bg-[#FAF7F2] dark:bg-[#141012] rounded-t-3xl sm:rounded-2xl border-t sm:border border-[#C9A050]/40 shadow-[0_-8px_32px_rgba(0,0,0,0.3)] sm:shadow-[0_16px_50px_rgba(40,8,14,0.45)] overflow-hidden"
             >
               {/* Header */}
               <div className="flex flex-col bg-gradient-to-r from-[#4A0E17] via-[#38070F] to-[#250409] text-[#FAF7F2] border-b border-[#C9A050]/30 select-none shrink-0">
                 {/* Mobile Pull/Drag Indicator */}
                 <div className="w-10 h-1 bg-[#C9A050]/40 rounded-full mx-auto mt-2.5 mb-1 sm:hidden" />
 
-                <div className="flex items-center justify-between px-4 py-3">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-7 h-7 rounded-full bg-[#35070D] border border-[#C9A050]/70 flex items-center justify-center shrink-0 shadow-inner">
-                      <Sparkles className="w-3.5 h-3.5 text-[#DFC07B]" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h2 className="font-serif text-sm font-semibold tracking-wider text-[#F7F4EB] truncate">
-                          Zaria Atelier Concierge
-                        </h2>
-                        <span className="hidden xs:inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-sans font-medium bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 shrink-0">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse" />
-                          Live
-                        </span>
-                      </div>
-                      <p className="text-[10px] text-[#DFC07B] font-sans tracking-widest uppercase truncate">
-                        Gemini Grounded Assistant
-                      </p>
-                    </div>
+                <div className="flex items-center justify-between px-4 py-3.5">
+                  <div className="flex items-center min-w-0">
+                    <h2 className="font-serif text-base font-semibold tracking-wider text-[#F7F4EB] truncate">
+                      Zaria Atelier Concierge
+                    </h2>
                   </div>
 
                   <div className="flex items-center gap-1.5 shrink-0 ml-2">
@@ -357,7 +352,16 @@ export function ChatPanel() {
               </div>
 
               {/* Message List */}
-              <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 scroll-smooth overscroll-contain">
+              <div
+                ref={messagesContainerRef}
+                data-lenis-prevent="true"
+                onWheel={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
+                className="flex-1 min-h-0 overflow-y-auto px-4 py-3 space-y-3 overscroll-contain"
+                style={{
+                  WebkitOverflowScrolling: "touch",
+                }}
+              >
                 {messages.map((msg) => (
                   <div
                     key={msg.id}

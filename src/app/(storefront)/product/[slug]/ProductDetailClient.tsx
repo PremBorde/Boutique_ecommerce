@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
+import { resolveShadeImage } from "@/lib/colorShades";
 import { Button } from "@/components/ui/button";
 import {
   ShieldCheck,
@@ -93,15 +94,42 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
   const currentStock = selectedVariant?.inventory?.quantity ?? 0;
   const isVariantInStock = currentStock > 0;
 
-  // Filter gallery images: prioritize images tagged with this color, else fallback to all
-  const displayedImages = useMemo(() => {
-    const colorSpecific = product.images.filter(
-      (img) => img.color && img.color.toLowerCase() === selectedColor.toLowerCase()
-    );
-    return colorSpecific.length > 0 ? colorSpecific : product.images;
-  }, [product.images, selectedColor]);
+  // Resolve image and shade for the active color
+  const resolvedColor = useMemo(() => {
+    return resolveShadeImage(product, selectedColor);
+  }, [product, selectedColor]);
 
-  const activeImage = displayedImages[activeImageIndex] || displayedImages[0] || product.images[0];
+  // Filter gallery images: prioritize images matching this color, with resolved studio photo first
+  const displayedImages = useMemo(() => {
+    const list: (ProductImage & { isTinted?: boolean })[] = [...product.images];
+
+    if (resolvedColor && !list.some((img) => img.url === resolvedColor.url)) {
+      return [
+        {
+          id: `resolved-${selectedColor}`,
+          url: resolvedColor.url,
+          altText: `${product.name} in ${selectedColor}`,
+          color: selectedColor,
+          isPrimary: true,
+          isTinted: resolvedColor.isTinted,
+        },
+        ...list,
+      ];
+    }
+
+    return list.map((img) => ({
+      ...img,
+      isTinted: img.url === resolvedColor.url ? resolvedColor.isTinted : false,
+    }));
+  }, [product.images, resolvedColor, selectedColor]);
+
+  const activeImage =
+    displayedImages[activeImageIndex] || {
+      id: "fallback",
+      url: resolvedColor.url,
+      isTinted: resolvedColor.isTinted,
+      altText: product.name,
+    };
 
   // When color changes, reset image index and check if current size is valid
   const handleColorSelect = (color: string) => {
@@ -203,11 +231,11 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
             <div className="relative flex-1 aspect-[3/4] bg-white border border-gold/30 overflow-hidden shadow-sm">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activeImage?.url}
+                  key={`${activeImage?.url}-${selectedColor}-${activeImageIndex}`}
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="relative w-full h-full"
                 >
                   <Image
@@ -218,6 +246,21 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                     sizes="(max-width: 1024px) 100vw, 60vw"
                     className="object-cover"
                   />
+                  {/* Dynamic Luxury Fabric Color Shade Overlay */}
+                  {activeImage?.isTinted && selectedVariant?.colorHex && (
+                    <motion.div
+                      key={`shade-${selectedVariant.colorHex}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.55 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.35 }}
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        backgroundColor: selectedVariant.colorHex,
+                        mixBlendMode: "color",
+                      }}
+                    />
+                  )}
                   {/* Subtle fabric texture vignette */}
                   <div className="absolute inset-0 bg-radial-vignette pointer-events-none opacity-30" />
                 </motion.div>

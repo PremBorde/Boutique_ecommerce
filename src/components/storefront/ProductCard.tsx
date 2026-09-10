@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { formatPrice } from "@/lib/utils";
+import { resolveShadeImage } from "@/lib/colorShades";
 
 interface ProductCardProps {
   product: {
@@ -57,6 +58,11 @@ export function ProductCard({ product }: ProductCardProps) {
     mouseY.set(0);
   };
 
+  const [activeColorShade, setActiveColorShade] = useState<{
+    color: string;
+    colorHex: string;
+  } | null>(null);
+
   const primaryImage =
     product.images.find((img) => img.isPrimary)?.url ||
     product.images[0]?.url ||
@@ -66,6 +72,12 @@ export function ProductCard({ product }: ProductCardProps) {
     product.images.length > 1
       ? product.images[1].url
       : primaryImage;
+
+  const currentShadeImage = activeColorShade
+    ? resolveShadeImage(product, activeColorShade.color)
+    : null;
+
+  const displayPrimaryImage = currentShadeImage?.url || primaryImage;
 
   // Unique colors
   const colorVariants = Array.from(
@@ -96,16 +108,28 @@ export function ProductCard({ product }: ProductCardProps) {
       <Link href={`/product/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/30">
         {/* Primary Image */}
         <Image
-          src={primaryImage}
+          src={displayPrimaryImage}
           alt={product.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={`object-cover transition-all duration-700 ease-out ${
-            isHovered && secondaryImage !== primaryImage
+            isHovered && secondaryImage !== primaryImage && !activeColorShade
               ? "opacity-0 scale-105"
               : "opacity-100 scale-100"
           }`}
         />
+
+        {/* Dynamic Shade Tint Overlay if card is previewing a shade */}
+        {currentShadeImage?.isTinted && activeColorShade?.colorHex && (
+          <div
+            className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+            style={{
+              backgroundColor: activeColorShade.colorHex,
+              mixBlendMode: "color",
+              opacity: 0.52,
+            }}
+          />
+        )}
 
         {/* Secondary Image (Crossfade on hover) */}
         {secondaryImage !== primaryImage && (
@@ -185,19 +209,33 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* Product Information */}
       <div className="pt-4 flex flex-col flex-1 justify-between">
         <div>
-          {/* Color Dots */}
+          {/* Color Dots with Live Shade Preview */}
           {colorVariants.length > 0 && (
             <div className="flex items-center gap-1.5 mb-2">
-              {colorVariants.map((v) => (
-                <span
-                  key={v.colorHex}
-                  title={v.color}
-                  style={{ backgroundColor: v.colorHex }}
-                  className="w-2.5 h-2.5 rounded-full border border-black/20 shadow-xs"
-                />
-              ))}
-              <span className="text-[10px] text-noir/40 dark:text-ivory/40 ml-1">
-                {colorVariants.length} {colorVariants.length === 1 ? "shade" : "shades"}
+              {colorVariants.map((v) => {
+                const isSelected = activeColorShade?.colorHex === v.colorHex;
+                return (
+                  <button
+                    type="button"
+                    key={v.colorHex}
+                    title={v.color}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setActiveColorShade(isSelected ? null : { color: v.color, colorHex: v.colorHex });
+                    }}
+                    onMouseEnter={() => setActiveColorShade({ color: v.color, colorHex: v.colorHex })}
+                    style={{ backgroundColor: v.colorHex }}
+                    className={`w-3 h-3 rounded-full border transition-transform cursor-pointer ${
+                      isSelected
+                        ? "scale-125 border-gold ring-1 ring-gold shadow-xs"
+                        : "border-black/20 hover:scale-110"
+                    }`}
+                  />
+                );
+              })}
+              <span className="text-[10px] text-noir/40 dark:text-ivory/40 ml-1 truncate">
+                {activeColorShade ? activeColorShade.color : `${colorVariants.length} ${colorVariants.length === 1 ? "shade" : "shades"}`}
               </span>
             </div>
           )}

@@ -38,7 +38,7 @@ export function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeDrawer}
-            className="fixed inset-0 bg-noir/70 backdrop-blur-sm z-50 transition-opacity"
+            className="fixed inset-0 bg-noir/70 backdrop-blur-sm z-[70] transition-opacity"
           />
 
           {/* Slide-in Drawer */}
@@ -47,7 +47,7 @@ export function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-ivory dark:bg-[#120E10] border-l border-gold/30 dark:border-gold/20 z-50 flex flex-col shadow-2xl transition-colors duration-300"
+            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-ivory dark:bg-[#120E10] border-l border-gold/30 dark:border-gold/20 z-[70] flex flex-col shadow-2xl transition-colors duration-300"
           >
             {/* Header */}
             <div className="p-6 border-b border-gold/20 flex items-center justify-between bg-white/60 dark:bg-[#171215]/80">
@@ -69,7 +69,10 @@ export function CartDrawer() {
             </div>
 
             {/* Items List */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            <div
+              data-lenis-prevent="true"
+              className="flex-1 min-h-0 overflow-y-auto p-6 space-y-6 overscroll-contain"
+            >
               {items.length === 0 ? (
                 <div className="py-20 text-center space-y-4">
                   <div className="w-16 h-16 rounded-full bg-gold/10 text-gold-dark flex items-center justify-center mx-auto">
