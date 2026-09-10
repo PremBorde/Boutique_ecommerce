@@ -1,11 +1,38 @@
 # Zaria Atelier — Indian Luxury Pret & Couture
 
+![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript_5-blue?style=for-the-badge&logo=typescript&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma_ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Gemini_2.0_Flash-8E75B2?style=for-the-badge&logo=google&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
+
 > *"Threaded in Gold, Cut in Silk"*  
-> An editorial e-commerce experience celebrating generational weaving guilds, royal baroque minimalism, and high-fashion craft. Built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, **Prisma ORM**, **PostgreSQL**, **Google Gemini 2.0 Flash function calling**, **GSAP ScrollTrigger**, and **Lenis Smooth Scroll**.
+> An editorial luxury e-commerce experience celebrating authentic weaving guilds, royal minimalism, and high-fashion artisanal craft. Built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, **Prisma ORM**, **PostgreSQL**, **Google Gemini 2.0 Flash function calling**, **GSAP ScrollTrigger**, and **Lenis Smooth Scroll**.
 
 📚 **Project Documentation Guides**:
-- 🏛️ **[ARCHITECTURE.md](file:///d:/Internship%20Challege/Boutique_ecommerce/ARCHITECTURE.md)**: In-depth technical architecture, concurrency models, state machine transitions, and hydration patterns.
-- 🚀 **[DEPLOYMENT.md](file:///d:/Internship%20Challege/Boutique_ecommerce/DEPLOYMENT.md)**: Production deployment instructions for Vercel, PostgreSQL/Supabase configuration, environment variables, and verification checklists.
+- 🏛️ **[ARCHITECTURE.md](./ARCHITECTURE.md)**: In-depth technical architecture, concurrency models, state machine transitions, and hydration patterns.
+- 🚀 **[DEPLOYMENT.md](./DEPLOYMENT.md)**: Production deployment instructions for Vercel, PostgreSQL/Supabase configuration, environment variables, and verification checklists.
+
+---
+
+## 📸 Visual Tour & Interface Highlights
+
+| Desktop Parallax Hero | Curated Heirlooms & Lookbook Rail |
+| :---: | :---: |
+| ![Hero Opening Ritual](./docs/screenshots/hero-opening-ritual.png) | ![Lookbook Rail](./docs/screenshots/lookbook-rail.png) |
+| *Atelier hero with subtle parallax and gold typography* | *Smooth drag-to-explore horizontal lookbook rail* |
+
+| AI Stylist Concierge | Real-Time Stock & Variant Matrix |
+| :---: | :---: |
+| ![AI Chat Concierge](./docs/screenshots/ai-chat-widget.png) | ![Product Detail Page](./docs/screenshots/product-variant-crossfade.png) |
+| *Grounded Gemini chat with inline ProductCards* | *Color swatch crossfade and live inventory badges* |
+
+| Admin Inventory & Demand Intelligence | Mobile Responsive Experience |
+| :---: | :---: |
+| ![Admin Management](./docs/screenshots/admin-dashboard.png) | ![Mobile Viewport](./docs/screenshots/mobile-storefront.png) |
+| *Live stock editor, catalog management & unmet demand logs* | *Fully responsive mobile drawer, navigation, and pillars* |
 
 ---
 
@@ -94,7 +121,11 @@ flowchart TD
 
 #### AI Guardrails & Grounding Verification Script Results
 
-Automated test suite (`scripts/verify_ai_guardrails.ts`) verified against live PostgreSQL:
+Automated test suite verified against live PostgreSQL:
+
+```bash
+pnpm tsx scripts/verify_ai_guardrails.ts
+```
 
 | Test Scenario | Query / Input | Expected Guardrail Behavior | Result |
 |---|---|---|:---:|
@@ -129,11 +160,10 @@ Automated test suite (`scripts/verify_ai_guardrails.ts`) verified against live P
 - **Historical Order Price Snapshot**: `OrderItem` stores unit price at purchase time, never joining live product prices.
 
 ### 3. Order Status State Machine
-- Strict lifecycle rules:
-  $$\text{PENDING} \longrightarrow \text{CONFIRMED} \longrightarrow \text{PROCESSING} \longrightarrow \text{SHIPPED} \longrightarrow \text{DELIVERED}$$
-- $\text{CANCELLED}$ is reachable **only** from $\text{PENDING}$ or $\text{CONFIRMED}$.
-- Cancelling an order atomically increments inventory back into the vault.
-- Terminal states ($\text{DELIVERED}$, $\text{CANCELLED}$) lock further transitions.
+- **Lifecycle Flow**: `PENDING` → `CONFIRMED` → `PROCESSING` → `SHIPPED` → `DELIVERED`.
+- `CANCELLED` is reachable **only** from `PENDING` or `CONFIRMED`.
+- Cancelling an order atomically increments inventory back into the database.
+- Terminal states (`DELIVERED`, `CANCELLED`) lock further transitions.
 
 ```mermaid
 stateDiagram-v2
@@ -160,10 +190,10 @@ stateDiagram-v2
 ### 5. Royal Nocturne Dark Mode & Active Nav Synchronization
 - **Nocturne Mode**: One-click toggle between warm ivory parchment (`#FAF7F2`) and obsidian velvet nocturne (`#0C0A0B`) with gilded borders (`#D4AF37`).
 - **Anti-FOUC Engine**: Zero flash of unstyled content via blocking inline `<head>` script reading `localStorage` before layout paint.
-- **Synchronized Vault Navigation**: Nav links accurately detect active categories via `useSearchParams()` (e.g. `/shop?category=lehengas-couture` highlights **LEHENGAS** with a gold underline, while `/shop` highlights **ALL CREATIONS**). Category filter tabs on the `/shop` page dynamically sync browser URLs.
+- **Synchronized Header Navigation**: Nav links accurately detect active categories via `useSearchParams()` (e.g. `/shop?category=lehengas-couture` highlights **LEHENGAS** with a gold underline, while `/shop` highlights **ALL CREATIONS**). Category filter tabs on the `/shop` page dynamically sync browser URLs.
 
 ### 6. Expanded 17-Piece Heirloom Catalog
-- **Diverse Categories**: Fully seeded vault spanning Lehengas & Couture (4), Heritage Sarees (4), Anarkalis & Ensembles (3), Festive Pret (3), and Regal Menswear (3).
+- **Diverse Categories**: Fully seeded catalogue database spanning Lehengas & Couture (4), Heritage Sarees (4), Anarkalis & Ensembles (3), Festive Pret (3), and Regal Menswear (3).
 - **Rich Specs**: Every garment features authentic Indian couture details — artisanal weave stories, fabric compositions, colorways, multi-angle photos, and SKU-level inventory tracking.
 
 ---
@@ -290,7 +320,7 @@ pnpm tsx scripts/verify_edge_cases.ts
 ### If I Had More Time
 1. **Redis Distributed Locks (Upstash)**: Add Redlock distributed locks alongside atomic conditional updates for multi-region clustering.
 2. **Virtual Fitting Room (3D Canvas)**: Integrate a Three.js fabric simulation shader to drape silks over a 3D mannequin based on customer waist and height inputs.
-3. **Automated WhatsApp / SMS Dispatch Notifications**: Wire Twilio webhooks to dispatch royal SMS updates as the order advances from $\text{PROCESSING} \to \text{SHIPPED}$.
+3. **Automated WhatsApp / SMS Dispatch Notifications**: Wire Twilio webhooks to dispatch automated SMS delivery tracking updates as the order advances from `PROCESSING` to `SHIPPED`.
 
 ---
 
@@ -304,11 +334,25 @@ The codebase was constructed with incremental, production-grade commits:
 - `feat: product catalogue + variant system`
 - `feat: cart + checkout + atomic inventory locking`
 - `feat: order status state machine + admin dashboard`
-- `feat: AI assistant backend (tools) + UI`
 - `feat: scroll animations (lenis+gsap) + signature interactions`
-- `fix/polish: suspense boundaries + edge cases test suite`
-- `docs: README + architecture notes`
+- `feat(ai): ship Gemini 2.0 Flash shopping assistant with real Prisma tools, guardrails, & companion`
+- `feat(ai): zero-cost prebuilt answers and smart local database fallback`
+- `fix(build): resolve Route export and missing useEffect for Vercel production build`
+- `docs: comprehensive README polish, screenshots, and architecture guides`
 
 ---
 
-*Handcrafted with devotional precision for the Full Stack Developer Internship Challenge.*
+## 📄 License
+
+This project is developed as an internship technical challenge submission and is licensed under the [MIT License](./LICENSE).
+
+---
+
+## 👤 Author & Contact
+
+**Prem Borde**  
+- 🌐 GitHub: [@PremBorde](https://github.com/PremBorde)  
+- 💼 Repository: [Boutique_ecommerce](https://github.com/PremBorde/Boutique_ecommerce)  
+- ✉️ Inquiry: Contact via GitHub Profile or Repository Issues
+
+*Handcrafted with meticulous attention to detail for the Full Stack Developer Internship Challenge.*
