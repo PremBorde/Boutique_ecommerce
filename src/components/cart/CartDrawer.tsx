@@ -170,6 +170,25 @@ export function CartDrawer() {
               )}
             </div>
 
+            {/* Section 8.3: Outfit-Completion Nudge Strip */}
+            {items.length > 0 && (
+              <div className="px-6 py-2.5 bg-[#FAF7F2] dark:bg-[#1E171A] border-t border-[#C9A050]/20 flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="text-[#C9A050] text-xs">✦</span>
+                  <p className="font-serif italic text-[11px] text-oxblood dark:text-ivory">
+                    Pair your selection with handcrafted heritage dupattas & brocades.
+                  </p>
+                </div>
+                <Link
+                  href="/shop?category=heritage-sarees"
+                  onClick={closeDrawer}
+                  className="text-[10px] uppercase tracking-wider text-[#9E7A2F] dark:text-gold-light hover:underline font-semibold shrink-0 ml-2"
+                >
+                  Explore Pairings →
+                </Link>
+              </div>
+            )}
+
             {/* Footer Summary & Checkout CTA */}
             {items.length > 0 && (
               <div className="p-6 border-t border-gold/25 bg-white/40 dark:bg-[#171215]/60 space-y-4">

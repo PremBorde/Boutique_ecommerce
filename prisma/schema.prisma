@@ -50,6 +50,7 @@ model Product {
   description String
   story       String?        // Editorial craft story
   fabric      String?        // e.g. "Handwoven Mulberry Silk with Zari Border"
+  stylistNote String?        // Ambient styling companion note
   basePrice   Decimal        @db.Decimal(10, 2)
   categoryId  String
   category    Category       @relation(fields: [categoryId], references: [id])
@@ -195,4 +196,12 @@ model ChatMessage {
   content    String
   productIds Json?       // Array of product UUIDs recommended
   createdAt  DateTime    @default(now())
+}
+
+model UnmetSearchRequest {
+  id          String   @id @default(cuid())
+  query       String?
+  filtersUsed Json?
+  sessionId   String?
+  createdAt   DateTime @default(now())
 }

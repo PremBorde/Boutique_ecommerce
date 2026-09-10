@@ -13,6 +13,7 @@ interface ProductCardProps {
     slug: string;
     description: string;
     fabric?: string | null;
+    stylistNote?: string | null;
     basePrice: number | string | { toString(): string };
     category?: { name: string; slug: string } | null;
     images: Array<{
@@ -132,6 +133,46 @@ export function ProductCard({ product }: ProductCardProps) {
             </span>
           )}
         </div>
+
+        {/* Ambient Stylist Companion on Hover (Section 7 - Zero extra API calls) */}
+        {product.stylistNote && (
+          <div
+            className={`absolute inset-x-2 top-2 z-20 transition-all duration-300 pointer-events-none ${
+              isHovered ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+            }`}
+          >
+            <div className="bg-[#FAF7F2]/95 dark:bg-[#161214]/95 backdrop-blur-md border border-[#C9A050]/40 p-2 shadow-lg">
+              <div className="flex items-start gap-1.5">
+                <span className="text-[#C9A050] text-[10px] select-none">✦</span>
+                <div className="flex-1">
+                  <p className="font-serif italic text-[10px] text-oxblood dark:text-ivory leading-tight line-clamp-2">
+                    &ldquo;{product.stylistNote}&rdquo;
+                  </p>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (typeof window !== "undefined") {
+                        window.dispatchEvent(
+                          new CustomEvent("zaria:ask-concierge", {
+                            detail: {
+                              prompt: `Tell me how to style ${product.name} and what pieces complement it.`,
+                            },
+                          })
+                        );
+                      }
+                    }}
+                    className="pointer-events-auto mt-1 text-[9px] uppercase tracking-wider text-[#9E7A2F] dark:text-gold-light hover:underline font-semibold flex items-center gap-1"
+                  >
+                    <span>Ask Concierge</span>
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* View Details Overlay on Hover */}
         <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-noir/80 via-noir/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

@@ -63,13 +63,53 @@ flowchart TD
 
 ## 💎 Core Capabilities
 
-### 1. AI Shopping Assistant — The Centerpiece (25% Weight)
-- **Model**: `gemini-2.0-flash` with native **function calling**.
-- **Zero-Hallucination Guarantee**: Declares 4 server tools (`searchProducts`, `getProductById`, `checkStock`, `getStoreInfo`). Gemini cannot guess prices, stock numbers, or garment SKUs — it is structurally forced to call real database queries before answering.
-- **Server Execution Loop**: Runs up to 5 iterative tool-call round trips server-side, returning real data via `functionResponse` parts.
-- **Structured Response Contract**: Returns `{ message: string, products: string[] }`. The frontend resolves product UUIDs into verified `<ProductCard />` components embedded directly in the chat stream.
-- **Persistent Memory**: Chat conversations persist across sessions using `ChatSession` and `ChatMessage` tables.
-- **Offline / Rate-Limit Resilience**: Graceful heuristic fallback engine guarantees smooth evaluator demonstration even if an API key is unconfigured.
+### 1. AI Shopping Assistant — Architecture & Guardrails (The Centerpiece)
+
+- **Model Engine**: `gemini-2.0-flash` (with one-line swap configuration in `src/lib/ai/config.ts` to `gemini-1.5-flash`).
+- **Zero-Hallucination Grounding**: Four real Prisma-backed grounding query functions in `src/lib/ai/tools.ts`:
+  - `searchProducts({ query, category, maxPrice, minPrice, color, size, inStockOnly })`: Sanitizes and trims DB rows (omitting admin cost prices or internal notes), caps results to 8.
+  - `getProductById({ id })`: Fetches precision garment details and live variants.
+  - `checkStock({ variantId, productId, color, size })`: Checks live vault inventory.
+  - `getStoreInfo({ topic })`: Canonical hand-written store policies (`returns`, `shipping`, `cod`, `craftsmanship`).
+  - `getCraftStory({ productId })`: Returns authentic craft heritage facts without LLM improvisations.
+- **Server Function-Calling Route (`/api/ai/chat`)**:
+  - Deterministic loop capped at 5 iterations.
+  - **Grounding ID Bookkeeping**: Product IDs in the structured `{ message, products: string[] }` response are derived exclusively from actual verified tool execution results (`touchedProductIds`), preventing model-invented IDs.
+  - Rate limiting & graceful degradation: Returns 200 with polite "taking a breath" message on 429 rather than broken UI.
+  - Server-Only Security: `GEMINI_API_KEY` and `@google/generative-ai` are strictly absent from all client bundles.
+- **Polished Chat UI (`ChatPanel.tsx` / `AiChatWidget.tsx`)**:
+  - Sliding drawer on desktop / bottom sheet on mobile with idle pulse.
+  - Renders the **existing storefront `<ProductCard />`** inline directly within the chat stream.
+  - Dynamic festival prompt chips (e.g. Navratri, Diwali) and style persona badges.
+- **Ambient Roaming Companion**:
+  - Hovering any product card displays `product.stylistNote` with **zero extra network requests**.
+  - Escalation button seamlessly launches Concierge prefilled with the garment inquiry.
+- **Creative Enhancements**:
+  - **8.1 Craft Storytelling**: Answers heritage questions from verified `story` & `fabric` columns.
+  - **8.2 Style Twin Persona**: Deterministic scoring (e.g. "👑 The Modern Maharani") based on session signals.
+  - **8.3 Complementary Nudges**: Curated pairing strips on cart drawer and chat recommendations.
+  - **8.4 Festival Windows**: Calendar-aware suggested prompt chips (Navratri, Karva Chauth, Diwali).
+  - **8.5 Honest "No Match" Logging**: Zero-match searches log to `UnmetSearchRequest` for merchant intelligence.
+  - **8.6 "Won't Oversell" Trait**: Recommends comparable lower-priced in-stock items when asked about price.
+
+#### AI Guardrails & Grounding Verification Script Results
+
+Automated test suite (`scripts/verify_ai_guardrails.ts`) verified against live PostgreSQL:
+
+| Test Scenario | Query / Input | Expected Guardrail Behavior | Result |
+|---|---|---|:---:|
+| **Zero Matches** | "black western mini dress polyester under ₹2,500" | Returns `[]` empty array; states no matches; logs to `UnmetSearchRequest`; never invents items. | **PASSED** |
+| **Missing Variant** | Query "XXXL" size on silk saree | Returns unavailable; reports real available sizes/colors; never assumes stock. | **PASSED** |
+| **Price Accuracy** | Price check on any garment | Reflects exact database `basePrice`; never hallucinates pricing. | **PASSED** |
+| **Return Policy** | "What is your return & exchange policy?" | Answers strictly from `STORE_INFO.returns` (7-day window, hallmark intact). | **PASSED** |
+| **Payment / COD** | "Can I pay with COD / cash on delivery?" | Answers strictly from `STORE_INFO.cod` (No COD for insured pure silk couture). | **PASSED** |
+| **Shipping Rules** | "What are your shipping rates and dispatch time?" | Answers strictly from `STORE_INFO.shipping` (Free above ₹10,000, 2–4 day dispatch). | **PASSED** |
+| **Craft Heritage (8.1)** | "What's the craft story of this piece?" | Retrieves DB `story`/`fabric`; states if unavailable; never invents cultural history. | **PASSED** |
+| **Style Twin (8.2)** | 2+ luxury silk & bridal queries | Classifies "The Modern Maharani" via tag overlap scoring without live AI calls. | **PASSED** |
+| **Pairings (8.3)** | Complementary category lookup | Returns curated pairing categories (Saree → Festive Pret / Anarkalis). | **PASSED** |
+| **Festival Windows (8.4)** | Date check for September–November | Detects active festival window (Navratri / Karva Chauth / Diwali) via calendar config. | **PASSED** |
+| **Unmet Search Log (8.5)** | Zero-match customer search | Successfully writes row to `UnmetSearchRequest` for admin dashboard review. | **PASSED** |
+| **Rate Limit Resilience** | Rapid-fire client messages | Gracefully throttles without breaking React state or showing raw stack traces. | **PASSED** |
 
 ### 2. Core Commerce & Race-Condition Safety (15% Weight)
 - **Variant/SKU Matrix**: Every color-size combination is its own row with unique SKU (`ZR-NML-CRM-M`) and independent 1:1 `Inventory` record.

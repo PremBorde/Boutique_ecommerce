@@ -18,9 +18,18 @@ export async function GET(req: Request) {
     const limit = Math.max(1, Math.min(50, Number(searchParams.get("limit") || "12")));
     const skip = (page - 1) * limit;
 
+    const idsParam = searchParams.get("ids");
+
     const where: any = {
       active: true,
     };
+
+    if (idsParam) {
+      const ids = idsParam.split(",").map((s) => s.trim()).filter(Boolean);
+      if (ids.length > 0) {
+        where.id = { in: ids };
+      }
+    }
 
     // Text search in name, description, story, fabric
     if (q.trim()) {

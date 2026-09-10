@@ -19,6 +19,7 @@ import {
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
+  const [unmetSearches, setUnmetSearches] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [feedback, setFeedback] = useState<{ msg: string; type: "success" | "error" } | null>(null);
 
@@ -65,6 +66,13 @@ export default function AdminProductsPage() {
           });
         });
         setStockInputs(initialStock);
+      }
+
+      // Load Section 8.5 unmet search insights
+      const unmetRes = await fetch("/api/admin/unmet-searches");
+      if (unmetRes.ok) {
+        const unmetData = await unmetRes.json();
+        setUnmetSearches(unmetData.requests || []);
       }
     } catch (err) {
       console.error("Failed to load admin products:", err);
@@ -338,6 +346,49 @@ export default function AdminProductsPage() {
           ))}
         </div>
       )}
+
+      {/* Section 8.5: Unmet Search Inquiries (AI Demand Intelligence) */}
+      <div className="mt-12 bg-white dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-sm space-y-4">
+        <div className="flex items-center justify-between border-b border-gold/20 pb-3">
+          <div>
+            <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil font-semibold">
+              Requested But Not in Stock
+            </h2>
+            <p className="text-xs text-noir/60 dark:text-ivory/60">
+              Patron queries where Gemini found 0 matching pieces — captures genuine unmet customer demand.
+            </p>
+          </div>
+          <span className="text-xs font-semibold px-2.5 py-1 bg-gold/10 text-gold-dark border border-gold/30">
+            {unmetSearches.length} logged
+          </span>
+        </div>
+
+        {unmetSearches.length === 0 ? (
+          <p className="text-xs text-noir/50 dark:text-ivory/50 italic py-4">
+            No unmet search requests recorded. The assistant is currently satisfying all customer discovery queries.
+          </p>
+        ) : (
+          <div className="divide-y divide-gold/15 max-h-60 overflow-y-auto text-xs">
+            {unmetSearches.map((req) => (
+              <div key={req.id} className="py-2.5 flex items-center justify-between">
+                <div>
+                  <span className="font-semibold text-oxblood dark:text-ivory">
+                    &ldquo;{req.query}&rdquo;
+                  </span>
+                  {req.filtersUsed && (
+                    <span className="text-[10px] text-noir/50 dark:text-ivory/50 ml-2 font-mono">
+                      {JSON.stringify(req.filtersUsed)}
+                    </span>
+                  )}
+                </div>
+                <span className="text-[10px] text-noir/40 dark:text-ivory/40 shrink-0 ml-4">
+                  {new Date(req.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Add Product Modal */}
       {showAddModal && (
