@@ -1,15 +1,20 @@
+<div align="center">
+
 # Zaria Atelier — Indian Luxury Pret & Couture
 
-![Next.js](https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript_5-blue?style=for-the-badge&logo=typescript&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma_ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![Google Gemini](https://img.shields.io/badge/Gemini_2.0_Flash-8E75B2?style=for-the-badge&logo=google&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
-
 > *"Threaded in Gold, Cut in Silk"*  
-> An editorial luxury e-commerce experience celebrating authentic weaving guilds, royal minimalism, and high-fashion artisanal craft. Built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, **Prisma ORM**, **PostgreSQL**, **Google Gemini 2.0 Flash function calling**, **GSAP ScrollTrigger**, and **Lenis Smooth Scroll**.
+> An editorial luxury e-commerce experience celebrating authentic weaving guilds, royal minimalism, and high-fashion craft. Built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, **Prisma ORM**, **PostgreSQL**, **GSAP ScrollTrigger**, and **Lenis Smooth Scroll**.
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js_14-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript_5-blue?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Prisma_ORM-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma" />
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+</p>
+
+</div>
 
 📚 **Project Documentation Guides**:
 - 🏛️ **[ARCHITECTURE.md](./ARCHITECTURE.md)**: In-depth technical architecture, concurrency models, state machine transitions, and hydration patterns.
@@ -17,22 +22,12 @@
 
 ---
 
-## 📸 Visual Tour & Interface Highlights
+## 📸 Interface Preview
 
 | Desktop Parallax Hero | Curated Heirlooms & Lookbook Rail |
 | :---: | :---: |
 | ![Hero Opening Ritual](./docs/screenshots/hero-opening-ritual.png) | ![Lookbook Rail](./docs/screenshots/lookbook-rail.png) |
 | *Atelier hero with subtle parallax and gold typography* | *Smooth drag-to-explore horizontal lookbook rail* |
-
-| AI Stylist Concierge | Real-Time Stock & Variant Matrix |
-| :---: | :---: |
-| ![AI Chat Concierge](./docs/screenshots/ai-chat-widget.png) | ![Product Detail Page](./docs/screenshots/product-variant-crossfade.png) |
-| *Grounded Gemini chat with inline ProductCards* | *Color swatch crossfade and live inventory badges* |
-
-| Admin Inventory & Demand Intelligence | Mobile Responsive Experience |
-| :---: | :---: |
-| ![Admin Management](./docs/screenshots/admin-dashboard.png) | ![Mobile Viewport](./docs/screenshots/mobile-storefront.png) |
-| *Live stock editor, catalog management & unmet demand logs* | *Fully responsive mobile drawer, navigation, and pillars* |
 
 ---
 
