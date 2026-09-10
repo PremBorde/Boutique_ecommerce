@@ -53,27 +53,7 @@ export function ProductCard({ product }: ProductCardProps) {
     mouseY.set(y);
   };
 
-  const dwellTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const startDwellTimer = (customColor?: string) => {
-    if (dwellTimerRef.current) clearTimeout(dwellTimerRef.current);
-    dwellTimerRef.current = setTimeout(() => {
-      useCompanionStore.getState().triggerOpinion(product, {
-        selectedColor: customColor || activeColorShade?.color,
-      });
-    }, 500);
-  };
-
-  const cancelDwellTimer = () => {
-    if (dwellTimerRef.current) {
-      clearTimeout(dwellTimerRef.current);
-      dwellTimerRef.current = null;
-    }
-  };
-
-  useEffect(() => {
-    return () => cancelDwellTimer();
-  }, []);
+  const cancelDwellTimer = () => {};
 
   const handleMouseLeave = () => {
     setIsHovered(false);
@@ -125,14 +105,8 @@ export function ProductCard({ product }: ProductCardProps) {
         transformStyle: "preserve-3d",
       }}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => {
-        setIsHovered(true);
-        startDwellTimer();
-      }}
+      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      onTouchStart={() => {
-        startDwellTimer();
-      }}
       className="group relative flex flex-col bg-white dark:bg-[#161214] border border-gold/25 dark:border-gold/20 p-3.5 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(74,14,23,0.18)] dark:hover:shadow-[0_20px_40px_-15px_rgba(201,160,80,0.15)]"
     >
       <Link href={`/product/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/30">

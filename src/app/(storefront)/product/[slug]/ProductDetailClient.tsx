@@ -18,7 +18,6 @@ import {
   AlertCircle,
   HelpCircle,
 } from "lucide-react";
-import { useCompanionStore } from "@/lib/companion/store";
 
 interface VariantType {
   id: string;
@@ -137,12 +136,6 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
     setSelectedColor(color);
     setActiveImageIndex(0);
     setQuantity(1);
-    const variantStock = checkSizeStock(selectedSize).stock;
-    useCompanionStore.getState().triggerOpinion(product, {
-      selectedColor: color,
-      selectedSize,
-      stock: variantStock,
-    });
   };
 
   // Helper to test if a size has stock for the selected color
@@ -173,14 +166,6 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
     setAddedNotice(true);
     setTimeout(() => setAddedNotice(false), 3000);
     openDrawer();
-
-    // Ambient companion post-decision affirmation
-    useCompanionStore.getState().triggerOpinion(product, {
-      selectedColor: selectedVariant.color,
-      selectedSize: selectedVariant.size,
-      stock: currentStock,
-      isCartAction: true,
-    });
   };
 
   const price = Number(selectedVariant?.priceOverride ?? product.basePrice);
@@ -386,11 +371,6 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                           onClick={() => {
                             setSelectedSize(sz);
                             setQuantity(1);
-                            useCompanionStore.getState().triggerOpinion(product, {
-                              selectedColor,
-                              selectedSize: sz,
-                              stock,
-                            });
                           }}
                           className={`relative h-14 px-2 border transition-all flex flex-col items-center justify-center ${
                             isSelected && !isOutOfStock

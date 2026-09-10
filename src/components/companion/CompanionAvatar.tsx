@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Sparkles, VolumeX, Volume2 } from "lucide-react";
 import { useCompanionStore } from "@/lib/companion/store";
 
 interface CompanionAvatarProps {
@@ -10,14 +9,7 @@ interface CompanionAvatarProps {
 }
 
 export function CompanionAvatar({ onOpenChat }: CompanionAvatarProps) {
-  const {
-    activeOpinion,
-    isBubbleVisible,
-    promptSeed,
-    isDisabled,
-    dismissBubble,
-    toggleDisabled,
-  } = useCompanionStore();
+  const { promptSeed, dismissBubble } = useCompanionStore();
 
   // Name label introduction on initial page load, collapses after 4.5 seconds
   const [showIntroLabel, setShowIntroLabel] = useState(true);
@@ -49,71 +41,6 @@ export function CompanionAvatar({ onOpenChat }: CompanionAvatarProps) {
 
   return (
     <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end pointer-events-none select-none">
-      {/* ── 1. Anchored Speech Bubble (Expanded from Avatar with Tail) ── */}
-      <AnimatePresence>
-        {isBubbleVisible && activeOpinion && !isDisabled && (
-          <motion.div
-            initial={{ opacity: 0, y: 12, scale: 0.94 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-auto relative mb-3 max-w-[290px] sm:max-w-[320px] bg-[#FAF7F2] dark:bg-[#1C1619] border border-[#C9A050]/55 p-3.5 rounded-xl shadow-[0_12px_32px_rgba(74,14,23,0.18)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.5)] cursor-pointer group"
-            onClick={handleClick}
-          >
-            {/* Top Row: Brand Flavour + Dismiss Control */}
-            <div className="flex items-center justify-between gap-2 pb-1.5 border-b border-[#C9A050]/20 mb-1.5">
-              <div className="flex items-center gap-1.5 text-[9.5px] uppercase tracking-[0.2em] font-semibold text-oxblood dark:text-gold-foil">
-                <Sparkles className="w-3 h-3 text-[#C9A050]" />
-                <span>Atelier Note</span>
-              </div>
-
-              <div className="flex items-center gap-1">
-                {/* Setting toggle to disable ambient opinions */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleDisabled();
-                  }}
-                  title={isDisabled ? "Enable companion notes" : "Mute companion notes"}
-                  className="w-5 h-5 flex items-center justify-center text-noir/40 hover:text-noir dark:text-ivory/40 dark:hover:text-ivory rounded transition-colors"
-                  aria-label="Mute ambient notes"
-                >
-                  <VolumeX className="w-3 h-3" />
-                </button>
-
-                {/* Dismiss Button */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    dismissBubble();
-                  }}
-                  title="Dismiss note"
-                  className="w-5 h-5 flex items-center justify-center text-noir/40 hover:text-oxblood dark:text-ivory/40 dark:hover:text-gold rounded transition-colors"
-                  aria-label="Dismiss note"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Opinion Body */}
-            <p className="font-serif text-[12px] sm:text-[12.5px] text-noir/90 dark:text-ivory/90 leading-relaxed italic">
-              &ldquo;{activeOpinion}&rdquo;
-            </p>
-
-            {/* Action Prompt Cue */}
-            <div className="mt-2 pt-1.5 flex items-center justify-between text-[9.5px] uppercase tracking-wider font-semibold text-gold-dark dark:text-gold-light group-hover:text-oxblood dark:group-hover:text-gold transition-colors">
-              <span>Ask Atelier Concierge</span>
-              <span className="group-hover:translate-x-0.5 transition-transform">→</span>
-            </div>
-
-            {/* CSS Speech Bubble Tail pointing downward to Avatar */}
-            <div className="absolute -bottom-2 right-6 w-3.5 h-3.5 bg-[#FAF7F2] dark:bg-[#1C1619] border-r border-b border-[#C9A050]/55 rotate-45" />
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* ── 2. Introductory Name Label (Shown once, then auto-collapses) ── */}
       <AnimatePresence>

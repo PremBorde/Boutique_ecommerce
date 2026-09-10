@@ -67,7 +67,7 @@ export const useCompanionStore = create<CompanionState>((set, get) => ({
       activeSignal: signalSource,
       promptSeed,
       lastProduct: product,
-      isBubbleVisible: true,
+      isBubbleVisible: false,
       lastSpokenTimestamp: now,
     });
   },

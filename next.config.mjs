@@ -17,8 +17,9 @@ const nextConfig = {
     ],
   },
 
-  // Prevent Prisma & bcrypt from being bundled into the edge runtime
-  serverExternalPackages: ['@prisma/client', 'bcryptjs'],
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'],
+  },
 };
 
 export default nextConfig;
