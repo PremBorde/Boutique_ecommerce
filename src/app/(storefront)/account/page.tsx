@@ -153,28 +153,32 @@ function AccountContent() {
 
         {session?.user ? (
           /* Logged In Dashboard */
-          <div className="space-y-8">
-            <div className="bg-ivory dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-8 shadow-sm transition-colors duration-300">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-gold/15">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-oxblood text-gold-light flex items-center justify-center font-serif text-xl border border-gold">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="bg-ivory dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-4 sm:p-8 shadow-xs transition-colors duration-300">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pb-6 border-b border-gold/15">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-oxblood text-gold-light flex items-center justify-center font-serif text-lg sm:text-xl border border-gold shrink-0">
                     {session.user.name?.[0] || "Z"}
                   </div>
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h1 className="text-2xl font-serif text-oxblood dark:text-gold-foil">{session.user.name}</h1>
-                      <span className="text-[10px] uppercase tracking-[0.2em] px-2.5 py-0.5 border border-gold/40 text-gold-dark dark:text-gold-light bg-gold/10 font-medium">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h1 className="text-xl sm:text-2xl font-serif text-oxblood dark:text-gold-foil font-normal truncate">
+                        {session.user.name}
+                      </h1>
+                      <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] px-2 py-0.5 border border-gold/40 text-gold-dark dark:text-gold-light bg-gold/10 font-medium rounded-xs">
                         {(session.user as any).role || "CUSTOMER"}
                       </span>
                     </div>
-                    <p className="text-xs text-noir/60 dark:text-ivory/60 tracking-wider mt-1">{session.user.email}</p>
+                    <p className="text-xs text-noir/60 dark:text-ivory/60 tracking-wider mt-0.5 truncate">
+                      {session.user.email}
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5 shrink-0">
                   {(session.user as any).role === "ADMIN" && (
                     <Link href="/admin">
-                      <Button variant="gold" size="sm" className="gap-2">
+                      <Button variant="gold" size="sm" className="gap-1.5 text-xs">
                         <ShieldCheck className="w-3.5 h-3.5" />
                         Admin Console
                       </Button>
@@ -184,7 +188,7 @@ function AccountContent() {
                     variant="outline"
                     size="sm"
                     onClick={() => signOut({ callbackUrl: "/account" })}
-                    className="gap-2 text-oxblood border-oxblood/30 hover:bg-oxblood/10"
+                    className="gap-1.5 text-xs text-oxblood border-oxblood/30 hover:bg-oxblood/10"
                   >
                     <LogOut className="w-3.5 h-3.5" />
                     Sign Out
@@ -193,27 +197,31 @@ function AccountContent() {
               </div>
 
               {/* Order History Section */}
-              <div className="mt-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-lg font-serif text-noir flex items-center gap-2">
-                    <Package className="w-4 h-4 text-gold" />
+              <div className="mt-6 sm:mt-8">
+                <div className="flex items-center justify-between mb-5">
+                  <h2 className="text-base sm:text-lg font-serif font-normal text-noir dark:text-ivory flex items-center gap-2">
+                    <Package className="w-4 h-4 text-gold shrink-0" />
                     Bespoke Order History
                   </h2>
-                  <span className="text-xs text-noir/50">{orders.length} orders on record</span>
+                  <span className="text-[11px] sm:text-xs text-noir/50 dark:text-ivory/50">
+                    {orders.length} {orders.length === 1 ? "order" : "orders"} on record
+                  </span>
                 </div>
 
                 {ordersLoading ? (
-                  <div className="py-12 text-center text-xs uppercase tracking-widest text-noir/50">
+                  <div className="py-10 text-center text-xs uppercase tracking-widest text-noir/50">
                     Retrieving orders from archive...
                   </div>
                 ) : orders.length === 0 ? (
-                  <div className="py-12 text-center border border-dashed border-gold/30 p-8">
-                    <p className="font-serif text-lg text-noir/70 mb-2">No orders placed yet</p>
-                    <p className="text-xs text-noir/50 max-w-sm mx-auto mb-6">
+                  <div className="py-10 sm:py-12 text-center border border-dashed border-gold/30 p-5 sm:p-8">
+                    <p className="font-serif text-base sm:text-lg text-noir/70 dark:text-ivory/70 font-normal mb-1.5">
+                      No orders placed yet
+                    </p>
+                    <p className="text-xs text-noir/50 dark:text-ivory/50 max-w-sm mx-auto mb-5">
                       Explore our handcrafted collections and acquire your first heirloom piece.
                     </p>
                     <Link href="/shop">
-                      <Button variant="oxblood" size="sm">
+                      <Button variant="oxblood" size="sm" className="text-xs px-5">
                         Explore Catalogue
                       </Button>
                     </Link>

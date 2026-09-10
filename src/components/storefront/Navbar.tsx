@@ -140,19 +140,19 @@ export function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-noir dark:text-ivory hover:text-oxblood dark:hover:text-gold p-1 shrink-0"
+          className="md:hidden text-noir dark:text-ivory hover:text-oxblood dark:hover:text-gold w-9 h-9 flex items-center justify-center -ml-1 shrink-0 cursor-pointer"
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
 
         {/* Brand Wordmark */}
-        <Link href="/" className="flex flex-col items-center group px-1">
+        <Link href="/" className="flex flex-col items-center group px-1 text-center">
           <span className="font-display text-xl sm:text-2xl md:text-3xl tracking-[0.18em] sm:tracking-[0.22em] text-oxblood dark:text-gold-foil uppercase group-hover:text-gold transition-colors font-semibold">
             Zaria
           </span>
-          <span className="text-[7.5px] sm:text-[8.5px] uppercase tracking-[0.25em] sm:tracking-[0.35em] text-gold-antique dark:text-gold-light/70 -mt-0.5 font-sans font-medium whitespace-nowrap">
-            Atelier · All Over India
+          <span className="text-[7.5px] sm:text-[9px] uppercase tracking-[0.32em] sm:tracking-[0.45em] text-gold-antique dark:text-gold-light/70 -mt-0.5 font-sans font-medium whitespace-nowrap">
+            Atelier · Jaipur
           </span>
         </Link>
 
@@ -162,11 +162,12 @@ export function Navbar() {
         </Suspense>
 
         {/* Right Actions */}
-        <div className="flex items-center space-x-2 sm:space-x-4">
+        <div className="flex items-center space-x-1 sm:space-x-3.5 shrink-0">
           <Link
             href="/shop"
-            className="text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light transition-colors p-1"
+            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light transition-colors"
             title="Search Catalogue"
+            aria-label="Search Catalogue"
           >
             <Search className="w-4 h-4" />
           </Link>
@@ -174,12 +175,13 @@ export function Navbar() {
           {/* Account Icon */}
           <Link
             href="/account"
-            className="text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light transition-colors p-1 relative"
+            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light transition-colors relative"
             title={session?.user ? `Signed in as ${session.user.name}` : "Client Account"}
+            aria-label="Client Account"
           >
             <User className="w-4 h-4" />
             {session?.user && (
-              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-gold" />
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-gold" />
             )}
           </Link>
 
@@ -201,12 +203,12 @@ export function Navbar() {
           <button
             id="navbar-cart-btn"
             onClick={toggleDrawer}
-            className="relative text-noir/80 dark:text-ivory/80 hover:text-oxblood dark:hover:text-gold-light transition-colors p-1 flex items-center"
+            className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-noir/70 dark:text-ivory/70 hover:text-oxblood dark:hover:text-gold-light transition-colors cursor-pointer"
             aria-label="View shopping bag"
           >
-            <ShoppingBag className="w-5 h-5 text-oxblood dark:text-gold-light" />
+            <ShoppingBag className="w-4 h-4 sm:w-[18px] sm:h-[18px] stroke-[1.4]" />
             {itemCount > 0 && (
-              <span className="absolute -top-1.5 -right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-oxblood dark:bg-gold-dark text-gold-foil dark:text-noir text-[10px] font-semibold flex items-center justify-center shadow-sm border border-gold/40">
+              <span className="absolute -top-0.5 -right-0.5 min-w-[15px] h-[15px] px-0.5 rounded-full bg-[#4A0E17] text-[#DFC07B] text-[8px] font-sans font-medium flex items-center justify-center shadow-xs border border-[#C9A050]/50 leading-none">
                 {itemCount}
               </span>
             )}

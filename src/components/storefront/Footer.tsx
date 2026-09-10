@@ -46,16 +46,16 @@ export function Footer() {
               <span className="font-display text-2xl tracking-[0.25em] text-gold-foil uppercase font-semibold">
                 Zaria
               </span>
-              <span className="block text-[10px] uppercase tracking-[0.35em] text-ivory/50">
-                Atelier · All Over India
+              <span className="block text-[10px] uppercase tracking-[0.45em] text-ivory/50">
+                Atelier · Jaipur
               </span>
             </Link>
             <p className="text-xs text-ivory/70 max-w-sm leading-relaxed">
               Threaded in Gold, Cut in Silk. An editorial Indian couture house celebrating regional
-              weaving guilds, regal silhouettes, and baroque ornament all over India.
+              weaving guilds, regal silhouettes, and baroque ornament.
             </p>
             <p className="text-[11px] text-gold-antique tracking-widest font-mono">
-              EST. MMXXVI · ALL OVER INDIA
+              EST. MMXXVI · JAIPUR
             </p>
           </div>
 

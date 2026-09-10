@@ -113,7 +113,8 @@ export function LookbookRail() {
       {/* Horizontal Drag-to-Explore Rail */}
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto px-4 md:px-8 pb-8 no-scrollbar scroll-smooth"
+        className="flex gap-4 sm:gap-6 overflow-x-auto px-3 sm:px-4 md:px-8 pb-8 no-scrollbar scroll-smooth touch-pan-x"
+        style={{ WebkitOverflowScrolling: "touch" }}
       >
         {FEATURED_LOOKS.map((look) => (
           <Link
@@ -124,10 +125,10 @@ export function LookbookRail() {
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.35, ease: "easeOut" }}
-              className="w-[300px] sm:w-[380px] bg-white dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-4 shadow-sm flex flex-col justify-between group transition-colors duration-300 h-full"
+              className="w-[260px] sm:w-[380px] bg-white dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-3.5 sm:p-4 shadow-sm flex flex-col justify-between group transition-colors duration-300 h-full"
             >
               {/* Image */}
-              <div className="relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/40 border border-gold/20 mb-4">
+              <div className="relative aspect-[3/4] overflow-hidden bg-noir/5 dark:bg-noir/40 border border-gold/20 mb-3.5 sm:mb-4">
                 <Image
                   src={look.image}
                   alt={look.name}
