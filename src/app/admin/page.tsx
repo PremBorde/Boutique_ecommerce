@@ -178,18 +178,18 @@ export default function AdminProductsPage() {
   return (
     <div className="space-y-6">
       {/* Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-xs transition-colors">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/80 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-4 sm:p-6 shadow-xs transition-colors">
         <div>
-          <h1 className="font-serif text-2xl text-oxblood dark:text-gold-foil font-semibold flex items-center gap-2">
-            <Layers className="w-5 h-5 text-gold-dark dark:text-gold" />
-            Atelier Products & Variant Inventory
+          <h1 className="font-serif text-xl sm:text-2xl text-oxblood dark:text-gold-foil font-semibold flex items-center gap-2">
+            <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-gold-dark dark:text-gold shrink-0" />
+            <span>Atelier Products &amp; Inventory</span>
           </h1>
-          <p className="text-xs text-noir/60 dark:text-ivory/60 mt-1">
+          <p className="text-xs text-noir/60 dark:text-ivory/60 mt-1 hidden sm:block">
             Manage live pricing, active states, and real-time inventory quantities per SKU.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Button
             variant="outline"
             size="sm"
@@ -206,7 +206,8 @@ export default function AdminProductsPage() {
             className="gap-1.5 text-xs tracking-wider"
           >
             <Plus className="w-3.5 h-3.5" />
-            Add Garment Piece
+            <span className="hidden xs:inline">Add Garment</span>
+            <span className="xs:hidden">Add</span>
           </Button>
         </div>
       </div>
@@ -244,9 +245,9 @@ export default function AdminProductsPage() {
               }`}
             >
               {/* Product Header */}
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gold/15 dark:border-gold/10">
-                <div className="flex items-center gap-4">
-                  <div className="relative w-14 h-18 bg-noir/5 dark:bg-white/5 border border-gold/20 overflow-hidden shrink-0">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gold/15 dark:border-gold/10">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-12 h-16 sm:w-14 sm:h-18 bg-noir/5 dark:bg-white/5 border border-gold/20 overflow-hidden shrink-0">
                     <Image
                       src={
                         product.images?.[0]?.url ||
@@ -258,13 +259,13 @@ export default function AdminProductsPage() {
                       className="object-cover"
                     />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h3 className="font-serif text-lg text-oxblood dark:text-gold-foil font-semibold">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-serif text-base sm:text-lg text-oxblood dark:text-gold-foil font-semibold leading-tight">
                         {product.name}
                       </h3>
                       <span
-                        className={`text-[9px] uppercase tracking-widest px-2 py-0.5 border font-medium ${
+                        className={`text-[9px] uppercase tracking-widest px-2 py-0.5 border font-medium shrink-0 ${
                           product.active
                             ? "bg-emerald/10 text-emerald border-emerald/30"
                             : "bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-ivory/60 border-gray-300 dark:border-white/10"
@@ -274,8 +275,8 @@ export default function AdminProductsPage() {
                       </span>
                     </div>
                     <p className="text-xs text-noir/60 dark:text-ivory/60 mt-0.5">
-                      Category: <span className="font-medium text-noir dark:text-ivory">{product.category?.name}</span> · Base
-                      Price: <span className="font-semibold text-oxblood dark:text-gold-light">{formatPrice(product.basePrice)}</span>
+                      <span className="hidden sm:inline">Category: <span className="font-medium text-noir dark:text-ivory">{product.category?.name}</span> · </span>
+                      Base: <span className="font-semibold text-oxblood dark:text-gold-light">{formatPrice(product.basePrice)}</span>
                     </p>
                   </div>
                 </div>
@@ -288,7 +289,7 @@ export default function AdminProductsPage() {
                     className="text-[10px] uppercase tracking-wider text-noir dark:text-ivory border-gold/30 dark:border-gold/20 hover:bg-gold/10"
                   >
                     <Archive className="w-3.5 h-3.5 mr-1" />
-                    {product.active ? "Archive Piece" : "Activate"}
+                    {product.active ? "Archive" : "Activate"}
                   </Button>
                 </div>
               </div>
@@ -348,17 +349,17 @@ export default function AdminProductsPage() {
       )}
 
       {/* Section 8.5: Unmet Search Inquiries (AI Demand Intelligence) */}
-      <div className="mt-12 bg-white dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-6 shadow-sm space-y-4">
-        <div className="flex items-center justify-between border-b border-gold/20 pb-3">
+      <div className="mt-6 sm:mt-12 bg-white dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-4 sm:p-6 shadow-sm space-y-4">
+        <div className="flex items-start sm:items-center justify-between border-b border-gold/20 pb-3 gap-3">
           <div>
-            <h2 className="font-serif text-lg text-oxblood dark:text-gold-foil font-semibold">
+            <h2 className="font-serif text-base sm:text-lg text-oxblood dark:text-gold-foil font-semibold">
               Requested But Not in Stock
             </h2>
-            <p className="text-xs text-noir/60 dark:text-ivory/60">
+            <p className="text-xs text-noir/60 dark:text-ivory/60 hidden sm:block">
               Patron queries where Gemini found 0 matching pieces — captures genuine unmet customer demand.
             </p>
           </div>
-          <span className="text-xs font-semibold px-2.5 py-1 bg-gold/10 text-gold-dark border border-gold/30">
+          <span className="text-xs font-semibold px-2.5 py-1 bg-gold/10 text-gold-dark border border-gold/30 shrink-0">
             {unmetSearches.length} logged
           </span>
         </div>
@@ -393,7 +394,7 @@ export default function AdminProductsPage() {
       {/* Add Product Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 bg-noir/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-ivory dark:bg-[#161214] border border-gold/40 dark:border-gold/30 p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl space-y-6 text-noir dark:text-ivory transition-colors">
+          <div className="bg-ivory dark:bg-[#161214] border border-gold/40 dark:border-gold/30 p-4 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl space-y-4 sm:space-y-6 text-noir dark:text-ivory transition-colors">
             <div className="flex items-center justify-between border-b border-gold/20 pb-4">
               <h2 className="font-serif text-2xl text-oxblood dark:text-gold-foil font-semibold">
                 Commission New Garment Piece
