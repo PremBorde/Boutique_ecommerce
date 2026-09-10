@@ -229,14 +229,18 @@ export function ChatPanel() {
   return (
     <>
       {/* ── Floating Launcher Button (Section 5) ── */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-2">
+      <div
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 ${
+          isOpen ? "hidden sm:flex" : "flex"
+        } flex-col items-end gap-2`}
+      >
         <AnimatePresence>
           {!isOpen && (
             <motion.div
               initial={{ opacity: 0, y: 4, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 4, scale: 0.95 }}
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#FAF7F2] dark:bg-[#161214] border border-[#C9A050]/60 shadow-[0_4px_16px_rgba(74,14,23,0.12)] cursor-pointer select-none"
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-[#FAF7F2] dark:bg-[#161214] border border-[#C9A050]/60 shadow-[0_4px_16px_rgba(74,14,23,0.12)] cursor-pointer select-none rounded-md"
               onClick={() => setIsOpen(true)}
             >
               <Sparkles className="w-3.5 h-3.5 text-[#C9A050] animate-pulse" />
@@ -253,7 +257,7 @@ export function ChatPanel() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Open Zaria Concierge Chat"
-          className="relative flex items-center justify-center w-[54px] h-[54px] sm:w-[60px] sm:h-[60px] rounded-full bg-gradient-to-br from-[#58111A] via-[#4A0E17] to-[#250409] border border-[#C9A050]/70 text-[#F7F4EB] shadow-[0_8px_28px_rgba(74,14,23,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A050]"
+          className="relative flex items-center justify-center w-[52px] h-[52px] sm:w-[58px] sm:h-[58px] rounded-full bg-gradient-to-br from-[#58111A] via-[#4A0E17] to-[#250409] border border-[#C9A050]/70 text-[#F7F4EB] shadow-[0_8px_28px_rgba(74,14,23,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A050]"
         >
           {/* Ambient idle glow */}
           <span className="absolute -inset-1.5 rounded-full bg-[#C9A050]/20 blur-sm pointer-events-none animate-pulse" />
@@ -282,7 +286,7 @@ export function ChatPanel() {
         </motion.button>
       </div>
 
-      {/* ── Slide-in Panel (Desktop) / Bottom Sheet (Mobile) ── */}
+      {/* ── Slide-in Panel (Desktop / Tablet) / Bottom Sheet (Mobile) ── */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -291,57 +295,69 @@ export function ChatPanel() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 sm:hidden"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 sm:hidden"
               onClick={() => setIsOpen(false)}
             />
 
             <motion.div
               id="ai-chat-panel"
-              initial={{ opacity: 0, y: 30, scale: 0.98 }}
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.98 }}
-              transition={{ duration: 0.28, ease: "easeOut" }}
-              className="fixed bottom-0 sm:bottom-22 right-0 sm:right-6 z-50 w-full sm:w-[440px] h-[90vh] sm:h-[620px] max-h-[92vh] flex flex-col bg-[#FAF7F2] dark:bg-[#141012] border-t sm:border border-[#C9A050]/40 sm:shadow-[0_20px_50px_rgba(74,14,23,0.3)] overflow-hidden"
+              exit={{ opacity: 0, y: 20, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed inset-x-0 bottom-0 sm:inset-x-auto sm:bottom-24 sm:right-6 z-50 w-full sm:w-[410px] md:w-[440px] h-[85dvh] sm:h-[580px] md:h-[620px] max-h-[90dvh] sm:max-h-[calc(100dvh-7.5rem)] flex flex-col bg-[#FAF7F2] dark:bg-[#141012] rounded-t-3xl sm:rounded-2xl border-t sm:border border-[#C9A050]/40 shadow-[0_-8px_32px_rgba(0,0,0,0.3)] sm:shadow-[0_20px_60px_rgba(74,14,23,0.35)] overflow-hidden"
             >
               {/* Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-[#4A0E17] text-[#FAF7F2] border-b border-[#C9A050]/30 select-none">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-[#35070D] border border-[#C9A050]/60 flex items-center justify-center">
-                    <span className="text-[#C9A050] text-xs">✦</span>
-                  </div>
-                  <div>
-                    <h2 className="font-serif text-sm tracking-wider text-[#F7F4EB]">
-                      Zaria Atelier Concierge
-                    </h2>
-                    <p className="text-[10px] text-[#DFC07B] font-sans tracking-widest uppercase">
-                      Gemini Grounded Assistant
-                    </p>
-                  </div>
-                </div>
+              <div className="flex flex-col bg-gradient-to-r from-[#4A0E17] via-[#38070F] to-[#250409] text-[#FAF7F2] border-b border-[#C9A050]/30 select-none shrink-0">
+                {/* Mobile Pull/Drag Indicator */}
+                <div className="w-10 h-1 bg-[#C9A050]/40 rounded-full mx-auto mt-2.5 mb-1 sm:hidden" />
 
-                <div className="flex items-center gap-1.5">
-                  {/* Persona Badge (Section 8.2) */}
-                  {activePersona && (
-                    <div
-                      title={activePersona.tagline}
-                      className="px-2 py-0.5 rounded-full bg-[#35070D] border border-[#C9A050]/60 text-[#DFC07B] text-[10px] font-sans tracking-wide"
-                    >
-                      {activePersona.badge}
+                <div className="flex items-center justify-between px-4 py-3">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-7 h-7 rounded-full bg-[#35070D] border border-[#C9A050]/70 flex items-center justify-center shrink-0 shadow-inner">
+                      <Sparkles className="w-3.5 h-3.5 text-[#DFC07B]" />
                     </div>
-                  )}
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h2 className="font-serif text-sm font-semibold tracking-wider text-[#F7F4EB] truncate">
+                          Zaria Atelier Concierge
+                        </h2>
+                        <span className="hidden xs:inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-sans font-medium bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 shrink-0">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse" />
+                          Live
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-[#DFC07B] font-sans tracking-widest uppercase truncate">
+                        Gemini Grounded Assistant
+                      </p>
+                    </div>
+                  </div>
 
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="p-1 text-[#DFC07B] hover:text-[#FAF7F2] transition-colors"
-                    aria-label="Close chat"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
+                  <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                    {/* Persona Badge */}
+                    {activePersona && (
+                      <div
+                        title={activePersona.tagline}
+                        className="hidden md:flex items-center px-2 py-0.5 rounded-full bg-[#35070D] border border-[#C9A050]/60 text-[#DFC07B] text-[10px] font-sans tracking-wide"
+                      >
+                        {activePersona.badge}
+                      </div>
+                    )}
+
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="p-1.5 rounded-full text-[#DFC07B] hover:text-[#FAF7F2] hover:bg-white/10 active:bg-white/20 transition-colors"
+                      aria-label="Close chat"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* Message List */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3.5 scroll-smooth">
+              <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 scroll-smooth overscroll-contain">
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
@@ -351,16 +367,16 @@ export function ChatPanel() {
                   >
                     {/* Message Bubble */}
                     <div
-                      className={`max-w-[85%] px-3.5 py-2.5 text-xs leading-relaxed ${
+                      className={`max-w-[88%] sm:max-w-[82%] px-3.5 py-2.5 text-xs sm:text-[13px] leading-relaxed break-words shadow-xs ${
                         msg.role === "user"
-                          ? "bg-[#4A0E17] text-[#FAF7F2] border border-[#C9A050]/40 rounded-tl-lg rounded-tr-none rounded-bl-lg rounded-br-lg"
-                          : "bg-white dark:bg-[#1E171A] text-[#250409] dark:text-[#FAF7F2] border border-[#C9A050]/25 shadow-xs rounded-tl-none rounded-tr-lg rounded-bl-lg rounded-br-lg"
+                          ? "bg-[#4A0E17] text-[#FAF7F2] border border-[#C9A050]/40 rounded-2xl rounded-tr-xs"
+                          : "bg-white dark:bg-[#1E171A] text-[#250409] dark:text-[#FAF7F2] border border-[#C9A050]/25 rounded-2xl rounded-tl-xs"
                       }`}
                     >
                       {msg.content}
                     </div>
 
-                    {/* Inline Products Grid (Using existing ProductCard - Section 4 & 5) */}
+                    {/* Inline Products Grid */}
                     {msg.resolvedProducts && msg.resolvedProducts.length > 0 && (
                       <div className="mt-2.5 w-full space-y-2">
                         <span className="text-[10px] uppercase tracking-[0.2em] text-[#9E7A2F] dark:text-[#DFC07B] font-medium block">
@@ -368,7 +384,7 @@ export function ChatPanel() {
                         </span>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                           {msg.resolvedProducts.map((prod) => (
-                            <div key={prod.id} className="scale-95 origin-top-left">
+                            <div key={prod.id} className="w-full">
                               <ProductCard product={prod} />
                             </div>
                           ))}
@@ -389,7 +405,7 @@ export function ChatPanel() {
                 {/* Loading state indicator */}
                 {loading && (
                   <div className="flex items-start gap-2">
-                    <div className="bg-white dark:bg-[#1E171A] border border-[#C9A050]/30 px-3 py-2 rounded-lg flex items-center gap-1.5 shadow-xs">
+                    <div className="bg-white dark:bg-[#1E171A] border border-[#C9A050]/30 px-3.5 py-2 rounded-2xl flex items-center gap-1.5 shadow-xs">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#C9A050] animate-bounce" />
                       <span className="w-1.5 h-1.5 rounded-full bg-[#C9A050] animate-bounce [animation-delay:0.15s]" />
                       <span className="w-1.5 h-1.5 rounded-full bg-[#C9A050] animate-bounce [animation-delay:0.3s]" />
@@ -401,8 +417,8 @@ export function ChatPanel() {
                 )}
 
                 {errorState && (
-                  <div className="flex items-center gap-1.5 p-2 bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-200 text-[10px]">
-                    <AlertCircle className="w-3 h-3 shrink-0" />
+                  <div className="flex items-center gap-1.5 p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-amber-800 dark:text-amber-200 text-[10px]">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                     <span>{errorState}</span>
                   </div>
                 )}
@@ -410,19 +426,22 @@ export function ChatPanel() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Suggested Prompts / Chips (Dynamic Festival-aware - Section 8.4) */}
-              <div className="px-3 pt-2 pb-1 border-t border-[#C9A050]/20 bg-[#F4EFE6]/60 dark:bg-[#1A1417]/60">
-                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+              {/* Suggested Prompts / Chips (Dynamic Festival-aware) */}
+              <div className="px-3 py-2 border-t border-[#C9A050]/20 bg-[#F4EFE6]/90 dark:bg-[#1A1417]/90 backdrop-blur-xs shrink-0">
+                <div
+                  className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5"
+                  style={{ WebkitOverflowScrolling: "touch" }}
+                >
                   {suggestedPrompts.map((chip, idx) => (
                     <button
                       key={idx}
                       type="button"
                       disabled={loading}
                       onClick={() => handleSendMessage(chip.prompt)}
-                      className={`whitespace-nowrap px-2.5 py-1 text-[10px] tracking-wide transition-all border shrink-0 ${
+                      className={`whitespace-nowrap px-3 py-1.5 rounded-full text-[11px] tracking-wide transition-all border shrink-0 active:scale-95 disabled:opacity-50 ${
                         (chip as any).highlight
-                          ? "bg-[#4A0E17] text-[#DFC07B] border-[#C9A050] font-medium shadow-xs"
-                          : "bg-white dark:bg-[#20181B] text-[#4A0E17] dark:text-[#DFC07B] border-[#C9A050]/30 hover:border-[#C9A050]"
+                          ? "bg-[#4A0E17] text-[#DFC07B] border-[#C9A050] font-medium shadow-xs hover:bg-[#35070D]"
+                          : "bg-white dark:bg-[#20181B] text-[#4A0E17] dark:text-[#DFC07B] border-[#C9A050]/35 hover:border-[#C9A050] hover:bg-[#FAF7F2] dark:hover:bg-[#271E22]"
                       }`}
                     >
                       {chip.label}
@@ -437,7 +456,7 @@ export function ChatPanel() {
                   e.preventDefault();
                   handleSendMessage();
                 }}
-                className="p-2.5 bg-white dark:bg-[#161214] border-t border-[#C9A050]/30 flex items-center gap-2"
+                className="p-3 sm:p-3.5 bg-white dark:bg-[#161214] border-t border-[#C9A050]/30 flex items-center gap-2 shrink-0 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
               >
                 <input
                   ref={inputRef}
@@ -446,16 +465,16 @@ export function ChatPanel() {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about silk fabrics, sizes, policies, or styling..."
                   disabled={loading}
-                  className="flex-1 bg-transparent px-3 py-2 text-xs text-[#250409] dark:text-[#FAF7F2] placeholder-[#250409]/40 dark:placeholder-[#FAF7F2]/40 border border-[#C9A050]/30 focus:border-[#C9A050] focus:outline-none transition-colors"
+                  className="flex-1 bg-[#FAF7F2] dark:bg-[#20181B] px-3.5 py-2.5 text-xs sm:text-[13px] text-[#250409] dark:text-[#FAF7F2] placeholder-[#250409]/45 dark:placeholder-[#FAF7F2]/45 rounded-xl border border-[#C9A050]/40 focus:border-[#C9A050] focus:ring-1 focus:ring-[#C9A050]/50 focus:outline-none transition-all shadow-inner"
                 />
 
                 <button
                   type="submit"
                   disabled={!input.trim() || loading}
                   aria-label="Send message"
-                  className="w-8 h-8 flex items-center justify-center bg-[#4A0E17] text-[#DFC07B] hover:bg-[#35070D] disabled:opacity-40 transition-colors shrink-0 border border-[#C9A050]/50"
+                  className="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#58111A] to-[#35070D] text-[#DFC07B] hover:brightness-110 active:scale-95 disabled:opacity-40 transition-all shrink-0 border border-[#C9A050]/60 shadow-xs cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <Send className="w-3.5 h-3.5" />
+                  <Send className="w-4 h-4" />
                 </button>
               </form>
             </motion.div>
