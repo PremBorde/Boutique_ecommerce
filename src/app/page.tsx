@@ -6,6 +6,7 @@ import { MarqueeTicker } from "@/components/animations/MarqueeTicker";
 import { CraftPillars } from "@/components/storefront/CraftPillars";
 import { LookbookRail } from "@/components/storefront/LookbookRail";
 import { ProductCard } from "@/components/storefront/ProductCard";
+import { ScrollExpand } from "@/components/animations/ScrollExpand";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Gem } from "lucide-react";
 
@@ -167,6 +168,39 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 9. Interactive ScrollExpand Masterpiece Showcase */}
+      <section className="relative bg-[#0C0A0B] text-ivory border-t border-gold/30 overflow-hidden">
+        <ScrollExpand
+          src="/products/lehenga_crimson_bridal.jpg"
+          alt="Zaria Imperial Couture"
+          title="IMPERIAL COUTURE"
+          scrollHint="Scroll to unfold masterpiece"
+          useWindowScroll
+          mediaZoom={1.35}
+          overlayScrim={0.55}
+        >
+          <div className="max-w-2xl mx-auto space-y-4 px-4 text-center">
+            <span className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold block">
+              Bespoke Atelier · Handcrafted Perfection
+            </span>
+            <h2 className="text-3xl md:text-5xl font-serif text-ivory leading-tight">
+              Every Thread, Cut in Pure Imperial Silk
+            </h2>
+            <p className="text-xs md:text-sm text-ivory/80 leading-relaxed font-sans max-w-xl mx-auto">
+              Experience the pinnacle of contemporary Indian luxury. From hand-loomed Banarasi brocades to custom zari embroidery, our atelier brings royal elegance to modern silhouettes.
+            </p>
+            <div className="pt-2">
+              <Link href="/shop">
+                <Button variant="gold" size="lg" className="h-12 px-8 text-xs tracking-[0.25em]">
+                  Explore Bespoke Atelier
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </ScrollExpand>
+      </section>
     </main>
   );
 }
+
