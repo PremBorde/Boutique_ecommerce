@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { runGeminiChatLoop } from "@/lib/gemini";
+import { matchPrebuiltIntent, executeSmartFallback } from "@/lib/ai/prebuilt-answers";
 
 export async function POST(req: Request) {
   try {
@@ -38,7 +39,44 @@ export async function POST(req: Request) {
       },
     });
 
-    // Prepare message history for Gemini
+    // 1. SMART PREBUILT INTENT CHECK (0 Gemini API calls, 0 cost, instant response)
+    const prebuilt = await matchPrebuiltIntent(message.trim());
+    if (prebuilt) {
+      let resolvedProducts: any[] = [];
+      if (prebuilt.products && prebuilt.products.length > 0) {
+        resolvedProducts = await prisma.product.findMany({
+          where: {
+            id: { in: prebuilt.products },
+            active: true,
+          },
+          include: {
+            category: true,
+            images: { orderBy: { order: "asc" } },
+            variants: {
+              where: { active: true },
+              include: { inventory: true },
+            },
+          },
+        });
+      }
+
+      await prisma.chatMessage.create({
+        data: {
+          sessionId: session.id,
+          role: "assistant",
+          content: prebuilt.message,
+          productIds: prebuilt.products as any,
+        },
+      });
+
+      return NextResponse.json({
+        message: prebuilt.message,
+        products: resolvedProducts,
+        sessionToken,
+      });
+    }
+
+    // 2. Prepare message history for Gemini
     const history = [
       ...session.messages.map((m) => ({
         role: m.role,
@@ -48,7 +86,16 @@ export async function POST(req: Request) {
     ];
 
     // Execute Gemini 2.0 Flash function calling loop
-    const aiResult = await runGeminiChatLoop(history);
+    let aiResult: any;
+    try {
+      aiResult = await runGeminiChatLoop(history);
+    } catch {
+      const fallback = await executeSmartFallback(message.trim());
+      aiResult = {
+        message: fallback.message,
+        products: fallback.products,
+      };
+    }
 
     // Resolve product IDs to full Product entities for rendering real cards
     let resolvedProducts: any[] = [];

@@ -10,6 +10,7 @@ import {
 import { GEMINI_MODEL_NAME, GEMINI_FALLBACK_MODEL_NAME } from "@/lib/ai/config";
 import prisma from "@/lib/prisma";
 import { computeStylePersona, SessionSignal } from "@/lib/ai/personas";
+import { matchPrebuiltIntent, executeSmartFallback } from "@/lib/ai/prebuilt-answers";
 
 // Initialize Gemini SDK with server-only key
 const apiKey = process.env.GEMINI_API_KEY || "";
@@ -113,6 +114,7 @@ const tools = [
 ];
 
 export async function POST(req: Request) {
+  let userText = "";
   try {
     const body = await req.json();
     const { messages, sessionId, sessionToken } = body;
@@ -132,17 +134,6 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!genAI || !apiKey) {
-      return Response.json(
-        {
-          message:
-            "Our digital concierge is resting while our boutique keys are updated. Please browse our curated collections in the meantime.",
-          products: [],
-        },
-        { status: 200 }
-      );
-    }
-
     // Format incoming messages for Gemini
     // Expects messages format: [{ role: 'user' | 'model', parts: [{ text }] }] or standard conversation objects
     let geminiHistory: any[] = [];
@@ -156,13 +147,35 @@ export async function POST(req: Request) {
       });
     }
 
+    // Extract last user message
     const lastMessage = geminiHistory.pop() || {
       role: "user",
       parts: [{ text: "Hello" }],
     };
+    userText = lastMessage.parts?.[0]?.text || "";
 
     const touchedProductIds = new Set<string>();
     const sessionSignals: SessionSignal[] = [];
+
+    // 1. SMART PRE-BUILT INTENT INTERCEPTION (Saves API quota, 0 cost, instant answers)
+    const prebuilt = await matchPrebuiltIntent(userText, sessionSignals);
+    if (prebuilt) {
+      return Response.json({
+        message: prebuilt.message,
+        products: prebuilt.products,
+        persona: prebuilt.persona || null,
+      });
+    }
+
+    // 2. If Gemini API key is missing or unconfigured, execute smart local database discovery
+    if (!genAI || !apiKey) {
+      const fallback = await executeSmartFallback(userText);
+      return Response.json({
+        message: fallback.message,
+        products: fallback.products,
+        persona: null,
+      });
+    }
 
     // Instantiate Gemini model
     let model = genAI.getGenerativeModel({
@@ -263,16 +276,27 @@ export async function POST(req: Request) {
       } : null,
     });
   } catch (error: any) {
-    console.error("Gemini Chat API Error:", error);
+    console.error("Gemini Chat API Error, invoking smart fallback:", error);
 
-    // Graceful fallback guaranteeing zero broken client UI
-    return Response.json(
-      {
-        message:
-          "I apologize, my connection with the atelier records was briefly interrupted. Please ask again in just a moment.",
-        products: [],
-      },
-      { status: 200 }
-    );
+    try {
+      const fallback = await executeSmartFallback(userText);
+      return Response.json(
+        {
+          message: fallback.message,
+          products: fallback.products,
+          persona: null,
+        },
+        { status: 200 }
+      );
+    } catch {
+      return Response.json(
+        {
+          message:
+            "I am delighted to assist you with our handwoven silks, sizes, bespoke fittings, and store policies. Please ask about any garment or occasion.",
+          products: [],
+        },
+        { status: 200 }
+      );
+    }
   }
 }
