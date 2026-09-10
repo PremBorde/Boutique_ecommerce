@@ -169,31 +169,96 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 9. Interactive ScrollExpand Masterpiece Showcase */}
-      <section className="relative bg-[#0C0A0B] text-ivory border-t border-gold/30 overflow-hidden">
-        <ScrollExpand
-          src="/products/lehenga_crimson_bridal.jpg"
-          alt="Zaria Imperial Couture"
-          title="IMPERIAL COUTURE"
-          scrollHint="Scroll to unfold masterpiece"
-          useWindowScroll
-          mediaZoom={1.35}
-          overlayScrim={0.55}
-        >
-          <div className="max-w-2xl mx-auto space-y-4 px-4 text-center">
-            <span className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold block">
-              Bespoke Atelier · Handcrafted Perfection
+      {/* 9. Masterpiece Lookbook Reveal */}
+      <section className="relative bg-[#0A0709] border-t border-gold/30 pt-16 pb-0 text-ivory">
+        <div className="max-w-4xl mx-auto text-center px-4 mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold/10 border border-gold/30 mb-3 backdrop-blur-xs">
+            <span className="text-gold text-xs">✦</span>
+            <span className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold">
+              The Grand Atelier Reveal
             </span>
-            <h2 className="text-3xl md:text-5xl font-serif text-ivory leading-tight">
-              Every Thread, Cut in Pure Imperial Silk
-            </h2>
-            <p className="text-xs md:text-sm text-ivory/80 leading-relaxed font-sans max-w-xl mx-auto">
-              Experience the pinnacle of contemporary Indian luxury. From hand-loomed Banarasi brocades to custom zari embroidery, our atelier brings royal elegance to modern silhouettes.
+            <span className="text-gold text-xs">✦</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-serif text-ivory">
+            The Noor Mahal Bridal Edit
+          </h2>
+          <p className="text-xs md:text-sm text-ivory/70 max-w-lg mx-auto mt-2 font-light">
+            Scroll down to unfold the artisan embroidery, hand-set zari details, and pure silk velvet drape.
+          </p>
+        </div>
+
+        <ScrollExpand
+          src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?q=92&w=2560&auto=format&fit=crop"
+          alt="The Noor Mahal Velvet Lehenga by Zaria Atelier"
+          useWindowScroll
+          startWidth={52}
+          startHeight={76}
+          startRadius={6}
+          mediaZoom={1.0}
+          objectPosition="center 26%"
+          scrollDistance={0.8}
+          holdDistance={0.25}
+          overlayScrim={0.72}
+          title={
+            <div className="space-y-2.5 max-w-lg px-4 text-center select-none pointer-events-none">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-noir/85 border border-gold/40 backdrop-blur-md shadow-xl mb-1">
+                <span className="text-gold text-[10px]">✦</span>
+                <span className="text-[9.5px] uppercase tracking-[0.35em] text-gold-foil font-semibold">
+                  Bridal Couture Spotlight
+                </span>
+                <span className="text-gold text-[10px]">✦</span>
+              </div>
+              <h3 className="font-serif text-3xl sm:text-5xl md:text-6xl text-ivory tracking-wide leading-tight drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
+                The Noor Mahal
+              </h3>
+              <p className="font-sans text-[11px] sm:text-xs uppercase tracking-[0.28em] text-gold-light/95 drop-shadow-md font-medium">
+                18-Panel Pure Silk Velvet · Hand Zari Jaal
+              </p>
+            </div>
+          }
+          scrollHint={
+            <div className="flex flex-col items-center gap-1.5 text-gold-light/90">
+              <span className="text-[9.5px] uppercase tracking-[0.3em] font-medium">
+                Scroll to Unfold Creation
+              </span>
+              <div className="w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center animate-bounce">
+                <span className="text-xs leading-none">↓</span>
+              </div>
+            </div>
+          }
+        >
+          <div className="max-w-2xl mx-auto space-y-4 px-6 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold/15 border border-gold/40 backdrop-blur-md">
+              <span className="text-[10px] uppercase tracking-[0.35em] text-gold-foil font-semibold">
+                Limited Atelier Edition
+              </span>
+            </div>
+
+            <h3 className="font-serif text-3xl sm:text-5xl md:text-6xl text-ivory leading-tight drop-shadow-lg">
+              Crafted in Pure Gold &amp; Silk
+            </h3>
+
+            <p className="text-xs sm:text-sm text-ivory/85 leading-relaxed font-sans max-w-lg mx-auto font-light">
+              Over 320 karigar hours of zardozi bullion embroidery on 18 hand-panelled cuts of mulberry silk velvet. Complete with real metallic zari borders.
             </p>
-            <div className="pt-2">
-              <Link href="/shop">
-                <Button variant="gold" size="lg" className="h-12 px-8 text-xs tracking-[0.25em]">
-                  Explore Bespoke Atelier
+
+            <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+              <Link href="/product/noor-mahal-velvet-lehenga">
+                <Button
+                  variant="gold"
+                  size="lg"
+                  className="h-12 px-8 text-xs tracking-[0.25em] shadow-[0_4px_25px_rgba(201,160,80,0.35)]"
+                >
+                  Acquire This Piece · ₹28,500
+                </Button>
+              </Link>
+              <Link href="/shop?category=lehengas-couture">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="h-12 px-7 text-xs tracking-[0.25em] border-gold/40 text-ivory hover:bg-gold/15 backdrop-blur-sm"
+                >
+                  Explore Bridal Gallery →
                 </Button>
               </Link>
             </div>
