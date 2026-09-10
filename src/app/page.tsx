@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import prisma from "@/lib/prisma";
-import { AtelierIntro } from "@/components/animations/AtelierIntro";
 import { HeroSection } from "@/components/storefront/HeroSection";
 import { MarqueeTicker } from "@/components/animations/MarqueeTicker";
 import { CraftPillars } from "@/components/storefront/CraftPillars";
@@ -60,10 +59,7 @@ export default async function HomePage() {
 
   return (
     <main className="relative bg-ivory dark:bg-[#0C0A0B] transition-colors duration-300">
-      {/* 1. Opening Ritual: The Atelier Opens (<1.8s, session-flagged) */}
-      <AtelierIntro />
-
-      {/* 2. Hero Section with Layered Parallax */}
+      {/* Hero Section with Layered Parallax */}
       <HeroSection />
 
       {/* 3. Infinite Marquee Ticker */}
