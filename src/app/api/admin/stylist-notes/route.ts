@@ -9,7 +9,7 @@ const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 /**
  * Generates one warm, editorial stylist sentence for a product.
  */
-export async function generateStylistNoteForProduct(product: {
+async function generateStylistNoteForProduct(product: {
   id: string;
   name: string;
   category?: { name: string } | null;
