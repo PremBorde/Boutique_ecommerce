@@ -116,6 +116,7 @@ function DesktopNavFallback() {
 }
 
 export function Navbar() {
+  const pathname = usePathname();
   const { data: session } = useSession();
   const { toggleDrawer, getItemCount } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -124,6 +125,10 @@ export function Navbar() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   const itemCount = mounted ? getItemCount() : 0;
 

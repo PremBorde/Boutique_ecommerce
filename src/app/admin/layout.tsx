@@ -53,52 +53,40 @@ export default function AdminLayout({
       label: "Total Revenue",
       value: metrics ? formatPrice(metrics.totalRevenue) : "—",
       icon: IndianRupee,
-      iconColor: "text-amber-300",
-      iconBg: "bg-amber-500/20 border border-amber-400/30",
-      cardBorder: "border-amber-500/30 bg-gradient-to-br from-amber-950/30 to-black/40 hover:border-amber-400/60",
-      valueColor: "text-amber-200 font-bold",
-      labelColor: "text-amber-200/80",
+      iconBox: "bg-gold/15 text-gold-dark dark:text-gold-light border border-gold/30",
+      subText: "All non-cancelled orders",
     },
     {
-      label: "Month Revenue",
+      label: "This Month",
       value: metrics ? formatPrice(metrics.revenueThisMonth) : "—",
       icon: TrendingUp,
-      iconColor: "text-emerald-300",
-      iconBg: "bg-emerald-500/20 border border-emerald-400/30",
-      cardBorder: "border-emerald-500/30 bg-gradient-to-br from-emerald-950/30 to-black/40 hover:border-emerald-400/60",
-      valueColor: "text-emerald-300 font-bold",
-      labelColor: "text-emerald-200/80",
+      iconBox: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20",
+      subText: "Current calendar month",
     },
     {
       label: "Pending Orders",
       value: metrics ? String(metrics.pendingOrders) : "—",
       icon: Clock,
-      iconColor: metrics && metrics.pendingOrders > 0 ? "text-amber-300" : "text-sky-300",
-      iconBg: metrics && metrics.pendingOrders > 0 ? "bg-amber-500/20 border border-amber-400/40" : "bg-sky-500/20 border border-sky-400/30",
-      cardBorder: metrics && metrics.pendingOrders > 0
-        ? "border-amber-500/50 bg-gradient-to-br from-amber-950/40 to-black/40 hover:border-amber-400"
-        : "border-sky-500/30 bg-gradient-to-br from-sky-950/30 to-black/40 hover:border-sky-400/60",
-      valueColor: metrics && metrics.pendingOrders > 0 ? "text-amber-300 font-bold" : "text-sky-200 font-bold",
-      labelColor: metrics && metrics.pendingOrders > 0 ? "text-amber-200/90" : "text-sky-200/80",
+      iconBox: metrics && metrics.pendingOrders > 0
+        ? "bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30"
+        : "bg-gold/10 text-noir/50 dark:text-ivory/50 border border-gold/20",
+      subText: "Awaiting preparation & cut",
     },
     {
-      label: "Low / Zero Stock SKUs",
+      label: "Stock Alerts",
       value: metrics ? String(metrics.lowStockCount) : "—",
       icon: AlertTriangle,
-      iconColor: metrics && metrics.lowStockCount > 0 ? "text-rose-300" : "text-emerald-300",
-      iconBg: metrics && metrics.lowStockCount > 0 ? "bg-rose-500/25 border border-rose-400/40" : "bg-emerald-500/20 border border-emerald-400/30",
-      cardBorder: metrics && metrics.lowStockCount > 0
-        ? "border-rose-500/50 bg-gradient-to-br from-rose-950/40 to-black/40 hover:border-rose-400 shadow-xs shadow-rose-950"
-        : "border-emerald-500/30 bg-gradient-to-br from-emerald-950/30 to-black/40 hover:border-emerald-400/60",
-      valueColor: metrics && metrics.lowStockCount > 0 ? "text-rose-300 font-bold" : "text-emerald-300 font-bold",
-      labelColor: metrics && metrics.lowStockCount > 0 ? "text-rose-200/90" : "text-emerald-200/80",
+      iconBox: metrics && metrics.lowStockCount > 0
+        ? "bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/30"
+        : "bg-gold/10 text-noir/50 dark:text-ivory/50 border border-gold/20",
+      subText: "Variants at zero stock",
     },
   ];
 
   return (
     <div className="min-h-screen bg-regal-texture text-noir">
       {/* Admin Top Header */}
-      <header className="bg-noir text-ivory border-b border-gold/40 sticky top-0 z-30">
+      <header className="bg-noir text-ivory border-b border-gold/40 sticky top-0 z-30 shadow-md">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <ShieldCheck className="w-5 h-5 text-gold" />
@@ -116,40 +104,11 @@ export default function AdminLayout({
             </span>
             <Link
               href="/"
-              className="text-xs uppercase tracking-wider text-ivory/60 hover:text-gold flex items-center gap-1.5 transition-colors"
+              className="text-xs uppercase tracking-wider text-ivory/70 hover:text-gold flex items-center gap-1.5 px-3 py-1.5 border border-gold/30 hover:border-gold transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               View Storefront
             </Link>
-          </div>
-        </div>
-
-        {/* KPI Metrics Bar */}
-        <div className="bg-[#120E11] border-t border-gold/20 px-4 md:px-8 py-2.5 shadow-inner">
-          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
-            {kpiCards.map((card) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={card.label}
-                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-md border transition-all ${card.cardBorder}`}
-                >
-                  <div
-                    className={`w-8 h-8 rounded-md flex items-center justify-center shrink-0 ${card.iconBg}`}
-                  >
-                    <Icon className={`w-4 h-4 ${card.iconColor}`} />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold truncate ${card.labelColor}`}>
-                      {card.label}
-                    </p>
-                    <p className={`text-base font-mono leading-tight tracking-tight mt-0.5 ${card.valueColor}`}>
-                      {card.value}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
 
@@ -181,7 +140,41 @@ export default function AdminLayout({
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">{children}</main>
+      <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-8">
+        {/* KPI Metrics Summary Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {kpiCards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <div
+                key={card.label}
+                className="bg-white/90 dark:bg-[#161214] border border-gold/30 dark:border-gold/20 p-5 shadow-xs hover:border-gold transition-all flex flex-col justify-between"
+              >
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <span className="text-[10px] uppercase tracking-[0.25em] text-noir/60 dark:text-ivory/60 font-semibold truncate">
+                    {card.label}
+                  </span>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${card.iconBox}`}>
+                    <Icon className="w-4 h-4" />
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-serif text-2xl lg:text-3xl font-bold text-oxblood dark:text-gold-foil leading-none">
+                    {card.value}
+                  </p>
+                  <p className="text-[11px] text-noir/50 dark:text-ivory/50 mt-2 flex items-center gap-1.5">
+                    {card.subText}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Tab Page Content */}
+        <div>{children}</div>
+      </main>
     </div>
   );
 }

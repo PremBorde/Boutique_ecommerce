@@ -1,8 +1,14 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Gem, Shield, Clock, Compass } from "lucide-react";
 
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <footer className="bg-noir text-ivory/80 pt-20 pb-12 border-t border-gold/30">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
