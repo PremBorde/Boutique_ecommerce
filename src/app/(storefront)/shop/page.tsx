@@ -40,12 +40,42 @@ function ShopContent() {
   // Track whether categories have been fetched yet
   const categoriesFetchedRef = useRef(false);
 
-  // Sync category when query param changes
+  // Sync category & other URL filters whenever query parameters change
   useEffect(() => {
-    const cat = searchParams.get("category");
-    if (cat && cat !== selectedCategory) {
-      setSelectedCategory(cat);
-      setPage(1);
+    const urlCategory = searchParams.get("category") || "all";
+    const urlQuery = searchParams.get("q") || "";
+    const urlSort = searchParams.get("sort") || "newest";
+    const urlPage = Number(searchParams.get("page") || "1");
+
+    let changed = false;
+
+    if (urlCategory !== selectedCategory) {
+      setSelectedCategory(urlCategory);
+      changed = true;
+    }
+    if (urlQuery !== query) {
+      setQuery(urlQuery);
+      changed = true;
+    }
+    if (urlSort !== selectedSort) {
+      setSelectedSort(urlSort);
+      changed = true;
+    }
+    if (urlPage !== page) {
+      setPage(urlPage);
+      changed = true;
+    }
+
+    // When URL params change (e.g. user clicks "ALL CREATIONS" in navbar or back/forward),
+    // immediately fetch with the updated URL parameters without waiting for debounce.
+    if (changed) {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      fetchProductsWithOverrides({
+        category: urlCategory,
+        q: urlQuery,
+        sort: urlSort,
+        page: urlPage,
+      });
     }
   }, [searchParams]);
 
@@ -60,16 +90,39 @@ function ShopContent() {
     };
   }, [selectedCategory, selectedSort, selectedSize, inStockOnly, page]);
 
-  const fetchProducts = async (forceWithCategories = false) => {
+  const fetchProductsWithOverrides = async (
+    overrides?: {
+      category?: string;
+      q?: string;
+      sort?: string;
+      page?: number;
+      size?: string;
+      inStock?: boolean;
+    },
+    forceWithCategories = false
+  ) => {
     try {
       setLoading(true);
+      const activeCategory =
+        overrides?.category !== undefined ? overrides.category : selectedCategory;
+      const activeQuery = overrides?.q !== undefined ? overrides.q : query;
+      const activeSort = overrides?.sort !== undefined ? overrides.sort : selectedSort;
+      const activeSize = overrides?.size !== undefined ? overrides.size : selectedSize;
+      const activeInStock =
+        overrides?.inStock !== undefined ? overrides.inStock : inStockOnly;
+      const activePage = overrides?.page !== undefined ? overrides.page : page;
+
       const params = new URLSearchParams();
-      if (query.trim()) params.set("q", query.trim());
-      if (selectedCategory && selectedCategory !== "all") params.set("category", selectedCategory);
-      if (selectedSize && selectedSize !== "all") params.set("size", selectedSize);
-      if (inStockOnly) params.set("inStock", "true");
-      if (selectedSort) params.set("sort", selectedSort);
-      params.set("page", page.toString());
+      if (activeQuery.trim()) params.set("q", activeQuery.trim());
+      if (activeCategory && activeCategory !== "all") {
+        params.set("category", activeCategory);
+      }
+      if (activeSize && activeSize !== "all") {
+        params.set("size", activeSize);
+      }
+      if (activeInStock) params.set("inStock", "true");
+      if (activeSort) params.set("sort", activeSort);
+      params.set("page", activePage.toString());
       params.set("limit", "9");
 
       // Only ask for categories on the first load — they rarely change between filter interactions
@@ -92,6 +145,10 @@ function ShopContent() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fetchProducts = (forceWithCategories = false) => {
+    return fetchProductsWithOverrides(undefined, forceWithCategories);
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -143,7 +200,7 @@ function ShopContent() {
           </form>
 
           {/* Category Tabs (Desktop) */}
-          <div className="hidden lg:flex items-center gap-2 overflow-x-auto max-w-xl py-1">
+          <div className="hidden lg:flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             <button
               onClick={() => {
                 setSelectedCategory("all");
