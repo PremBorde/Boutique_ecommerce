@@ -405,26 +405,26 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                 {/* 3. Real-Time Stock Status Badge */}
                 <div className="pt-2">
                   {!selectedVariant ? (
-                    <div className="flex items-center gap-2 text-xs text-noir/60 bg-amber-50/60 p-2.5 border border-amber-200">
-                      <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                    <div className="flex items-center gap-2 text-xs text-amber-800 dark:text-amber-300 bg-amber-50/60 dark:bg-amber-900/20 p-2.5 border border-amber-200 dark:border-amber-700/50">
+                      <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
                       <span>This combination is currently not available in our atelier.</span>
                     </div>
                   ) : currentStock === 0 ? (
-                    <div className="flex items-center gap-2 text-xs text-red-800 bg-red-50 p-2.5 border border-red-200">
-                      <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+                    <div className="flex items-center gap-2 text-xs text-red-800 dark:text-red-300 bg-red-50 dark:bg-red-900/20 p-2.5 border border-red-200 dark:border-red-700/50">
+                      <AlertCircle className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0" />
                       <span>
                         Sold out in {selectedColor}, Size {selectedSize}. Please contact our stylist for custom commissioning.
                       </span>
                     </div>
                   ) : currentStock <= 2 ? (
-                    <div className="flex items-center text-xs text-amber-900 bg-amber-50/70 p-2.5 border border-amber-200 font-medium">
+                    <div className="flex items-center text-xs text-amber-900 dark:text-amber-300 bg-amber-50/70 dark:bg-amber-900/20 p-2.5 border border-amber-200 dark:border-amber-700/50 font-medium">
                       <span>
                         Rare Piece: Only <strong>{currentStock}</strong> available in vault.
                       </span>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2 text-xs text-emerald-800 bg-emerald-50/70 p-2.5 border border-emerald-200 font-medium">
-                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <div className="flex items-center gap-2 text-xs text-emerald-800 dark:text-emerald-300 bg-emerald-50/70 dark:bg-emerald-900/20 p-2.5 border border-emerald-200 dark:border-emerald-700/40 font-medium">
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>
                         In Stock · SKU: <strong className="font-mono text-[11px]">{selectedVariant.sku}</strong>
                       </span>
@@ -494,23 +494,23 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
               {/* ---------------- CRAFT NARRATIVE ---------------- */}
               {product.story && (
                 <div className="mt-8 pt-6 border-t border-gold/20">
-                  <h3 className="text-xs uppercase tracking-[0.25em] font-semibold text-oxblood mb-2">
+                  <h3 className="text-xs uppercase tracking-[0.25em] font-semibold text-oxblood dark:text-gold-light mb-2">
                     The Craft Story
                   </h3>
-                  <p className="text-xs text-noir/70 leading-relaxed italic font-serif">
+                  <p className="text-xs text-noir/70 dark:text-ivory/70 leading-relaxed italic font-serif">
                     &ldquo;{product.story}&rdquo;
                   </p>
                 </div>
               )}
 
               {/* Trust Guarantees */}
-              <div className="grid grid-cols-2 gap-4 pt-6 border-t border-gold/15 text-xs text-noir/70">
+              <div className="grid grid-cols-2 gap-4 pt-6 border-t border-gold/15 text-xs text-noir/70 dark:text-ivory/60">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-gold-dark shrink-0" />
+                  <ShieldCheck className="w-4 h-4 text-gold-dark dark:text-gold-light shrink-0" />
                   <span>Verified Pure Zari Hallmark</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Truck className="w-4 h-4 text-gold-dark shrink-0" />
+                  <Truck className="w-4 h-4 text-gold-dark dark:text-gold-light shrink-0" />
                   <span>Complimentary Insured Delivery</span>
                 </div>
               </div>
