@@ -16,10 +16,6 @@
 
 </div>
 
-📚 **Project Documentation Guides**:
-- 🏛️ **[ARCHITECTURE.md](./ARCHITECTURE.md)**: In-depth technical architecture, concurrency models, state machine transitions, and hydration patterns.
-- 🚀 **[DEPLOYMENT.md](./DEPLOYMENT.md)**: Production deployment instructions for Vercel, PostgreSQL/Supabase configuration, environment variables, and verification checklists.
-
 ---
 
 ## 📸 Interface Preview
